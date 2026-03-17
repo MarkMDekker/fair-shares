@@ -1932,7 +1932,7 @@
 </tr>
 </tbody>
 </table>
-<p>Each approach is registered in <code>allocations/registry.py</code>.</p>
+<p>Each approach is registered in <code>allocations/manager.py</code>.</p>
 <hr />
 <h2 id="before-you-begin">Before You Begin<a class="headerlink" href="#before-you-begin" title="Permanent link">&para;</a></h2>
 <p>Every allocation approach operationalizes specific equity principles. Before writing code, you should be able to explain:</p>
@@ -2085,7 +2085,7 @@
 </span></code></pre></div>
 <hr />
 <h2 id="step-4-register-the-approach">Step 4: Register the Approach<a class="headerlink" href="#step-4-register-the-approach" title="Permanent link">&para;</a></h2>
-<p>Add to <code>allocations/registry.py</code>:</p>
+<p>Add to <code>allocations/manager.py</code>:</p>
 <div class="language-python highlight"><span class="filename">Python</span><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">fair_shares.library.allocations.budgets</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="c1"># ... existing imports ...</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="n">my_new_budget</span><span class="p">,</span>

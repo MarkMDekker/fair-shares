@@ -1716,6 +1716,9 @@
 <p>This guide explains the fair-shares architecture and how to extend the library.</p>
 <hr />
 <h2 id="architecture-overview">Architecture Overview<a class="headerlink" href="#architecture-overview" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>For a detailed end-to-end walkthrough with worked examples</strong>, see the <a href="architecture-walkthrough/">Architecture Walkthrough</a>.</p>
+</blockquote>
 <pre class="mermaid"><code>graph TB
     subgraph Input
         DS[Data Sources&lt;br/&gt;conf/data_sources/]
@@ -1724,7 +1727,7 @@
 
     subgraph Pipeline
         PP[Preprocessing&lt;br/&gt;notebooks/1xx]
-        SM[Snakemake&lt;br/&gt;workflow/]
+        SM[Snakemake&lt;br/&gt;Snakefile]
     end
 
     subgraph Library
@@ -1792,8 +1795,8 @@
 </span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>│   └── cumulative_per_capita_convergence.py
 </span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>├── results/               # Result dataclasses
 </span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>├── core.py               # Shared logic
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>├── manager.py            # AllocationManager
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>└── registry.py           # Approach name → function mapping
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>├── manager.py            # Orchestration + approach name → function registry
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>└── runner.py             # Category-level allocation runner
 </span></code></pre></div>
 <h3 id="entry-points">Entry Points<a class="headerlink" href="#entry-points" title="Permanent link">&para;</a></h3>
 <p><strong>Direct function calls:</strong></p>
@@ -1805,15 +1808,14 @@
 </span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="n">emission_category</span><span class="o">=</span><span class="s2">&quot;co2-ffi&quot;</span><span class="p">,</span>
 </span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="p">)</span>
 </span></code></pre></div>
-<p><strong>AllocationManager (high-level):</strong></p>
-<div class="language-python highlight"><span class="filename">Python</span><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">fair_shares.library.allocations</span><span class="w"> </span><span class="kn">import</span> <span class="n">AllocationManager</span>
+<p><strong>Manager functions (high-level):</strong></p>
+<div class="language-python highlight"><span class="filename">Python</span><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">fair_shares.library.allocations</span><span class="w"> </span><span class="kn">import</span> <span class="n">run_parameter_grid</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">manager</span> <span class="o">=</span> <span class="n">AllocationManager</span><span class="p">()</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">results</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">run_parameter_grid</span><span class="p">(</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="n">allocations_config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="n">population_ts</span><span class="o">=</span><span class="n">population_df</span><span class="p">,</span>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="c1"># ...</span>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="p">)</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">results</span> <span class="o">=</span> <span class="n">run_parameter_grid</span><span class="p">(</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    <span class="n">allocations_config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="n">population_ts</span><span class="o">=</span><span class="n">population_df</span><span class="p">,</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="c1"># ...</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="p">)</span>
 </span></code></pre></div>
 <h3 id="result-types">Result Types<a class="headerlink" href="#result-types" title="Permanent link">&para;</a></h3>
 <table>
@@ -1954,7 +1956,7 @@
 <tbody>
 <tr>
 <td><strong>Registry coverage</strong></td>
-<td>All approaches in <code>registry.py</code> have API docs and catalog entries</td>
+<td>All approaches in <code>manager.py</code> have API docs and catalog entries</td>
 </tr>
 <tr>
 <td><strong>Example syntax</strong></td>
@@ -1992,6 +1994,7 @@
 <hr />
 <h2 id="see-also">See Also<a class="headerlink" href="#see-also" title="Permanent link">&para;</a></h2>
 <ul>
+<li><strong><a href="architecture-walkthrough/">Architecture Walkthrough</a></strong> - End-to-end code path walkthrough with worked examples</li>
 <li><strong><a href="https://setupelz.github.io/fair-shares/api/">API Reference</a></strong> - Function documentation</li>
 <li><strong><a href="https://setupelz.github.io/fair-shares/science/allocations/">Scientific Documentation</a></strong> - Theoretical foundations</li>
 </ul>

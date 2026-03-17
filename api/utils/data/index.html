@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="API reference for data processing utilities including convergence data preparation">
+        <meta name="description" content="API reference for data processing utilities including convergence data preparation, NGHGI corrections, and RCB processing">
       
       
         <meta name="author" content="The fair-shares Contributors">
@@ -1022,6 +1022,117 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#nghgi-corrections" class="md-nav__link">
+    <span class="md-ellipsis">
+      NGHGI Corrections
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="NGHGI Corrections">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load_ar6_category_constants" class="md-nav__link">
+    <span class="md-ellipsis">
+      load_ar6_category_constants
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load_world_co2_lulucf" class="md-nav__link">
+    <span class="md-ellipsis">
+      load_world_co2_lulucf
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load_bunker_timeseries" class="md-nav__link">
+    <span class="md-ellipsis">
+      load_bunker_timeseries
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compute_bunker_deduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      compute_bunker_deduction
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#build_nghgi_world_co2_timeseries" class="md-nav__link">
+    <span class="md-ellipsis">
+      build_nghgi_world_co2_timeseries
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compute_cumulative_emissions" class="md-nav__link">
+    <span class="md-ellipsis">
+      compute_cumulative_emissions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rcb-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      RCB Processing
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="RCB Processing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parse_rcb_scenario" class="md-nav__link">
+    <span class="md-ellipsis">
+      parse_rcb_scenario
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#calculate_budget_from_rcb" class="md-nav__link">
+    <span class="md-ellipsis">
+      calculate_budget_from_rcb
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#process_rcb_to_2020_baseline" class="md-nav__link">
+    <span class="md-ellipsis">
+      process_rcb_to_2020_baseline
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#see-also" class="md-nav__link">
     <span class="md-ellipsis">
       See Also
@@ -1700,6 +1811,117 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#nghgi-corrections" class="md-nav__link">
+    <span class="md-ellipsis">
+      NGHGI Corrections
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="NGHGI Corrections">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load_ar6_category_constants" class="md-nav__link">
+    <span class="md-ellipsis">
+      load_ar6_category_constants
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load_world_co2_lulucf" class="md-nav__link">
+    <span class="md-ellipsis">
+      load_world_co2_lulucf
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load_bunker_timeseries" class="md-nav__link">
+    <span class="md-ellipsis">
+      load_bunker_timeseries
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compute_bunker_deduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      compute_bunker_deduction
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#build_nghgi_world_co2_timeseries" class="md-nav__link">
+    <span class="md-ellipsis">
+      build_nghgi_world_co2_timeseries
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compute_cumulative_emissions" class="md-nav__link">
+    <span class="md-ellipsis">
+      compute_cumulative_emissions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rcb-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      RCB Processing
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="RCB Processing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parse_rcb_scenario" class="md-nav__link">
+    <span class="md-ellipsis">
+      parse_rcb_scenario
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#calculate_budget_from_rcb" class="md-nav__link">
+    <span class="md-ellipsis">
+      calculate_budget_from_rcb
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#process_rcb_to_2020_baseline" class="md-nav__link">
+    <span class="md-ellipsis">
+      process_rcb_to_2020_baseline
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#see-also" class="md-nav__link">
     <span class="md-ellipsis">
       See Also
@@ -1740,7 +1962,7 @@
 
 
 <h1 id="data-processing-utilities">Data Processing Utilities<a class="headerlink" href="#data-processing-utilities" title="Permanent link">&para;</a></h1>
-<p>Functions for processing and transforming input datasets.</p>
+<p>Functions for processing and transforming input datasets: convergence pathway data preparation, NGHGI-consistent RCB corrections, and RCB scenario processing.</p>
 <h2 id="convergence-data-processing">Convergence Data Processing<a class="headerlink" href="#convergence-data-processing" title="Permanent link">&para;</a></h2>
 <h3 id="process_emissions_data">process_emissions_data<a class="headerlink" href="#process_emissions_data" title="Permanent link">&para;</a></h3>
 
@@ -2461,10 +2683,1317 @@ by country and country_sum is the total.</p>
 
     </div>
 
+</div><h2 id="nghgi-corrections">NGHGI Corrections<a class="headerlink" href="#nghgi-corrections" title="Permanent link">&para;</a></h2>
+<p>Functions for loading NGHGI-consistent data and computing RCB corrections following Weber et al. (2026). See <a href="https://setupelz.github.io/fair-shares/science/other-operations/#nghgi-consistent-rcb-corrections">Scientific Documentation</a> for methodology.</p>
+<h3 id="load_ar6_category_constants">load_ar6_category_constants<a class="headerlink" href="#load_ar6_category_constants" title="Permanent link">&para;</a></h3>
+
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="fair_shares.library.utils.data.nghgi.load_ar6_category_constants" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">fair_shares.library.utils.data.nghgi.load_ar6_category_constants</span>
+
+
+<a href="#fair_shares.library.utils.data.nghgi.load_ar6_category_constants" class="headerlink" title="Permanent link">&para;</a></h4>
+<div class="language-python doc-signature highlight"><span class="filename">Python</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">load_ar6_category_constants</span><span class="p">(</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n">path</span><span class="p">:</span> <span class="n"><span title="str">str</span></span> <span class="o">|</span> <span class="n"><span title="pathlib.Path">Path</span></span><span class="p">,</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><span title="dict">dict</span></span><span class="p">[</span><span class="n"><span title="str">str</span></span><span class="p">,</span> <span class="n"><span title="dict">dict</span></span><span class="p">]</span>
+</span></code></pre></div>
+
+    <div class="doc doc-contents first">
+
+        <p>Load pre-computed AR6 category constants from YAML.</p>
+<p>The constants file is generated by the RCB preprocessing notebook and contains
+per-category net-zero years and scenario counts extracted from
+AR6 reanalysis data.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>path</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span> or <span title="pathlib.Path">Path</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Path to <code>ar6_category_constants.yaml</code></p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="dict">dict</span>[<span title="str">str</span>, <span title="dict">dict</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Mapping of AR6 category (e.g. "C1") to dict with keys:
+<code>nz_year_median</code>, <code>n_scenarios</code>, and distribution stats
+(<code>nz_year_min</code>, <code>nz_year_q25</code>, <code>nz_year_q75</code>, <code>nz_year_max</code>,
+<code>n_reaching_nz</code>)</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Raises:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="fair_shares.library.exceptions.DataLoadingError">DataLoadingError</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>If the file does not exist or cannot be parsed</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="fair_shares.library.exceptions.DataProcessingError">DataProcessingError</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>If required keys are missing from any category</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div><h3 id="load_world_co2_lulucf">load_world_co2_lulucf<a class="headerlink" href="#load_world_co2_lulucf" title="Permanent link">&para;</a></h3>
+
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="fair_shares.library.utils.data.nghgi.load_world_co2_lulucf" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">fair_shares.library.utils.data.nghgi.load_world_co2_lulucf</span>
+
+
+<a href="#fair_shares.library.utils.data.nghgi.load_world_co2_lulucf" class="headerlink" title="Permanent link">&para;</a></h4>
+<div class="language-python doc-signature highlight"><span class="filename">Python</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">load_world_co2_lulucf</span><span class="p">(</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n">path</span><span class="p">:</span> <span class="n"><span title="str">str</span></span> <span class="o">|</span> <span class="n"><span title="pathlib.Path">Path</span></span><span class="p">,</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><span title="tuple">tuple</span></span><span class="p">[</span><span class="n"><span title="pandas.DataFrame">DataFrame</span></span><span class="p">,</span> <span class="n"><span title="int">int</span></span><span class="p">]</span>
+</span></code></pre></div>
+
+    <div class="doc doc-contents first">
+
+        <p>Load world-total NGHGI LULUCF CO2 timeseries from notebook-produced CSV.</p>
+<p>Reads the world-total NGHGI-reported LULUCF CO2 values produced by
+notebook 105 (Melo v3.1). The CSV has a single row with a "source" index
+and string year columns. Values are in MtCO2/yr (negative = net sink).</p>
+<p>The splice year (last year of NGHGI data) is derived dynamically from the
+data rather than being hardcoded.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>path</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span> or <span title="pathlib.Path">Path</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Path to <code>world_co2-lulucf_timeseries.csv</code></p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="tuple">tuple</span>[<span title="pandas.DataFrame">DataFrame</span>, <span title="int">int</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>(nghgi_ts, splice_year) where nghgi_ts is a single-row DataFrame
+indexed by ["source"] with string year columns, and splice_year is
+the last year of NGHGI data coverage.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Raises:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="fair_shares.library.exceptions.DataLoadingError">DataLoadingError</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>If the file does not exist or expected structure is missing</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div><h3 id="load_bunker_timeseries">load_bunker_timeseries<a class="headerlink" href="#load_bunker_timeseries" title="Permanent link">&para;</a></h3>
+
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="fair_shares.library.utils.data.nghgi.load_bunker_timeseries" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">fair_shares.library.utils.data.nghgi.load_bunker_timeseries</span>
+
+
+<a href="#fair_shares.library.utils.data.nghgi.load_bunker_timeseries" class="headerlink" title="Permanent link">&para;</a></h4>
+<div class="language-python doc-signature highlight"><span class="filename">Python</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">load_bunker_timeseries</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n"><span title="str">str</span></span> <span class="o">|</span> <span class="n"><span title="pathlib.Path">Path</span></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><span title="pandas.DataFrame">DataFrame</span></span>
+</span></code></pre></div>
+
+    <div class="doc doc-contents first">
+
+        <p>Load international bunker fuel CO2 timeseries from notebook-produced CSV.</p>
+<p>Reads the intermediate CSV produced by notebook 107 (LULUCF &amp; bunker
+preprocessing). The CSV has a single row with a "source" index and
+string year columns. Values are already in MtCO2/yr.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>path</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span> or <span title="pathlib.Path">Path</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Path to <code>bunker_timeseries.csv</code></p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="pandas.DataFrame">DataFrame</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Single-row DataFrame indexed by ["source"] with string year columns
+and values in MtCO2/yr</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Raises:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="fair_shares.library.exceptions.DataLoadingError">DataLoadingError</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>If the file does not exist or expected structure is missing</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div><h3 id="compute_bunker_deduction">compute_bunker_deduction<a class="headerlink" href="#compute_bunker_deduction" title="Permanent link">&para;</a></h3>
+
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="fair_shares.library.utils.data.nghgi.compute_bunker_deduction" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">fair_shares.library.utils.data.nghgi.compute_bunker_deduction</span>
+
+
+<a href="#fair_shares.library.utils.data.nghgi.compute_bunker_deduction" class="headerlink" title="Permanent link">&para;</a></h4>
+<div class="language-python doc-signature highlight"><span class="filename">Python</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">compute_bunker_deduction</span><span class="p">(</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n">bunker_ts</span><span class="p">:</span> <span class="n"><span title="pandas.DataFrame">DataFrame</span></span><span class="p">,</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n">start_year</span><span class="p">:</span> <span class="n"><span title="int">int</span></span><span class="p">,</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="n">net_zero_year</span><span class="p">:</span> <span class="n"><span title="int">int</span></span><span class="p">,</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="n">historical_end_year</span><span class="p">:</span> <span class="n"><span title="int">int</span></span> <span class="o">=</span> <span class="mi">2023</span><span class="p">,</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><span title="float">float</span></span>
+</span></code></pre></div>
+
+    <div class="doc doc-contents first">
+
+        <p>Compute cumulative international bunker fuel CO2 deduction.</p>
+<p>Combines historical year-by-year values from GCB2024 with extrapolation
+from the last observed annual rate for years beyond the historical record.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>bunker_ts</code>
+            </td>
+            <td>
+                  <code><span title="pandas.DataFrame">DataFrame</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Bunker fuel CO2 timeseries (from load_bunker_timeseries) in MtCO2/yr</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>start_year</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Start of integration window (inclusive)</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>net_zero_year</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>End of integration window (inclusive)</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>historical_end_year</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Last year covered by the historical timeseries (default: 2023,
+matching GCB2024 coverage)</p>
+              </div>
+            </td>
+            <td>
+                  <code>2023</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="float">float</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Total cumulative bunker deduction in MtCO2 (always positive)</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Raises:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="fair_shares.library.exceptions.DataProcessingError">DataProcessingError</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>If historical data is insufficient for the start_year</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div><h3 id="build_nghgi_world_co2_timeseries">build_nghgi_world_co2_timeseries<a class="headerlink" href="#build_nghgi_world_co2_timeseries" title="Permanent link">&para;</a></h3>
+
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="fair_shares.library.utils.data.nghgi.build_nghgi_world_co2_timeseries" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">fair_shares.library.utils.data.nghgi.build_nghgi_world_co2_timeseries</span>
+
+
+<a href="#fair_shares.library.utils.data.nghgi.build_nghgi_world_co2_timeseries" class="headerlink" title="Permanent link">&para;</a></h4>
+<div class="language-python doc-signature highlight"><span class="filename">Python</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">build_nghgi_world_co2_timeseries</span><span class="p">(</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n">fossil_ts</span><span class="p">:</span> <span class="n"><span title="pandas.DataFrame">DataFrame</span></span><span class="p">,</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n">nghgi_ts</span><span class="p">:</span> <span class="n"><span title="pandas.DataFrame">DataFrame</span></span><span class="p">,</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="n">bunker_ts</span><span class="p">:</span> <span class="n"><span title="pandas.DataFrame">DataFrame</span></span><span class="p">,</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="n">bm_lulucf_ts</span><span class="p">:</span> <span class="n"><span title="pandas.DataFrame">DataFrame</span></span><span class="p">,</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="n">splice_year</span><span class="p">:</span> <span class="n"><span title="int">int</span></span> <span class="o">=</span> <span class="mi">2022</span><span class="p">,</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><span title="pandas.DataFrame">DataFrame</span></span>
+</span></code></pre></div>
+
+    <div class="doc doc-contents first">
+
+        <p>Construct NGHGI-consistent world total CO2 timeseries.</p>
+<p>For backward extension of allocation years &lt; 2020, Weber Eq. 3 requires
+per-year world CO2 = fossil - bunkers + LULUCF, where LULUCF uses:
+- 1990 onwards: NGHGI LULUCF (Melo v3.1)
+- Pre-1990: bookkeeping LULUCF (PRIMAP co2-lulucf) as fallback</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>fossil_ts</code>
+            </td>
+            <td>
+                  <code><span title="pandas.DataFrame">DataFrame</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>World CO2-FFI emissions timeseries (PRIMAP) in Mt CO2/yr.
+Must have string year columns and a MultiIndex with
+(iso3c, unit, emission-category).</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>nghgi_ts</code>
+            </td>
+            <td>
+                  <code><span title="pandas.DataFrame">DataFrame</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>NGHGI LULUCF historical timeseries (from load_world_co2_lulucf)
+in MtCO2/yr. Single-row DataFrame with string year columns.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>bunker_ts</code>
+            </td>
+            <td>
+                  <code><span title="pandas.DataFrame">DataFrame</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Bunker fuel CO2 timeseries (from load_bunker_timeseries)
+in MtCO2/yr. Single-row DataFrame with string year columns.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>bm_lulucf_ts</code>
+            </td>
+            <td>
+                  <code><span title="pandas.DataFrame">DataFrame</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Bookkeeping LULUCF world totals (PRIMAP co2-lulucf) in Mt CO2/yr.
+Same index structure as fossil_ts.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>splice_year</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>First year of NGHGI data availability (default: 2022, matching
+the last year of NGHGI data — years &lt;= splice_year use NGHGI
+where available).</p>
+              </div>
+            </td>
+            <td>
+                  <code>2022</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="pandas.DataFrame">DataFrame</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Single-row DataFrame with same index structure as fossil_ts but
+emission-category label set to "co2", containing per-year
+NGHGI-consistent total CO2 = fossil - bunkers + LULUCF.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div><h3 id="compute_cumulative_emissions">compute_cumulative_emissions<a class="headerlink" href="#compute_cumulative_emissions" title="Permanent link">&para;</a></h3>
+
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="fair_shares.library.utils.data.nghgi.compute_cumulative_emissions" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">fair_shares.library.utils.data.nghgi.compute_cumulative_emissions</span>
+
+
+<a href="#fair_shares.library.utils.data.nghgi.compute_cumulative_emissions" class="headerlink" title="Permanent link">&para;</a></h4>
+<div class="language-python doc-signature highlight"><span class="filename">Python</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">compute_cumulative_emissions</span><span class="p">(</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n">timeseries</span><span class="p">:</span> <span class="n"><span title="pandas.DataFrame">DataFrame</span></span><span class="p">,</span> <span class="n">start_year</span><span class="p">:</span> <span class="n"><span title="int">int</span></span><span class="p">,</span> <span class="n">end_year</span><span class="p">:</span> <span class="n"><span title="int">int</span></span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><span title="float">float</span></span>
+</span></code></pre></div>
+
+    <div class="doc doc-contents first">
+
+        <p>Integrate a single-row timeseries DataFrame over a year range.</p>
+<p>Sums values for all years from start_year to end_year (inclusive). Missing
+years are skipped (not interpolated) since gap-filling is the caller's
+responsibility.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>timeseries</code>
+            </td>
+            <td>
+                  <code><span title="pandas.DataFrame">DataFrame</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Single-row DataFrame with string year columns (as produced by the
+load_* functions in this module)</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>start_year</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>First year to include (inclusive)</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>end_year</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Last year to include (inclusive)</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="float">float</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Cumulative sum over the requested year range</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Raises:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="fair_shares.library.exceptions.DataProcessingError">DataProcessingError</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>If no year columns fall within the requested range</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div><h2 id="rcb-processing">RCB Processing<a class="headerlink" href="#rcb-processing" title="Permanent link">&para;</a></h2>
+<p>Functions for parsing RCB scenarios and converting to allocation-ready budgets.</p>
+<h3 id="parse_rcb_scenario">parse_rcb_scenario<a class="headerlink" href="#parse_rcb_scenario" title="Permanent link">&para;</a></h3>
+
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="fair_shares.library.utils.data.rcb.parse_rcb_scenario" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">fair_shares.library.utils.data.rcb.parse_rcb_scenario</span>
+
+
+<a href="#fair_shares.library.utils.data.rcb.parse_rcb_scenario" class="headerlink" title="Permanent link">&para;</a></h4>
+<div class="language-python doc-signature highlight"><span class="filename">Python</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">parse_rcb_scenario</span><span class="p">(</span><span class="n">scenario_string</span><span class="p">:</span> <span class="n"><span title="str">str</span></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><span title="tuple">tuple</span></span><span class="p">[</span><span class="n"><span title="str">str</span></span><span class="p">,</span> <span class="n"><span title="str">str</span></span><span class="p">]</span>
+</span></code></pre></div>
+
+    <div class="doc doc-contents first">
+
+        <p>Parse RCB scenario string into climate assessment and quantile.</p>
+<p>RCB scenario strings follow the format "TEMPpPROB" where TEMP is the
+temperature target (e.g., "1.5" or "2") and PROB is the probability
+as a percentage (e.g., "50" or "66").</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>scenario_string</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>RCB scenario string (e.g., "1.5p50", "2p66")</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="tuple">tuple</span>[<span title="str">str</span>, <span title="str">str</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>A tuple of (climate_assessment, quantile) as strings
+- climate_assessment: Temperature target with "C" suffix (e.g., "1.5C")
+- quantile: Probability as decimal string (e.g., "0.5")</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div><h3 id="calculate_budget_from_rcb">calculate_budget_from_rcb<a class="headerlink" href="#calculate_budget_from_rcb" title="Permanent link">&para;</a></h3>
+
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="fair_shares.library.utils.data.rcb.calculate_budget_from_rcb" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">fair_shares.library.utils.data.rcb.calculate_budget_from_rcb</span>
+
+
+<a href="#fair_shares.library.utils.data.rcb.calculate_budget_from_rcb" class="headerlink" title="Permanent link">&para;</a></h4>
+<div class="language-python doc-signature highlight"><span class="filename">Python</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">calculate_budget_from_rcb</span><span class="p">(</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n">rcb_value</span><span class="p">:</span> <span class="n"><span title="float">float</span></span><span class="p">,</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n">allocation_year</span><span class="p">:</span> <span class="n"><span title="int">int</span></span><span class="p">,</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="n">world_scenario_emissions_ts</span><span class="p">:</span> <span class="n"><span title="fair_shares.library.utils.dataframes.TimeseriesDataFrame">TimeseriesDataFrame</span></span><span class="p">,</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="n">verbose</span><span class="p">:</span> <span class="n"><span title="bool">bool</span></span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><span title="float">float</span></span>
+</span></code></pre></div>
+
+    <div class="doc doc-contents first">
+
+        <p>Calculate total budget to allocate based on RCB value and allocation year.</p>
+<p>RCB (Remaining Carbon Budget) values represent the remaining budget FROM 2020
+onwards. The total budget to allocate depends on the allocation year:</p>
+<ul>
+<li>If allocation_year &lt; 2020: Add historical emissions (allocation_year to
+  2019)</li>
+<li>If allocation_year == 2020: Use RCB directly</li>
+<li>If allocation_year &gt; 2020: Subtract emissions already used (2020 to
+  allocation_year-1)</li>
+</ul>
+<p>This ensures that the budget allocation is consistent regardless of which year
+is chosen as the allocation starting point.</p>
+<p>All values are in Mt * CO2. RCB values are converted from Gt to Mt during
+preprocessing to match the units used in world_scenario_emissions_ts.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>rcb_value</code>
+            </td>
+            <td>
+                  <code><span title="float">float</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Remaining Carbon Budget value in Mt CO2 (from 2020 onwards)</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>allocation_year</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Year when budget allocation should start</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>world_scenario_emissions_ts</code>
+            </td>
+            <td>
+                  <code><span title="fair_shares.library.utils.dataframes.TimeseriesDataFrame">TimeseriesDataFrame</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>World scenario emissions timeseries data with year columns (in Mt CO2)</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>verbose</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Whether to print detailed calculation information (default: True)</p>
+              </div>
+            </td>
+            <td>
+                  <code>True</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="float">float</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Total budget to allocate in Mt CO2</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div><h3 id="process_rcb_to_2020_baseline">process_rcb_to_2020_baseline<a class="headerlink" href="#process_rcb_to_2020_baseline" title="Permanent link">&para;</a></h3>
+
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="fair_shares.library.utils.data.rcb.process_rcb_to_2020_baseline" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">fair_shares.library.utils.data.rcb.process_rcb_to_2020_baseline</span>
+
+
+<a href="#fair_shares.library.utils.data.rcb.process_rcb_to_2020_baseline" class="headerlink" title="Permanent link">&para;</a></h4>
+<div class="language-python doc-signature highlight"><span class="filename">Python</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">process_rcb_to_2020_baseline</span><span class="p">(</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n">rcb_value</span><span class="p">:</span> <span class="n"><span title="float">float</span></span><span class="p">,</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n">rcb_unit</span><span class="p">:</span> <span class="n"><span title="str">str</span></span><span class="p">,</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="n">rcb_baseline_year</span><span class="p">:</span> <span class="n"><span title="int">int</span></span><span class="p">,</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="n">emission_category</span><span class="p">:</span> <span class="n"><span title="str">str</span></span><span class="p">,</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="n">world_co2_ffi_emissions</span><span class="p">:</span> <span class="n"><span title="pandas.DataFrame">DataFrame</span></span><span class="p">,</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="n">actual_bm_lulucf_emissions</span><span class="p">:</span> <span class="n"><span title="pandas.DataFrame">DataFrame</span></span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="n">bunkers_deduction_mt</span><span class="p">:</span> <span class="n"><span title="float">float</span></span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="n">lulucf_deduction_mt</span><span class="p">:</span> <span class="n"><span title="float">float</span></span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="n">target_baseline_year</span><span class="p">:</span> <span class="n"><span title="int">int</span></span> <span class="o">=</span> <span class="mi">2020</span><span class="p">,</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="n">source_name</span><span class="p">:</span> <span class="n"><span title="str">str</span></span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    <span class="n">scenario</span><span class="p">:</span> <span class="n"><span title="str">str</span></span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    <span class="n">verbose</span><span class="p">:</span> <span class="n"><span title="bool">bool</span></span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><span title="dict">dict</span></span><span class="p">[</span><span class="n"><span title="str">str</span></span><span class="p">,</span> <span class="n"><span title="float">float</span></span> <span class="o">|</span> <span class="n"><span title="str">str</span></span> <span class="o">|</span> <span class="n"><span title="int">int</span></span><span class="p">]</span>
+</span></code></pre></div>
+
+    <div class="doc doc-contents first">
+
+        <p>Process RCB from its original baseline year to 2020 baseline with adjustments.</p>
+<p>This function converts RCB values from any baseline year (&gt;= 2020) to a
+standardized 2020 baseline. It also applies adjustments for international
+bunkers and LULUCF following Weber et al. (2026).</p>
+<p>The rebase always uses actual observational data (PRIMAP), never scenario
+projections. What enters the rebase depends on the emission category:</p>
+<ul>
+<li><strong>co2-ffi</strong>: Rebase uses fossil CO2 only. LULUCF is omitted because it
+  cancels algebraically with the LULUCF decomposition term.
+  lulucf_deduction = -L_BM(base,NZ) (positive, increases fossil budget).</li>
+<li><strong>co2</strong>: Rebase uses fossil CO2 + actual bookkeeping-model LULUCF.
+  lulucf_deduction = convention_gap(base,NZ) (negative, reduces budget
+  per Weber).</li>
+</ul>
+<p>The calculation follows these steps:
+1. Convert RCB from source unit to Mt * CO2e
+2. If baseline_year &gt; 2020: Add actual emissions from 2020 to
+   (baseline_year - 1) — fossil only for co2-ffi, fossil + BM LULUCF
+   for co2
+3. Subtract bunkers deduction (always reduces budget)
+4. Apply LULUCF deduction (sign-ready from caller)</p>
+<p>Sign convention for deduction parameters:
+- bunkers_deduction_mt: always positive (cumulative emissions), subtracted
+- lulucf_deduction_mt: sign-ready from caller (added directly to budget):
+    - For co2: convention gap, negative -&gt; reduces budget (per Weber)
+    - For co2-ffi: negated BM LULUCF, positive -&gt; increases fossil budget</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>rcb_value</code>
+            </td>
+            <td>
+                  <code><span title="float">float</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Original RCB value from the source</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>rcb_unit</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Unit of the RCB value (e.g., "Gt * CO2", "Mt * CO2")</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>rcb_baseline_year</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The year from which the RCB is calculated (must be &gt;= 2020)</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>emission_category</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Emission category: "co2-ffi" or "co2". Controls whether BM LULUCF
+is included in the rebase.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>world_co2_ffi_emissions</code>
+            </td>
+            <td>
+                  <code><span title="pandas.DataFrame">DataFrame</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>World-level CO2-FFI emissions timeseries with year columns (in Mt * CO2e)</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>actual_bm_lulucf_emissions</code>
+            </td>
+            <td>
+                  <code><span title="pandas.DataFrame">DataFrame</span> or None</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Actual bookkeeping-model LULUCF CO2 emissions from PRIMAP, with year
+columns (in Mt * CO2e). Used ONLY for the co2 rebase (default: None).</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>bunkers_deduction_mt</code>
+            </td>
+            <td>
+                  <code><span title="float">float</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Total bunker CO2 emissions from 2020-2100 in Mt * CO2e (default: 0.0).
+Always positive; subtracted from budget.</p>
+              </div>
+            </td>
+            <td>
+                  <code>0.0</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>lulucf_deduction_mt</code>
+            </td>
+            <td>
+                  <code><span title="float">float</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>LULUCF adjustment in Mt * CO2e, sign-ready (default: 0.0).
+Added directly to the budget -- caller is responsible for correct sign.</p>
+              </div>
+            </td>
+            <td>
+                  <code>0.0</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>target_baseline_year</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Target baseline year for standardization (default: 2020)</p>
+              </div>
+            </td>
+            <td>
+                  <code>2020</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>source_name</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Name of the RCB source for logging (default: "")</p>
+              </div>
+            </td>
+            <td>
+                  <code>&#39;&#39;</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>scenario</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Scenario name for logging (default: "")</p>
+              </div>
+            </td>
+            <td>
+                  <code>&#39;&#39;</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>verbose</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Whether to print detailed calculation information (default: True)</p>
+              </div>
+            </td>
+            <td>
+                  <code>True</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="dict">dict</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Dictionary containing:
+- 'rcb_2020_mt': RCB adjusted to 2020 baseline in Mt * CO2e
+- 'rcb_original_value': Original RCB value (in source units)
+- 'rcb_original_unit': Original RCB unit
+- 'baseline_year': Original baseline year
+- 'rebase_total_mt': Emissions added to rebase from source year to 2020
+  (positive, Mt * CO2e); fossil only for co2-ffi, fossil + actual BM
+  LULUCF for co2
+- 'rebase_fossil_mt': Fossil-only component of rebase (Mt * CO2e)
+- 'rebase_lulucf_mt': Actual BM LULUCF component of rebase (Mt * CO2e);
+  only non-zero for co2
+- 'deduction_bunkers_mt': Bunker fuel deduction (negative, Mt * CO2e)
+- 'deduction_lulucf_mt': LULUCF deduction (Mt * CO2e; sign depends on
+  emission category)
+- 'net_adjustment_mt': Total change from original to 2020 baseline
+  (rebase + deductions, Mt * CO2e)</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
 </div><h2 id="see-also">See Also<a class="headerlink" href="#see-also" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong><a href="https://setupelz.github.io/fair-shares/api/utils/core/">Core Utilities</a></strong>: General data manipulation functions</li>
 <li><strong><a href="https://setupelz.github.io/fair-shares/api/utils/math/">Math Utilities</a></strong>: Convergence solver and adjustments</li>
+<li><strong><a href="https://setupelz.github.io/fair-shares/science/other-operations/#nghgi-consistent-rcb-corrections">NGHGI Corrections (Science)</a></strong>: Scientific methodology</li>
 </ul>
 
 

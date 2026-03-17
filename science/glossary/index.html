@@ -2032,7 +2032,7 @@
 <dt><strong><code>convergence_year</code></strong> (type: <code>int</code>)</dt>
 <dd>Target year for per capita convergence. Must be &gt; allocation year. Convergence approaches only.</dd>
 <dt><strong><code>emission_category</code></strong> (type: <code>str</code>)</dt>
-<dd>Emission species (e.g., <code>"CO2"</code>, <code>"Kyoto GHG"</code>). Must match data sources.</dd>
+<dd>Emission species (e.g., <code>"co2-ffi"</code>, <code>"co2"</code>, <code>"all-ghg"</code>, <code>"all-ghg-ex-co2-lulucf"</code>, <code>"non-co2"</code>). Must match data sources.</dd>
 <dt><strong><code>group_level</code></strong> (type: <code>str</code>, default: <code>"iso3c"</code>)</dt>
 <dd>Index level for countries/regions (ISO 3166-1 alpha-3 codes).</dd>
 </dl>
@@ -2116,7 +2116,7 @@
 <ol>
 <li><code>iso3c</code> (str): ISO 3166-1 alpha-3 country code (e.g., <code>"USA"</code>, <code>"IND"</code>, <code>"DEU"</code>)</li>
 <li><code>unit</code> (str): Physical unit for the data (e.g., <code>"Mt CO2/yr"</code>, <code>"billion 2011 USD"</code>)</li>
-<li><code>emission-category</code> (str): Emission species (e.g., <code>"CO2"</code>, <code>"Kyoto GHG"</code>)</li>
+<li><code>emission-category</code> (str): Emission species (e.g., <code>"co2-ffi"</code>, <code>"all-ghg"</code>, <code>"non-co2"</code>)</li>
 </ol>
 <p><strong>Columns:</strong></p>
 <ul>
@@ -2126,9 +2126,9 @@
 <p><strong>Example:</strong></p>
 <div class="language-python highlight"><span class="filename">Python</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>                                            <span class="mi">2020</span>    <span class="mi">2021</span>    <span class="mi">2022</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">iso3c</span>  <span class="n">unit</span>       <span class="n">emission</span><span class="o">-</span><span class="n">category</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">USA</span>    <span class="n">Mt</span> <span class="n">CO2</span><span class="o">/</span><span class="n">yr</span>  <span class="n">CO2</span>                      <span class="mi">5000</span>    <span class="mi">4900</span>    <span class="mi">4800</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">IND</span>    <span class="n">Mt</span> <span class="n">CO2</span><span class="o">/</span><span class="n">yr</span>  <span class="n">CO2</span>                      <span class="mi">2500</span>    <span class="mi">2600</span>    <span class="mi">2700</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">World</span>  <span class="n">Mt</span> <span class="n">CO2</span><span class="o">/</span><span class="n">yr</span>  <span class="n">CO2</span>                     <span class="mi">35000</span>   <span class="mi">34500</span>   <span class="mi">34000</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">USA</span>    <span class="n">Mt</span> <span class="n">CO2</span><span class="o">/</span><span class="n">yr</span>  <span class="n">co2</span><span class="o">-</span><span class="n">ffi</span>                  <span class="mi">5000</span>    <span class="mi">4900</span>    <span class="mi">4800</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">IND</span>    <span class="n">Mt</span> <span class="n">CO2</span><span class="o">/</span><span class="n">yr</span>  <span class="n">co2</span><span class="o">-</span><span class="n">ffi</span>                  <span class="mi">2500</span>    <span class="mi">2600</span>    <span class="mi">2700</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">World</span>  <span class="n">Mt</span> <span class="n">CO2</span><span class="o">/</span><span class="n">yr</span>  <span class="n">co2</span><span class="o">-</span><span class="n">ffi</span>                 <span class="mi">35000</span>   <span class="mi">34500</span>   <span class="mi">34000</span>
 </span></code></pre></div>
 <p>See: <a href="https://setupelz.github.io/fair-shares/dev-guide/adding-approaches/#function-signature">Function Signature</a> for implementation details</p>
 <h3 id="multiindex">MultiIndex<a class="headerlink" href="#multiindex" title="Permanent link">&para;</a></h3>
@@ -2176,6 +2176,10 @@
 <dd>IPCC Sixth Assessment Report (2021-2023). Source of global emissions scenarios used in fair-shares.</dd>
 <dt><strong>BAU</strong></dt>
 <dd>Business As Usual. Baseline emissions scenario without climate policy. Note: framing deviation from BAU as a "cost" or "sacrifice" has been critiqued in the literature as inconsistent with CBDR-RC (see Kartha 2018).</dd>
+<dt><strong>Bookkeeping (BM)</strong></dt>
+<dd>LULUCF accounting method that estimates only direct human-caused land-use fluxes (deforestation, afforestation, land management). Used by IPCC for RCBs. Contrast with NGHGI, which additionally includes indirect effects. See: <a href="../other-operations/#why-two-lulucf-conventions-matter">NGHGI-Consistent RCB Corrections</a></dd>
+<dt><strong>Bunker fuels</strong></dt>
+<dd>CO₂ emissions from international aviation and shipping. Included in global emission totals but excluded from national inventories (no country claims responsibility). Must be subtracted when converting global RCBs to country-allocatable budgets [Weber 2026].</dd>
 <dt><strong>ECPC</strong></dt>
 <dd>Equal Cumulative Per Capita. An allocation approach that distributes a carbon budget equally on a cumulative per-capita basis, with past emissions subtracted from future entitlements.</dd>
 <dt><strong>GDP</strong></dt>
@@ -2190,10 +2194,16 @@
 <dd>Three-letter country codes (e.g., <code>USA</code>, <code>IND</code>, <code>DEU</code>). Standard for the <code>iso3c</code> index level.</dd>
 <dt><strong>Mt CO2/yr</strong></dt>
 <dd>Megatonnes of CO2 per year. Common unit for annual emissions.</dd>
+<dt><strong>Melo et al. (2026)</strong></dt>
+<dd>Country-reported NGHGI LULUCF CO₂ timeseries (v3.1). Covers 187 countries, 2000-2023. Replaces Grassi et al. (2023) with higher coverage and an additional year. See: <a href="../other-operations/#nghgi-consistent-rcb-corrections">NGHGI-Consistent RCB Corrections</a></dd>
+<dt><strong>NGHGI</strong></dt>
+<dd>National Greenhouse Gas Inventory. Country-level emissions reporting under UNFCCC. Includes passive carbon fluxes (CO₂ fertilization, climate feedbacks) in LULUCF estimates, unlike bookkeeping models. See: <a href="../other-operations/#nghgi-consistent-rcb-corrections">NGHGI-Consistent RCB Corrections</a></dd>
+<dt><strong>NGHGI-BM convention gap</strong></dt>
+<dd>The systematic difference between NGHGI and bookkeeping (BM) LULUCF CO₂ estimates. NGHGI includes indirect effects (CO₂ fertilization of managed forests) that BM excludes, making NGHGI a larger net sink. ~84 GtCO₂ for 1.5°C scenarios [Weber 2026]. See: <a href="../other-operations/#correction-for-total-co2-budgets-co2">NGHGI-Consistent RCB Corrections</a></dd>
 <dt><strong>PRIMAP-hist</strong></dt>
 <dd>Historical emissions dataset from PIK (Potsdam Institute for Climate Impact Research).</dd>
 <dt><strong>RCB</strong></dt>
-<dd>Remaining Carbon Budget. The amount of CO2 that can still be emitted while staying within a temperature target (e.g., 1.5°C).</dd>
+<dd>Remaining Carbon Budget. The amount of CO2 that can still be emitted while staying within a temperature target (e.g., 1.5°C). IPCC RCBs use bookkeeping LULUCF and include bunker fuels — conversion to NGHGI-consistent values requires corrections [Weber 2026]. See: <a href="../other-operations/#nghgi-consistent-rcb-corrections">NGHGI-Consistent RCB Corrections</a></dd>
 <dt><strong>SSP</strong></dt>
 <dd>Shared Socioeconomic Pathway. Scenarios combining socioeconomic projections with climate mitigation levels (e.g., SSP1-1.9, SSP2-4.5).</dd>
 <dt><strong>TCRE</strong></dt>

@@ -6,19 +6,15 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Step-by-step guide for integrating new data sources into the fair-shares pipeline">
+        <meta name="description" content="End-to-end code path walkthrough for fair-shares allocations">
       
       
         <meta name="author" content="The fair-shares Contributors">
       
       
-        <link rel="canonical" href="https://setupelz.github.io/fair-shares/dev-guide/adding-data-sources/">
+        <link rel="canonical" href="https://setupelz.github.io/fair-shares/dev-guide/architecture-walkthrough/">
       
       
-        <link rel="prev" href="../adding-approaches/">
-      
-      
-        <link rel="next" href="../docstring-template/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -26,7 +22,7 @@
     
     
       
-        <title>Adding Data Sources - fair-shares</title>
+        <title>Architecture Walkthrough - fair-shares</title>
       
     
     
@@ -92,7 +88,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#adding-data-sources" class="md-skip">
+        <a href="#architecture-walkthrough" class="md-skip">
           Skip to content
         </a>
       
@@ -130,7 +126,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Adding Data Sources
+              Architecture Walkthrough
             
           </span>
         </div>
@@ -342,12 +338,10 @@
         
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
+      <li class="md-tabs__item">
         <a href="../" class="md-tabs__link">
           
   
@@ -1329,8 +1323,6 @@
       
   
   
-    
-  
   
   
     
@@ -1351,19 +1343,18 @@
     
     
       
-        
-        
-      
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
         
           
           
@@ -1381,13 +1372,13 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="">
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             Developer Guide
@@ -1444,32 +1435,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 14h2v3h3v2h-3v3h-2v-3h-3v-2h3zM12 3c4.42 0 8 1.79 8 4s-3.58 4-8 4-8-1.79-8-4 3.58-4 8-4M4 9c0 2.21 3.58 4 8 4s8-1.79 8-4v3.08L19 12c-2.59 0-4.8 1.64-5.64 3.94L12 16c-4.42 0-8-1.79-8-4zm0 5c0 2.21 3.58 4 8 4h1c0 1.05.27 2.04.75 2.9L12 21c-4.42 0-8-1.79-8-4z"/></svg>
-  
-  <span class="md-ellipsis">
-    Adding Data Sources
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../adding-data-sources/" class="md-nav__link">
         
   
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 14h2v3h3v2h-3v3h-2v-3h-3v-2h3zM12 3c4.42 0 8 1.79 8 4s-3.58 4-8 4-8-1.79-8-4 3.58-4 8-4M4 9c0 2.21 3.58 4 8 4s8-1.79 8-4v3.08L19 12c-2.59 0-4.8 1.64-5.64 3.94L12 16c-4.42 0-8-1.79-8-4zm0 5c0 2.21 3.58 4 8 4h1c0 1.05.27 2.04.75 2.9L12 21c-4.42 0-8-1.79-8-4z"/></svg>
@@ -1480,256 +1449,6 @@
   
 
       </a>
-      
-        
-
-  
-
-<nav class="md-nav md-nav--secondary" aria-label="On this page">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      On this page
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#overview" class="md-nav__link">
-    <span class="md-ellipsis">
-      Overview
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Overview">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#data-types" class="md-nav__link">
-    <span class="md-ellipsis">
-      Data Types
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#step-1-add-raw-data" class="md-nav__link">
-    <span class="md-ellipsis">
-      Step 1: Add Raw Data
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#step-2-configure-the-source" class="md-nav__link">
-    <span class="md-ellipsis">
-      Step 2: Configure the Source
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Step 2: Configure the Source">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#common-configuration-parameters" class="md-nav__link">
-    <span class="md-ellipsis">
-      Common Configuration Parameters
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#step-3-create-preprocessing-notebook" class="md-nav__link">
-    <span class="md-ellipsis">
-      Step 3: Create Preprocessing Notebook
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Step 3: Create Preprocessing Notebook">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#preprocessing-pattern" class="md-nav__link">
-    <span class="md-ellipsis">
-      Preprocessing Pattern
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#step-4-index-structure-requirements" class="md-nav__link">
-    <span class="md-ellipsis">
-      Step 4: Index Structure Requirements
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Step 4: Index Structure Requirements">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#emissions" class="md-nav__link">
-    <span class="md-ellipsis">
-      Emissions
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#gdp-population" class="md-nav__link">
-    <span class="md-ellipsis">
-      GDP / Population
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#gini-stationary" class="md-nav__link">
-    <span class="md-ellipsis">
-      Gini (Stationary)
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#step-5-integrate-with-pipeline" class="md-nav__link">
-    <span class="md-ellipsis">
-      Step 5: Integrate with Pipeline
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#step-6-test" class="md-nav__link">
-    <span class="md-ellipsis">
-      Step 6: Test
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#lulucf-data-sources" class="md-nav__link">
-    <span class="md-ellipsis">
-      LULUCF Data Sources
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="LULUCF Data Sources">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#what-lulucf-preprocessing-produces" class="md-nav__link">
-    <span class="md-ellipsis">
-      What LULUCF preprocessing produces
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#adding-a-new-lulucf-source" class="md-nav__link">
-    <span class="md-ellipsis">
-      Adding a new LULUCF source
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#which-categories-use-lulucf" class="md-nav__link">
-    <span class="md-ellipsis">
-      Which categories use LULUCF?
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#scenario-data-and-nghgi-consistency" class="md-nav__link">
-    <span class="md-ellipsis">
-      Scenario Data and NGHGI Consistency
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#normative-implications" class="md-nav__link">
-    <span class="md-ellipsis">
-      Normative Implications
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#validation-requirements" class="md-nav__link">
-    <span class="md-ellipsis">
-      Validation Requirements
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#existing-notebooks-as-examples" class="md-nav__link">
-    <span class="md-ellipsis">
-      Existing Notebooks as Examples
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#see-also" class="md-nav__link">
-    <span class="md-ellipsis">
-      See Also
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1792,19 +1511,91 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#overview" class="md-nav__link">
+  <a href="#layer-map" class="md-nav__link">
     <span class="md-ellipsis">
-      Overview
+      Layer Map
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Overview">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worked-example-1-budget-allocation-for-co2-ffi-under-rcbs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked Example 1: Budget Allocation for CO2-FFI under RCBs
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Worked Example 1: Budget Allocation for CO2-FFI under RCBs">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#data-types" class="md-nav__link">
+  <a href="#step-1-data-pipeline-notebook-301-lines-144-187" class="md-nav__link">
     <span class="md-ellipsis">
-      Data Types
+      Step 1: Data Pipeline (notebook 301, lines 144-187)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-load-data-notebook-301-lines-250-263" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 2: Load Data (notebook 301, lines 250-263)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-run-allocations-notebook-301-lines-278-286" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 3: Run Allocations (notebook 301, lines 278-286)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-category-level-budget-runner-notebook_helperspy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 4: Category-Level Budget Runner (notebook_helpers.py)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-5-parameter-grid-expansion-managerpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 5: Parameter Grid Expansion (manager.py)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-6-single-allocation-dispatch-managerpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 6: Single Allocation Dispatch (manager.py)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-7-the-math-budgetsper_capitapy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 7: The Math (budgets/per_capita.py)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-8-result-serialization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 8: Result Serialization
     </span>
   </a>
   
@@ -1816,28 +1607,73 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-1-add-raw-data" class="md-nav__link">
+  <a href="#worked-example-2-pathway-allocation-for-all-ghg-decomposition" class="md-nav__link">
     <span class="md-ellipsis">
-      Step 1: Add Raw Data
+      Worked Example 2: Pathway Allocation for all-GHG (Decomposition)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Worked Example 2: Pathway Allocation for all-GHG (Decomposition)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-decomposition" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why decomposition?
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#step-2-configure-the-source" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-data-pipeline-snakefile-decomposition" class="md-nav__link">
     <span class="md-ellipsis">
-      Step 2: Configure the Source
+      Step 1: Data Pipeline (Snakefile decomposition)
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Step 2: Configure the Source">
-      <ul class="md-nav__list">
+</li>
         
           <li class="md-nav__item">
-  <a href="#common-configuration-parameters" class="md-nav__link">
+  <a href="#step-2-auto-derive-pathway-approaches" class="md-nav__link">
     <span class="md-ellipsis">
-      Common Configuration Parameters
+      Step 2: Auto-Derive Pathway Approaches
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-category-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 3: Category Loop
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-pathway-runner" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 4: Pathway Runner
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-5-pathway-math" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 5: Pathway Math
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-6-scenario-labels" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 6: Scenario Labels
     </span>
   </a>
   
@@ -1849,19 +1685,37 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-3-create-preprocessing-notebook" class="md-nav__link">
+  <a href="#data-preprocessing-pipeline" class="md-nav__link">
     <span class="md-ellipsis">
-      Step 3: Create Preprocessing Notebook
+      Data Preprocessing Pipeline
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Step 3: Create Preprocessing Notebook">
+    <nav class="md-nav" aria-label="Data Preprocessing Pipeline">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#preprocessing-pattern" class="md-nav__link">
+  <a href="#pipeline-architecture" class="md-nav__link">
     <span class="md-ellipsis">
-      Preprocessing Pattern
+      Pipeline Architecture
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-preprocessing-modules" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Preprocessing Modules
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output-directory-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Output Directory Structure
     </span>
   </a>
   
@@ -1873,37 +1727,82 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-4-index-structure-requirements" class="md-nav__link">
+  <a href="#where-do-i-change-x-quick-reference" class="md-nav__link">
     <span class="md-ellipsis">
-      Step 4: Index Structure Requirements
+      "Where Do I Change X?" Quick Reference
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Step 4: Index Structure Requirements">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Concepts
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Key Concepts">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#emissions" class="md-nav__link">
+  <a href="#relative-shares-vs-absolute-emissions" class="md-nav__link">
     <span class="md-ellipsis">
-      Emissions
+      Relative Shares vs Absolute Emissions
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#gdp-population" class="md-nav__link">
+  <a href="#budget-vs-pathway-approaches" class="md-nav__link">
     <span class="md-ellipsis">
-      GDP / Population
+      Budget vs Pathway Approaches
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#gini-stationary" class="md-nav__link">
+  <a href="#the-parameter-grid" class="md-nav__link">
     <span class="md-ellipsis">
-      Gini (Stationary)
+      The Parameter Grid
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#composite-category-decomposition" class="md-nav__link">
+    <span class="md-ellipsis">
+      Composite Category Decomposition
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kebab-case-vs-snake-case-convention" class="md-nav__link">
+    <span class="md-ellipsis">
+      Kebab-Case vs Snake-Case Convention
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#year-columns-as-strings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Year Columns as Strings
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-rest-of-world-row-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Rest-of-World (ROW) Pattern
     </span>
   </a>
   
@@ -1911,102 +1810,6 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#step-5-integrate-with-pipeline" class="md-nav__link">
-    <span class="md-ellipsis">
-      Step 5: Integrate with Pipeline
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#step-6-test" class="md-nav__link">
-    <span class="md-ellipsis">
-      Step 6: Test
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#lulucf-data-sources" class="md-nav__link">
-    <span class="md-ellipsis">
-      LULUCF Data Sources
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="LULUCF Data Sources">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#what-lulucf-preprocessing-produces" class="md-nav__link">
-    <span class="md-ellipsis">
-      What LULUCF preprocessing produces
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#adding-a-new-lulucf-source" class="md-nav__link">
-    <span class="md-ellipsis">
-      Adding a new LULUCF source
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#which-categories-use-lulucf" class="md-nav__link">
-    <span class="md-ellipsis">
-      Which categories use LULUCF?
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#scenario-data-and-nghgi-consistency" class="md-nav__link">
-    <span class="md-ellipsis">
-      Scenario Data and NGHGI Consistency
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#normative-implications" class="md-nav__link">
-    <span class="md-ellipsis">
-      Normative Implications
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#validation-requirements" class="md-nav__link">
-    <span class="md-ellipsis">
-      Validation Requirements
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#existing-notebooks-as-examples" class="md-nav__link">
-    <span class="md-ellipsis">
-      Existing Notebooks as Examples
-    </span>
-  </a>
   
 </li>
       
@@ -2034,7 +1837,7 @@
                   
 
   
-    <a href="https://github.com/setupelz/fair-shares/edit/main/docs/dev-guide/adding-data-sources.md" title="Edit this page" class="md-content__button md-icon">
+    <a href="https://github.com/setupelz/fair-shares/edit/main/docs/dev-guide/architecture-walkthrough.md" title="Edit this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
     </a>
@@ -2043,355 +1846,550 @@
     
       
     
-    <a href="https://github.com/setupelz/fair-shares/raw/main/docs/dev-guide/adding-data-sources.md" title="View source of this page" class="md-content__button md-icon">
+    <a href="https://github.com/setupelz/fair-shares/raw/main/docs/dev-guide/architecture-walkthrough.md" title="View source of this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
     </a>
   
 
 
-<h1 id="adding-data-sources">Adding Data Sources<a class="headerlink" href="#adding-data-sources" title="Permanent link">&para;</a></h1>
-<p>This guide explains how to add new data sources to fair-shares.</p>
+<h1 id="architecture-walkthrough">Architecture Walkthrough<a class="headerlink" href="#architecture-walkthrough" title="Permanent link">&para;</a></h1>
+<p>This document traces the full execution path of a fair-shares allocation, from
+the notebook configuration cell to the final parquet file on disk. Use it to
+build a mental model of the codebase before making changes.</p>
+<p><strong>Intended audience:</strong> Developers who need to understand <em>where</em> code runs and
+<em>why</em> the layers exist, not the climate science behind the equity principles
+(see <a href="../../science/allocations/">Scientific Documentation</a> for that).</p>
 <hr />
-<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
-<p>Data sources are configured in <code>conf/data_sources/data_sources_unified.yaml</code> and processed through preprocessing notebooks in the <code>notebooks/1xx_*.py</code> series.</p>
-<h3 id="data-types">Data Types<a class="headerlink" href="#data-types" title="Permanent link">&para;</a></h3>
+<h2 id="layer-map">Layer Map<a class="headerlink" href="#layer-map" title="Permanent link">&para;</a></h2>
+<p>The codebase has four layers. A request flows top-to-bottom; data flows
+bottom-to-top.</p>
+<div class="language-text highlight"><span class="filename">Text Only</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a> Layer 0  Notebook / CLI                 notebooks/301_*.py
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a> Layer 1  Helpers                        notebook_helpers.py
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a> Layer 2  Manager                        allocations/manager.py
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a> Layer 3  Math                           allocations/budgets/per_capita.py
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>                                         allocations/pathways/per_capita.py
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>                                         allocations/pathways/per_capita_convergence.py
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>                                         allocations/pathways/cumulative_per_capita_convergence.py
+</span></code></pre></div>
 <table>
 <thead>
 <tr>
-<th>Type</th>
-<th>Purpose</th>
-<th>Current Sources</th>
+<th>Layer</th>
+<th>Module</th>
+<th>Responsibility</th>
+<th>Key entry point</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>emissions</code></td>
-<td>Historical non-LULUCF emissions</td>
-<td>PRIMAP-hist</td>
+<td>0</td>
+<td><code>notebooks/301_custom_fair_share_allocation.py</code></td>
+<td>User configuration, data pipeline trigger, visualization</td>
+<td>Config cell (lines 57-106), execution cell (lines 250-286)</td>
 </tr>
 <tr>
-<td><code>gdp</code></td>
-<td>Economic capability</td>
-<td>World Bank WDI, IMF</td>
+<td>1</td>
+<td><code>src/.../notebook_helpers.py</code></td>
+<td>Extract boilerplate from notebooks; load data, run all allocations, print summary</td>
+<td><code>load_allocation_data()</code>, <code>run_all_allocations()</code>, <code>run_and_save_category_allocations()</code></td>
 </tr>
 <tr>
-<td><code>population</code></td>
-<td>Per capita calculations</td>
-<td>UN/OWID</td>
+<td>2</td>
+<td><code>src/.../allocations/manager.py</code></td>
+<td>Approach registry, parameter grid expansion, single allocation dispatch, result saving, budget/pathway classification</td>
+<td><code>run_parameter_grid()</code>, <code>run_allocation()</code>, <code>get_function()</code>, <code>is_budget_approach()</code></td>
 </tr>
 <tr>
-<td><code>gini</code></td>
-<td>Within-country inequality</td>
-<td>UNU-WIDER, WID</td>
-</tr>
-<tr>
-<td><code>lulucf</code></td>
-<td>NGHGI-consistent LULUCF emissions</td>
-<td>Melo et al. (2026)</td>
-</tr>
-<tr>
-<td><code>targets</code></td>
-<td>Global constraints</td>
-<td>AR6 scenarios, RCBs</td>
+<td>3</td>
+<td><code>src/.../allocations/budgets/per_capita.py</code></td>
+<td>Actual math: population shares, capability/responsibility adjustments</td>
+<td><code>_per_capita_budget_core()</code>, <code>equal_per_capita_budget()</code></td>
 </tr>
 </tbody>
 </table>
-<hr />
-<h2 id="step-1-add-raw-data">Step 1: Add Raw Data<a class="headerlink" href="#step-1-add-raw-data" title="Permanent link">&para;</a></h2>
-<p>Place your data files in the appropriate subdirectory:</p>
-<div class="language-text highlight"><span class="filename">Text Only</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>data/
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>├── emissions/
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>│   └── my-source-YYYY/
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>│       └── raw_data_file.csv
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>├── gdp/
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>│   └── my-source-YYYY/
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>├── population/
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>├── gini/
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>├── lulucf/
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>│   └── my-source-YYYY/
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>├── scenarios/
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>└── rcbs/
-</span></code></pre></div>
-<p>Use the naming convention <code>{source}-{year}/</code> for versioning.</p>
-<hr />
-<h2 id="step-2-configure-the-source">Step 2: Configure the Source<a class="headerlink" href="#step-2-configure-the-source" title="Permanent link">&para;</a></h2>
-<p>Add an entry to <code>conf/data_sources/data_sources_unified.yaml</code>:</p>
-<div class="language-yaml highlight"><span class="filename">YAML</span><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Example: Adding a new emissions source</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nt">emissions</span><span class="p">:</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nt">primap-202503</span><span class="p">:</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="c1"># ... existing source ...</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">  </span><span class="nt">my-source-2026</span><span class="p">:</span><span class="w"> </span><span class="c1"># New source</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;data/emissions/my-source-2026/emissions_data.csv&quot;</span>
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="nt">data_parameters</span><span class="p">:</span>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">      </span><span class="nt">available_categories</span><span class="p">:</span>
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">co2-ffi</span>
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">all-ghg</span>
-</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">      </span><span class="nt">world_key</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;WORLD&quot;</span><span class="w"> </span><span class="c1"># How the source identifies global totals</span>
-</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">      </span><span class="nt">scenario</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;HISTCR&quot;</span><span class="w"> </span><span class="c1"># Historical scenario identifier</span>
-</span></code></pre></div>
-<h3 id="common-configuration-parameters">Common Configuration Parameters<a class="headerlink" href="#common-configuration-parameters" title="Permanent link">&para;</a></h3>
+<p><strong>Result containers</strong> live alongside the math layer:</p>
 <table>
 <thead>
 <tr>
-<th>Parameter</th>
-<th>Purpose</th>
+<th>Container</th>
+<th>Module</th>
+<th>Holds</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>path</code></td>
-<td>Relative path to data file</td>
+<td><code>BudgetAllocationResult</code></td>
+<td><code>allocations/results/__init__.py</code></td>
+<td><code>relative_shares_cumulative_emission</code> -- single-year column, sums to 1.0</td>
 </tr>
 <tr>
-<td><code>available_categories</code></td>
-<td>Which emission categories this source provides</td>
-</tr>
-<tr>
-<td><code>world_key</code></td>
-<td>String used to identify global totals in the data</td>
+<td><code>PathwayAllocationResult</code></td>
+<td><code>allocations/results/__init__.py</code></td>
+<td><code>relative_shares_pathway_emissions</code> -- multi-year columns, each sums to 1.0</td>
 </tr>
 </tbody>
 </table>
+<p>Both containers store <strong>relative shares</strong> (dimensionless fractions). Absolute
+emissions are computed later by multiplying shares by a global budget or world
+pathway.</p>
 <hr />
-<h2 id="step-3-create-preprocessing-notebook">Step 3: Create Preprocessing Notebook<a class="headerlink" href="#step-3-create-preprocessing-notebook" title="Permanent link">&para;</a></h2>
-<p>Create a preprocessing notebook in the <code>1xx</code> series:</p>
-<div class="language-text highlight"><span class="filename">Text Only</span><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>notebooks/
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>├── 101_data_preprocess_emiss_primap-202503.py       # Existing
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>├── 102_data_preprocess_gdp_wdi-2025.py              # Existing
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>├── 103_data_preprocess_population_un-owid-2025.py   # Existing
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>├── 1xx_data_preprocess_my_source.py                 # New notebook
+<h2 id="worked-example-1-budget-allocation-for-co2-ffi-under-rcbs">Worked Example 1: Budget Allocation for CO2-FFI under RCBs<a class="headerlink" href="#worked-example-1-budget-allocation-for-co2-ffi-under-rcbs" title="Permanent link">&para;</a></h2>
+<p>This traces what happens when a user configures notebook 301 with:</p>
+<div class="language-python highlight"><span class="filename">Python</span><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">emission_category</span> <span class="o">=</span> <span class="s2">&quot;co2-ffi&quot;</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">active_sources</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;target&quot;</span><span class="p">:</span> <span class="s2">&quot;rcbs&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">}</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">allocations</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="s2">&quot;equal-per-capita-budget&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;allocation_year&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2015</span><span class="p">],</span> <span class="s2">&quot;preserve_allocation_year_shares&quot;</span><span class="p">:</span> <span class="p">[</span><span class="kc">False</span><span class="p">]}]</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="p">}</span>
 </span></code></pre></div>
-<h3 id="preprocessing-pattern">Preprocessing Pattern<a class="headerlink" href="#preprocessing-pattern" title="Permanent link">&para;</a></h3>
-<div class="language-python highlight"><span class="filename">Python</span><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="sd">Preprocess my-source-2026 data.</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="sd">Input: Raw data file</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="sd">Output: Standardized DataFrame with proper index structure</span>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
-</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pyprojroot</span><span class="w"> </span><span class="kn">import</span> <span class="n">here</span>
-</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>
-</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="c1"># Load raw data</span>
-</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="n">raw_path</span> <span class="o">=</span> <span class="n">here</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;data/emissions/my-source-2026/emissions_data.csv&quot;</span>
-</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">raw_path</span><span class="p">)</span>
-</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>
-</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="c1"># Standardize country codes to ISO3c</span>
-</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="n">df</span><span class="p">[</span><span class="s2">&quot;iso3c&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">convert_to_iso3c</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;country_column&quot;</span><span class="p">])</span>
-</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>
-</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="c1"># Set standard index</span>
-</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s2">&quot;iso3c&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">,</span> <span class="s2">&quot;emission-category&quot;</span><span class="p">])</span>
-</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>
-</span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="c1"># Ensure year columns are strings</span>
-</span><span id="__span-3-22"><a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="kn">from</span><span class="w"> </span><span class="nn">fair_shares.library.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">ensure_string_year_columns</span>
-</span><span id="__span-3-23"><a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="n">df</span> <span class="o">=</span> <span class="n">ensure_string_year_columns</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
-</span><span id="__span-3-24"><a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>
-</span><span id="__span-3-25"><a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="c1"># Add World row if missing</span>
-</span><span id="__span-3-26"><a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a><span class="k">if</span> <span class="s2">&quot;World&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">get_level_values</span><span class="p">(</span><span class="s2">&quot;iso3c&quot;</span><span class="p">):</span>
-</span><span id="__span-3-27"><a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a>    <span class="n">world_row</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;unit&quot;</span><span class="p">,</span> <span class="s2">&quot;emission-category&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-</span><span id="__span-3-28"><a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a>    <span class="n">world_row</span><span class="p">[</span><span class="s2">&quot;iso3c&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;World&quot;</span>
-</span><span id="__span-3-29"><a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a>    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df</span><span class="p">,</span> <span class="n">world_row</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;iso3c&quot;</span><span class="p">,</span> <span class="n">append</span><span class="o">=</span><span class="kc">True</span><span class="p">)])</span>
-</span><span id="__span-3-30"><a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a>
-</span><span id="__span-3-31"><a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a><span class="c1"># Save processed data</span>
-</span><span id="__span-3-32"><a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a><span class="n">output_path</span> <span class="o">=</span> <span class="n">here</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;data/processed/my-source-2026/emissions.csv&quot;</span>
-</span><span id="__span-3-33"><a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a><span class="n">output_path</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</span><span id="__span-3-34"><a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a><span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">output_path</span><span class="p">)</span>
-</span></code></pre></div>
-<hr />
-<h2 id="step-4-index-structure-requirements">Step 4: Index Structure Requirements<a class="headerlink" href="#step-4-index-structure-requirements" title="Permanent link">&para;</a></h2>
-<p>All data must follow standardized MultiIndex structures:</p>
-<h3 id="emissions">Emissions<a class="headerlink" href="#emissions" title="Permanent link">&para;</a></h3>
-<div class="language-python highlight"><span class="filename">Python</span><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># Index: iso3c, unit, emission-category</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="c1"># Columns: year columns as strings (&quot;1990&quot;, &quot;2000&quot;, ...)</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">names</span> <span class="o">==</span> <span class="p">[</span><span class="s2">&quot;iso3c&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">,</span> <span class="s2">&quot;emission-category&quot;</span><span class="p">]</span>
-</span></code></pre></div>
-<h3 id="gdp-population">GDP / Population<a class="headerlink" href="#gdp-population" title="Permanent link">&para;</a></h3>
-<div class="language-python highlight"><span class="filename">Python</span><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># Index: iso3c, unit</span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="c1"># Columns: year columns as strings</span>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">names</span> <span class="o">==</span> <span class="p">[</span><span class="s2">&quot;iso3c&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">]</span>
-</span></code></pre></div>
-<h3 id="gini-stationary">Gini (Stationary)<a class="headerlink" href="#gini-stationary" title="Permanent link">&para;</a></h3>
-<div class="language-python highlight"><span class="filename">Python</span><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># Index: iso3c, unit</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="c1"># Columns: &quot;gini&quot; (single value, not time-varying)</span>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">names</span> <span class="o">==</span> <span class="p">[</span><span class="s2">&quot;iso3c&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">]</span>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">==</span> <span class="p">[</span><span class="s2">&quot;gini&quot;</span><span class="p">]</span>
-</span></code></pre></div>
-<hr />
-<h2 id="step-5-integrate-with-pipeline">Step 5: Integrate with Pipeline<a class="headerlink" href="#step-5-integrate-with-pipeline" title="Permanent link">&para;</a></h2>
-<p>The Snakemake workflow automatically picks up sources from the configuration. Ensure your preprocessing notebook:</p>
+<h3 id="step-1-data-pipeline-notebook-301-lines-144-187">Step 1: Data Pipeline (notebook 301, lines 144-187)<a class="headerlink" href="#step-1-data-pipeline-notebook-301-lines-144-187" title="Permanent link">&para;</a></h3>
+<p>The notebook calls <code>setup_data()</code> from <code>src/.../utils/data/setup.py</code>. This
+function:</p>
 <ol>
-<li>Reads from the path specified in the config</li>
-<li>Outputs to the standard processed data location</li>
-<li>Uses consistent index structures</li>
+<li><strong>Validates config</strong> via <code>build_data_config()</code> (<code>utils/data/config.py</code>)
+   which loads <code>conf/data_sources/data_sources_unified.yaml</code>, filters to the
+   selected target, and validates with Pydantic (<code>config/models.py</code>).</li>
+<li><strong>Builds paths</strong> via <code>build_data_paths()</code> (<code>utils/data/setup.py</code>).</li>
+<li><strong>Generates a Snakemake command</strong> via <code>generate_snakemake_command()</code>
+   (<code>utils/data/setup.py</code>).</li>
+<li><strong>Executes Snakemake</strong> via <code>execute_snakemake_setup()</code>
+   (<code>utils/data/setup.py</code>). This runs the <code>Snakefile</code> which
+   orchestrates the 100-series preprocessing notebooks (emissions, GDP,
+   population, Gini, scenarios) and produces CSV files under
+   <code>output/&lt;source_id&gt;/intermediate/processed/</code>.</li>
 </ol>
-<hr />
-<h2 id="step-6-test">Step 6: Test<a class="headerlink" href="#step-6-test" title="Permanent link">&para;</a></h2>
-<ol>
-<li><strong>Run preprocessing notebook</strong> - Verify it completes without errors</li>
-<li><strong>Run allocation with new source</strong> - Use in 301 notebook</li>
-<li><strong>Check results</strong> - Verify country coverage and data ranges</li>
-</ol>
-<div class="language-python highlight"><span class="filename">Python</span><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># In 301 notebook:</span>
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">active_sources</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>    <span class="s2">&quot;target&quot;</span><span class="p">:</span> <span class="s2">&quot;rcbs&quot;</span><span class="p">,</span>
-</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>    <span class="s2">&quot;emissions&quot;</span><span class="p">:</span> <span class="s2">&quot;my-source-2026&quot;</span><span class="p">,</span>  <span class="c1"># Use new source</span>
-</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>    <span class="s2">&quot;gdp&quot;</span><span class="p">:</span> <span class="s2">&quot;wdi-2025&quot;</span><span class="p">,</span>
-</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>    <span class="s2">&quot;population&quot;</span><span class="p">:</span> <span class="s2">&quot;un-owid-2025&quot;</span><span class="p">,</span>
-</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>    <span class="s2">&quot;gini&quot;</span><span class="p">:</span> <span class="s2">&quot;unu-wider-2025&quot;</span><span class="p">,</span>
-</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>    <span class="s2">&quot;lulucf&quot;</span><span class="p">:</span> <span class="s2">&quot;melo-2026&quot;</span><span class="p">,</span>
-</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="p">}</span>
-</span></code></pre></div>
-<hr />
-<h2 id="lulucf-data-sources">LULUCF Data Sources<a class="headerlink" href="#lulucf-data-sources" title="Permanent link">&para;</a></h2>
-<p>LULUCF data provides NGHGI-consistent land-use CO2 emissions that replace
-the bookkeeping model (BM) estimates in PRIMAP. This is required for total
-CO2 (<code>co2</code>) and all-GHG (<code>all-ghg</code>) categories — see
-<a href="../../science/other-operations/">NGHGI Corrections</a> for the science.</p>
-<h3 id="what-lulucf-preprocessing-produces">What LULUCF preprocessing produces<a class="headerlink" href="#what-lulucf-preprocessing-produces" title="Permanent link">&para;</a></h3>
-<p>Notebook 107 reads the raw LULUCF source and outputs:</p>
+<p>The Snakefile (<code>Snakefile</code>, line 174 <code>rule all</code>) chains:
+<code>compose_config</code> -&gt; <code>preprocess_emiss</code> -&gt; <code>preprocess_gdp</code> -&gt;
+<code>preprocess_population</code> -&gt; <code>preprocess_gini</code> -&gt; <code>preprocess_lulucf</code> -&gt;
+<code>master_preprocess</code>.</p>
+<p>For <code>target=rcbs</code>, the master notebook is <code>100_data_preprocess_rcbs</code>
+(Snakefile line 101-105). No scenario notebook runs because RCBs are
+cumulative budgets, not pathways.</p>
+<p><strong>Output:</strong> <code>output/&lt;source_id&gt;/intermediate/processed/</code> containing:</p>
 <ul>
-<li><code>emiss_co2-lulucf_timeseries.csv</code> — country-level NGHGI LULUCF emissions
-  (overwrites the PRIMAP BM version from notebook 101)</li>
-<li><code>world_co2-lulucf_timeseries.csv</code> — world-total LULUCF for RCB corrections</li>
-<li><code>bunker_timeseries.csv</code> — international bunker fuel emissions</li>
-<li><code>lulucf_metadata.yaml</code> — NGHGI start year (enforces allocation year ≥ 2000
-  for <code>co2</code> category)</li>
+<li><code>country_emissions_co2-ffi_timeseries.csv</code></li>
+<li><code>world_emissions_co2-ffi_timeseries.csv</code></li>
+<li><code>rcbs_co2-ffi.csv</code></li>
+<li><code>country_gdp_timeseries.csv</code></li>
+<li><code>country_population_timeseries.csv</code></li>
+<li><code>country_gini_stationary.csv</code></li>
 </ul>
-<h3 id="adding-a-new-lulucf-source">Adding a new LULUCF source<a class="headerlink" href="#adding-a-new-lulucf-source" title="Permanent link">&para;</a></h3>
-<ol>
-<li>Place data in <code>data/lulucf/{source-name}/</code></li>
-<li>Add config entry under <code>lulucf:</code> in <code>data_sources_unified.yaml</code> with
-   <code>data_parameters</code> including <code>format</code>, <code>iso3_column</code>, <code>year_column</code>,
-   <code>value_column</code>, <code>category_filter</code>, <code>gas_filter</code>, and <code>exclude_regions</code></li>
-<li>Create <code>107_data_preprocess_lulucf_{source-name}.py</code> following the pattern
-   of <code>107_data_preprocess_lulucf_melo-2026.py</code></li>
-<li>The Snakefile will pick it up via <code>active_lulucf_source</code></li>
-</ol>
-<h3 id="which-categories-use-lulucf">Which categories use LULUCF?<a class="headerlink" href="#which-categories-use-lulucf" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>Emission category</th>
-<th>Uses LULUCF?</th>
-<th>Why</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>co2-ffi</code></td>
-<td>No</td>
-<td>Fossil fuels only</td>
-</tr>
-<tr>
-<td><code>co2</code></td>
-<td><strong>Yes</strong></td>
-<td>Total CO2 = fossil − bunkers + NGHGI LULUCF</td>
-</tr>
-<tr>
-<td><code>all-ghg</code></td>
-<td><strong>Yes</strong></td>
-<td>Decomposes into <code>co2</code> (NGHGI) + <code>non-co2</code></td>
-</tr>
-<tr>
-<td><code>all-ghg-ex-co2-lulucf</code></td>
-<td>No</td>
-<td>CO2 component is <code>co2-ffi</code></td>
-</tr>
-<tr>
-<td><code>co2-lulucf</code></td>
-<td>Indirect</td>
-<td>IS the LULUCF data</td>
-</tr>
-<tr>
-<td><code>non-co2</code></td>
-<td>No</td>
-<td>Derived by subtraction</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="scenario-data-and-nghgi-consistency">Scenario Data and NGHGI Consistency<a class="headerlink" href="#scenario-data-and-nghgi-consistency" title="Permanent link">&para;</a></h2>
-<p>When adding or updating scenario data (AR6 or custom), ensure the scenarios
-use NGHGI-consistent emissions conventions. The pipeline applies NGHGI
-corrections to remaining carbon budgets (RCBs) to account for the gap
-between bookkeeping model and NGHGI LULUCF estimates, but scenario pathways
-must already be internally consistent.</p>
-<p><strong>For AR6 scenarios:</strong> The Gidden et al. reanalysis provides scenarios that
-are consistent with PRIMAP historical emissions. NGHGI corrections are
-applied at the RCB level (adjusting the budget), not at the scenario pathway
-level.</p>
-<p><strong>For custom scenarios:</strong> If your scenario data uses a different emissions
-convention than PRIMAP/NGHGI, apply the necessary corrections in the
-preprocessing notebook (<code>104_data_preprocess_scenarios.py</code>) before
-the data enters the pipeline. Do not rely on downstream corrections — the
-allocation functions assume scenario data is already convention-consistent.</p>
-<hr />
-<h2 id="normative-implications">Normative Implications<a class="headerlink" href="#normative-implications" title="Permanent link">&para;</a></h2>
-<p>Some data source choices carry normative weight. Contributors should document the rationale for their data source choices. For example, some decision points include:</p>
+<h3 id="step-2-load-data-notebook-301-lines-250-263">Step 2: Load Data (notebook 301, lines 250-263)<a class="headerlink" href="#step-2-load-data-notebook-301-lines-250-263" title="Permanent link">&para;</a></h3>
+<p><code>load_allocation_data()</code> (<code>notebook_helpers.py</code>) reads the processed CSVs
+into DataFrames. For RCB runs, it loads:</p>
 <ul>
-<li><strong>GDP:</strong> PPP vs. MER measurement can significantly affect allocation results — PPP tends to raise developing-country capacity shares [Pelz 2025b].</li>
-<li><strong>Emissions:</strong> Production vs. consumption accounting embeds different theories of responsibility. Production accounting (territorial) excludes embedded imports; consumption accounting includes them.</li>
-<li><strong>Population:</strong> Projection method choices (UN median, SSP scenarios) affect per capita allocations, particularly for countries with high projected growth.</li>
+<li><code>emissions_data["co2-ffi"]</code> -- country emissions indexed by
+  <code>[iso3c, unit, emission-category]</code></li>
+<li><code>rcbs_data["co2-ffi"]</code> -- RCB table with columns: <code>source</code>,
+  <code>climate-assessment</code>, <code>quantile</code>, <code>rcb_2020_mt</code></li>
+<li><code>world_emissions_data["co2-ffi"]</code> -- world historical emissions (used to
+  convert RCB values to total budgets)</li>
+<li>Socioeconomic DataFrames: GDP, population, Gini (with validation)</li>
 </ul>
-<hr />
-<h2 id="validation-requirements">Validation Requirements<a class="headerlink" href="#validation-requirements" title="Permanent link">&para;</a></h2>
-<p>New data sources should:</p>
+<h3 id="step-3-run-allocations-notebook-301-lines-278-286">Step 3: Run Allocations (notebook 301, lines 278-286)<a class="headerlink" href="#step-3-run-allocations-notebook-301-lines-278-286" title="Permanent link">&para;</a></h3>
+<p><code>run_all_allocations()</code> (<code>notebook_helpers.py</code>) orchestrates the full run:</p>
 <ol>
-<li><strong>Cover expected countries</strong> - At minimum, major emitters</li>
-<li><strong>Include World total</strong> - Required for validation</li>
-<li><strong>Use standard units</strong> - Mt CO2e for emissions, persons for population</li>
-<li><strong>Handle missing values</strong> - Document any gaps</li>
+<li><strong>Splits approaches</strong> into budget vs pathway using
+   <code>is_budget_approach()</code> from the manager.</li>
+<li><strong>Iterates over <code>final_categories</code></strong>. For <code>co2-ffi</code> with RCBs,
+   there is one category: <code>("co2-ffi",)</code>.</li>
+<li><strong>Delegates</strong> to <code>run_and_save_category_allocations()</code>.</li>
 </ol>
+<h3 id="step-4-category-level-budget-runner-notebook_helperspy">Step 4: Category-Level Budget Runner (notebook_helpers.py)<a class="headerlink" href="#step-4-category-level-budget-runner-notebook_helperspy" title="Permanent link">&para;</a></h3>
+<p><code>_run_budget_allocations()</code> does two things:</p>
+<p><strong>4a. Compute share allocations:</strong></p>
+<p>Calls <code>run_parameter_grid()</code> from <code>manager.py</code> with all budget approach
+configs. This is called <strong>once</strong> per category because shares depend only on
+socioeconomic data and approach parameters, not on individual RCB values.</p>
+<p><strong>4b. Iterate over RCB rows:</strong></p>
+<p>For each row in the RCB table (e.g., "1.5C|0.5 from IPCC AR6"):</p>
+<ol>
+<li>Convert the RCB value (GtCO2 remaining from 2020) to a total budget for
+   the allocation year using <code>calculate_budget_from_rcb()</code>.</li>
+<li>Multiply relative shares by the total budget:
+   <code>result.get_absolute_budgets(cumulative_budget)</code> -- calls
+   <code>BudgetAllocationResult.get_absolute_budgets()</code>.</li>
+<li>Save via <code>save_allocation_result()</code> to a parquet file.</li>
+</ol>
+<h3 id="step-5-parameter-grid-expansion-managerpy">Step 5: Parameter Grid Expansion (manager.py)<a class="headerlink" href="#step-5-parameter-grid-expansion-managerpy" title="Permanent link">&para;</a></h3>
+<p><code>run_parameter_grid()</code> expands the config:</p>
+<div class="language-python highlight"><span class="filename">Python</span><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">{</span><span class="s2">&quot;equal-per-capita-budget&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;allocation_year&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2015</span><span class="p">],</span> <span class="s2">&quot;preserve_allocation_year_shares&quot;</span><span class="p">:</span> <span class="p">[</span><span class="kc">False</span><span class="p">]}]}</span>
+</span></code></pre></div>
+<ol>
+<li><strong>Validates</strong> target-source compatibility and allocation years.</li>
+<li><strong>Iterates approaches</strong>. For each approach:</li>
+<li>Converts kebab-case keys to snake_case.</li>
+<li>Validates parameters.</li>
+<li>Expands parameter lists into combinations via <code>_expand_parameters()</code>.
+     Here: 1 year x 1 preserve setting = 1 combination.</li>
+<li><strong>Calls <code>run_allocation()</code></strong> for each combination.</li>
+</ol>
+<h3 id="step-6-single-allocation-dispatch-managerpy">Step 6: Single Allocation Dispatch (manager.py)<a class="headerlink" href="#step-6-single-allocation-dispatch-managerpy" title="Permanent link">&para;</a></h3>
+<p><code>run_allocation()</code>:</p>
+<ol>
+<li>Looks up the function: <code>get_function("equal-per-capita-budget")</code> from the
+   approach registry in <code>manager.py</code>, which returns <code>equal_per_capita_budget</code>.</li>
+<li>Builds <code>func_args</code> dict with all data + parameters.</li>
+<li>Validates (<code>validate_function_parameters()</code>) and filters to only the
+   parameters the function accepts (<code>filter_function_parameters()</code>).</li>
+<li>Calls the math function.</li>
+</ol>
+<h3 id="step-7-the-math-budgetsper_capitapy">Step 7: The Math (budgets/per_capita.py)<a class="headerlink" href="#step-7-the-math-budgetsper_capitapy" title="Permanent link">&para;</a></h3>
+<p><code>equal_per_capita_budget()</code> delegates to <code>_per_capita_budget_core()</code>
+with <code>responsibility_weight=0.0</code> and <code>capability_weight=0.0</code>.</p>
+<p>Inside <code>_per_capita_budget_core()</code>:</p>
+<ol>
+<li><strong>Filter population</strong> to allocation year onwards.</li>
+<li><strong>Convert units</strong> to common scale.</li>
+<li>Since no adjustments, skip capability/responsibility blocks.</li>
+<li><strong>Calculate shares</strong>:</li>
+<li><code>group_totals = base_population.sum(axis=1)</code> -- sum each country's
+     population from allocation year onward.</li>
+<li><code>world_totals = groupby_except_robust(group_totals, group_level)</code> --
+     sum across all countries.</li>
+<li><code>shares = group_totals / world_totals</code> -- each country's fraction.</li>
+<li><strong>Apply deviation constraint</strong> if <code>max_deviation_sigma</code> is set.</li>
+<li><strong>Return</strong> a <code>BudgetAllocationResult</code> with the shares DataFrame.</li>
+</ol>
+<h3 id="step-8-result-serialization">Step 8: Result Serialization<a class="headerlink" href="#step-8-result-serialization" title="Permanent link">&para;</a></h3>
+<p>Back in <code>_run_budget_allocations()</code> (<code>notebook_helpers.py</code>),
+<code>save_allocation_result()</code> (<code>manager.py</code>) delegates to
+<code>results/serializers.py</code>. The serializer:</p>
+<ol>
+<li>Adds metadata columns (approach, climate-assessment, quantile, data
+   sources) from <code>results/metadata.py</code>.</li>
+<li>Writes two parquet files per allocation:</li>
+<li><code>*_relative.parquet</code> -- dimensionless shares</li>
+<li><code>*_absolute.parquet</code> -- shares multiplied by the global budget (MtCO2)</li>
+</ol>
+<p>After all RCB rows and approaches, <code>create_param_manifest()</code> writes
+<code>param_manifest.csv</code> and <code>generate_readme()</code> writes documentation markdown.</p>
 <hr />
-<h2 id="existing-notebooks-as-examples">Existing Notebooks as Examples<a class="headerlink" href="#existing-notebooks-as-examples" title="Permanent link">&para;</a></h2>
+<h2 id="worked-example-2-pathway-allocation-for-all-ghg-decomposition">Worked Example 2: Pathway Allocation for all-GHG (Decomposition)<a class="headerlink" href="#worked-example-2-pathway-allocation-for-all-ghg-decomposition" title="Permanent link">&para;</a></h2>
+<p>This traces a more complex case:</p>
+<div class="language-python highlight"><span class="filename">Python</span><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">emission_category</span> <span class="o">=</span> <span class="s2">&quot;all-ghg&quot;</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">active_sources</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;target&quot;</span><span class="p">:</span> <span class="s2">&quot;rcbs&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">}</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">allocations</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="s2">&quot;equal-per-capita-budget&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;allocation_year&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2015</span><span class="p">],</span> <span class="s2">&quot;preserve_allocation_year_shares&quot;</span><span class="p">:</span> <span class="p">[</span><span class="kc">False</span><span class="p">]}]</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="p">}</span>
+</span></code></pre></div>
+<h3 id="why-decomposition">Why decomposition?<a class="headerlink" href="#why-decomposition" title="Permanent link">&para;</a></h3>
+<p>RCBs only constrain CO2. For all-GHG, the system must <strong>decompose</strong> into:</p>
+<ul>
+<li><strong>CO2 component</strong> (<code>co2</code>): allocated via budget approach (RCBs)</li>
+<li><strong>non-CO2 component</strong> (<code>non-co2</code>): allocated via pathway approach (AR6
+  scenarios)</li>
+</ul>
+<p>This logic lives in <code>utils/data/config.py</code>:</p>
+<ul>
+<li><code>is_composite_category("all-ghg")</code> returns <code>True</code></li>
+<li><code>needs_decomposition("rcbs", "all-ghg")</code> returns <code>True</code></li>
+<li><code>get_final_categories("rcbs", "all-ghg")</code> returns <code>("co2", "non-co2")</code></li>
+<li><code>get_co2_component("all-ghg")</code> returns <code>"co2"</code></li>
+</ul>
+<h3 id="step-1-data-pipeline-snakefile-decomposition">Step 1: Data Pipeline (Snakefile decomposition)<a class="headerlink" href="#step-1-data-pipeline-snakefile-decomposition" title="Permanent link">&para;</a></h3>
+<p>The Snakefile detects <code>is_multi_category = True</code> and:</p>
+<ol>
+<li>Runs emissions preprocessing for all PRIMAP source categories:
+   <code>co2-ffi</code>, <code>co2</code>, <code>co2-lulucf</code>, <code>all-ghg-ex-co2-lulucf</code> (Snakefile
+   lines 228-251).</li>
+<li>Runs AR6 scenario preprocessing for derivation sources: <code>co2-ffi</code> and
+   <code>all-ghg-ex-co2-lulucf</code> (Snakefile lines 331-374).</li>
+<li><strong>Derives non-CO2</strong> by subtraction (Snakefile lines 386-429):</li>
+<li>Historical: <code>non-co2 = all-ghg-ex-co2-lulucf - co2-ffi</code></li>
+<li>Scenarios: same subtraction on AR6 scenario data.</li>
+<li>Runs master preprocessing twice (Snakefile lines 470-487):</li>
+<li>CO2 pass: <code>100_data_preprocess_rcbs.ipynb</code> for <code>co2</code></li>
+<li>non-CO2 pass: <code>100_data_preprocess_pathways.ipynb</code> for <code>non-co2</code></li>
+</ol>
+<h3 id="step-2-auto-derive-pathway-approaches">Step 2: Auto-Derive Pathway Approaches<a class="headerlink" href="#step-2-auto-derive-pathway-approaches" title="Permanent link">&para;</a></h3>
+<p>In <code>run_all_allocations()</code> (<code>notebook_helpers.py</code>):</p>
+<p>The user only defined budget approaches (<code>equal-per-capita-budget</code>). But
+non-CO2 needs pathway approaches. The helper auto-derives them:</p>
+<div class="language-python highlight"><span class="filename">Python</span><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">if</span> <span class="n">budget_allocs</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">pathway_allocs</span><span class="p">:</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="n">pathway_allocs</span> <span class="o">=</span> <span class="n">derive_pathway_allocations</span><span class="p">(</span><span class="n">budget_allocs</span><span class="p">)</span>
+</span></code></pre></div>
+<p><code>derive_pathway_allocations()</code> (<code>manager.py</code>) maps:</p>
+<ul>
+<li><code>equal-per-capita-budget</code> -&gt; <code>equal-per-capita</code></li>
+<li><code>allocation_year</code> -&gt; <code>first_allocation_year</code></li>
+<li><code>preserve_allocation_year_shares</code> -&gt; <code>preserve_first_allocation_year_shares</code></li>
+</ul>
+<h3 id="step-3-category-loop">Step 3: Category Loop<a class="headerlink" href="#step-3-category-loop" title="Permanent link">&para;</a></h3>
+<p><code>run_all_allocations()</code> iterates over <code>final_categories = ("co2", "non-co2")</code>:</p>
+<p><strong>Pass 1: <code>co2</code> (budget)</strong></p>
+<ul>
+<li><code>is_budget_target("rcbs", "co2")</code> returns <code>True</code> (<code>config.py</code>)</li>
+<li>Uses <code>budget_allocs</code> dict</li>
+<li>Follows the same path as Worked Example 1</li>
+</ul>
+<p><strong>Pass 2: <code>non-co2</code> (pathway)</strong></p>
+<ul>
+<li><code>is_budget_target("rcbs", "non-co2")</code> returns <code>False</code></li>
+<li>Uses auto-derived <code>pathway_allocs</code> dict</li>
+<li>Calls <code>_run_pathway_allocations()</code> (<code>notebook_helpers.py</code>)</li>
+</ul>
+<h3 id="step-4-pathway-runner">Step 4: Pathway Runner<a class="headerlink" href="#step-4-pathway-runner" title="Permanent link">&para;</a></h3>
+<p><code>_run_pathway_allocations()</code> (<code>notebook_helpers.py</code>):</p>
+<ol>
+<li><strong>Groups scenarios</strong> by <code>climate-assessment</code> and <code>quantile</code>.</li>
+<li>For each group, extracts the World totals timeseries.</li>
+<li>Calls <code>run_parameter_grid()</code> with pathway approaches and the world
+   scenario data.</li>
+<li>For each result:</li>
+<li><code>PathwayAllocationResult.get_absolute_emissions(world_ts)</code> multiplies
+     year-by-year shares by the global pathway.</li>
+<li>Saves to parquet.</li>
+</ol>
+<h3 id="step-5-pathway-math">Step 5: Pathway Math<a class="headerlink" href="#step-5-pathway-math" title="Permanent link">&para;</a></h3>
+<p>Pathway allocations flow through <code>pathways/per_capita.py</code>
+(<code>_per_capita_core()</code>). The key difference from budget math:</p>
+<ul>
+<li>Uses <code>first_allocation_year</code> instead of <code>allocation_year</code>.</li>
+<li>Produces <strong>multi-year shares</strong> (one column per year from
+  <code>first_allocation_year</code> onward).</li>
+<li>If <code>preserve_first_allocation_year_shares=False</code>, each year's shares
+  reflect that year's population (dynamic shares).</li>
+<li>Returns <code>PathwayAllocationResult</code> instead of <code>BudgetAllocationResult</code>.</li>
+</ul>
+<h3 id="step-6-scenario-labels">Step 6: Scenario Labels<a class="headerlink" href="#step-6-scenario-labels" title="Permanent link">&para;</a></h3>
+<p>AR6 categories (C1, C2, C3) are relabeled to RCB scenario labels
+(<code>1.5p50</code>, <code>2p83</code>, <code>2p66</code>) during preprocessing in notebook 104.
+This is a 1:1 mapping — each RCB scenario corresponds to exactly one
+AR6 category. The relabeling happens once at data loading time, so
+all downstream code (including non-CO2 pathways) uses the RCB labels
+directly without runtime translation.</p>
+<hr />
+<h2 id="data-preprocessing-pipeline">Data Preprocessing Pipeline<a class="headerlink" href="#data-preprocessing-pipeline" title="Permanent link">&para;</a></h2>
+<p>The preprocessing pipeline transforms raw data sources into analysis-ready
+CSVs. It runs via Snakemake, orchestrated by the Snakefile.</p>
+<h3 id="pipeline-architecture">Pipeline Architecture<a class="headerlink" href="#pipeline-architecture" title="Permanent link">&para;</a></h3>
+<div class="language-text highlight"><span class="filename">Text Only</span><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>conf/data_sources/data_sources_unified.yaml   (source of truth for config)
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>        |
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>        v
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>   Snakefile                                   (DAG orchestration)
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>        |
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>        +---&gt; compose_config                   (Pydantic validation)
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>        |         |
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>        +---&gt; preprocess_emiss (101_*.ipynb)   (per emission category)
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>        +---&gt; preprocess_gdp   (102_*.ipynb)
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>        +---&gt; preprocess_population (103_*.ipynb)
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>        +---&gt; preprocess_gini  (105_*.ipynb)
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>        +---&gt; preprocess_lulucf (107_*.ipynb)  (NGHGI LULUCF, bunkers, metadata)
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>        +---&gt; preprocess_scenarios (104/106_*.ipynb)  (if pathway/rcb-pathways)
+</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>        |         |
+</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>        +---&gt; [derive_non_co2]                 (if decomposition)
+</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>        |         |
+</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>        +---&gt; master_preprocess (100_*.ipynb)  (combines all, produces final CSVs)
+</span></code></pre></div>
+<h3 id="key-preprocessing-modules">Key Preprocessing Modules<a class="headerlink" href="#key-preprocessing-modules" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
-<th>Notebook</th>
-<th>Data Type</th>
-<th>Good Example Of</th>
+<th>Module</th>
+<th>Location</th>
+<th>Purpose</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>101_data_preprocess_emiss_primap-202503.py</code></td>
-<td>Emissions</td>
-<td>NetCDF processing, category mapping</td>
+<td><code>DataPreprocessor</code></td>
+<td><code>pipeline/preprocessing.py</code></td>
+<td>Common preprocessing: load, validate, filter to analysis countries, add ROW</td>
 </tr>
 <tr>
-<td><code>102_data_preprocess_gdp_wdi-2025.py</code></td>
-<td>GDP</td>
-<td>CSV processing, country code mapping</td>
+<td><code>run_rcb_preprocessing()</code></td>
+<td><code>pipeline/preprocessing.py</code></td>
+<td>RCB-specific: NGHGI corrections, RCB processing</td>
 </tr>
 <tr>
-<td><code>103_data_preprocess_population_un-owid-2025.py</code></td>
-<td>Population</td>
-<td>Combining historical and projected data</td>
+<td><code>run_pathway_preprocessing()</code></td>
+<td><code>pipeline/preprocessing.py</code></td>
+<td>Pathway-specific: scenario loading and processing</td>
 </tr>
 <tr>
-<td><code>105_data_preprocess_gini_unu-wider-2025.py</code></td>
-<td>Gini</td>
-<td>Quality filtering, stationary output</td>
+<td><code>run_composite_preprocessing()</code></td>
+<td><code>pipeline/preprocessing.py</code></td>
+<td>Composite: 2-pass decomposition for all-GHG</td>
 </tr>
 <tr>
-<td><code>105_data_preprocess_gini_wid-2025.py</code></td>
-<td>Gini</td>
-<td>WID.world processing, stationary output</td>
-</tr>
-<tr>
-<td><code>107_data_preprocess_lulucf_melo-2026.py</code></td>
-<td>LULUCF</td>
-<td>NGHGI corrections, metadata export, world totals</td>
+<td><code>run_non_co2_preprocessing()</code></td>
+<td><code>pipeline/preprocessing.py</code></td>
+<td>Derive non-CO2 by subtraction, then pathway-process</td>
 </tr>
 </tbody>
 </table>
+<h3 id="output-directory-structure">Output Directory Structure<a class="headerlink" href="#output-directory-structure" title="Permanent link">&para;</a></h3>
+<div class="language-text highlight"><span class="filename">Text Only</span><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>output/&lt;source_id&gt;/
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>  config.yaml                          (validated configuration)
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>  notebooks/                           (executed preprocessing notebooks)
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>  intermediate/
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>    emissions/                         (per-category emission CSVs)
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>      world_co2-lulucf_timeseries.csv  (NGHGI world LULUCF for RCB corrections)
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>      bunker_timeseries.csv            (international bunker emissions)
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>      lulucf_metadata.yaml             (NGHGI start year, splice year)
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>    gdp/                               (GDP timeseries)
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>    population/                        (population timeseries)
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>    gini/                              (Gini coefficients)
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>    processed/                         (final analysis-ready CSVs)
+</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>      country_emissions_*.csv
+</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>      country_gdp_timeseries.csv
+</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>      country_population_timeseries.csv
+</span><span id="__span-6-16"><a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>      country_gini_stationary.csv
+</span><span id="__span-6-17"><a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a>      rcbs_*.csv                       (budget mode only)
+</span><span id="__span-6-18"><a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a>      world_emissions_*.csv            (budget mode only)
+</span><span id="__span-6-19"><a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a>      world_scenarios_*_complete.csv   (pathway mode only)
+</span><span id="__span-6-20"><a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a>  allocations/
+</span><span id="__span-6-21"><a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a>    &lt;folder_name&gt;/
+</span><span id="__span-6-22"><a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a>      *_relative.parquet               (dimensionless shares)
+</span><span id="__span-6-23"><a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a>      *_absolute.parquet               (MtCO2/MtCO2eq)
+</span><span id="__span-6-24"><a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a>      param_manifest.csv               (all parameter combinations)
+</span><span id="__span-6-25"><a id="__codelineno-6-25" name="__codelineno-6-25" href="#__codelineno-6-25"></a>      README_*.md                      (auto-generated docs)
+</span></code></pre></div>
+<hr />
+<h2 id="where-do-i-change-x-quick-reference">"Where Do I Change X?" Quick Reference<a class="headerlink" href="#where-do-i-change-x-quick-reference" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>I want to...</th>
+<th>File(s) to edit</th>
+<th>Key function/class</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Add a new allocation approach</td>
+<td><code>allocations/budgets/*.py</code> or <code>allocations/pathways/*.py</code>, then <code>allocations/manager.py</code></td>
+<td>Write the math function, add to <code>get_allocation_functions()</code> dict in <code>manager.py</code></td>
+</tr>
+<tr>
+<td>Change how parameters are expanded</td>
+<td><code>allocations/manager.py</code></td>
+<td><code>_expand_parameters()</code>, <code>run_parameter_grid()</code></td>
+</tr>
+<tr>
+<td>Add a new data source</td>
+<td><code>conf/data_sources/data_sources_unified.yaml</code>, new <code>notebooks/10x_*.py</code>, update <code>Snakefile</code></td>
+<td>Add YAML config, write preprocessing notebook, add Snakefile rule</td>
+</tr>
+<tr>
+<td>Change validation rules</td>
+<td><code>src/.../validation/</code></td>
+<td><code>validate_allocation_parameters()</code>, <code>validate_target_source_compatibility()</code></td>
+</tr>
+<tr>
+<td>Modify output parquet schema</td>
+<td><code>allocations/results/metadata.py</code></td>
+<td><code>DATA_CONTEXT_COLUMNS</code>, <code>ALLOCATION_PARAMETER_COLUMNS</code></td>
+</tr>
+<tr>
+<td>Add a new emission category</td>
+<td><code>utils/data/config.py</code></td>
+<td><code>get_final_categories()</code>, <code>get_emission_preprocessing_categories()</code></td>
+</tr>
+<tr>
+<td>Change how RCBs are processed</td>
+<td><code>preprocessing/rcbs.py</code>, <code>utils/data/rcb.py</code></td>
+<td><code>load_and_process_rcbs()</code>, <code>calculate_budget_from_rcb()</code></td>
+</tr>
+<tr>
+<td>Add/modify NGHGI corrections</td>
+<td><code>utils/data/nghgi.py</code>, <code>config/models.py</code> (<code>AdjustmentsConfig</code>)</td>
+<td><code>build_nghgi_world_co2_timeseries()</code></td>
+</tr>
+<tr>
+<td>Change the notebook helpers</td>
+<td><code>notebook_helpers.py</code></td>
+<td><code>load_allocation_data()</code>, <code>run_all_allocations()</code>, <code>run_and_save_category_allocations()</code></td>
+</tr>
+<tr>
+<td>Change Snakemake pipeline</td>
+<td><code>Snakefile</code>, <code>utils/data/setup.py</code></td>
+<td>Rules in Snakefile, <code>setup_data()</code></td>
+</tr>
+<tr>
+<td>Add a visualization</td>
+<td><code>visualization/</code></td>
+<td><code>plot_allocation_comparison()</code>, <code>plot_decomposition_summary()</code></td>
+</tr>
+<tr>
+<td>Change how composite categories decompose</td>
+<td><code>utils/data/config.py</code>, <code>pipeline/preprocessing.py</code></td>
+<td><code>needs_decomposition()</code>, <code>run_composite_preprocessing()</code></td>
+</tr>
+<tr>
+<td>Change result serialization</td>
+<td><code>allocations/results/serializers.py</code></td>
+<td><code>save_allocation_result()</code></td>
+</tr>
+<tr>
+<td>Modify the budget-to-pathway derivation</td>
+<td><code>allocations/manager.py</code></td>
+<td><code>_BUDGET_TO_PATHWAY</code> dict, <code>derive_pathway_allocations()</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="key-concepts">Key Concepts<a class="headerlink" href="#key-concepts" title="Permanent link">&para;</a></h2>
+<h3 id="relative-shares-vs-absolute-emissions">Relative Shares vs Absolute Emissions<a class="headerlink" href="#relative-shares-vs-absolute-emissions" title="Permanent link">&para;</a></h3>
+<p>The system separates <strong>allocation</strong> (who gets what fraction) from
+<strong>quantification</strong> (how large the pie is). Math functions return relative
+shares (dimensionless, sum to 1.0). The helpers layer multiplies these by a
+concrete global budget or pathway to produce absolute emissions.</p>
+<p>This separation means the same equity-based allocation can be applied to
+different RCB estimates or scenario pathways without re-running the math.</p>
+<h3 id="budget-vs-pathway-approaches">Budget vs Pathway Approaches<a class="headerlink" href="#budget-vs-pathway-approaches" title="Permanent link">&para;</a></h3>
+<p><strong>Budget approaches</strong> (names ending in <code>-budget</code>) produce a single column of
+shares for one allocation year. They answer: "What fraction of the remaining
+cumulative budget does each country get?"</p>
+<p><strong>Pathway approaches</strong> produce a column per year. They answer: "What fraction
+of each year's global emissions does each country get?"</p>
+<p>The manager (<code>manager.py</code>) classifies approaches by checking whether the
+name ends in <code>-budget</code>. This convention is load-bearing.</p>
+<h3 id="the-parameter-grid">The Parameter Grid<a class="headerlink" href="#the-parameter-grid" title="Permanent link">&para;</a></h3>
+<p>Users specify parameters as lists in the config:</p>
+<div class="language-python highlight"><span class="filename">Python</span><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">{</span><span class="s2">&quot;allocation_year&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2015</span><span class="p">,</span> <span class="mi">2020</span><span class="p">],</span> <span class="s2">&quot;capability_weight&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]}</span>
+</span></code></pre></div>
+<p><code>_expand_parameters()</code> (<code>manager.py</code>) uses <code>itertools.product</code> to create
+all combinations (here: 4). <code>run_parameter_grid()</code> iterates over them and
+calls <code>run_allocation()</code> for each.</p>
+<h3 id="composite-category-decomposition">Composite Category Decomposition<a class="headerlink" href="#composite-category-decomposition" title="Permanent link">&para;</a></h3>
+<p>When <code>emission_category="all-ghg"</code> and <code>target="rcbs"</code>, the system cannot
+allocate all-GHG directly because RCBs only constrain CO2. The solution:</p>
+<ol>
+<li>Decompose into CO2 (budget allocation via RCBs) + non-CO2 (pathway
+   allocation via AR6 scenarios).</li>
+<li>Derive non-CO2 data by subtraction: <code>all-ghg-ex-co2-lulucf - co2-ffi</code>.</li>
+<li>Auto-derive pathway approach configs from budget configs (the user only
+   specifies budget approaches).</li>
+</ol>
+<p>The final outputs for each sub-category can be recombined downstream.</p>
+<h3 id="kebab-case-vs-snake-case-convention">Kebab-Case vs Snake-Case Convention<a class="headerlink" href="#kebab-case-vs-snake-case-convention" title="Permanent link">&para;</a></h3>
+<p>Config keys and approach names use kebab-case (<code>allocation-year</code>,
+<code>equal-per-capita-budget</code>). Python identifiers use snake_case
+(<code>allocation_year</code>, <code>equal_per_capita_budget</code>). The manager converts between
+them:</p>
+<div class="language-python highlight"><span class="filename">Python</span><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">):</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">params</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+</span></code></pre></div>
+<h3 id="year-columns-as-strings">Year Columns as Strings<a class="headerlink" href="#year-columns-as-strings" title="Permanent link">&para;</a></h3>
+<p>All DataFrames use string year columns (<code>"2020"</code>, not <code>2020</code>). Call
+<code>ensure_string_year_columns(df)</code> after loading any CSV. This convention
+prevents pandas from treating years as integer indices, which causes subtle
+alignment bugs.</p>
+<h3 id="the-rest-of-world-row-pattern">The Rest-of-World (ROW) Pattern<a class="headerlink" href="#the-rest-of-world-row-pattern" title="Permanent link">&para;</a></h3>
+<p>During preprocessing, the <code>DataPreprocessor</code> (<code>pipeline/preprocessing.py</code>)
+filters datasets to countries with complete data across all sources, then
+adds a "ROW" (Rest of World) row as the residual between the world total and
+the sum of included countries. This ensures allocations always cover 100% of
+global emissions.</p>
 <hr />
 <h2 id="see-also">See Also<a class="headerlink" href="#see-also" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Data Sources Config</strong>: <code>conf/data_sources/data_sources_unified.yaml</code> in the repository</li>
-<li><strong><a href="https://setupelz.github.io/fair-shares/api/utils/validation/">Validation Utilities</a></strong> - Data validation functions</li>
+<li><a href="../">Developer Guide</a> -- Module overview and conventions</li>
+<li><a href="../dev-guide/adding-approaches/">Adding Allocation Approaches</a> -- Step-by-step guide for new approaches</li>
+<li><a href="../dev-guide/adding-data-sources/">Adding Data Sources</a> -- Step-by-step guide for new datasets</li>
+<li><a href="../../science/allocations/">Scientific Documentation</a> -- Theoretical foundations</li>
+<li><a href="../api/">API Reference</a> -- Function-level documentation</li>
 </ul>
 
 
@@ -2428,44 +2426,6 @@ allocation functions assume scenario data is already convention-consistent.</p>
       
         <footer class="md-footer">
   
-    
-      
-      <nav class="md-footer__inner md-grid" aria-label="Footer" >
-        
-          
-          <a href="../adding-approaches/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Adding Allocation Approaches">
-            <div class="md-footer__button md-icon">
-              
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
-            </div>
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                Previous
-              </span>
-              <div class="md-ellipsis">
-                Adding Allocation Approaches
-              </div>
-            </div>
-          </a>
-        
-        
-          
-          <a href="../docstring-template/" class="md-footer__link md-footer__link--next" aria-label="Next: Docstring Template">
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              <div class="md-ellipsis">
-                Docstring Template
-              </div>
-            </div>
-            <div class="md-footer__button md-icon">
-              
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
-            </div>
-          </a>
-        
-      </nav>
     
   
   <div class="md-footer-meta md-typeset">
