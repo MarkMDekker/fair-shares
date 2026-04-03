@@ -1352,8 +1352,6 @@
       
         
       
-        
-      
     
     
       
@@ -1413,27 +1411,6 @@
   
   <span class="md-ellipsis">
     Allocation Approaches
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../science/climate-equity-concepts/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Climate Equity Concepts
   </span>
   
 
@@ -1580,10 +1557,6 @@
       
         
       
-        
-      
-        
-      
     
     
       
@@ -1710,50 +1683,6 @@
   
   <span class="md-ellipsis">
     Docstring Template
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../dev-guide/architecture-walkthrough/" class="md-nav__link">
-        
-  
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 15a3 3 0 0 1 3 3 3 3 0 0 1-3 3 2.99 2.99 0 0 1-2.83-2H14v-2h1.17c.41-1.17 1.52-2 2.83-2m0 2a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1m0-9a1.43 1.43 0 0 0 1.43-1.43 1.43 1.43 0 1 0-2.86 0A1.43 1.43 0 0 0 18 8m0-5.43a4 4 0 0 1 4 4C22 9.56 18 14 18 14s-4-4.44-4-7.43a4 4 0 0 1 4-4M8.83 17H10v2H8.83A2.99 2.99 0 0 1 6 21a3 3 0 0 1-3-3c0-1.31.83-2.42 2-2.83V14h2v1.17c.85.3 1.53.98 1.83 1.83M6 17a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1M6 3a3 3 0 0 1 3 3c0 1.31-.83 2.42-2 2.83V10H5V8.83A2.99 2.99 0 0 1 3 6a3 3 0 0 1 3-3m0 2a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1m5 14v-2h2v2zm-4-6H5v-2h2z"/></svg>
-  
-  <span class="md-ellipsis">
-    Architecture Walkthrough
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../dev-guide/docs-links/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Docs Links
   </span>
   
 
@@ -2869,7 +2798,7 @@ AR6 reanalysis data.</p>
 
         <p>Load world-total NGHGI LULUCF CO2 timeseries from notebook-produced CSV.</p>
 <p>Reads the world-total NGHGI-reported LULUCF CO2 values produced by
-notebook 105 (Melo v3.1). The CSV has a single row with a "source" index
+notebook 107 (Melo v3.1). The CSV has a single row with a "source" index
 and string year columns. Values are in MtCO2/yr (negative = net sink).</p>
 <p>The splice year (last year of NGHGI data) is derived dynamically from the
 data rather than being hardcoded.</p>
@@ -3227,9 +3156,7 @@ matching GCB2024 coverage)</p>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n">fossil_ts</span><span class="p">:</span> <span class="n"><span title="pandas.DataFrame">DataFrame</span></span><span class="p">,</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n">nghgi_ts</span><span class="p">:</span> <span class="n"><span title="pandas.DataFrame">DataFrame</span></span><span class="p">,</span>
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="n">bunker_ts</span><span class="p">:</span> <span class="n"><span title="pandas.DataFrame">DataFrame</span></span><span class="p">,</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="n">bm_lulucf_ts</span><span class="p">:</span> <span class="n"><span title="pandas.DataFrame">DataFrame</span></span><span class="p">,</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="n">splice_year</span><span class="p">:</span> <span class="n"><span title="int">int</span></span> <span class="o">=</span> <span class="mi">2022</span><span class="p">,</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><span title="pandas.DataFrame">DataFrame</span></span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><span title="pandas.DataFrame">DataFrame</span></span>
 </span></code></pre></div>
 
     <div class="doc doc-contents first">
@@ -3237,8 +3164,9 @@ matching GCB2024 coverage)</p>
         <p>Construct NGHGI-consistent world total CO2 timeseries.</p>
 <p>For backward extension of allocation years &lt; 2020, Weber Eq. 3 requires
 per-year world CO2 = fossil - bunkers + LULUCF, where LULUCF uses:
-- 1990 onwards: NGHGI LULUCF (Melo v3.1)
-- Pre-1990: bookkeeping LULUCF (PRIMAP co2-lulucf) as fallback</p>
+- 2000 onwards: NGHGI LULUCF (Melo v3.1)
+- Pre-2000: NaN (no fallback — NGHGI coverage only)</p>
+<p>No NGHGI/BM splicing is performed. Years outside NGHGI coverage are NaN.</p>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
@@ -3304,41 +3232,6 @@ in MtCO2/yr. Single-row DataFrame with string year columns.</p>
                 <em>required</em>
             </td>
           </tr>
-          <tr class="doc-section-item">
-            <td>
-                <code>bm_lulucf_ts</code>
-            </td>
-            <td>
-                  <code><span title="pandas.DataFrame">DataFrame</span></code>
-            </td>
-            <td>
-              <div class="doc-md-description">
-                <p>Bookkeeping LULUCF world totals (PRIMAP co2-lulucf) in Mt CO2/yr.
-Same index structure as fossil_ts.</p>
-              </div>
-            </td>
-            <td>
-                <em>required</em>
-            </td>
-          </tr>
-          <tr class="doc-section-item">
-            <td>
-                <code>splice_year</code>
-            </td>
-            <td>
-                  <code><span title="int">int</span></code>
-            </td>
-            <td>
-              <div class="doc-md-description">
-                <p>First year of NGHGI data availability (default: 2022, matching
-the last year of NGHGI data — years &lt;= splice_year use NGHGI
-where available).</p>
-              </div>
-            </td>
-            <td>
-                  <code>2022</code>
-            </td>
-          </tr>
       </tbody>
     </table>
 
@@ -3360,7 +3253,8 @@ where available).</p>
               <div class="doc-md-description">
                 <p>Single-row DataFrame with same index structure as fossil_ts but
 emission-category label set to "co2", containing per-year
-NGHGI-consistent total CO2 = fossil - bunkers + LULUCF.</p>
+NGHGI-consistent total CO2 = fossil - bunkers + LULUCF.
+Years outside NGHGI LULUCF coverage will be NaN.</p>
               </div>
             </td>
           </tr>

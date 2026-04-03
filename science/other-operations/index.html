@@ -1120,8 +1120,6 @@
       
         
       
-        
-      
     
     
       
@@ -1182,27 +1180,6 @@
   
   <span class="md-ellipsis">
     Allocation Approaches
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../climate-equity-concepts/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Climate Equity Concepts
   </span>
   
 
@@ -1739,10 +1716,6 @@
       
         
       
-        
-      
-        
-      
     
     
       
@@ -1869,50 +1842,6 @@
   
   <span class="md-ellipsis">
     Docstring Template
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../dev-guide/architecture-walkthrough/" class="md-nav__link">
-        
-  
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 15a3 3 0 0 1 3 3 3 3 0 0 1-3 3 2.99 2.99 0 0 1-2.83-2H14v-2h1.17c.41-1.17 1.52-2 2.83-2m0 2a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1m0-9a1.43 1.43 0 0 0 1.43-1.43 1.43 1.43 0 1 0-2.86 0A1.43 1.43 0 0 0 18 8m0-5.43a4 4 0 0 1 4 4C22 9.56 18 14 18 14s-4-4.44-4-7.43a4 4 0 0 1 4-4M8.83 17H10v2H8.83A2.99 2.99 0 0 1 6 21a3 3 0 0 1-3-3c0-1.31.83-2.42 2-2.83V14h2v1.17c.85.3 1.53.98 1.83 1.83M6 17a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1M6 3a3 3 0 0 1 3 3c0 1.31-.83 2.42-2 2.83V10H5V8.83A2.99 2.99 0 0 1 3 6a3 3 0 0 1 3-3m0 2a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1m5 14v-2h2v2zm-4-6H5v-2h2z"/></svg>
-  
-  <span class="md-ellipsis">
-    Architecture Walkthrough
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../dev-guide/docs-links/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Docs Links
   </span>
   
 
@@ -2461,6 +2390,7 @@ system automatically derives equivalent pathway approaches for non-CO₂:</p>
 <li><code>per-capita-adjusted-budget</code> → <code>per-capita-adjusted</code></li>
 <li><code>per-capita-adjusted-gini-budget</code> → <code>per-capita-adjusted-gini</code></li>
 <li><code>allocation_year</code> → <code>first_allocation_year</code></li>
+<li><code>preserve_allocation_year_shares</code> → <code>preserve_first_allocation_year_shares</code></li>
 </ul>
 <p>This ensures methodological consistency: the same equity principle governs
 both gases, adapted to the different allocation modes.</p>
@@ -2643,9 +2573,9 @@ L_{\text{BM}}^{\text{capped}} = \max\!\left(0,\; \underset{i}{\text{median}}\lef
 <p>Scenarios that never reach net-zero total CO₂ before 2100 are assigned 2100 as a conservative upper integration bound.</p>
 <h3 id="convention-gap-decomposition">Convention gap decomposition<a class="headerlink" href="#convention-gap-decomposition" title="Permanent link">&para;</a></h3>
 <p>The per-scenario convention gap <span class="arithmatex">\(\text{Gap}_i\)</span> decomposes into two temporal segments:</p>
-<p><strong>Historical</strong> (<span class="arithmatex">\(\text{base} \leq t \leq \text{splice\_year}\)</span>): Melo NGHGI (reported values, same for all scenarios) minus Gidden Direct for scenario <span class="arithmatex">\(i\)</span> (a bookkeeping proxy from the AR6 reanalysis). The splice year is derived dynamically from the data (currently 2023 with Melo v3.1):</p>
+<p><strong>Historical</strong> (<span class="arithmatex">\(2020 \leq t \leq \text{splice\_year}\)</span>): Melo NGHGI (reported values, same for all scenarios) minus Gidden Direct for scenario <span class="arithmatex">\(i\)</span> (a bookkeeping proxy from the AR6 reanalysis). The splice year is derived dynamically from the data (currently 2023 with Melo v3.1). The gap always covers the full 2020--NZ range because the BM LULUCF rebase years also need convention conversion:</p>
 <div class="arithmatex">\[
-\text{Gap}_{i,\text{hist}} = \sum_{t=\text{base}}^{\min(\text{splice},\, t_{\text{nz},i})} \left[\text{Melo}(t) - \text{Gidden}_{\text{Direct},i}(t)\right]
+\text{Gap}_{i,\text{hist}} = \sum_{t=2020}^{\min(\text{splice},\, t_{\text{nz},i})} \left[\text{Melo}(t) - \text{Gidden}_{\text{Direct},i}(t)\right]
 \]</div>
 <p><strong>Future</strong> (<span class="arithmatex">\(t &gt; \text{splice\_year}\)</span>): Only the Gidden Indirect component for scenario <span class="arithmatex">\(i\)</span> (CO₂ fertilization and other passive fluxes), because the Direct components cancel in the gap:</p>
 <div class="arithmatex">\[
