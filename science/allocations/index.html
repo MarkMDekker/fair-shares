@@ -2147,7 +2147,7 @@
 </tr>
 </tbody>
 </table>
-<p>Earlier allocation years account for historical emissions in the cumulative calculation. See <a href="../principle-to-code/#historical-responsibility">Historical Responsibility</a>.</p>
+<p>Earlier allocation years account for historical emissions in the cumulative calculation. See <a href="#historical-responsibility">Historical Responsibility</a> below.</p>
 <h3 id="building-blocks">Building Blocks<a class="headerlink" href="#building-blocks" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -2299,7 +2299,7 @@
 
 <p>Implements the Greenhouse Development Rights (GDR) framework approach to national capability: only income <strong>above</strong> a development threshold counts as "ability to pay." The income floor works like a tax-free personal allowance — each person's first $7,500/year (default, 2010 PPP) of income is exempt from capability calculations.</p>
 <p>Income distribution is modelled as log-normal, parameterised by each country's Gini coefficient. When combined with the income floor, higher inequality means more national income sits above the development threshold — increasing measured capability.</p>
-<p>See <a href="../principle-to-code/#subsistence-protection">Subsistence Protection</a> for conceptual context.</p>
+<p>See <a href="../principle-to-code/">From Principle to Code</a> for conceptual context.</p>
 <p><strong>Mathematical formulations:</strong> <a href="https://setupelz.github.io/fair-shares/api/utils/adjustments/#calculate_gini_adjusted_gdp">GDR capability calculation</a> | <a href="https://setupelz.github.io/fair-shares/api/allocations/budgets/#per_capita_adjusted_gini_budget">Budget</a> | <a href="https://setupelz.github.io/fair-shares/api/allocations/pathways/#per_capita_adjusted_gini">Pathway</a></p>
 <hr />
 <h2 id="maximum-deviation-constraint">Maximum Deviation Constraint<a class="headerlink" href="#maximum-deviation-constraint" title="Permanent link">&para;</a></h2>
@@ -2354,7 +2354,7 @@
 <li><strong>Early allocation year:</strong> Set <code>allocation_year</code> to 1850 or 1990 (calculates cumulative per capita since that year)</li>
 <li><strong>Responsibility weight:</strong> Use <code>responsibility_weight</code> + <code>historical_responsibility_year</code> (multiplicative adjustment based on per-capita historical emissions)</li>
 </ol>
-<p>These can be combined. See <a href="../principle-to-code/#historical-responsibility">Historical Responsibility</a> for conceptual foundations.</p>
+<p>These can be combined. See <a href="#historical-responsibility">Historical Responsibility</a> below for conceptual foundations.</p>
 <p><strong>Mathematical details:</strong> <a href="https://setupelz.github.io/fair-shares/api/allocations/budgets/">Budget</a> | <a href="https://setupelz.github.io/fair-shares/api/allocations/pathways/">Pathway</a></p>
 <hr />
 <h2 id="convergence-mechanism-pathways-only">Convergence Mechanism (Pathways Only)<a class="headerlink" href="#convergence-mechanism-pathways-only" title="Permanent link">&para;</a></h2>

@@ -1930,7 +1930,7 @@
 <!-- REFERENCE: equal_per_capita_budget() in src/fair_shares/library/allocations/budgets/per_capita.py -->
 
 <p><strong>Mathematical detail:</strong> See <a href="https://setupelz.github.io/fair-shares/api/allocations/budgets/#equal_per_capita_budget">equal_per_capita_budget API</a></p>
-<p><strong>Theoretical basis:</strong> See <a href="https://setupelz.github.io/fair-shares/science/principle-to-code/#equal-per-capita">Equal Per Capita</a> · <a href="https://setupelz.github.io/fair-shares/science/principle-to-code/#historical-responsibility">Historical Responsibility</a></p>
+<p><strong>Theoretical basis:</strong> See <a href="https://setupelz.github.io/fair-shares/science/allocations/">Allocation Approaches</a> · <a href="https://setupelz.github.io/fair-shares/science/allocations/#historical-responsibility">Historical Responsibility</a></p>
 <hr />
 <h2 id="responsibility_weight">responsibility_weight<a class="headerlink" href="#responsibility_weight" title="Permanent link">&para;</a></h2>
 <p><strong>Effect:</strong> Activates historical responsibility adjustments. Weights are <strong>relative</strong> — only the ratio of <code>responsibility_weight</code> to <code>capability_weight</code> matters (see <a href="https://setupelz.github.io/fair-shares/science/allocations/#weight-normalization">Weight Normalization</a>).</p>
@@ -1976,7 +1976,7 @@
 <!-- REFERENCE: per_capita_adjusted_budget() in src/fair_shares/library/allocations/budgets/per_capita.py -->
 
 <p><strong>Mathematical detail:</strong> See <a href="https://setupelz.github.io/fair-shares/api/allocations/budgets/#per_capita_adjusted_budget">per_capita_adjusted_budget API</a></p>
-<p><strong>Theoretical basis:</strong> See <a href="https://setupelz.github.io/fair-shares/science/principle-to-code/#historical-responsibility">Historical Responsibility</a></p>
+<p><strong>Theoretical basis:</strong> See <a href="https://setupelz.github.io/fair-shares/science/allocations/#historical-responsibility">Historical Responsibility</a></p>
 <hr />
 <h2 id="capability_weight">capability_weight<a class="headerlink" href="#capability_weight" title="Permanent link">&para;</a></h2>
 <p><strong>Effect:</strong> Activates capability (ability to pay) adjustments. Like <code>responsibility_weight</code>, this is <strong>relative</strong> — only the ratio between the two weights matters.</p>
@@ -2022,7 +2022,7 @@
 <!-- REFERENCE: per_capita_adjusted_budget() in src/fair_shares/library/allocations/budgets/per_capita.py -->
 
 <p><strong>Mathematical detail:</strong> See <a href="https://setupelz.github.io/fair-shares/api/allocations/budgets/#per_capita_adjusted_budget">per_capita_adjusted_budget API</a></p>
-<p><strong>Theoretical basis:</strong> See <a href="https://setupelz.github.io/fair-shares/science/principle-to-code/#capability">Capability</a></p>
+<p><strong>Theoretical basis:</strong> See <a href="https://setupelz.github.io/fair-shares/science/allocations/#weight-normalization">Weight Normalization</a></p>
 <hr />
 <h2 id="income_floor">income_floor<a class="headerlink" href="#income_floor" title="Permanent link">&para;</a></h2>
 <p><strong>Effect:</strong> Sets a development threshold for capability calculations, following the Greenhouse Development Rights framework (Baer et al. 2009). For every person, only their income <strong>above</strong> this threshold counts towards "capability" or "ability to pay". Income up to the threshold is considered necessary for basic human development.</p>
@@ -2069,7 +2069,7 @@
 <!-- REFERENCE: per_capita_adjusted_gini_budget() in src/fair_shares/library/allocations/budgets/per_capita.py -->
 
 <p><strong>Mathematical detail:</strong> See <a href="https://setupelz.github.io/fair-shares/api/allocations/budgets/#per_capita_adjusted_gini_budget">per_capita_adjusted_gini_budget API</a></p>
-<p><strong>Theoretical basis:</strong> See <a href="https://setupelz.github.io/fair-shares/science/principle-to-code/#subsistence-protection">Subsistence Protection</a></p>
+<p><strong>Theoretical basis:</strong> See <a href="https://setupelz.github.io/fair-shares/science/allocations/#gini-adjustment">Gini Adjustment</a></p>
 <hr />
 <h2 id="understanding-weights-vs-exponents">Understanding Weights vs Exponents<a class="headerlink" href="#understanding-weights-vs-exponents" title="Permanent link">&para;</a></h2>
 <p>Two distinct parameter types control adjustments. They are often confused:</p>
