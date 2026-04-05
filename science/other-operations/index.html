@@ -2501,7 +2501,7 @@ so the system runs a single pathway allocation pass.</p>
 <h3 id="correction-for-fossil-only-budgets-co2-ffi">Correction for fossil-only budgets (co2-ffi)<a class="headerlink" href="#correction-for-fossil-only-budgets-co2-ffi" title="Permanent link">&para;</a></h3>
 <p>The fossil-allocatable budget isolates the portion of the total carbon budget available for fossil CO₂ emissions, after removing the land-use share and international bunkers:</p>
 <div class="arithmatex">\[
-\text{fossil\_budget}(2020) = \text{RCB}_{\text{BM}}(\text{base})
+\mathrm{fossil{\_}budget}(2020) = \text{RCB}_{\text{BM}}(\text{base})
   + F_{\text{actual}}(2020,\, \text{base}{-}1)
   - L_{\text{BM}}(\text{base},\, \text{NZ})
   - B(2020,\, \text{NZ})
@@ -2542,7 +2542,7 @@ L_{\text{BM}}^{\text{capped}} = \max\!\left(0,\; \underset{i}{\text{median}}\lef
 <h3 id="correction-for-total-co2-budgets-co2">Correction for total CO₂ budgets (co2)<a class="headerlink" href="#correction-for-total-co2-budgets-co2" title="Permanent link">&para;</a></h3>
 <p>For budgets covering <strong>total CO₂</strong> including land use, LULUCF stays in the budget but the convention must switch from BM to NGHGI. Unlike the co2-ffi case, there is no LULUCF decomposition -- only a convention gap adjustment:</p>
 <div class="arithmatex">\[
-\text{nghgi\_budget}(2020) = \text{RCB}_{\text{BM}}(\text{base})
+\mathrm{nghgi{\_}budget}(2020) = \text{RCB}_{\text{BM}}(\text{base})
   + F_{\text{actual}}(2020,\, \text{base}{-}1)
   + L_{\text{BM,actual}}(2020,\, \text{base}{-}1)
   + \text{gap}(2020,\, \text{NZ})
@@ -2621,11 +2621,11 @@ L_{\text{BM}}^{\text{capped}} = \max\!\left(0,\; \underset{i}{\text{median}}\lef
 <p>Scenarios that never reach net-zero total CO₂ before 2100 are assigned 2100 as a conservative upper integration bound.</p>
 <h3 id="convention-gap-decomposition">Convention gap decomposition<a class="headerlink" href="#convention-gap-decomposition" title="Permanent link">&para;</a></h3>
 <p>The per-scenario convention gap <span class="arithmatex">\(\text{Gap}_i\)</span> decomposes into two temporal segments:</p>
-<p><strong>Historical</strong> (<span class="arithmatex">\(2020 \leq t \leq \text{splice\_year}\)</span>): Melo NGHGI (reported values, same for all scenarios) minus Gidden Direct for scenario <span class="arithmatex">\(i\)</span> (a bookkeeping proxy from the AR6 reanalysis). The splice year is derived dynamically from the data (currently 2023 with Melo v3.1). The gap always covers the full 2020--NZ range because the BM LULUCF rebase years also need convention conversion:</p>
+<p><strong>Historical</strong> (<span class="arithmatex">\(2020 \leq t \leq \mathrm{splice{\_}year}\)</span>): Melo NGHGI (reported values, same for all scenarios) minus Gidden Direct for scenario <span class="arithmatex">\(i\)</span> (a bookkeeping proxy from the AR6 reanalysis). The splice year is derived dynamically from the data (currently 2023 with Melo v3.1). The gap always covers the full 2020--NZ range because the BM LULUCF rebase years also need convention conversion:</p>
 <div class="arithmatex">\[
 \text{Gap}_{i,\text{hist}} = \sum_{t=2020}^{\min(\text{splice},\, t_{\text{nz},i})} \left[\text{Melo}(t) - \text{Gidden}_{\text{Direct},i}(t)\right]
 \]</div>
-<p><strong>Future</strong> (<span class="arithmatex">\(t &gt; \text{splice\_year}\)</span>): Only the Gidden Indirect component for scenario <span class="arithmatex">\(i\)</span> (CO₂ fertilization and other passive fluxes), because the Direct components cancel in the gap:</p>
+<p><strong>Future</strong> (<span class="arithmatex">\(t &gt; \mathrm{splice{\_}year}\)</span>): Only the Gidden Indirect component for scenario <span class="arithmatex">\(i\)</span> (CO₂ fertilization and other passive fluxes), because the Direct components cancel in the gap:</p>
 <div class="arithmatex">\[
 \text{Gap}_{i,\text{future}} = \sum_{t=\text{splice}+1}^{t_{\text{nz},i}} \text{Gidden}_{\text{Indirect},i}(t)
 \]</div>
@@ -3042,7 +3042,7 @@ E_{\text{world}}(t) = E_{\text{fossil}}(t) - E_{\text{bunkers}}(t) + \text{LULUC
       
         <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
       
     
   </body>
