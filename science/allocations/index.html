@@ -1328,6 +1328,21 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Gini Adjustment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#development-threshold-on-responsibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      Development Threshold on Responsibility
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1345,6 +1360,21 @@
       Weight Normalization
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Weight Normalization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#combination-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      Combination Mode
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1364,6 +1394,21 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Historical Responsibility">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#historical-emissions-discounting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Historical Emissions Discounting
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1372,6 +1417,30 @@
       Convergence Mechanism (Pathways Only)
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Convergence Mechanism (Pathways Only)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#convergence-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      Convergence Method
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#historical-start-year-convergence-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      Historical Start Year (Convergence Only)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1914,6 +1983,21 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Gini Adjustment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#development-threshold-on-responsibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      Development Threshold on Responsibility
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1931,6 +2015,21 @@
       Weight Normalization
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Weight Normalization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#combination-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      Combination Mode
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1950,6 +2049,21 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Historical Responsibility">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#historical-emissions-discounting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Historical Emissions Discounting
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1958,6 +2072,30 @@
       Convergence Mechanism (Pathways Only)
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Convergence Mechanism (Pathways Only)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#convergence-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      Convergence Method
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#historical-start-year-convergence-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      Historical Start Year (Convergence Only)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2214,9 +2352,9 @@
 <td><code>first_allocation_year</code></td>
 </tr>
 <tr>
-<td>Responsibility weight</td>
-<td>Rescales by emissions from <code>historical_responsibility_year</code></td>
-<td><code>responsibility_weight</code> + <code>historical_responsibility_year</code></td>
+<td>Pre-allocation responsibility</td>
+<td>Relative rescaling by per-capita emissions in [<code>pre_allocation_responsibility_year</code>, <code>allocation_year</code>)</td>
+<td><code>pre_allocation_responsibility_weight</code> + <code>pre_allocation_responsibility_year</code></td>
 <td>Same</td>
 </tr>
 <tr>
@@ -2238,6 +2376,24 @@
 <td>Use <code>*-gini</code> or <code>*-gini-adjusted</code> allocation approach</td>
 </tr>
 <tr>
+<td>Historical discounting</td>
+<td>Weights earlier emissions less (natural CO2 removal)</td>
+<td><code>historical_discount_rate</code></td>
+<td>Same</td>
+</tr>
+<tr>
+<td>Combination mode</td>
+<td>Additive (RCI) vs multiplicative weight combination</td>
+<td><code>combination_mode</code></td>
+<td>Same</td>
+</tr>
+<tr>
+<td>Threshold on responsibility</td>
+<td>Development threshold applied to emissions side</td>
+<td><code>apply_threshold_to_responsibility</code></td>
+<td>Same (requires <code>*-gini-*</code> approach)</td>
+</tr>
+<tr>
 <td>Convergence mechanism</td>
 <td>Transition from current to target cumulative shares</td>
 <td>N/A</td>
@@ -2245,7 +2401,7 @@
 </tr>
 </tbody>
 </table>
-<p><strong>Temporal note:</strong> Capability adjustments apply from the allocation year onwards, while responsibility weight rescaling uses emissions from <code>historical_responsibility_year</code> to the allocation year. This allows separating the periods for capability and responsibility accounting.</p>
+<p><strong>Temporal note:</strong> Capability adjustments apply from the allocation year onwards, while responsibility weight rescaling uses emissions from <code>pre_allocation_responsibility_year</code> to the allocation year. This allows separating the periods for capability and responsibility accounting.</p>
 <p>These can be combined. For example, CBDR-RC can be interpreted and operationalised through:</p>
 <ul>
 <li>Early allocation year (e.g. 1850) + capability weight: simplest, but capability data may be unavailable for early years</li>
@@ -2284,7 +2440,17 @@
 <tr>
 <td>CBDR-RC (via rescaling)</td>
 <td><code>per-capita-adjusted-budget</code></td>
-<td><code>responsibility_weight</code> + <code>capability_weight</code></td>
+<td><code>pre_allocation_responsibility_weight</code> + <code>capability_weight</code></td>
+</tr>
+<tr>
+<td>CBDR-RC with discounting</td>
+<td><code>per-capita-adjusted-budget</code></td>
+<td><code>pre_allocation_responsibility_weight</code> + <code>historical_discount_rate=0.01</code></td>
+</tr>
+<tr>
+<td>GDR-faithful (additive RCI)</td>
+<td><code>per-capita-adjusted-gini-budget</code></td>
+<td><code>combination_mode="additive"</code> + <code>apply_threshold_to_responsibility</code></td>
 </tr>
 <tr>
 <td>Inequality-sensitive CBDR-RC</td>
@@ -2326,12 +2492,32 @@
 <tr>
 <td>CBDR-RC (via rescaling)</td>
 <td><code>per-capita-adjusted</code></td>
-<td><code>responsibility_weight</code> + <code>capability_weight</code></td>
+<td><code>pre_allocation_responsibility_weight</code> + <code>capability_weight</code></td>
+</tr>
+<tr>
+<td>CBDR-RC with discounting</td>
+<td><code>per-capita-adjusted</code></td>
+<td><code>pre_allocation_responsibility_weight</code> + <code>historical_discount_rate=0.01</code></td>
+</tr>
+<tr>
+<td>GDR-faithful (additive RCI)</td>
+<td><code>per-capita-adjusted-gini</code></td>
+<td><code>combination_mode="additive"</code> + <code>apply_threshold_to_responsibility</code></td>
 </tr>
 <tr>
 <td>CBDR-RC with convergence</td>
 <td><code>cumulative-per-capita-convergence-adjusted</code></td>
 <td>Early <code>first_allocation_year</code> + <code>capability_weight</code></td>
+</tr>
+<tr>
+<td>Sine-deviation convergence</td>
+<td><code>cumulative-per-capita-convergence-adjusted</code></td>
+<td><code>convergence_method="sine-deviation"</code> + <code>convergence_year=2100</code></td>
+</tr>
+<tr>
+<td>Convergence (shifted pop window)</td>
+<td><code>cumulative-per-capita-convergence-adjusted</code></td>
+<td><code>historical_start_year=1950</code> + <code>first_allocation_year</code></td>
 </tr>
 <tr>
 <td>Inequality-sensitive CBDR-RC</td>
@@ -2349,6 +2535,19 @@
 <p>Income distribution is modelled as log-normal, parameterised by each country's Gini coefficient. When combined with the income floor, higher inequality means more national income sits above the development threshold — increasing measured capability.</p>
 <p>See <a href="../principle-to-code/">From Principle to Code</a> for conceptual context.</p>
 <p><strong>Mathematical formulations:</strong> <a href="https://setupelz.github.io/fair-shares/api/utils/adjustments/#calculate_gini_adjusted_gdp">GDR capability calculation</a> | <a href="https://setupelz.github.io/fair-shares/api/allocations/budgets/#per_capita_adjusted_gini_budget">Budget</a> | <a href="https://setupelz.github.io/fair-shares/api/allocations/pathways/#per_capita_adjusted_gini">Pathway</a></p>
+<h3 id="development-threshold-on-responsibility">Development Threshold on Responsibility<a class="headerlink" href="#development-threshold-on-responsibility" title="Permanent link">&para;</a></h3>
+<!-- REFERENCE: calculate_gini_adjusted_responsibility() in src/fair_shares/library/utils/math/adjustments.py -->
+
+<p>Parameter: <code>apply_threshold_to_responsibility</code> (default: False)</p>
+<p>Available in <code>*-gini-*</code> approaches only. Applies the income floor (development threshold) to the <strong>responsibility</strong> side in addition to the capability side.</p>
+<p>The standard Gini adjustment applies the development threshold only to capability -- income below the threshold is excluded from "ability to pay." With <code>apply_threshold_to_responsibility=True</code>, the same logic extends to historical emissions: below-threshold individuals' emissions are excluded from a country's historical responsibility.</p>
+<p>For each country and year in the responsibility window:</p>
+<div class="arithmatex">\[
+E_i^{above}(t) = E_i(t) \times \big(1 - L(p_i(t))\big)
+\]</div>
+<p>where <span class="arithmatex">\(L(p)\)</span> is the Lorenz curve value at the population fraction <span class="arithmatex">\(p\)</span> below the development threshold, and <span class="arithmatex">\((1 - L(p))\)</span> is the income (and assumed emissions) share of above-threshold individuals.</p>
+<p>This completes the GDR framework [Baer 2009], which applies the development threshold symmetrically to both capability and responsibility. Without this flag, only the capability side uses the threshold -- a partial implementation of GDR. Setting it to True requires <code>income_floor &gt; 0</code>, Gini data, and GDP data.</p>
+<p><strong>Effect:</strong> Countries with large below-threshold populations (e.g., India, Sub-Saharan Africa) see reduced historical responsibility because a larger share of their emissions is attributed to subsistence-level individuals and excluded.</p>
 <hr />
 <h2 id="maximum-deviation-constraint">Maximum Deviation Constraint<a class="headerlink" href="#maximum-deviation-constraint" title="Permanent link">&para;</a></h2>
 <!-- REFERENCE: per_capita_adjusted_budget() in src/fair_shares/library/allocations/budgets/per_capita.py -->
@@ -2367,6 +2566,55 @@
 </span></code></pre></div>
 <p>Where <code>w_r</code> and <code>w_c</code> are the normalized responsibility and capability weights (divided by their sum). Only the ratio between weights affects results; <code>(0.3, 0.7)</code> and <code>(0.15, 0.35)</code> produce identical allocations because they normalize to the same values.</p>
 <p><strong>Mathematical specification:</strong> <a href="https://setupelz.github.io/fair-shares/api/allocations/budgets/#per_capita_adjusted_budget">Budget</a> | <a href="https://setupelz.github.io/fair-shares/api/allocations/pathways/#per_capita_adjusted">Pathway</a></p>
+<h3 id="combination-mode">Combination Mode<a class="headerlink" href="#combination-mode" title="Permanent link">&para;</a></h3>
+<!-- REFERENCE: per_capita_adjusted_budget() in src/fair_shares/library/allocations/budgets/per_capita.py -->
+<!-- REFERENCE: per_capita_adjusted() in src/fair_shares/library/allocations/pathways/per_capita.py -->
+
+<p>Parameter: <code>combination_mode</code> (default: <code>"multiplicative"</code>)</p>
+<p>Controls how responsibility and capability adjustments combine with the equal-per-capita baseline.</p>
+<p><strong>Multiplicative (default):</strong></p>
+<p>The current default. Responsibility and capability act as exponents on the per-capita baseline:</p>
+<div class="arithmatex">\[
+\text{share}_i \propto \text{pop}_i \times R_i^{-w_R} \times C_i^{-w_C}
+\]</div>
+<p>Adjustments interact -- a country that is both high-responsibility and high-capability receives a compounding reduction.</p>
+<p><strong>Additive (Baer's RCI formula):</strong></p>
+<p>Implements the Responsibility-Capability Index from the GDR framework [Baer 2009]. Responsibility and capability produce independent normalised share vectors, combined as a weighted sum:</p>
+<div class="arithmatex">\[
+\text{share}_i = (1 - w_R - w_C) \times \text{EPC}_i + w_R \times R'_i + w_C \times C'_i
+\]</div>
+<p>where <span class="arithmatex">\(\text{EPC}_i\)</span> is the equal-per-capita share, <span class="arithmatex">\(R'_i\)</span> is the normalised responsibility share, and <span class="arithmatex">\(C'_i\)</span> is the normalised capability share. The weights <span class="arithmatex">\(w_R\)</span> and <span class="arithmatex">\(w_C\)</span> must sum to <span class="arithmatex">\(\leq 1\)</span>; the residual <span class="arithmatex">\((1 - w_R - w_C)\)</span> retains a pure equal-per-capita component.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Multiplicative</th>
+<th>Additive (RCI)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Interaction between R and C</td>
+<td>Compounding</td>
+<td>Independent</td>
+</tr>
+<tr>
+<td>Extreme country behaviour</td>
+<td>Stronger divergence</td>
+<td>Bounded divergence</td>
+</tr>
+<tr>
+<td>Pure EPC residual</td>
+<td>No</td>
+<td>Yes (if <span class="arithmatex">\(w_R + w_C &lt; 1\)</span>)</td>
+</tr>
+<tr>
+<td>Literature basis</td>
+<td>Standard in fair-shares</td>
+<td>[Baer 2009]</td>
+</tr>
+</tbody>
+</table>
 <hr />
 <h2 id="dynamic-vs-preserved-shares">Dynamic vs Preserved Shares<a class="headerlink" href="#dynamic-vs-preserved-shares" title="Permanent link">&para;</a></h2>
 <!-- REFERENCE: equal_per_capita_budget() in src/fair_shares/library/allocations/budgets/per_capita.py -->
@@ -2400,10 +2648,53 @@
 <p>Two mechanisms:</p>
 <ol>
 <li><strong>Early allocation year:</strong> Set <code>allocation_year</code> to 1850 or 1990 (calculates cumulative per capita since that year)</li>
-<li><strong>Responsibility weight:</strong> Use <code>responsibility_weight</code> + <code>historical_responsibility_year</code> (multiplicative adjustment based on per-capita historical emissions)</li>
+<li><strong>Responsibility weight:</strong> Use <code>pre_allocation_responsibility_weight</code> + <code>pre_allocation_responsibility_year</code> (multiplicative adjustment based on per-capita historical emissions)</li>
 </ol>
-<p>These can be combined. See <a href="#historical-responsibility">Historical Responsibility</a> below for conceptual foundations.</p>
+<p>These can be combined.</p>
 <p><strong>Mathematical details:</strong> <a href="https://setupelz.github.io/fair-shares/api/allocations/budgets/">Budget</a> | <a href="https://setupelz.github.io/fair-shares/api/allocations/pathways/">Pathway</a></p>
+<h3 id="historical-emissions-discounting">Historical Emissions Discounting<a class="headerlink" href="#historical-emissions-discounting" title="Permanent link">&para;</a></h3>
+<!-- REFERENCE: calculate_responsibility_adjustment_data() in src/fair_shares/library/utils/math/adjustments.py -->
+
+<p>Parameter: <code>historical_discount_rate</code> (default: 0.0)</p>
+<div class="admonition warning">
+<p class="admonition-title">This is a per-capita-adjusted parameter, not an equal-per-capita parameter</p>
+<p>Discounting historical emissions is not a neutral technical choice. It systematically reduces measured responsibility for early-industrialising countries and is <strong>not</strong> part of equal-per-capita accounting. Equal per capita treats every tonne of CO2 equivalently regardless of when it was emitted. Discounting departs from this by introducing a temporal weighting that favours early emitters.</p>
+<p>The parameter is available on the <code>per-capita-adjusted</code> family of functions (where <code>pre_allocation_responsibility_weight &gt; 0</code>), not on <code>equal-per-capita</code> functions. It is also available on <code>cumulative-per-capita-convergence-adjusted</code> and <code>cumulative-per-capita-convergence-adjusted-gini</code>, which route through the same responsibility adjustment pipeline.</p>
+<p>For critiques of discounting historical responsibility, see [Meyer 2013] (why historical emissions should count at face value), [Shue 2014; Shue 2015] (harm prohibition does not decay with time), and [Caney 2009] (discounting conflates atmospheric residence with moral responsibility). For the countervailing physical argument, see [Dekker 2025] and [Van Den Berg 2020].</p>
+</div>
+<p>Weights earlier historical emissions less than recent ones when computing responsibility adjustments. The discount weight for emissions in year <span class="arithmatex">\(t\)</span> relative to a reference year <span class="arithmatex">\(t_{ref}\)</span> is:</p>
+<div class="arithmatex">\[
+w(t) = (1 - r_d)^{t_{ref} - t}
+\]</div>
+<p>where <span class="arithmatex">\(r_d\)</span> is the discount rate (0.0 to &lt;1.0) and <span class="arithmatex">\(t_{ref}\)</span> is the year before the allocation year. When <code>historical_discount_rate=0.0</code> (default), all historical emissions are weighted equally — this is the standard approach. When per-capita responsibility is used, the same discount weights are applied to population for consistency.</p>
+<p>The argument for discounting is physical: a fraction of emitted CO2 is removed from the atmosphere each year by ocean and terrestrial sinks, so older emissions contribute less to current concentrations [Dekker 2025; Van Den Berg 2020]. The argument against is moral: responsibility for harm does not diminish with time, and discounting produces outcomes that systematically benefit the countries most responsible for cumulative warming [Meyer 2013; Shue 2015].</p>
+<table>
+<thead>
+<tr>
+<th>Rate</th>
+<th>Effect on 1850 emissions (ref. 2020)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.0</td>
+<td>Full weight (1.0) — standard</td>
+</tr>
+<tr>
+<td>0.005</td>
+<td>~43% weight</td>
+</tr>
+<tr>
+<td>0.01</td>
+<td>~18% weight</td>
+</tr>
+<tr>
+<td>0.02</td>
+<td>~3% weight</td>
+</tr>
+</tbody>
+</table>
+<p>Higher rates reduce the influence of early historical emissions on responsibility calculations. Countries with large early-industrialisation emissions (e.g., UK, Germany) benefit most from discounting. Countries whose emissions grew recently (e.g., China, India) see relatively smaller changes.</p>
 <hr />
 <h2 id="convergence-mechanism-pathways-only">Convergence Mechanism (Pathways Only)<a class="headerlink" href="#convergence-mechanism-pathways-only" title="Permanent link">&para;</a></h2>
 <!-- REFERENCE: cumulative_per_capita_convergence() in src/fair_shares/library/allocations/pathways/cumulative_per_capita_convergence.py -->
@@ -2418,6 +2709,71 @@
 <li>Automatic speed: minimum speed satisfying cumulative constraints</li>
 </ul>
 <p><strong><a href="https://setupelz.github.io/fair-shares/api/allocations/pathways/#cumulative_per_capita_convergence">Mathematical derivation →</a></strong></p>
+<h3 id="convergence-method">Convergence Method<a class="headerlink" href="#convergence-method" title="Permanent link">&para;</a></h3>
+<p>Parameter: <code>convergence_method</code> (default: <code>"minimum-speed"</code>)</p>
+<p>Two convergence solvers are available:</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+<th>Required Parameters</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>minimum-speed</code></td>
+<td>Default. Finds the minimum exponential convergence speed satisfying cumulative constraints.</td>
+<td>None (automatic)</td>
+</tr>
+<tr>
+<td><code>sine-deviation</code></td>
+<td>Iterative sine-shaped deviation from a PCC baseline [Dekker 2025]. Front-loads the adjustment toward cumulative budget targets.</td>
+<td><code>convergence_year</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Sine-deviation method:</strong> Computes year-by-year allocations that deviate from a per-capita-convergence (PCC) baseline using a sine-shaped correction. Each year's allocation depends on all previous allocations (iterative). The method tracks the remaining "debt" between the target cumulative budget and actual cumulative allocations, and applies a sine-shaped correction that front-loads the adjustment.</p>
+<!-- REFERENCE: evolve_shares_sine_deviation() in src/fair_shares/library/utils/math/convergence.py -->
+
+<p>For country <span class="arithmatex">\(g\)</span> in year <span class="arithmatex">\(t\)</span>:</p>
+<div class="arithmatex">\[
+D(t, g) = B_{ECPC}(g) - \sum_{t_i=t_a}^{t-1} E_{alloc}(t_i, g) + E_{PCC}(t, g)
+\]</div>
+<div class="arithmatex">\[
+E_{alloc}(t, g) = \frac{D(t,g)}{t_{conv} - t} \cdot \sin\!\left(\frac{t}{t_{conv} - t_a} \cdot \pi\right) + E_{PCC}(t, g)
+\]</div>
+<p>where <span class="arithmatex">\(t_{conv}\)</span> is <code>convergence_year</code> and <span class="arithmatex">\(t_a\)</span> is <code>first_allocation_year</code>.</p>
+<p>Parameter: <code>convergence_year</code> (required when <code>convergence_method="sine-deviation"</code>)</p>
+<p>The year by which cumulative allocations converge to the target. Later convergence years produce smoother transitions; earlier years produce steeper near-term adjustments.</p>
+<h3 id="historical-start-year-convergence-only">Historical Start Year (Convergence Only)<a class="headerlink" href="#historical-start-year-convergence-only" title="Permanent link">&para;</a></h3>
+<!-- REFERENCE: cumulative_per_capita_convergence() in src/fair_shares/library/allocations/pathways/cumulative_per_capita_convergence.py -->
+
+<p>Parameter: <code>historical_start_year</code> (default: None)</p>
+<p>When provided, cumulative population for computing target shares is summed from <code>historical_start_year</code> instead of <code>first_allocation_year</code>. Must be <span class="arithmatex">\(\leq\)</span> <code>first_allocation_year</code>.</p>
+<p>This shifts the cumulative per capita entitlement calculation to account for historical population patterns over a longer window [Dekker 2025]. Countries that had large populations in the extended window (e.g., China, India historically) receive larger cumulative entitlements, while countries whose population grew recently receive relatively less.</p>
+<table>
+<thead>
+<tr>
+<th>Configuration</th>
+<th>Cumulative population window</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Default (no <code>historical_start_year</code>)</td>
+<td><code>first_allocation_year</code> to end</td>
+</tr>
+<tr>
+<td><code>historical_start_year=1950</code></td>
+<td>1950 to end</td>
+</tr>
+<tr>
+<td><code>historical_start_year=1850</code></td>
+<td>1850 to end</td>
+</tr>
+</tbody>
+</table>
 <hr />
 <h2 id="strict-parameter-convergence-only">Strict Parameter (Convergence Only)<a class="headerlink" href="#strict-parameter-convergence-only" title="Permanent link">&para;</a></h2>
 <!-- REFERENCE: cumulative_per_capita_convergence() in src/fair_shares/library/allocations/pathways/cumulative_per_capita_convergence.py -->

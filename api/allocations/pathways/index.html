@@ -2143,9 +2143,9 @@ per_capita_adjusted_gini : With Gini-adjusted GDP</p>
 </span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>        <span class="n"><span title="fair_shares.library.utils.dataframes.TimeseriesDataFrame">TimeseriesDataFrame</span></span> <span class="o">|</span> <span class="kc">None</span>
 </span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="p">)</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 </span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="n">gdp_ts</span><span class="p">:</span> <span class="n"><span title="fair_shares.library.utils.dataframes.TimeseriesDataFrame">TimeseriesDataFrame</span></span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="n">responsibility_weight</span><span class="p">:</span> <span class="n"><span title="float">float</span></span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="n">pre_allocation_responsibility_weight</span><span class="p">:</span> <span class="n"><span title="float">float</span></span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
 </span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="n">capability_weight</span><span class="p">:</span> <span class="n"><span title="float">float</span></span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="n">historical_responsibility_year</span><span class="p">:</span> <span class="n"><span title="int">int</span></span> <span class="o">=</span> <span class="mi">1990</span><span class="p">,</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="n">pre_allocation_responsibility_year</span><span class="p">:</span> <span class="n"><span title="int">int</span></span> <span class="o">=</span> <span class="mi">1990</span><span class="p">,</span>
 </span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    <span class="n">responsibility_per_capita</span><span class="p">:</span> <span class="n"><span title="bool">bool</span></span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 </span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    <span class="n">responsibility_exponent</span><span class="p">:</span> <span class="n"><span title="float">float</span></span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
 </span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    <span class="n">responsibility_functional_form</span><span class="p">:</span> <span class="n"><span title="str">str</span></span> <span class="o">=</span> <span class="s2">&quot;asinh&quot;</span><span class="p">,</span>
@@ -2154,15 +2154,17 @@ per_capita_adjusted_gini : With Gini-adjusted GDP</p>
 </span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>    <span class="n">capability_functional_form</span><span class="p">:</span> <span class="n"><span title="str">str</span></span> <span class="o">=</span> <span class="s2">&quot;asinh&quot;</span><span class="p">,</span>
 </span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>    <span class="n">max_deviation_sigma</span><span class="p">:</span> <span class="n"><span title="float">float</span></span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="mf">2.0</span><span class="p">,</span>
 </span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>    <span class="n">preserve_first_allocation_year_shares</span><span class="p">:</span> <span class="n"><span title="bool">bool</span></span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>    <span class="n">group_level</span><span class="p">:</span> <span class="n"><span title="str">str</span></span> <span class="o">=</span> <span class="s2">&quot;iso3c&quot;</span><span class="p">,</span>
-</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>    <span class="n">unit_level</span><span class="p">:</span> <span class="n"><span title="str">str</span></span> <span class="o">=</span> <span class="s2">&quot;unit&quot;</span><span class="p">,</span>
-</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>    <span class="n">ur</span><span class="p">:</span> <span class="n"><span title="pint.facets.PlainRegistry">PlainRegistry</span></span> <span class="o">=</span> <span class="n"><a class="autorefs autorefs-internal" title="&lt;span class=&quot;doc doc-object-name doc-function-name&quot;&gt;fair_shares.library.utils.get_default_unit_registry&lt;/span&gt;
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>    <span class="n">historical_discount_rate</span><span class="p">:</span> <span class="n"><span title="float">float</span></span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>    <span class="n">combination_mode</span><span class="p">:</span> <span class="n"><span title="str">str</span></span> <span class="o">=</span> <span class="s2">&quot;multiplicative&quot;</span><span class="p">,</span>
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>    <span class="n">group_level</span><span class="p">:</span> <span class="n"><span title="str">str</span></span> <span class="o">=</span> <span class="s2">&quot;iso3c&quot;</span><span class="p">,</span>
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>    <span class="n">unit_level</span><span class="p">:</span> <span class="n"><span title="str">str</span></span> <span class="o">=</span> <span class="s2">&quot;unit&quot;</span><span class="p">,</span>
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>    <span class="n">ur</span><span class="p">:</span> <span class="n"><span title="pint.facets.PlainRegistry">PlainRegistry</span></span> <span class="o">=</span> <span class="n"><a class="autorefs autorefs-internal" title="&lt;span class=&quot;doc doc-object-name doc-function-name&quot;&gt;fair_shares.library.utils.get_default_unit_registry&lt;/span&gt;
 
 
   &lt;span class=&quot;doc doc-labels&quot;&gt;
       &lt;small class=&quot;doc doc-label doc-label-cached&quot;&gt;&lt;code&gt;cached&lt;/code&gt;&lt;/small&gt;
   &lt;/span&gt;" href="../../utils/core/#fair_shares.library.utils.get_default_unit_registry">get_default_unit_registry</a></span><span class="p">(),</span>
-</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><span title="fair_shares.library.allocations.results.PathwayAllocationResult">PathwayAllocationResult</span></span>
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><span title="fair_shares.library.allocations.results.PathwayAllocationResult">PathwayAllocationResult</span></span>
 </span></code></pre></div>
 
     <div class="doc doc-contents first">
@@ -2200,7 +2202,7 @@ P_{\text{adj}}(g, t) = P(g, t) \times R(g) \times C(g, t)
 <p>Shares calculated at first_allocation_year are broadcast across all years.</p>
 <p><strong>Responsibility Adjustment</strong></p>
 <p>The responsibility metric is based on cumulative historical emissions
-from historical_responsibility_year to first_allocation_year.</p>
+from pre_allocation_responsibility_year to first_allocation_year.</p>
 <p>For per capita responsibility (:code:<code>responsibility_per_capita=True</code>, default):</p>
 <div class="arithmatex">\[
 R(g) = \left(\frac{\sum_{t=t_h}^{t_a} E(g, t)}{\sum_{t=t_h}^{t_a} P(g, t)}\right)^{-w_r \times e_r}
@@ -2313,7 +2315,7 @@ country shares</p>
             <td>
               <div class="doc-md-description">
                 <p>Country emissions for responsibility calculation. Required if
-responsibility_weight &gt; 0.</p>
+pre_allocation_responsibility_weight &gt; 0.</p>
               </div>
             </td>
             <td>
@@ -2338,7 +2340,7 @@ responsibility_weight &gt; 0.</p>
           </tr>
           <tr class="doc-section-item">
             <td>
-                <code>responsibility_weight</code>
+                <code>pre_allocation_responsibility_weight</code>
             </td>
             <td>
                   <code><span title="float">float</span></code>
@@ -2347,8 +2349,8 @@ responsibility_weight &gt; 0.</p>
               <div class="doc-md-description">
                 <p>Weight for responsibility adjustment (0-1). Higher historical emissions
 -&gt; smaller allocation. Must satisfy:
-responsibility_weight + capability_weight &lt;= 1.0
-See docs/science/parameter-effects.md#responsibility_weight for real
+pre_allocation_responsibility_weight + capability_weight &lt;= 1.0
+See docs/science/parameter-effects.md#pre_allocation_responsibility_weight for real
 allocation examples showing how this affects country shares</p>
               </div>
             </td>
@@ -2367,7 +2369,7 @@ allocation examples showing how this affects country shares</p>
               <div class="doc-md-description">
                 <p>Weight for capability adjustment (0-1). Higher cumulative GDP per capita
 -&gt; smaller allocation. Must satisfy:
-responsibility_weight + capability_weight &lt;= 1.0
+pre_allocation_responsibility_weight + capability_weight &lt;= 1.0
 See docs/science/parameter-effects.md#capability_weight for real
 allocation examples showing how this affects country shares</p>
               </div>
@@ -2378,14 +2380,14 @@ allocation examples showing how this affects country shares</p>
           </tr>
           <tr class="doc-section-item">
             <td>
-                <code>historical_responsibility_year</code>
+                <code>pre_allocation_responsibility_year</code>
             </td>
             <td>
                   <code><span title="int">int</span></code>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>First year of responsibility window [historical_responsibility_year,
+                <p>First year of responsibility window [pre_allocation_responsibility_year,
 first_allocation_year]. Default: 1990</p>
               </div>
             </td>
@@ -2468,7 +2470,7 @@ Default: 'asinh'</p>
             <td>
               <div class="doc-md-description">
                 <p>Functional form for capability adjustment ('asinh', 'power', 'linear').
-Default: 'power'</p>
+Default: 'asinh'</p>
               </div>
             </td>
             <td>
@@ -2509,6 +2511,43 @@ calculated at first_allocation_year are preserved across all periods.</p>
             </td>
             <td>
                   <code>False</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>historical_discount_rate</code>
+            </td>
+            <td>
+                  <code><span title="float">float</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Discount rate for historical emissions (0.0 to &lt;1.0). When &gt; 0, earlier
+emissions are weighted less via (1 - rate)^(reference_year - t). Implements
+natural CO2 removal rationale (Dekker Eq. 5). Default: 0.0 (no discounting).</p>
+              </div>
+            </td>
+            <td>
+                  <code>0.0</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>combination_mode</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>How responsibility and capability adjustments are combined.
+"multiplicative" (default): adjustments multiply the population baseline.
+"additive": independent normalized share vectors combined via
+Baer's GDR RCI formula: (1-w_R-w_C)*EPC + w_R*R' + w_C*C'.</p>
+              </div>
+            </td>
+            <td>
+                  <code>&#39;multiplicative&#39;</code>
             </td>
           </tr>
           <tr class="doc-section-item">
@@ -2622,7 +2661,7 @@ Respective Capabilities (CBDR-RC) by combining:</p>
 </span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="gp">... </span>    <span class="n">gdp_ts</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;gdp&quot;</span><span class="p">],</span>
 </span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="gp">... </span>    <span class="n">first_allocation_year</span><span class="o">=</span><span class="mi">2020</span><span class="p">,</span>
 </span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="gp">... </span>    <span class="n">emission_category</span><span class="o">=</span><span class="s2">&quot;co2-ffi&quot;</span><span class="p">,</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="gp">... </span>    <span class="n">responsibility_weight</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="gp">... </span>    <span class="n">pre_allocation_responsibility_weight</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
 </span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="gp">... </span>    <span class="n">capability_weight</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
 </span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="gp">... </span><span class="p">)</span>
 </span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="go">Converting units...</span>
@@ -2673,9 +2712,9 @@ per_capita_adjusted_gini : With Gini-adjusted GDP</p>
 </span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="p">)</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 </span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="n">gdp_ts</span><span class="p">:</span> <span class="n"><span title="fair_shares.library.utils.dataframes.TimeseriesDataFrame">TimeseriesDataFrame</span></span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 </span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="n">gini_s</span><span class="p">:</span> <span class="n"><span title="pandas.DataFrame">DataFrame</span></span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="n">responsibility_weight</span><span class="p">:</span> <span class="n"><span title="float">float</span></span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="n">pre_allocation_responsibility_weight</span><span class="p">:</span> <span class="n"><span title="float">float</span></span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
 </span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="n">capability_weight</span><span class="p">:</span> <span class="n"><span title="float">float</span></span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    <span class="n">historical_responsibility_year</span><span class="p">:</span> <span class="n"><span title="int">int</span></span> <span class="o">=</span> <span class="mi">1990</span><span class="p">,</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    <span class="n">pre_allocation_responsibility_year</span><span class="p">:</span> <span class="n"><span title="int">int</span></span> <span class="o">=</span> <span class="mi">1990</span><span class="p">,</span>
 </span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    <span class="n">responsibility_per_capita</span><span class="p">:</span> <span class="n"><span title="bool">bool</span></span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 </span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    <span class="n">responsibility_exponent</span><span class="p">:</span> <span class="n"><span title="float">float</span></span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
 </span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    <span class="n">responsibility_functional_form</span><span class="p">:</span> <span class="n"><span title="str">str</span></span> <span class="o">=</span> <span class="s2">&quot;asinh&quot;</span><span class="p">,</span>
@@ -2686,15 +2725,18 @@ per_capita_adjusted_gini : With Gini-adjusted GDP</p>
 </span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>    <span class="n">max_gini_adjustment</span><span class="p">:</span> <span class="n"><span title="float">float</span></span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">,</span>
 </span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>    <span class="n">max_deviation_sigma</span><span class="p">:</span> <span class="n"><span title="float">float</span></span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="mf">2.0</span><span class="p">,</span>
 </span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>    <span class="n">preserve_first_allocation_year_shares</span><span class="p">:</span> <span class="n"><span title="bool">bool</span></span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>    <span class="n">group_level</span><span class="p">:</span> <span class="n"><span title="str">str</span></span> <span class="o">=</span> <span class="s2">&quot;iso3c&quot;</span><span class="p">,</span>
-</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>    <span class="n">unit_level</span><span class="p">:</span> <span class="n"><span title="str">str</span></span> <span class="o">=</span> <span class="s2">&quot;unit&quot;</span><span class="p">,</span>
-</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>    <span class="n">ur</span><span class="p">:</span> <span class="n"><span title="pint.facets.PlainRegistry">PlainRegistry</span></span> <span class="o">=</span> <span class="n"><a class="autorefs autorefs-internal" title="&lt;span class=&quot;doc doc-object-name doc-function-name&quot;&gt;fair_shares.library.utils.get_default_unit_registry&lt;/span&gt;
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>    <span class="n">historical_discount_rate</span><span class="p">:</span> <span class="n"><span title="float">float</span></span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>    <span class="n">combination_mode</span><span class="p">:</span> <span class="n"><span title="str">str</span></span> <span class="o">=</span> <span class="s2">&quot;multiplicative&quot;</span><span class="p">,</span>
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>    <span class="n">apply_threshold_to_responsibility</span><span class="p">:</span> <span class="n"><span title="bool">bool</span></span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>    <span class="n">group_level</span><span class="p">:</span> <span class="n"><span title="str">str</span></span> <span class="o">=</span> <span class="s2">&quot;iso3c&quot;</span><span class="p">,</span>
+</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>    <span class="n">unit_level</span><span class="p">:</span> <span class="n"><span title="str">str</span></span> <span class="o">=</span> <span class="s2">&quot;unit&quot;</span><span class="p">,</span>
+</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>    <span class="n">ur</span><span class="p">:</span> <span class="n"><span title="pint.facets.PlainRegistry">PlainRegistry</span></span> <span class="o">=</span> <span class="n"><a class="autorefs autorefs-internal" title="&lt;span class=&quot;doc doc-object-name doc-function-name&quot;&gt;fair_shares.library.utils.get_default_unit_registry&lt;/span&gt;
 
 
   &lt;span class=&quot;doc doc-labels&quot;&gt;
       &lt;small class=&quot;doc doc-label doc-label-cached&quot;&gt;&lt;code&gt;cached&lt;/code&gt;&lt;/small&gt;
   &lt;/span&gt;" href="../../utils/core/#fair_shares.library.utils.get_default_unit_registry">get_default_unit_registry</a></span><span class="p">(),</span>
-</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><span title="fair_shares.library.allocations.results.PathwayAllocationResult">PathwayAllocationResult</span></span>
+</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><span title="fair_shares.library.allocations.results.PathwayAllocationResult">PathwayAllocationResult</span></span>
 </span></code></pre></div>
 
     <div class="doc doc-contents first">
@@ -2819,7 +2861,7 @@ country shares</p>
             <td>
               <div class="doc-md-description">
                 <p>Country emissions for responsibility calculation. Required if
-responsibility_weight &gt; 0.</p>
+pre_allocation_responsibility_weight &gt; 0.</p>
               </div>
             </td>
             <td>
@@ -2862,7 +2904,7 @@ adjusted to reflect income distribution within countries.</p>
           </tr>
           <tr class="doc-section-item">
             <td>
-                <code>responsibility_weight</code>
+                <code>pre_allocation_responsibility_weight</code>
             </td>
             <td>
                   <code><span title="float">float</span></code>
@@ -2870,7 +2912,7 @@ adjusted to reflect income distribution within countries.</p>
             <td>
               <div class="doc-md-description">
                 <p>Weight for responsibility adjustment (0-1). Must satisfy:
-responsibility_weight + capability_weight &lt;= 1.0</p>
+pre_allocation_responsibility_weight + capability_weight &lt;= 1.0</p>
               </div>
             </td>
             <td>
@@ -2887,7 +2929,7 @@ responsibility_weight + capability_weight &lt;= 1.0</p>
             <td>
               <div class="doc-md-description">
                 <p>Weight for capability adjustment (0-1). Must satisfy:
-responsibility_weight + capability_weight &lt;= 1.0</p>
+pre_allocation_responsibility_weight + capability_weight &lt;= 1.0</p>
               </div>
             </td>
             <td>
@@ -2896,7 +2938,7 @@ responsibility_weight + capability_weight &lt;= 1.0</p>
           </tr>
           <tr class="doc-section-item">
             <td>
-                <code>historical_responsibility_year</code>
+                <code>pre_allocation_responsibility_year</code>
             </td>
             <td>
                   <code><span title="int">int</span></code>
@@ -2983,7 +3025,7 @@ responsibility_weight + capability_weight &lt;= 1.0</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Functional form for capability adjustment. Default: 'power'</p>
+                <p>Functional form for capability adjustment. Default: 'asinh'</p>
               </div>
             </td>
             <td>
@@ -3058,6 +3100,61 @@ is applied.</p>
               <div class="doc-md-description">
                 <p>If False (default), shares are calculated at each year. If True, shares
 calculated at first_allocation_year are preserved across all periods.</p>
+              </div>
+            </td>
+            <td>
+                  <code>False</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>historical_discount_rate</code>
+            </td>
+            <td>
+                  <code><span title="float">float</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Discount rate for historical emissions (0.0 to &lt;1.0). When &gt; 0, earlier
+emissions are weighted less via (1 - rate)^(reference_year - t). Implements
+natural CO2 removal rationale (Dekker Eq. 5). Default: 0.0 (no discounting).</p>
+              </div>
+            </td>
+            <td>
+                  <code>0.0</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>combination_mode</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>How responsibility and capability adjustments are combined.
+"multiplicative" (default): adjustments multiply the population baseline.
+"additive": independent normalized share vectors combined via
+Baer's GDR RCI formula: (1-w_R-w_C)*EPC + w_R*R' + w_C*C'.</p>
+              </div>
+            </td>
+            <td>
+                  <code>&#39;multiplicative&#39;</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>apply_threshold_to_responsibility</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>If True, apply the GDR development threshold (Baer 2009) to historical
+responsibility: below-threshold individuals' emissions are excluded.
+Requires gini_s, gdp_ts, and income_floor &gt; 0. Default: False.</p>
               </div>
             </td>
             <td>
@@ -3173,7 +3270,7 @@ for the mathematical formulation.</p>
 </span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="gp">... </span>    <span class="n">gini_s</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;gini&quot;</span><span class="p">],</span>
 </span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="gp">... </span>    <span class="n">first_allocation_year</span><span class="o">=</span><span class="mi">2020</span><span class="p">,</span>
 </span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="gp">... </span>    <span class="n">emission_category</span><span class="o">=</span><span class="s2">&quot;co2-ffi&quot;</span><span class="p">,</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="gp">... </span>    <span class="n">responsibility_weight</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="gp">... </span>    <span class="n">pre_allocation_responsibility_weight</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
 </span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="gp">... </span>    <span class="n">capability_weight</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
 </span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="gp">... </span><span class="p">)</span>
 </span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="go">Converting units...</span>
@@ -3195,7 +3292,7 @@ for the mathematical formulation.</p>
 </span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a><span class="gp">... </span>    <span class="n">gdp_ts</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;gdp&quot;</span><span class="p">],</span>
 </span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="gp">... </span>    <span class="n">first_allocation_year</span><span class="o">=</span><span class="mi">2020</span><span class="p">,</span>
 </span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a><span class="gp">... </span>    <span class="n">emission_category</span><span class="o">=</span><span class="s2">&quot;co2-ffi&quot;</span><span class="p">,</span>
-</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a><span class="gp">... </span>    <span class="n">responsibility_weight</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a><span class="gp">... </span>    <span class="n">pre_allocation_responsibility_weight</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
 </span><span id="__span-0-34"><a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a><span class="gp">... </span>    <span class="n">capability_weight</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
 </span><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a><span class="gp">... </span><span class="p">)</span>
 </span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a><span class="go">Converting units...</span>
@@ -3531,15 +3628,18 @@ cumulative_per_capita_convergence : Convergence accounting for cumulative emissi
 </span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="n">max_deviation_sigma</span><span class="p">:</span> <span class="n"><span title="float">float</span></span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="mf">2.0</span><span class="p">,</span>
 </span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="n">max_convergence_speed</span><span class="p">:</span> <span class="n"><span title="float">float</span></span> <span class="o">=</span> <span class="mf">0.9</span><span class="p">,</span>
 </span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="n">strict</span><span class="p">:</span> <span class="n"><span title="bool">bool</span></span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="n">group_level</span><span class="p">:</span> <span class="n"><span title="str">str</span></span> <span class="o">=</span> <span class="s2">&quot;iso3c&quot;</span><span class="p">,</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="n">unit_level</span><span class="p">:</span> <span class="n"><span title="str">str</span></span> <span class="o">=</span> <span class="s2">&quot;unit&quot;</span><span class="p">,</span>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    <span class="n">ur</span><span class="p">:</span> <span class="n"><span title="pint.facets.PlainRegistry">PlainRegistry</span></span> <span class="o">=</span> <span class="n"><a class="autorefs autorefs-internal" title="&lt;span class=&quot;doc doc-object-name doc-function-name&quot;&gt;fair_shares.library.utils.get_default_unit_registry&lt;/span&gt;
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="n">historical_start_year</span><span class="p">:</span> <span class="n"><span title="int">int</span></span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="n">convergence_method</span><span class="p">:</span> <span class="n"><span title="str">str</span></span> <span class="o">=</span> <span class="s2">&quot;minimum-speed&quot;</span><span class="p">,</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    <span class="n">convergence_year</span><span class="p">:</span> <span class="n"><span title="int">int</span></span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    <span class="n">group_level</span><span class="p">:</span> <span class="n"><span title="str">str</span></span> <span class="o">=</span> <span class="s2">&quot;iso3c&quot;</span><span class="p">,</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    <span class="n">unit_level</span><span class="p">:</span> <span class="n"><span title="str">str</span></span> <span class="o">=</span> <span class="s2">&quot;unit&quot;</span><span class="p">,</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    <span class="n">ur</span><span class="p">:</span> <span class="n"><span title="pint.facets.PlainRegistry">PlainRegistry</span></span> <span class="o">=</span> <span class="n"><a class="autorefs autorefs-internal" title="&lt;span class=&quot;doc doc-object-name doc-function-name&quot;&gt;fair_shares.library.utils.get_default_unit_registry&lt;/span&gt;
 
 
   &lt;span class=&quot;doc doc-labels&quot;&gt;
       &lt;small class=&quot;doc doc-label doc-label-cached&quot;&gt;&lt;code&gt;cached&lt;/code&gt;&lt;/small&gt;
   &lt;/span&gt;" href="../../utils/core/#fair_shares.library.utils.get_default_unit_registry">get_default_unit_registry</a></span><span class="p">(),</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><span title="fair_shares.library.allocations.results.PathwayAllocationResult">PathwayAllocationResult</span></span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><span title="fair_shares.library.allocations.results.PathwayAllocationResult">PathwayAllocationResult</span></span>
 </span></code></pre></div>
 
     <div class="doc doc-contents first">
@@ -3719,6 +3819,97 @@ from the baseline equal per capita share. If None, no constraint is applied.</p>
             </td>
             <td>
                   <code>2.0</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>max_convergence_speed</code>
+            </td>
+            <td>
+                  <code><span title="float">float</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Maximum allowed convergence speed (0 to 1.0). Lower values create smoother
+pathways but may become infeasible. Default: 0.9.</p>
+              </div>
+            </td>
+            <td>
+                  <code>0.9</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>strict</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>If True (default), raise error for infeasible convergence.
+If False, use nearest feasible solution with warnings.</p>
+              </div>
+            </td>
+            <td>
+                  <code>True</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>historical_start_year</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span> | None</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>If provided, cumulative population for target shares is computed from
+this year instead of first_allocation_year. Must be &lt;=
+first_allocation_year. Shifts entitlements toward historically populous
+countries (e.g. China, India pre-industrial) when early start years
+like 1850 are used. Default: None (use first_allocation_year).</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>convergence_method</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Convergence algorithm to use. "minimum-speed" (default): exponential
+convergence with binary-search for minimum feasible speed.
+"sine-deviation" (Dekker Eqs. 7-8): iterative sine-shaped correction
+from a PCC baseline; requires convergence_year.</p>
+              </div>
+            </td>
+            <td>
+                  <code>&#39;minimum-speed&#39;</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>convergence_year</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span> | None</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Year by which allocations converge to equal per capita. Required when
+convergence_method='sine-deviation'. Must be &gt; first_allocation_year.
+Default: None.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
             </td>
           </tr>
           <tr class="doc-section-item">
@@ -3903,9 +4094,9 @@ controls whether an error is raised if exact targets cannot be achieved.</p>
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="n">emission_category</span><span class="p">:</span> <span class="n"><span title="str">str</span></span><span class="p">,</span>
 </span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="n">world_scenario_emissions_ts</span><span class="p">:</span> <span class="n"><span title="fair_shares.library.utils.dataframes.TimeseriesDataFrame">TimeseriesDataFrame</span></span><span class="p">,</span>
 </span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="n">gdp_ts</span><span class="p">:</span> <span class="n"><span title="fair_shares.library.utils.dataframes.TimeseriesDataFrame">TimeseriesDataFrame</span></span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="n">responsibility_weight</span><span class="p">:</span> <span class="n"><span title="float">float</span></span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="n">pre_allocation_responsibility_weight</span><span class="p">:</span> <span class="n"><span title="float">float</span></span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
 </span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="n">capability_weight</span><span class="p">:</span> <span class="n"><span title="float">float</span></span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="n">historical_responsibility_year</span><span class="p">:</span> <span class="n"><span title="int">int</span></span> <span class="o">=</span> <span class="mi">1990</span><span class="p">,</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="n">pre_allocation_responsibility_year</span><span class="p">:</span> <span class="n"><span title="int">int</span></span> <span class="o">=</span> <span class="mi">1990</span><span class="p">,</span>
 </span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="n">responsibility_per_capita</span><span class="p">:</span> <span class="n"><span title="bool">bool</span></span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 </span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    <span class="n">responsibility_exponent</span><span class="p">:</span> <span class="n"><span title="float">float</span></span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
 </span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    <span class="n">responsibility_functional_form</span><span class="p">:</span> <span class="n"><span title="str">str</span></span> <span class="o">=</span> <span class="s2">&quot;asinh&quot;</span><span class="p">,</span>
@@ -3915,15 +4106,19 @@ controls whether an error is raised if exact targets cannot be achieved.</p>
 </span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>    <span class="n">max_deviation_sigma</span><span class="p">:</span> <span class="n"><span title="float">float</span></span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="mf">2.0</span><span class="p">,</span>
 </span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>    <span class="n">max_convergence_speed</span><span class="p">:</span> <span class="n"><span title="float">float</span></span> <span class="o">=</span> <span class="mf">0.9</span><span class="p">,</span>
 </span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>    <span class="n">strict</span><span class="p">:</span> <span class="n"><span title="bool">bool</span></span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>    <span class="n">group_level</span><span class="p">:</span> <span class="n"><span title="str">str</span></span> <span class="o">=</span> <span class="s2">&quot;iso3c&quot;</span><span class="p">,</span>
-</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>    <span class="n">unit_level</span><span class="p">:</span> <span class="n"><span title="str">str</span></span> <span class="o">=</span> <span class="s2">&quot;unit&quot;</span><span class="p">,</span>
-</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>    <span class="n">ur</span><span class="p">:</span> <span class="n"><span title="pint.facets.PlainRegistry">PlainRegistry</span></span> <span class="o">=</span> <span class="n"><a class="autorefs autorefs-internal" title="&lt;span class=&quot;doc doc-object-name doc-function-name&quot;&gt;fair_shares.library.utils.get_default_unit_registry&lt;/span&gt;
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>    <span class="n">historical_start_year</span><span class="p">:</span> <span class="n"><span title="int">int</span></span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>    <span class="n">historical_discount_rate</span><span class="p">:</span> <span class="n"><span title="float">float</span></span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>    <span class="n">convergence_method</span><span class="p">:</span> <span class="n"><span title="str">str</span></span> <span class="o">=</span> <span class="s2">&quot;minimum-speed&quot;</span><span class="p">,</span>
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>    <span class="n">convergence_year</span><span class="p">:</span> <span class="n"><span title="int">int</span></span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>    <span class="n">group_level</span><span class="p">:</span> <span class="n"><span title="str">str</span></span> <span class="o">=</span> <span class="s2">&quot;iso3c&quot;</span><span class="p">,</span>
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>    <span class="n">unit_level</span><span class="p">:</span> <span class="n"><span title="str">str</span></span> <span class="o">=</span> <span class="s2">&quot;unit&quot;</span><span class="p">,</span>
+</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>    <span class="n">ur</span><span class="p">:</span> <span class="n"><span title="pint.facets.PlainRegistry">PlainRegistry</span></span> <span class="o">=</span> <span class="n"><a class="autorefs autorefs-internal" title="&lt;span class=&quot;doc doc-object-name doc-function-name&quot;&gt;fair_shares.library.utils.get_default_unit_registry&lt;/span&gt;
 
 
   &lt;span class=&quot;doc doc-labels&quot;&gt;
       &lt;small class=&quot;doc doc-label doc-label-cached&quot;&gt;&lt;code&gt;cached&lt;/code&gt;&lt;/small&gt;
   &lt;/span&gt;" href="../../utils/core/#fair_shares.library.utils.get_default_unit_registry">get_default_unit_registry</a></span><span class="p">(),</span>
-</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><span title="fair_shares.library.allocations.results.PathwayAllocationResult">PathwayAllocationResult</span></span>
+</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><span title="fair_shares.library.allocations.results.PathwayAllocationResult">PathwayAllocationResult</span></span>
 </span></code></pre></div>
 
     <div class="doc doc-contents first">
@@ -3971,7 +4166,7 @@ P_{\text{adj}}(g) = P_{\text{cum}}(g) \times R(g) \times C(g)
 </ul>
 <p><strong>Responsibility Adjustment</strong></p>
 <p>The responsibility metric is based on cumulative historical emissions
-from historical_responsibility_year to first_allocation_year.</p>
+from pre_allocation_responsibility_year to first_allocation_year.</p>
 <p>For per capita responsibility (:code:<code>responsibility_per_capita=True</code>, default):</p>
 <div class="arithmatex">\[
 R(g) = \left(\frac{\sum_{t=t_h}^{t_a} E(g, t)}{\sum_{t=t_h}^{t_a} P(g, t)}\right)^{-w_r \times e_r}
@@ -4121,7 +4316,7 @@ adjustment.</p>
           </tr>
           <tr class="doc-section-item">
             <td>
-                <code>responsibility_weight</code>
+                <code>pre_allocation_responsibility_weight</code>
             </td>
             <td>
                   <code><span title="float">float</span></code>
@@ -4129,7 +4324,7 @@ adjustment.</p>
             <td>
               <div class="doc-md-description">
                 <p>Weight for responsibility adjustment (0-1). Higher historical emissions
--&gt; smaller allocation. Must satisfy: responsibility_weight +
+-&gt; smaller allocation. Must satisfy: pre_allocation_responsibility_weight +
 capability_weight &lt;= 1.0</p>
               </div>
             </td>
@@ -4147,7 +4342,7 @@ capability_weight &lt;= 1.0</p>
             <td>
               <div class="doc-md-description">
                 <p>Weight for capability adjustment (0-1). Higher GDP -&gt; smaller allocation.
-Requires gdp_ts. Must satisfy: responsibility_weight + capability_weight &lt;= 1.0</p>
+Requires gdp_ts. Must satisfy: pre_allocation_responsibility_weight + capability_weight &lt;= 1.0</p>
               </div>
             </td>
             <td>
@@ -4156,7 +4351,7 @@ Requires gdp_ts. Must satisfy: responsibility_weight + capability_weight &lt;= 1
           </tr>
           <tr class="doc-section-item">
             <td>
-                <code>historical_responsibility_year</code>
+                <code>pre_allocation_responsibility_year</code>
             </td>
             <td>
                   <code><span title="int">int</span></code>
@@ -4164,7 +4359,7 @@ Requires gdp_ts. Must satisfy: responsibility_weight + capability_weight &lt;= 1
             <td>
               <div class="doc-md-description">
                 <p>First year of responsibility window
-[historical_responsibility_year, first_allocation_year].
+[pre_allocation_responsibility_year, first_allocation_year].
 Default: 1990</p>
               </div>
             </td>
@@ -4323,6 +4518,80 @@ If False, use nearest feasible solution with warnings.</p>
           </tr>
           <tr class="doc-section-item">
             <td>
+                <code>historical_start_year</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span> | None</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>If provided, cumulative population for target shares is computed from
+this year instead of first_allocation_year. Must be &lt;=
+first_allocation_year. Shifts entitlements toward historically populous
+countries. Default: None (use first_allocation_year).</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>historical_discount_rate</code>
+            </td>
+            <td>
+                  <code><span title="float">float</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Discount rate for historical emissions (0.0 to &lt;1.0). When &gt; 0, earlier
+emissions are weighted less via (1 - rate)^(reference_year - t). Implements
+natural CO2 removal rationale (Dekker Eq. 5). Default: 0.0 (no discounting).</p>
+              </div>
+            </td>
+            <td>
+                  <code>0.0</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>convergence_method</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Convergence algorithm to use. "minimum-speed" (default): exponential
+convergence with binary-search for minimum feasible speed.
+"sine-deviation" (Dekker Eqs. 7-8): iterative sine-shaped correction
+from a PCC baseline; requires convergence_year.</p>
+              </div>
+            </td>
+            <td>
+                  <code>&#39;minimum-speed&#39;</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>convergence_year</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span> | None</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Year by which allocations converge to equal per capita. Required when
+convergence_method='sine-deviation'. Must be &gt; first_allocation_year.
+Default: None.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
                 <code>group_level</code>
             </td>
             <td>
@@ -4439,7 +4708,7 @@ Capabilities (CBDR-RC). Higher past emissions and higher GDP -&gt; smaller alloc
 </span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="gp">... </span>    <span class="n">gdp_ts</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;gdp&quot;</span><span class="p">],</span>
 </span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="gp">... </span>    <span class="n">first_allocation_year</span><span class="o">=</span><span class="mi">2020</span><span class="p">,</span>
 </span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="gp">... </span>    <span class="n">emission_category</span><span class="o">=</span><span class="s2">&quot;co2-ffi&quot;</span><span class="p">,</span>
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="gp">... </span>    <span class="n">responsibility_weight</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>  <span class="c1"># 50% adjustment for historical emissions</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="gp">... </span>    <span class="n">pre_allocation_responsibility_weight</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>  <span class="c1"># 50% adjustment for historical emissions</span>
 </span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="gp">... </span>    <span class="n">capability_weight</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>  <span class="c1"># 50% adjustment for GDP</span>
 </span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="gp">... </span>    <span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># Accept approximate targets with limited data</span>
 </span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="gp">... </span><span class="p">)</span>
@@ -4460,7 +4729,7 @@ Capabilities (CBDR-RC). Higher past emissions and higher GDP -&gt; smaller alloc
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="gp">... </span>    <span class="n">gdp_ts</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;gdp&quot;</span><span class="p">],</span>
 </span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="gp">... </span>    <span class="n">first_allocation_year</span><span class="o">=</span><span class="mi">2020</span><span class="p">,</span>
 </span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="gp">... </span>    <span class="n">emission_category</span><span class="o">=</span><span class="s2">&quot;co2-ffi&quot;</span><span class="p">,</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="gp">... </span>    <span class="n">responsibility_weight</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="gp">... </span>    <span class="n">pre_allocation_responsibility_weight</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
 </span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="gp">... </span>    <span class="n">capability_weight</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
 </span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="gp">... </span>    <span class="n">max_convergence_speed</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
 </span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="gp">... </span>    <span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -4478,13 +4747,13 @@ Capabilities (CBDR-RC). Higher past emissions and higher GDP -&gt; smaller alloc
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="gp">... </span>    <span class="n">gdp_ts</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;gdp&quot;</span><span class="p">],</span>
 </span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="gp">... </span>    <span class="n">first_allocation_year</span><span class="o">=</span><span class="mi">2020</span><span class="p">,</span>
 </span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="gp">... </span>    <span class="n">emission_category</span><span class="o">=</span><span class="s2">&quot;co2-ffi&quot;</span><span class="p">,</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="gp">... </span>    <span class="n">responsibility_weight</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="gp">... </span>    <span class="n">pre_allocation_responsibility_weight</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
 </span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="gp">... </span>    <span class="n">capability_weight</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
 </span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="gp">... </span>    <span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 </span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="gp">... </span><span class="p">)</span>
 </span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="go">Converting units...</span>
 </span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Historical emitters penalized more than in equal-weight case</span>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">result_responsibility</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;responsibility_weight&quot;</span><span class="p">]</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">result_responsibility</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;pre_allocation_responsibility_weight&quot;</span><span class="p">]</span>
 </span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="go">0.7</span>
 </span></code></pre></div>
 
@@ -4510,9 +4779,9 @@ Capabilities (CBDR-RC). Higher past emissions and higher GDP -&gt; smaller alloc
 </span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="n">world_scenario_emissions_ts</span><span class="p">:</span> <span class="n"><span title="fair_shares.library.utils.dataframes.TimeseriesDataFrame">TimeseriesDataFrame</span></span><span class="p">,</span>
 </span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="n">gdp_ts</span><span class="p">:</span> <span class="n"><span title="fair_shares.library.utils.dataframes.TimeseriesDataFrame">TimeseriesDataFrame</span></span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 </span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="n">gini_s</span><span class="p">:</span> <span class="n"><span title="pandas.DataFrame">DataFrame</span></span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="n">responsibility_weight</span><span class="p">:</span> <span class="n"><span title="float">float</span></span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="n">pre_allocation_responsibility_weight</span><span class="p">:</span> <span class="n"><span title="float">float</span></span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
 </span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="n">capability_weight</span><span class="p">:</span> <span class="n"><span title="float">float</span></span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="n">historical_responsibility_year</span><span class="p">:</span> <span class="n"><span title="int">int</span></span> <span class="o">=</span> <span class="mi">1990</span><span class="p">,</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="n">pre_allocation_responsibility_year</span><span class="p">:</span> <span class="n"><span title="int">int</span></span> <span class="o">=</span> <span class="mi">1990</span><span class="p">,</span>
 </span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    <span class="n">responsibility_per_capita</span><span class="p">:</span> <span class="n"><span title="bool">bool</span></span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 </span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    <span class="n">responsibility_exponent</span><span class="p">:</span> <span class="n"><span title="float">float</span></span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
 </span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    <span class="n">responsibility_functional_form</span><span class="p">:</span> <span class="n"><span title="str">str</span></span> <span class="o">=</span> <span class="s2">&quot;asinh&quot;</span><span class="p">,</span>
@@ -4524,15 +4793,19 @@ Capabilities (CBDR-RC). Higher past emissions and higher GDP -&gt; smaller alloc
 </span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>    <span class="n">max_deviation_sigma</span><span class="p">:</span> <span class="n"><span title="float">float</span></span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="mf">2.0</span><span class="p">,</span>
 </span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>    <span class="n">max_convergence_speed</span><span class="p">:</span> <span class="n"><span title="float">float</span></span> <span class="o">=</span> <span class="mf">0.9</span><span class="p">,</span>
 </span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>    <span class="n">strict</span><span class="p">:</span> <span class="n"><span title="bool">bool</span></span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>    <span class="n">group_level</span><span class="p">:</span> <span class="n"><span title="str">str</span></span> <span class="o">=</span> <span class="s2">&quot;iso3c&quot;</span><span class="p">,</span>
-</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>    <span class="n">unit_level</span><span class="p">:</span> <span class="n"><span title="str">str</span></span> <span class="o">=</span> <span class="s2">&quot;unit&quot;</span><span class="p">,</span>
-</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>    <span class="n">ur</span><span class="p">:</span> <span class="n"><span title="pint.facets.PlainRegistry">PlainRegistry</span></span> <span class="o">=</span> <span class="n"><a class="autorefs autorefs-internal" title="&lt;span class=&quot;doc doc-object-name doc-function-name&quot;&gt;fair_shares.library.utils.get_default_unit_registry&lt;/span&gt;
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>    <span class="n">historical_start_year</span><span class="p">:</span> <span class="n"><span title="int">int</span></span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>    <span class="n">historical_discount_rate</span><span class="p">:</span> <span class="n"><span title="float">float</span></span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>    <span class="n">convergence_method</span><span class="p">:</span> <span class="n"><span title="str">str</span></span> <span class="o">=</span> <span class="s2">&quot;minimum-speed&quot;</span><span class="p">,</span>
+</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>    <span class="n">convergence_year</span><span class="p">:</span> <span class="n"><span title="int">int</span></span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>    <span class="n">group_level</span><span class="p">:</span> <span class="n"><span title="str">str</span></span> <span class="o">=</span> <span class="s2">&quot;iso3c&quot;</span><span class="p">,</span>
+</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>    <span class="n">unit_level</span><span class="p">:</span> <span class="n"><span title="str">str</span></span> <span class="o">=</span> <span class="s2">&quot;unit&quot;</span><span class="p">,</span>
+</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>    <span class="n">ur</span><span class="p">:</span> <span class="n"><span title="pint.facets.PlainRegistry">PlainRegistry</span></span> <span class="o">=</span> <span class="n"><a class="autorefs autorefs-internal" title="&lt;span class=&quot;doc doc-object-name doc-function-name&quot;&gt;fair_shares.library.utils.get_default_unit_registry&lt;/span&gt;
 
 
   &lt;span class=&quot;doc doc-labels&quot;&gt;
       &lt;small class=&quot;doc doc-label doc-label-cached&quot;&gt;&lt;code&gt;cached&lt;/code&gt;&lt;/small&gt;
   &lt;/span&gt;" href="../../utils/core/#fair_shares.library.utils.get_default_unit_registry">get_default_unit_registry</a></span><span class="p">(),</span>
-</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><span title="fair_shares.library.allocations.results.PathwayAllocationResult">PathwayAllocationResult</span></span>
+</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><span title="fair_shares.library.allocations.results.PathwayAllocationResult">PathwayAllocationResult</span></span>
 </span></code></pre></div>
 
     <div class="doc doc-contents first">
@@ -4757,7 +5030,7 @@ to reflect income distribution within countries.</p>
           </tr>
           <tr class="doc-section-item">
             <td>
-                <code>responsibility_weight</code>
+                <code>pre_allocation_responsibility_weight</code>
             </td>
             <td>
                   <code><span title="float">float</span></code>
@@ -4765,7 +5038,7 @@ to reflect income distribution within countries.</p>
             <td>
               <div class="doc-md-description">
                 <p>Weight for responsibility adjustment (0-1). Higher historical emissions
--&gt; smaller allocation. Must satisfy: responsibility_weight +
+-&gt; smaller allocation. Must satisfy: pre_allocation_responsibility_weight +
 capability_weight &lt;= 1.0</p>
               </div>
             </td>
@@ -4783,7 +5056,7 @@ capability_weight &lt;= 1.0</p>
             <td>
               <div class="doc-md-description">
                 <p>Weight for capability adjustment (0-1). Higher GDP -&gt; smaller allocation.
-Requires gdp_ts. Must satisfy: responsibility_weight + capability_weight &lt;= 1.0</p>
+Requires gdp_ts. Must satisfy: pre_allocation_responsibility_weight + capability_weight &lt;= 1.0</p>
               </div>
             </td>
             <td>
@@ -4792,7 +5065,7 @@ Requires gdp_ts. Must satisfy: responsibility_weight + capability_weight &lt;= 1
           </tr>
           <tr class="doc-section-item">
             <td>
-                <code>historical_responsibility_year</code>
+                <code>pre_allocation_responsibility_year</code>
             </td>
             <td>
                   <code><span title="int">int</span></code>
@@ -4800,7 +5073,7 @@ Requires gdp_ts. Must satisfy: responsibility_weight + capability_weight &lt;= 1
             <td>
               <div class="doc-md-description">
                 <p>First year of responsibility window
-[historical_responsibility_year, first_allocation_year].
+[pre_allocation_responsibility_year, first_allocation_year].
 Default: 1990</p>
               </div>
             </td>
@@ -4994,6 +5267,80 @@ If False, use nearest feasible solution with warnings.</p>
           </tr>
           <tr class="doc-section-item">
             <td>
+                <code>historical_start_year</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span> | None</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>If provided, cumulative population for target shares is computed from
+this year instead of first_allocation_year. Must be &lt;=
+first_allocation_year. Shifts entitlements toward historically populous
+countries. Default: None (use first_allocation_year).</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>historical_discount_rate</code>
+            </td>
+            <td>
+                  <code><span title="float">float</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Discount rate for historical emissions (0.0 to &lt;1.0). When &gt; 0, earlier
+emissions are weighted less via (1 - rate)^(reference_year - t). Implements
+natural CO2 removal rationale (Dekker Eq. 5). Default: 0.0 (no discounting).</p>
+              </div>
+            </td>
+            <td>
+                  <code>0.0</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>convergence_method</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Convergence algorithm to use. "minimum-speed" (default): exponential
+convergence with binary-search for minimum feasible speed.
+"sine-deviation" (Dekker Eqs. 7-8): iterative sine-shaped correction
+from a PCC baseline; requires convergence_year.</p>
+              </div>
+            </td>
+            <td>
+                  <code>&#39;minimum-speed&#39;</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>convergence_year</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span> | None</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Year by which allocations converge to equal per capita. Required when
+convergence_method='sine-deviation'. Must be &gt; first_allocation_year.
+Default: None.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
                 <code>group_level</code>
             </td>
             <td>
@@ -5113,7 +5460,7 @@ more national income sits above the threshold — increasing measured capability
 </span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="gp">... </span>    <span class="n">gini_s</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;gini&quot;</span><span class="p">],</span>
 </span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="gp">... </span>    <span class="n">first_allocation_year</span><span class="o">=</span><span class="mi">2020</span><span class="p">,</span>
 </span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="gp">... </span>    <span class="n">emission_category</span><span class="o">=</span><span class="s2">&quot;co2-ffi&quot;</span><span class="p">,</span>
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="gp">... </span>    <span class="n">responsibility_weight</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>  <span class="c1"># 50% adjustment for historical emissions</span>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="gp">... </span>    <span class="n">pre_allocation_responsibility_weight</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>  <span class="c1"># 50% adjustment for historical emissions</span>
 </span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="gp">... </span>    <span class="n">capability_weight</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>  <span class="c1"># 50% adjustment for Gini-adjusted GDP</span>
 </span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="gp">... </span><span class="p">)</span>
 </span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="go">Converting units...</span>
@@ -5132,7 +5479,7 @@ more national income sits above the threshold — increasing measured capability
 </span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="gp">... </span>        <span class="n">gini_s</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;gini&quot;</span><span class="p">],</span>
 </span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="gp">... </span>        <span class="n">first_allocation_year</span><span class="o">=</span><span class="mi">2020</span><span class="p">,</span>
 </span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="gp">... </span>        <span class="n">emission_category</span><span class="o">=</span><span class="s2">&quot;co2-ffi&quot;</span><span class="p">,</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="gp">... </span>        <span class="n">responsibility_weight</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="gp">... </span>        <span class="n">pre_allocation_responsibility_weight</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
 </span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="gp">... </span>        <span class="n">capability_weight</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
 </span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="gp">... </span>        <span class="n">income_floor</span><span class="o">=</span><span class="mf">5000.0</span><span class="p">,</span>  <span class="c1"># Lower income floor</span>
 </span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="gp">... </span>        <span class="n">max_gini_adjustment</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span>  <span class="c1"># Allow stronger inequality adjustment</span>

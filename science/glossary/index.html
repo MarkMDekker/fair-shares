@@ -2023,7 +2023,7 @@
 <dt><strong><code>equal-per-capita-budget</code></strong></dt>
 <dd>Population-proportional allocation. Historical accountability via <code>allocation_year</code> only.</dd>
 <dt><strong><code>per-capita-adjusted-budget</code></strong></dt>
-<dd>Adds <code>responsibility_weight</code> and <code>capability_weight</code> adjustments. CBDR-RC.</dd>
+<dd>Adds <code>pre_allocation_responsibility_weight</code> and <code>capability_weight</code> adjustments. CBDR-RC.</dd>
 <dt><strong><code>per-capita-adjusted-gini-budget</code></strong></dt>
 <dd>Adds Gini adjustment for within-country inequality. Subsistence protection.</dd>
 </dl>
@@ -2062,17 +2062,17 @@
 <dd>Index level for countries/regions (ISO 3166-1 alpha-3 codes).</dd>
 </dl>
 <h3 id="adjustment-weights">Adjustment Weights<a class="headerlink" href="#adjustment-weights" title="Permanent link">&para;</a></h3>
-<p>Constraint: <code>responsibility_weight + capability_weight ≤ 1.0</code></p>
+<p>Constraint: <code>pre_allocation_responsibility_weight + capability_weight ≤ 1.0</code></p>
 <dl>
-<dt><strong><code>responsibility_weight</code></strong> (type: <code>float</code>, default: <code>0.0</code>)</dt>
-<dd>Weight for historical emissions adjustment. Higher = more reduction for high emitters.</dd>
+<dt><strong><code>pre_allocation_responsibility_weight</code></strong> (type: <code>float</code>, default: <code>0.0</code>)</dt>
+<dd>Weight for relative per-capita rescaling based on emissions in [<code>pre_allocation_responsibility_year</code>, <code>allocation_year</code>). Higher = more reduction for countries with high per-capita emissions in that window. Separate from the direct subtraction done by early <code>allocation_year</code>.</dd>
 <dt><strong><code>capability_weight</code></strong> (type: <code>float</code>, default: <code>0.0</code>)</dt>
 <dd>Weight for GDP-based adjustment. Higher = more reduction for wealthy countries.</dd>
 </dl>
 <h3 id="responsibility-parameters">Responsibility Parameters<a class="headerlink" href="#responsibility-parameters" title="Permanent link">&para;</a></h3>
 <dl>
-<dt><strong><code>historical_responsibility_year</code></strong> (type: <code>int</code>, default: <code>1990</code>)</dt>
-<dd>Start year for cumulative emissions in responsibility calculation. Must be ≤ <code>allocation_year</code>.</dd>
+<dt><strong><code>pre_allocation_responsibility_year</code></strong> (type: <code>int</code>, default: <code>1990</code>)</dt>
+<dd>Start year for cumulative emissions in the pre-allocation responsibility window. Must be strictly less than <code>allocation_year</code> for the adjustment to have effect — when equal, the window is empty.</dd>
 <dt><strong><code>responsibility_per_capita</code></strong> (type: <code>bool</code>, default: <code>True</code>)</dt>
 <dd>Per capita (True) or absolute (False) emissions for responsibility calculation.</dd>
 <dt><strong><code>responsibility_exponent</code></strong> (type: <code>float</code>, default: <code>1.0</code>)</dt>
@@ -2183,7 +2183,7 @@
 <dd>Allocating future entitlements based on current emission shares. Critiqued as lacking ethical basis. <code>per-capita-convergence</code> includes grandfathering elements.</dd>
 <dd>See: <a href="../allocations/#approaches-debated-in-the-literature">Allocation Approaches</a></dd>
 <dt><strong>Historical responsibility</strong></dt>
-<dd>Past emissions reduce remaining fair share. Primary mechanism: <code>allocation_year</code> (earlier = more subtracted). Secondary: <code>responsibility_weight</code> in <code>*-adjusted</code> approaches.</dd>
+<dd>Past emissions reduce remaining fair share. Primary mechanism: <code>allocation_year</code> (earlier = more subtracted). Secondary: <code>pre_allocation_responsibility_weight</code> in <code>*-adjusted</code> approaches.</dd>
 <dd>See: <a href="../allocations/#historical-responsibility">Allocation Approaches</a></dd>
 <dt><strong>Negative Allocation</strong></dt>
 <dd>When a party's remaining fair share under a carbon budget is negative — its past emissions have already exceeded its equal per capita entitlement. Signals the need for highest possible domestic ambition, negative emissions targets (CDR), and international support. Negative allocations are a feature, not a bug: they communicate the scale of overshoot and the urgency of minimizing its duration and magnitude. [Pelz 2025b]</dd>
