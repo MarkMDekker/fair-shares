@@ -2305,10 +2305,10 @@ transition that still achieves cumulative targets.</p>
 
     <div class="doc doc-contents first">
 
-        <p>Calculate historical responsibility data for allocation.</p>
+        <p>Calculate pre-allocation responsibility data for allocation.</p>
 <p>Returns cumulative emissions (or per capita emissions) from
 pre_allocation_responsibility_year up to (but not including) allocation_year.</p>
-<p>Responsibility window: [pre_allocation_responsibility_year, allocation_year - 1].</p>
+<p>Pre-allocation responsibility window: [pre_allocation_responsibility_year, allocation_year - 1].</p>
 <p>This function is used by both budget and pathway allocations.</p>
 
 
@@ -2364,7 +2364,7 @@ pre_allocation_responsibility_year up to (but not including) allocation_year.</p
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Start year of responsibility window (inclusive)</p>
+                <p>Start year of pre-allocation responsibility window (inclusive)</p>
               </div>
             </td>
             <td>
@@ -2380,7 +2380,7 @@ pre_allocation_responsibility_year up to (but not including) allocation_year.</p
             </td>
             <td>
               <div class="doc-md-description">
-                <p>End year of responsibility window (exclusive).
+                <p>End year of pre-allocation responsibility window (exclusive).
 For budgets: the allocation year itself.
 For pathways: the first allocation year.</p>
               </div>
@@ -2491,7 +2491,7 @@ rationale (Dekker Eq. 5). Default: 0.0 (no discounting).</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Historical responsibility metric by country/region.
+                <p>Pre-allocation responsibility metric by country/region.
 Units: emissions (or emissions per capita) depending on pre_allocation_responsibility_per_capita.</p>
               </div>
             </td>
@@ -2515,9 +2515,10 @@ Units: emissions (or emissions per capita) depending on pre_allocation_responsib
             </td>
             <td>
               <div class="doc-md-description">
-                <p>If no years found in responsibility window, no country data found,
-zero population encountered (when per capita), responsibility sums to
-non-positive, or historical_discount_rate is out of range.</p>
+                <p>If no years found in pre-allocation responsibility window, no country
+data found, zero population encountered (when per capita),
+pre-allocation responsibility sums to non-positive, or
+historical_discount_rate is out of range.</p>
               </div>
             </td>
           </tr>
@@ -2715,8 +2716,10 @@ When provided, GDP is adjusted to reflect income distribution.</p>
             <td>
               <div class="doc-md-description">
                 <p>Income floor for Gini adjustment (in USD PPP per capita). Income below this
-threshold is excluded from capability calculations, implementing the Greenhouse
-Development Rights development threshold [Baer 2013]. Default: 0.0</p>
+threshold is excluded from capability calculations, adapted from the
+Greenhouse Development Rights (GDR) development threshold [Baer 2013]
+(GDR was designed for burden-sharing; fair-shares uses its capability
+metric in an entitlement allocation context). Default: 0.0</p>
               </div>
             </td>
             <td>

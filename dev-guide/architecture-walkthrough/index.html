@@ -2505,6 +2505,9 @@ non-CO2 needs pathway approaches. The helper auto-derives them:</p>
 <li><code>allocation_year</code> -&gt; <code>first_allocation_year</code></li>
 <li><code>preserve_allocation_year_shares</code> -&gt; <code>preserve_first_allocation_year_shares</code></li>
 </ul>
+<p>Auto-derivation only works when scenario pathway data matching the RCBs'
+climate assessments is available in the active source set.
+See <a href="#composite-category-decomposition">Composite Category Decomposition</a>.</p>
 <h3 id="step-3-category-loop">Step 3: Category Loop<a class="headerlink" href="#step-3-category-loop" title="Permanent link">&para;</a></h3>
 <p><code>run_all_allocations()</code> iterates over <code>final_categories = ("co2", "non-co2")</code>:</p>
 <p><strong>Pass 1: <code>co2</code> (budget)</strong></p>

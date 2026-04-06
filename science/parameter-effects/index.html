@@ -2186,7 +2186,7 @@
 </tbody>
 </table>
 <p><em>Uses <code>allocation_year=2020</code>.</em></p>
-<p>Capability adjustments have a smaller magnitude effect. Wealthy countries see modest reductions (USA: 4.0% → 3.4%) while lower-GDP countries see small increases (India: 16.7% → 16.9%).</p>
+<p>Capability adjustments (applied from the allocation year onwards) have a smaller magnitude effect. Wealthy countries see modest reductions (USA: 4.0% → 3.4%) while lower-GDP countries see small increases (India: 16.7% → 16.9%).</p>
 <h3 id="varying-the-ratio-both-weights-non-zero">Varying the ratio (both weights non-zero)<a class="headerlink" href="#varying-the-ratio-both-weights-non-zero" title="Permanent link">&para;</a></h3>
 <p>The ratio only matters when both weights are non-zero. Here the specific values matter because they determine how much each adjustment contributes:</p>
 <table>
@@ -2242,7 +2242,7 @@
 <li><code>floor=15000</code> → $15,000/year (2010 PPP) subsistence threshold</li>
 </ul>
 <p>Higher floors increase the exempt portion, reducing measured capability for all countries and increasing their allocated share of emissions. The effect is largest for middle-income countries where a significant fraction of the population clusters around the threshold.</p>
-<p><strong>Example:</strong> <code>per-capita-adjusted-gini-budget</code> varying <code>income_floor</code> (with <code>capability_weight=0.5</code>)</p>
+<p><strong>Example:</strong> <code>per-capita-adjusted-gini-budget</code> varying <code>income_floor</code> (with <code>capability_weight=1.0</code>, <code>pre_allocation_responsibility_weight=0.0</code> — capability is the sole adjustment, so its specific value is arbitrary; 1.0 is used for clarity)</p>
 <table>
 <thead>
 <tr>
@@ -2283,7 +2283,7 @@
 <h2 id="historical_discount_rate">historical_discount_rate<a class="headerlink" href="#historical_discount_rate" title="Permanent link">&para;</a></h2>
 <!-- REFERENCE: calculate_responsibility_adjustment_data() in src/fair_shares/library/utils/math/adjustments.py -->
 
-<p><strong>Effect:</strong> Weights earlier historical emissions less than recent ones when computing pre-allocation responsibility adjustments. Available on <code>per-capita-adjusted</code> functions only — not part of equal-per-capita accounting.</p>
+<p><strong>Effect:</strong> Weights earlier historical emissions less than recent ones when computing pre-allocation responsibility adjustments. Available on all <code>*-adjusted</code> families -- <code>per-capita-adjusted</code>, <code>per-capita-adjusted-gini</code>, <code>cumulative-per-capita-convergence-adjusted</code>, and <code>cumulative-per-capita-convergence-gini-adjusted</code> (where <code>pre_allocation_responsibility_weight &gt; 0</code>) -- not part of equal-per-capita accounting.</p>
 <p><strong>Direction:</strong></p>
 <ul>
 <li><code>rate=0.0</code> (default) → All historical emissions weighted equally (standard approach)</li>
@@ -2298,7 +2298,7 @@
 <h2 id="historical_start_year-convergence-only">historical_start_year (Convergence Only)<a class="headerlink" href="#historical_start_year-convergence-only" title="Permanent link">&para;</a></h2>
 <!-- REFERENCE: cumulative_per_capita_convergence() in src/fair_shares/library/allocations/pathways/cumulative_per_capita_convergence.py -->
 
-<p><strong>Effect:</strong> Extends the cumulative population window backward when computing convergence target shares. Countries with large historical populations receive larger cumulative entitlements; countries whose populations grew recently receive relatively less. This is a population entitlement parameter — it does not affect responsibility adjustments or historical emissions accounting.</p>
+<p><strong>Effect:</strong> Extends the cumulative population window backward when computing convergence target shares. Countries with large historical populations receive larger cumulative entitlements; countries whose populations grew recently receive relatively less. This is a population entitlement parameter — it does not affect pre-allocation responsibility adjustments or historical emissions accounting.</p>
 <p><strong>Direction:</strong></p>
 <ul>
 <li>Default (None) → Cumulative population starts at <code>first_allocation_year</code></li>
@@ -2355,8 +2355,8 @@
 <li><code>strict=False</code> → Clips infeasible long-run shares to [0, 1], redistributes proportionally, reports per-country deviation ratios. Use during exploration to get results even when some targets are unreachable.</li>
 </ul>
 <p><strong>When infeasibility happens:</strong></p>
-<p>Aggressive equity configurations are the usual trigger. The more you push high-emitting countries toward small targets — via strong responsibility weighting, early allocation years, tight budgets, or combinations — the more likely the solver hits a mathematical wall. Short time horizons (few years between <code>first_allocation_year</code> and end of pathway) and low <code>max_convergence_speed</code> values also increase the chance.</p>
-<p><strong>Example:</strong> <code>cumulative-per-capita-convergence-adjusted</code> with strong responsibility weighting</p>
+<p>Aggressive equity configurations are the usual trigger. The more you push high-emitting countries toward small targets — via strong pre-allocation responsibility weighting, early allocation years, tight budgets, or combinations — the more likely the solver hits a mathematical wall. Short time horizons (few years between <code>first_allocation_year</code> and end of pathway) and low <code>max_convergence_speed</code> values also increase the chance.</p>
+<p><strong>Example:</strong> <code>cumulative-per-capita-convergence-adjusted</code> with strong pre-allocation responsibility weighting</p>
 <table>
 <thead>
 <tr>
@@ -2496,7 +2496,7 @@
 <tr>
 <td><strong>Cumulative accounting</strong></td>
 <td>Early <code>allocation_year</code> (e.g. 1990, 1850)</td>
-<td>Requires considering cumulative emissions since that year when determining the remaining budget; negative allocations are a mathematical consequence</td>
+<td>Cumulative population from that year determines shares; negative allocations are a mathematical consequence when shares are applied to budgets</td>
 </tr>
 <tr>
 <td><strong>Relative rescaling</strong></td>
@@ -2544,7 +2544,7 @@
 </tr>
 <tr>
 <td>Stronger-than-linear rescaling</td>
-<td><code>pre_allocation_responsibility_weight=0.5, pre_allocation_responsibility_exponent=2.0</code></td>
+<td><code>pre_allocation_responsibility_weight=1.0, pre_allocation_responsibility_exponent=2.0</code></td>
 </tr>
 <tr>
 <td>Historical population entitlements (convergence)</td>
@@ -2565,7 +2565,7 @@
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="n">pre_allocation_responsibility_year</span><span class="o">=</span><span class="mi">1990</span><span class="p">,</span>  <span class="c1"># window: [1990, 2020)</span>
 </span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="p">)</span>
 </span></code></pre></div>
-<p>Rescales per-capita shares using 1990-2019 per-capita emissions (50%) and GDP from 2020 onwards (50%). No cumulative accounting of past emissions in the budget (allocation starts at 2020). Note the temporal asymmetry: pre-allocation responsibility looks backward from the allocation year, capability looks forward from it.</p>
+<p>Rescales per-capita shares using both 1990-2019 per-capita emissions and GDP from 2020 onwards, weighted equally (0.5:0.5 ratio, identical to 1.0:1.0). No cumulative accounting of past emissions in the budget (allocation starts at 2020). Note the temporal asymmetry: pre-allocation responsibility looks backward from the allocation year, capability looks forward from it.</p>
 <h3 id="both-responsibility-mechanisms-cumulative-accounting-rescaling">Both Responsibility Mechanisms (Cumulative Accounting + Rescaling)<a class="headerlink" href="#both-responsibility-mechanisms-cumulative-accounting-rescaling" title="Permanent link">&para;</a></h3>
 <!-- REFERENCE: per_capita_adjusted_budget() in src/fair_shares/library/allocations/budgets/per_capita.py -->
 
@@ -2576,7 +2576,7 @@
 </span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="n">pre_allocation_responsibility_year</span><span class="o">=</span><span class="mi">1850</span><span class="p">,</span>  <span class="c1"># window: [1850, 1990)</span>
 </span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="p">)</span>
 </span></code></pre></div>
-<p>Cumulative emissions from 1990 onward are accounted for when determining the remaining budget (via <code>allocation_year=1990</code>). Per-capita emissions from 1850-1989 rescale the remaining allocation (via <code>pre_allocation_responsibility_weight=1.0</code>).</p>
+<p>Cumulative population from 1990 determines shares (via <code>allocation_year=1990</code>). Per-capita emissions from 1850-1989 rescale those shares (via <code>pre_allocation_responsibility_weight=1.0</code>). Remaining budgets are computed as a post-processing step by the analyst.</p>
 <h3 id="capability-with-development-threshold">Capability with Development Threshold<a class="headerlink" href="#capability-with-development-threshold" title="Permanent link">&para;</a></h3>
 <!-- REFERENCE: per_capita_adjusted_gini_budget() in src/fair_shares/library/allocations/budgets/per_capita.py -->
 

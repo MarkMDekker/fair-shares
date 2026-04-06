@@ -2089,27 +2089,27 @@ A(g) = \frac{\sum_{t \geq t_a} R(g) \times C(g, t) \times P(g, t)}{\sum_g \sum_{
 <p>Where:</p>
 <ul>
 <li><span class="arithmatex">\(A(g)\)</span>: Budget share allocated to country <span class="arithmatex">\(g\)</span></li>
-<li><span class="arithmatex">\(R(g)\)</span>: Responsibility adjustment factor for country <span class="arithmatex">\(g\)</span> (constant over time, equals 1.0 if not used)</li>
+<li><span class="arithmatex">\(R(g)\)</span>: Pre-allocation responsibility adjustment factor for country <span class="arithmatex">\(g\)</span> (constant over time, equals 1.0 if not used)</li>
 <li><span class="arithmatex">\(C(g, t)\)</span>: Capability adjustment factor for country <span class="arithmatex">\(g\)</span> in year <span class="arithmatex">\(t\)</span> (equals 1.0 if not used)</li>
 <li><span class="arithmatex">\(P(g, t)\)</span>: Population of country <span class="arithmatex">\(g\)</span> in year <span class="arithmatex">\(t\)</span></li>
 <li><span class="arithmatex">\(t_a\)</span>: Allocation year</li>
 </ul>
-<p><strong>Responsibility Adjustment</strong></p>
+<p><strong>Pre-Allocation Responsibility Adjustment</strong></p>
 <p>Historical emissions reduce future allocation rights.</p>
-<p>For per capita responsibility (:code:<code>pre_allocation_responsibility_per_capita=True</code>, default):</p>
+<p>For per capita pre-allocation responsibility (:code:<code>pre_allocation_responsibility_per_capita=True</code>, default):</p>
 <div class="arithmatex">\[
 R(g) = \left(\frac{\sum_{t=t_h}^{t_a-1} E(g, t)}{\sum_{t=t_h}^{t_a-1} P(g, t)}\right)^{-w_r \times e_r}
 \]</div>
 <p>Where:</p>
 <ul>
-<li><span class="arithmatex">\(R(g)\)</span>: Responsibility adjustment factor (inverse - higher emissions = lower allocation)</li>
+<li><span class="arithmatex">\(R(g)\)</span>: Pre-allocation responsibility adjustment factor (inverse - higher emissions = lower allocation)</li>
 <li><span class="arithmatex">\(E(g, t)\)</span>: Emissions of country <span class="arithmatex">\(g\)</span> in year <span class="arithmatex">\(t\)</span></li>
-<li><span class="arithmatex">\(t_h\)</span>: Historical responsibility start year</li>
+<li><span class="arithmatex">\(t_h\)</span>: Pre-allocation responsibility start year</li>
 <li><span class="arithmatex">\(t_a\)</span>: Allocation year</li>
-<li><span class="arithmatex">\(w_r\)</span>: Normalized responsibility weight</li>
-<li><span class="arithmatex">\(e_r\)</span>: Responsibility exponent</li>
+<li><span class="arithmatex">\(w_r\)</span>: Normalized pre-allocation responsibility weight</li>
+<li><span class="arithmatex">\(e_r\)</span>: Pre-allocation responsibility exponent</li>
 </ul>
-<p>For absolute responsibility (:code:<code>pre_allocation_responsibility_per_capita=False</code>):</p>
+<p>For absolute pre-allocation responsibility (:code:<code>pre_allocation_responsibility_per_capita=False</code>):</p>
 <div class="arithmatex">\[
 R(g) = \left(\sum_{t=t_h}^{t_a-1} E(g, t)\right)^{-w_r \times e_r}
 \]</div>
@@ -2241,7 +2241,7 @@ country shares</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Weight for historical responsibility adjustment (0.0 to 1.0).
+                <p>Weight for pre-allocation responsibility adjustment (0.0 to 1.0).
 See docs/science/parameter-effects.md#pre_allocation_responsibility_weight for real
 allocation examples showing how this affects country shares</p>
               </div>
@@ -2259,7 +2259,9 @@ allocation examples showing how this affects country shares</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Weight for economic capability adjustment (0.0 to 1.0).
+                <p>Weight for economic capability adjustment (0.0 to 1.0). Applies from the
+allocation year onwards (contrast with pre-allocation responsibility,
+which looks backward from it).
 See docs/science/parameter-effects.md#capability_weight for real
 allocation examples showing how this affects country shares</p>
               </div>
@@ -2277,7 +2279,7 @@ allocation examples showing how this affects country shares</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Start year for calculating historical responsibility (default: 1990)</p>
+                <p>Start year for pre-allocation responsibility calculation (default: 1990)</p>
               </div>
             </td>
             <td>
@@ -2309,7 +2311,7 @@ allocation examples showing how this affects country shares</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Exponent for the responsibility adjustment function</p>
+                <p>Exponent for the pre-allocation responsibility adjustment function</p>
               </div>
             </td>
             <td>
@@ -2325,7 +2327,7 @@ allocation examples showing how this affects country shares</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Functional form for responsibility: "asinh" or "power"</p>
+                <p>Functional form for pre-allocation responsibility: "asinh" or "power"</p>
               </div>
             </td>
             <td>
@@ -2510,7 +2512,7 @@ formulation, parameter considerations, and CBDR-RC alignment.</p>
 <p>For translating equity principles into code, see:</p>
 <ul>
 <li>docs/science/principle-to-code.md#historical-responsibility-polluter-pays
-  for responsibility weight implementation</li>
+  for pre-allocation responsibility weight implementation</li>
 <li>docs/science/principle-to-code.md#capability-ability-to-pay for capability
   weight implementation</li>
 <li>docs/science/principle-to-code.md#cbdr-rc for combining both principles</li>
@@ -2518,7 +2520,7 @@ formulation, parameter considerations, and CBDR-RC alignment.</p>
 </details>
 
 <p><span class="doc-section-title">Examples:</span></p>
-    <p>Calculate allocation with both responsibility and capability adjustments:</p>
+    <p>Calculate allocation with both pre-allocation responsibility and capability adjustments:</p>
     <div class="language-pycon highlight"><span class="filename">Python Console Session</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">fair_shares.library.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_example_data</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">create_example_data</span><span class="p">()</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">per_capita_adjusted_budget</span><span class="p">(</span>
@@ -2544,7 +2546,7 @@ formulation, parameter considerations, and CBDR-RC alignment.</p>
 </span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;capability_weight&quot;</span><span class="p">]</span>
 </span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="go">0.5...</span>
 </span></code></pre></div>
-    <p>Using only responsibility adjustment (no capability):</p>
+    <p>Using only pre-allocation responsibility adjustment (no capability):</p>
     <div class="language-pycon highlight"><span class="filename">Python Console Session</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">result_resp_only</span> <span class="o">=</span> <span class="n">per_capita_adjusted_budget</span><span class="p">(</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="gp">... </span>    <span class="n">population_ts</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;population&quot;</span><span class="p">],</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="gp">... </span>    <span class="n">allocation_year</span><span class="o">=</span><span class="mi">2030</span><span class="p">,</span>
@@ -2632,7 +2634,7 @@ A(g) = \frac{\sum_{t \geq t_a} R(g) \times C_{\text{Gini}}(g, t) \times P(g, t)}
 <p>Where:</p>
 <ul>
 <li><span class="arithmatex">\(A(g)\)</span>: Budget share allocated to country <span class="arithmatex">\(g\)</span></li>
-<li><span class="arithmatex">\(R(g)\)</span>: Responsibility adjustment factor (equals 1.0 if not used)</li>
+<li><span class="arithmatex">\(R(g)\)</span>: Pre-allocation responsibility adjustment factor (equals 1.0 if not used)</li>
 <li><span class="arithmatex">\(C_{\text{Gini}}(g, t)\)</span>: Gini-adjusted capability factor (equals 1.0 if not used)</li>
 <li><span class="arithmatex">\(P(g, t)\)</span>: Population of country <span class="arithmatex">\(g\)</span> in year <span class="arithmatex">\(t\)</span></li>
 <li><span class="arithmatex">\(t_a\)</span>: Allocation year</li>
@@ -2647,19 +2649,19 @@ means more national income sits above the threshold — increasing measured
 capability. See
 :func:<code>~fair_shares.library.utils.math.allocation.calculate_gini_adjusted_gdp</code>
 for the full mathematical derivation.</p>
-<p><strong>Responsibility Adjustment</strong></p>
+<p><strong>Pre-Allocation Responsibility Adjustment</strong></p>
 <p>Identical to per capita adjusted budget (see that function for details).</p>
-<p>For per capita responsibility (:code:<code>pre_allocation_responsibility_per_capita=True</code>, default):</p>
+<p>For per capita pre-allocation responsibility (:code:<code>pre_allocation_responsibility_per_capita=True</code>, default):</p>
 <div class="arithmatex">\[
 R(g) = \left(\frac{\sum_{t=t_h}^{t_a-1} E(g, t)}{\sum_{t=t_h}^{t_a-1} P(g, t)}\right)^{-w_r \times e_r}
 \]</div>
 <p>Where:</p>
 <ul>
 <li><span class="arithmatex">\(E(g, t)\)</span>: Emissions of country <span class="arithmatex">\(g\)</span> in year <span class="arithmatex">\(t\)</span></li>
-<li><span class="arithmatex">\(t_h\)</span>: Historical responsibility start year</li>
+<li><span class="arithmatex">\(t_h\)</span>: Pre-allocation responsibility start year</li>
 <li><span class="arithmatex">\(t_a\)</span>: Allocation year</li>
-<li><span class="arithmatex">\(w_r\)</span>: Normalized responsibility weight</li>
-<li><span class="arithmatex">\(e_r\)</span>: Responsibility exponent</li>
+<li><span class="arithmatex">\(w_r\)</span>: Normalized pre-allocation responsibility weight</li>
+<li><span class="arithmatex">\(e_r\)</span>: Pre-allocation responsibility exponent</li>
 </ul>
 <p><strong>Capability Adjustment with Gini-Adjusted GDP</strong></p>
 <p>For per capita capability (:code:<code>capability_per_capita=True</code>, default):</p>
@@ -2803,7 +2805,7 @@ country shares</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Weight for historical responsibility adjustment (0.0 to 1.0).
+                <p>Weight for pre-allocation responsibility adjustment (0.0 to 1.0).
 See docs/science/parameter-effects.md#pre_allocation_responsibility_weight for real
 allocation examples showing how this affects country shares</p>
               </div>
@@ -2837,7 +2839,7 @@ allocation examples showing how this affects country shares</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Start year for calculating historical responsibility (default: 1990)</p>
+                <p>Start year for pre-allocation responsibility calculation (default: 1990)</p>
               </div>
             </td>
             <td>
@@ -2869,7 +2871,7 @@ allocation examples showing how this affects country shares</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Exponent for the responsibility adjustment function</p>
+                <p>Exponent for the pre-allocation responsibility adjustment function</p>
               </div>
             </td>
             <td>
@@ -2885,7 +2887,7 @@ allocation examples showing how this affects country shares</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Functional form for responsibility: "asinh" or "power"</p>
+                <p>Functional form for pre-allocation responsibility: "asinh" or "power"</p>
               </div>
             </td>
             <td>
@@ -3115,7 +3117,7 @@ formulation, intra-national equity considerations, and when to use this approach
 </details>
 
 <p><span class="doc-section-title">Examples:</span></p>
-    <p>Calculate allocation with Gini-adjusted capability (no responsibility):</p>
+    <p>Calculate allocation with Gini-adjusted capability (no pre-allocation responsibility):</p>
     <div class="language-pycon highlight"><span class="filename">Python Console Session</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">fair_shares.library.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_example_data</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">create_example_data</span><span class="p">()</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">per_capita_adjusted_gini_budget</span><span class="p">(</span>
@@ -3140,7 +3142,7 @@ formulation, intra-national equity considerations, and when to use this approach
 </span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;max_gini_adjustment&quot;</span><span class="p">]</span>
 </span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="go">0.8...</span>
 </span></code></pre></div>
-    <p>Calculate allocation with both responsibility and Gini-adjusted capability:</p>
+    <p>Calculate allocation with both pre-allocation responsibility and Gini-adjusted capability:</p>
     <div class="language-pycon highlight"><span class="filename">Python Console Session</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">result_full</span> <span class="o">=</span> <span class="n">per_capita_adjusted_gini_budget</span><span class="p">(</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="gp">... </span>    <span class="n">population_ts</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;population&quot;</span><span class="p">],</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="gp">... </span>    <span class="n">gdp_ts</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;gdp&quot;</span><span class="p">],</span>

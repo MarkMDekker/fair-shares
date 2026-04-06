@@ -3232,7 +3232,7 @@ matching GCB2024 coverage)</p>
         <p>Construct NGHGI-consistent world total CO2 timeseries.</p>
 <p>For backward extension of allocation years &lt; 2020, Weber Eq. 3 requires
 per-year world CO2 = fossil - bunkers + LULUCF, where LULUCF uses:
-- 2000 onwards: NGHGI LULUCF (Melo v3.1)
+- 2000 onwards: NGHGI LULUCF (e.g. Melo v3.1)
 - Pre-2000: NaN (no fallback — NGHGI coverage only)</p>
 <p>No NGHGI/BM splicing is performed. Years outside NGHGI coverage are NaN.</p>
 
@@ -3257,7 +3257,7 @@ per-year world CO2 = fossil - bunkers + LULUCF, where LULUCF uses:
             </td>
             <td>
               <div class="doc-md-description">
-                <p>World CO2-FFI emissions timeseries (PRIMAP) in Mt CO2/yr.
+                <p>World CO2-FFI emissions timeseries (e.g. PRIMAP) in Mt CO2/yr.
 Must have string year columns and a MultiIndex with
 (iso3c, unit, emission-category).</p>
               </div>
@@ -3724,7 +3724,7 @@ preprocessing to match the units used in world_scenario_emissions_ts.</p>
 <p>This function converts RCB values from any baseline year (&gt;= 2020) to a
 standardized 2020 baseline. It also applies adjustments for international
 bunkers and LULUCF following Weber et al. (2026).</p>
-<p>The rebase always uses actual observational data (PRIMAP), never scenario
+<p>The rebase always uses actual observational data (e.g. PRIMAP), never scenario
 projections. What enters the rebase depends on the emission category:</p>
 <ul>
 <li><strong>co2-ffi</strong>: Rebase uses fossil CO2 only. LULUCF is omitted because it
@@ -3849,7 +3849,7 @@ is included in the rebase.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Actual bookkeeping-model LULUCF CO2 emissions from PRIMAP, with year
+                <p>Actual bookkeeping-model LULUCF CO2 emissions (e.g. PRIMAP), with year
 columns (in Mt * CO2e). Used ONLY for the co2 rebase (default: None).</p>
               </div>
             </td>

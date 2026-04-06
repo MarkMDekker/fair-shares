@@ -2052,14 +2052,14 @@
 <p>All approach names use <code>kebab-case</code> notation. For complete details, see the <a href="../../user-guide/approach-catalog/">Approach Catalog</a>.</p>
 <div class="admonition info">
 <p class="admonition-title">Key concept: allocation_year</p>
-<p>All approaches incorporate historical responsibility via <code>allocation_year</code> (budget) or <code>first_allocation_year</code> (pathway). When set in the past, cumulative emissions since that year are considered when determining the remaining budget — leaving different <strong>remaining allocations</strong> for each country. The <code>*-adjusted</code> approaches add further weighting on top of this mechanism.</p>
+<p>All approaches incorporate historical differentiation via <code>allocation_year</code> (budget) or <code>first_allocation_year</code> (pathway). When set in the past, cumulative population from that year determines each country's share of the total budget — leaving different <strong>remaining allocations</strong> for each country. The <code>*-adjusted</code> approaches add pre-allocation responsibility rescaling on top of this mechanism.</p>
 </div>
 <h3 id="budget-approaches">Budget Approaches<a class="headerlink" href="#budget-approaches" title="Permanent link">&para;</a></h3>
 <dl>
 <dt><strong><code>equal-per-capita-budget</code></strong></dt>
 <dd>Population-proportional allocation. Historical accountability via <code>allocation_year</code> only.</dd>
 <dt><strong><code>per-capita-adjusted-budget</code></strong></dt>
-<dd>Adds <code>pre_allocation_responsibility_weight</code> and <code>capability_weight</code> adjustments. CBDR-RC.</dd>
+<dd>Adds <code>pre_allocation_responsibility_weight</code> (backward-looking from allocation year) and <code>capability_weight</code> (forward-looking from allocation year onwards) adjustments. CBDR-RC.</dd>
 <dt><strong><code>per-capita-adjusted-gini-budget</code></strong></dt>
 <dd>Adds Gini adjustment for within-country inequality. Subsistence protection.</dd>
 </dl>
@@ -2068,7 +2068,7 @@
 <dt><strong><code>equal-per-capita</code></strong></dt>
 <dd>Annual population-proportional shares. Historical accountability via <code>first_allocation_year</code>.</dd>
 <dt><strong><code>per-capita-adjusted</code></strong></dt>
-<dd>Annual shares with pre-allocation responsibility/capability adjustments. CBDR-RC.</dd>
+<dd>Annual shares with pre-allocation responsibility (backward-looking) and capability (from allocation year onwards) adjustments. CBDR-RC.</dd>
 <dt><strong><code>per-capita-adjusted-gini</code></strong></dt>
 <dd>Annual shares with Gini adjustment. Subsistence protection.</dd>
 </dl>
@@ -2088,12 +2088,12 @@
 <h3 id="core-parameters">Core Parameters<a class="headerlink" href="#core-parameters" title="Permanent link">&para;</a></h3>
 <dl>
 <dt><strong><code>allocation_year</code></strong> / <strong><code>first_allocation_year</code></strong> (type: <code>int</code>)</dt>
-<dd>Start year for cumulative accounting. Cumulative emissions since this year are considered when determining the remaining budget → different remaining allocations. No neutral default.</dd>
+<dd>Start year for cumulative accounting. Cumulative population from this year determines each country's share of the total budget. No neutral default: the choice operationalises whether past emissions create present obligations.</dd>
 <dd>Budget approaches use <code>allocation_year</code>; pathway approaches use <code>first_allocation_year</code>.</dd>
 <dt><strong><code>convergence_year</code></strong> (type: <code>int</code>)</dt>
-<dd>Target year for per capita convergence. Must be &gt; allocation year. Convergence approaches only.</dd>
+<dd>Year by which allocations converge to equal per capita shares. Must be &gt; allocation year. Required when <code>convergence_method="sine-deviation"</code>. Earlier convergence years demand steeper near-term reductions; later years spread the transition. Convergence approaches only. See <a href="../parameter-effects/#convergence_method-convergence-only">Parameter Effects</a>.</dd>
 <dt><strong><code>emission_category</code></strong> (type: <code>str</code>)</dt>
-<dd>Emission species (e.g., <code>"co2-ffi"</code>, <code>"co2"</code>, <code>"all-ghg"</code>, <code>"all-ghg-ex-co2-lulucf"</code>, <code>"non-co2"</code>). Must match data sources.</dd>
+<dd>Emission species (e.g., <code>"co2-ffi"</code>, <code>"co2"</code>, <code>"all-ghg"</code>, <code>"all-ghg-ex-co2-lulucf"</code>, <code>"non-co2"</code>). Must match data sources. Both <code>all-ghg</code> and <code>all-ghg-ex-co2-lulucf</code> use GWP100 AR6 values to convert non-CO2 gases to CO2-equivalent. Composite categories (<code>all-ghg</code>, <code>all-ghg-ex-co2-lulucf</code>) trigger <a href="../other-operations/#all-ghg-allocations-with-rcbs">decomposition into CO2 + non-CO2</a> when used with RCB targets, because RCBs constrain CO2 only and non-CO2 requires scenario pathway data.</dd>
 <dt><strong><code>group_level</code></strong> (type: <code>str</code>, default: <code>"iso3c"</code>)</dt>
 <dd>Index level for countries/regions (ISO 3166-1 alpha-3 codes).</dd>
 </dl>
@@ -2122,16 +2122,16 @@
 <dt><strong><code>capability_per_capita</code></strong> (type: <code>bool</code>, default: <code>True</code>)</dt>
 <dd>Per capita (True) or absolute (False) GDP for capability calculation.</dd>
 <dt><strong><code>capability_exponent</code></strong> (type: <code>float</code>, default: <code>1.0</code>)</dt>
-<dd>Exponent for capability adjustment. &gt;1.0 increases non-linearity.</dd>
+<dd>Exponent for capability adjustment (applies from allocation year onwards). &gt;1.0 increases non-linearity.</dd>
 <dt><strong><code>capability_functional_form</code></strong> (type: <code>str</code>, default: <code>"asinh"</code>)</dt>
 <dd>Functional form: <code>"asinh"</code> or <code>"power"</code>.</dd>
 </dl>
 <h3 id="inequality-parameters">Inequality Parameters<a class="headerlink" href="#inequality-parameters" title="Permanent link">&para;</a></h3>
 <dl>
 <dt><strong><code>income_floor</code></strong> (type: <code>float</code>, default: <code>0.0</code>)</dt>
-<dd>Income below this threshold excluded from capability (subsistence protection).</dd>
+<dd>Income below this threshold (USD PPP per capita) is excluded from capability calculations, protecting subsistence needs. At <code>0.0</code>, all income counts. The GDR framework default is <code>7500</code> ($7,500/year 2010 PPP). Higher floors reduce measured capability for all countries, with the largest effect on middle-income countries where population clusters around the threshold. See <a href="../parameter-effects/#income_floor">Parameter Effects</a>.</dd>
 <dt><strong><code>max_gini_adjustment</code></strong> (type: <code>float</code>, default: <code>0.8</code>)</dt>
-<dd>Maximum Gini-based adjustment magnitude.</dd>
+<dd>Maximum proportional reduction from the Gini-based capability correction. Caps the influence of extreme inequality (Gini &gt; 0.6) on measured capability, preventing outsized adjustments from dominating the allocation. At 0.8, the Gini adjustment can reduce a country's measured GDP by at most 80%. Available on <code>*-gini-*</code> approaches only.</dd>
 </dl>
 <h3 id="discounting-parameters">Discounting Parameters<a class="headerlink" href="#discounting-parameters" title="Permanent link">&para;</a></h3>
 <dl>
@@ -2145,16 +2145,16 @@
 <dt><strong><code>max_convergence_speed</code></strong> (type: <code>float</code>, default: <code>0.9</code>)</dt>
 <dd>Upper bound on exponential convergence speed. Lower values force slower transitions but may cause infeasibility. Convergence approaches only.</dd>
 <dt><strong><code>historical_start_year</code></strong> (type: <code>int | None</code>, default: <code>None</code>)</dt>
-<dd>Extends cumulative population window backward for convergence target shares. When set, cumulative population is summed from this year instead of <code>first_allocation_year</code>. A population entitlement parameter -- does not affect responsibility adjustments or emissions accounting. Convergence approaches only. See <a href="../parameter-effects/#historical_start_year-convergence-only">Parameter Effects</a>.</dd>
+<dd>Extends cumulative population window backward for convergence target shares. When set, cumulative population is summed from this year instead of <code>first_allocation_year</code>. A population entitlement parameter -- does not affect pre-allocation responsibility adjustments or emissions accounting. Convergence approaches only. See <a href="../parameter-effects/#historical_start_year-convergence-only">Parameter Effects</a>.</dd>
 <dt><strong><code>strict</code></strong> (type: <code>bool</code>, default: <code>True</code>)</dt>
 <dd>Controls behavior on infeasible convergence targets. <code>True</code> raises an error; <code>False</code> clips infeasible long-run shares and reports per-country deviation ratios. Convergence approaches only. See <a href="../parameter-effects/#strict-convergence-only">Parameter Effects</a>.</dd>
 </dl>
 <h3 id="constraint-parameters">Constraint Parameters<a class="headerlink" href="#constraint-parameters" title="Permanent link">&para;</a></h3>
 <dl>
 <dt><strong><code>max_deviation_sigma</code></strong> (type: <code>float | None</code>, default: <code>2.0</code>)</dt>
-<dd>Outlier constraint (standard deviations from mean). Limits how far any country's adjusted allocation can deviate from equal per capita. Only relevant when applying scaling adjustments.</dd>
+<dd>Outlier constraint (standard deviations from mean). Prevents extreme adjustment values from dominating allocations -- without it, a single country with very high per-capita emissions or GDP can distort the entire distribution. Set to <code>None</code> to disable. Only relevant when applying scaling adjustments. See <a href="../parameter-effects/#max_deviation_sigma">Parameter Effects</a>.</dd>
 <dt><strong><code>preserve_allocation_year_shares</code></strong> / <strong><code>preserve_first_allocation_year_shares</code></strong> (type: <code>bool</code>, default: <code>False</code>)</dt>
-<dd>Fix population shares at allocation year rather than recalculating dynamically.</dd>
+<dd>When <code>True</code>, freezes population (and adjustment) shares at the allocation year instead of recalculating as demographics evolve. The choice reflects whether future population growth should increase a country's atmospheric entitlement. See <a href="../parameter-effects/#preserve_allocation_year_shares--preserve_first_allocation_year_shares">Parameter Effects</a>.</dd>
 </dl>
 <hr />
 <h2 id="result-types">Result Types<a class="headerlink" href="#result-types" title="Permanent link">&para;</a></h2>
@@ -2236,7 +2236,7 @@
 <dd>Allocating future entitlements based on current emission shares. Critiqued as lacking ethical basis. <code>per-capita-convergence</code> includes grandfathering elements.</dd>
 <dd>See: <a href="../allocations/#approaches-debated-in-the-literature">Allocation Approaches</a></dd>
 <dt><strong>Historical responsibility</strong></dt>
-<dd>Past emissions reduce remaining fair share. Two distinct mechanisms: (1) early <code>allocation_year</code> — cumulative accounting that includes past emissions when determining the remaining budget; (2) <code>pre_allocation_responsibility_weight</code> in <code>*-adjusted</code> approaches — multiplicative rescaling of shares.</dd>
+<dd>Past emissions reduce remaining fair share. Two distinct mechanisms: (1) early <code>allocation_year</code> — cumulative accounting where cumulative population from that year determines shares (can produce negative allocations as a mathematical consequence); (2) <code>pre_allocation_responsibility_weight</code> in <code>*-adjusted</code> approaches — multiplicative rescaling of shares by relative per-capita emissions in a historical window (always positive).</dd>
 <dd>See: <a href="../allocations/#historical-responsibility">Allocation Approaches</a></dd>
 <dt><strong>Negative Allocation</strong></dt>
 <dd>When a party's remaining fair share under a carbon budget is negative — its past emissions have already exceeded its equal per capita entitlement. Signals the need for highest possible domestic ambition, negative emissions targets (CDR), and international support. Negative allocations are a feature, not a bug: they communicate the scale of overshoot and the urgency of minimizing its duration and magnitude. [Pelz 2025b]</dd>
@@ -2259,9 +2259,9 @@
 <dt><strong>Bunker fuels</strong></dt>
 <dd>CO₂ emissions from international aviation and shipping. Included in global emission totals but excluded from national inventories (no country claims responsibility). Must be subtracted when converting global RCBs to country-allocatable budgets [Weber 2026].</dd>
 <dt><strong>ECPC</strong></dt>
-<dd>Equal Cumulative Per Capita. An allocation approach that distributes a carbon budget equally on a cumulative per-capita basis, requiring consideration of cumulative emissions since the allocation year when determining the remaining budget.</dd>
+<dd>Equal Cumulative Per Capita. An allocation approach that distributes a carbon budget equally on a cumulative per-capita basis. Cumulative population from the allocation year determines each country's share.</dd>
 <dt><strong>GDP</strong></dt>
-<dd>Gross Domestic Product. Economic output measure used for capability adjustments.</dd>
+<dd>Gross Domestic Product. Economic output measure used for capability adjustments (from the allocation year onwards).</dd>
 <dt><strong>GHG</strong></dt>
 <dd>Greenhouse Gas (e.g., CO2, CH4, N2O). "Kyoto GHG" refers to the basket of gases covered by the Kyoto Protocol.</dd>
 <dt><strong>IAMC</strong></dt>

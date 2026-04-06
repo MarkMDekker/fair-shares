@@ -1926,7 +1926,7 @@
 </tr>
 <tr>
 <td>Wealthier countries should do more</td>
-<td><code>*-adjusted</code> approaches (GDP scales per-capita shares)</td>
+<td><code>capability_weight</code> in <code>*-adjusted</code> approaches (GDP-based rescaling from allocation year onwards)</td>
 <td><a href="../allocations/">Allocation Approaches</a></td>
 </tr>
 <tr>
@@ -1985,16 +1985,16 @@
 </span></code></pre></div>
 <p><strong>What this reflects:</strong></p>
 <ul>
-<li><code>allocation_year=1990</code> → Requires considering cumulative emissions since 1990 when determining the remaining budget from the present</li>
-<li><code>pre_allocation_responsibility_weight=1.0</code> + <code>pre_allocation_responsibility_year=1950</code> → Per-capita emissions from 1950-1989 fully rescale remaining allocations — high historical per-capita emitters get proportionally less (relative mechanism)</li>
+<li><code>allocation_year=1990</code> → Cumulative population from 1990 determines each country's share of the total budget</li>
+<li><code>pre_allocation_responsibility_weight=1.0</code> + <code>pre_allocation_responsibility_year=1950</code> → Per-capita emissions from 1950-1989 fully rescale shares — high historical per-capita emitters get proportionally less (relative mechanism)</li>
 <li><code>capability_weight=0.0</code> → GDP does not affect allocation</li>
-<li>Both responsibility mechanisms are active: cumulative budget accounting via early allocation year AND relative rescaling via pre-allocation responsibility weight. These behave differently: the early allocation year requires considering cumulative emissions in the budget, and negative allocations are a mathematical consequence of the budget accounting, not a design choice. The rescaling is a multiplicative adjustment that always produces positive allocations if <code>allocation_year</code> is the present.</li>
+<li>Both mechanisms are active: cumulative accounting via early allocation year AND relative rescaling via pre-allocation responsibility weight. These behave differently: the early allocation year determines shares from cumulative population, and negative allocations are a mathematical consequence when those shares are applied to a budget. The rescaling is a multiplicative adjustment that always produces positive allocations if <code>allocation_year</code> is the present.</li>
 </ul>
-<p><strong>Distributional outcome:</strong> Both mechanisms apply to industrialized countries: cumulative emissions since 1990 are accounted for in the remaining budget (via early allocation_year), and 1950-1989 per-capita emissions rescale their proportional share of what remains (via pre_allocation_responsibility_weight=1.0). Countries with low historical emissions retain most of their per-capita allocation.</p>
-<p><strong>Underlying reasoning:</strong> The polluter pays principle is paramount. An early <code>allocation_year</code> requires considering cumulative emissions since that year when determining the remaining budget; <code>pre_allocation_responsibility_weight</code> additionally rescales shares based on pre-1990 per-capita emissions.</p>
+<p><strong>Distributional outcome:</strong> Both mechanisms apply to industrialized countries: cumulative population from 1990 determines their share (via early allocation_year), and 1950-1989 per-capita emissions rescale their proportional share of what remains (via pre_allocation_responsibility_weight=1.0). Countries with low historical emissions retain most of their per-capita allocation.</p>
+<p><strong>Underlying reasoning:</strong> The polluter pays principle is paramount. An early <code>allocation_year</code> means cumulative population from that year determines shares; <code>pre_allocation_responsibility_weight</code> additionally rescales shares based on pre-1990 per-capita emissions.</p>
 <hr />
 <h3 id="example-3-capability-adjustment">Example 3: Capability Adjustment<a class="headerlink" href="#example-3-capability-adjustment" title="Permanent link">&para;</a></h3>
-<p><strong>Value judgment:</strong> Wealthier countries have greater capacity to mitigate and should bear proportionally more of the burden. GDP scales per-capita shares so high-income countries receive smaller allocations.</p>
+<p><strong>Value judgment:</strong> Wealthier countries have greater capacity to mitigate and should bear proportionally more of the burden. GDP from the allocation year onwards scales per-capita shares so high-income countries receive smaller allocations.</p>
 <p><strong>Configuration:</strong></p>
 <div class="language-python highlight"><span class="filename">Python</span><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">allocations</span> <span class="o">=</span> <span class="p">{</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="s2">&quot;per-capita-adjusted-budget&quot;</span><span class="p">:</span> <span class="p">[</span>
@@ -2040,7 +2040,7 @@
 </ul>
 <p><strong>Distributional outcome:</strong> Countries with high historical per-capita emissions (US, EU) receive smaller allocations. Unlike early <code>allocation_year</code> (Example 2), no country receives a negative allocation — the rescaling always produces positive allocations when <code>allocation_year</code> is the present, reducing shares proportionally.</p>
 <p><strong>Underlying reasoning:</strong> Historical emissions create differential obligations, but the mechanism is proportional rescaling rather than cumulative budget accounting. This avoids negative allocations while still differentiating based on historical responsibility.</p>
-<p><strong>Contrast with early allocation year:</strong> Example 2 uses <code>allocation_year=1990</code>, requiring cumulative emissions since 1990 in the budget accounting — some countries end up with negative remaining budgets as a mathematical consequence. This example achieves historical differentiation without negative allocations.</p>
+<p><strong>Contrast with early allocation year:</strong> Example 2 uses <code>allocation_year=1990</code>, where cumulative population from 1990 determines shares — some countries end up with negative allocations when those shares are applied to a budget. This example achieves historical differentiation without negative allocations.</p>
 <hr />
 <h3 id="example-5-immediate-pathway-with-capability-adjustment">Example 5: Immediate Pathway with Capability Adjustment<a class="headerlink" href="#example-5-immediate-pathway-with-capability-adjustment" title="Permanent link">&para;</a></h3>
 <p><strong>Value judgment:</strong> Annual emissions should reflect fair shares immediately, not gradually converge. Economic capability should reduce allocations in each year, creating differentiated annual trajectories without grandfathering. This is a pathway approach (year-by-year allocations) but NOT a convergence approach (no gradual transition from current emissions).</p>
@@ -2123,7 +2123,7 @@
 </span></code></pre></div>
 <p><strong>What this reflects:</strong></p>
 <ul>
-<li><code>allocation_year=1990</code> → Cumulative emissions since 1990 are considered when determining the remaining budget</li>
+<li><code>allocation_year=1990</code> → Cumulative population from 1990 determines each country's share of the total budget</li>
 <li><code>pre_allocation_responsibility_weight=0.2</code> + <code>pre_allocation_responsibility_year=1950</code> → Per-capita emissions from 1950-1989 rescale allocations (relative mechanism)</li>
 <li><code>capability_weight=0.8</code> → GDP-based capability dominates the adjustment (applies from allocation year onwards)</li>
 <li><code>income_floor=10000</code> → Higher than GDR threshold ($7,500/year 2010 PPP) — broader subsistence definition (GDR was designed for burden-sharing; fair-shares adapts its capability metric for entitlement allocation)</li>
@@ -2145,7 +2145,7 @@
 <p><strong>Which principles are morally relevant?</strong> — Should historical responsibility matter? Should capability determine obligations? These are philosophical questions about justice.</p>
 </li>
 <li>
-<p><strong>Where do thresholds come from?</strong> — Income floors, responsibility start dates, convergence years involve value judgments about development rights and transition feasibility.</p>
+<p><strong>Where do thresholds come from?</strong> — Income floors, pre-allocation responsibility start dates, convergence years involve value judgments about development rights and transition feasibility.</p>
 </li>
 <li>
 <p><strong>What happens with negative remaining allocations?</strong> — When <code>allocation_year</code> is in the past, high historical emitters may have already exceeded their fair share — their remaining allocation is negative (carbon debt). Negative allocations communicate the scale of exceedance and create a signal for what is required. They imply the need for highest possible domestic ambition, negative emissions targets (carbon dioxide removal), and international support for others. The priority is to minimize the duration and magnitude of overshoot [Pelz 2025b; Pelz 2025a]. What specific obligations follow (accelerated domestic mitigation, financial transfers, CDR investments) requires political specification, but the tool transparently surfaces the normative implication.</p>
