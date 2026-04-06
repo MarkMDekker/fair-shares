@@ -1314,24 +1314,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#combination_mode" class="md-nav__link">
-    <span class="md-ellipsis">
-      combination_mode
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#apply_threshold_to_responsibility" class="md-nav__link">
-    <span class="md-ellipsis">
-      apply_threshold_to_responsibility
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#understanding-weights-vs-exponents" class="md-nav__link">
     <span class="md-ellipsis">
       Understanding Weights vs Exponents
@@ -1375,9 +1357,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#both-responsibility-mechanisms-direct-subtraction-rescaling" class="md-nav__link">
+  <a href="#both-responsibility-mechanisms-cumulative-accounting-rescaling" class="md-nav__link">
     <span class="md-ellipsis">
-      Both Responsibility Mechanisms (Direct Subtraction + Rescaling)
+      Both Responsibility Mechanisms (Cumulative Accounting + Rescaling)
     </span>
   </a>
   
@@ -1814,24 +1796,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#combination_mode" class="md-nav__link">
-    <span class="md-ellipsis">
-      combination_mode
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#apply_threshold_to_responsibility" class="md-nav__link">
-    <span class="md-ellipsis">
-      apply_threshold_to_responsibility
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#understanding-weights-vs-exponents" class="md-nav__link">
     <span class="md-ellipsis">
       Understanding Weights vs Exponents
@@ -1875,9 +1839,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#both-responsibility-mechanisms-direct-subtraction-rescaling" class="md-nav__link">
+  <a href="#both-responsibility-mechanisms-cumulative-accounting-rescaling" class="md-nav__link">
     <span class="md-ellipsis">
-      Both Responsibility Mechanisms (Direct Subtraction + Rescaling)
+      Both Responsibility Mechanisms (Cumulative Accounting + Rescaling)
     </span>
   </a>
   
@@ -1993,7 +1957,7 @@
 <p><strong>Effect:</strong> Earlier allocation years account for more historical emissions in the cumulative budget calculation, dramatically reducing the remaining allocation for high historical emitters.</p>
 <p><strong>Direction:</strong></p>
 <ul>
-<li>Earlier years → More historical emissions subtracted → High emitters may go negative</li>
+<li>Earlier years → More cumulative emissions accounted for → High emitters may go negative</li>
 <li>Later years → Less history considered → Allocations closer to current population shares</li>
 </ul>
 <p><strong>Example:</strong> <code>equal-per-capita-budget</code> with varying <code>allocation_year</code>, showing remaining budget from 2020</p>
@@ -2035,7 +1999,7 @@
 <p><strong>Theoretical basis:</strong> See <a href="https://setupelz.github.io/fair-shares/science/allocations/">Allocation Approaches</a> · <a href="https://setupelz.github.io/fair-shares/science/allocations/#historical-responsibility">Historical Responsibility</a></p>
 <hr />
 <h2 id="pre_allocation_responsibility_weight">pre_allocation_responsibility_weight<a class="headerlink" href="#pre_allocation_responsibility_weight" title="Permanent link">&para;</a></h2>
-<p><strong>Effect:</strong> Activates a relative per-capita rescaling of allocations based on cumulative per-capita emissions in the window [<code>pre_allocation_responsibility_year</code>, <code>allocation_year</code>). This is a <strong>separate mechanism</strong> from setting an early <code>allocation_year</code>, which subtracts past emissions directly from the budget. Weights are <strong>relative</strong> — only the ratio of <code>pre_allocation_responsibility_weight</code> to <code>capability_weight</code> matters (see <a href="https://setupelz.github.io/fair-shares/science/allocations/#weight-normalization">Weight Normalization</a>).</p>
+<p><strong>Effect:</strong> Activates a relative per-capita rescaling of allocations based on cumulative per-capita emissions in the window [<code>pre_allocation_responsibility_year</code>, <code>allocation_year</code>). This is a <strong>separate mechanism</strong> from setting an early <code>allocation_year</code> — rescaling is multiplicative and always produces positive allocations if <code>allocation_year</code> is the present, whereas cumulative accounting of past emissions can produce negative allocations as a mathematical consequence of the budget accounting (see <a href="#if-you-want-x-set-y-guide">comparison table</a> below). Weights are <strong>relative</strong> — only the ratio of <code>pre_allocation_responsibility_weight</code> to <code>capability_weight</code> matters (see <a href="https://setupelz.github.io/fair-shares/science/allocations/#weight-normalization">Weight Normalization</a>).</p>
 <p><strong>Direction:</strong></p>
 <ul>
 <li>Both weights <code>0.0</code> → No adjustment (equal per capita)</li>
@@ -2074,7 +2038,7 @@
 </tbody>
 </table>
 <p><em>Example uses <code>allocation_year=2020</code>, <code>pre_allocation_responsibility_year=1990</code>.</em></p>
-<p><strong>Key insight:</strong> Historical responsibility substantially reduces shares for high-emitting developed countries (USA: 4.0% to 0.5%, Germany: 0.8% to 0.1%). India's share also decreases (16.7% to 8.2%) because the adjustment redistributes toward countries with the lowest per capita historical emissions, which are not shown in this three-country excerpt. Note that <code>weight=0.5</code> and <code>weight=1.0</code> produce identical results here because <code>capability_weight=0.0</code> in both cases — any non-zero value with the other at zero normalizes to 100% weighting for that adjustment.</p>
+<p><strong>Key insight:</strong> Multiplicative rescaling substantially reduces shares for high-emitting developed countries (USA: 4.0% to 0.5%, Germany: 0.8% to 0.1%). India's share also decreases (16.7% to 8.2%) because the adjustment redistributes toward countries with the lowest per capita historical emissions, which are not shown in this three-country excerpt. Note that <code>weight=0.5</code> and <code>weight=1.0</code> produce identical results here because <code>capability_weight=0.0</code> in both cases — any non-zero value with the other at zero normalizes to 100% weighting for that adjustment.</p>
 <!-- REFERENCE: per_capita_adjusted_budget() in src/fair_shares/library/allocations/budgets/per_capita.py -->
 
 <p><strong>Mathematical detail:</strong> See <a href="https://setupelz.github.io/fair-shares/api/allocations/budgets/#per_capita_adjusted_budget">per_capita_adjusted_budget API</a></p>
@@ -2120,7 +2084,7 @@
 </tbody>
 </table>
 <p><em>Example uses <code>allocation_year=2020</code>.</em></p>
-<p><strong>Key insight:</strong> Capability adjustments have a smaller magnitude effect than historical responsibility adjustments. Wealthy countries see modest reductions (USA: 4.0% → 3.4%, Germany: 0.8% → 0.7%) while lower-GDP countries see small increases (India: 16.7% → 16.9%). As with responsibility above, <code>weight=0.5</code> and <code>weight=1.0</code> are identical here because the other weight is zero — both normalize to 100% capability weighting.</p>
+<p><strong>Key insight:</strong> Capability adjustments have a smaller magnitude effect than pre-allocation responsibility adjustments. Wealthy countries see modest reductions (USA: 4.0% → 3.4%, Germany: 0.8% → 0.7%) while lower-GDP countries see small increases (India: 16.7% → 16.9%). As with responsibility above, <code>weight=0.5</code> and <code>weight=1.0</code> are identical here because the other weight is zero — both normalize to 100% capability weighting.</p>
 <!-- REFERENCE: per_capita_adjusted_budget() in src/fair_shares/library/allocations/budgets/per_capita.py -->
 
 <p><strong>Mathematical detail:</strong> See <a href="https://setupelz.github.io/fair-shares/api/allocations/budgets/#per_capita_adjusted_budget">per_capita_adjusted_budget API</a></p>
@@ -2176,7 +2140,7 @@
 <h2 id="historical_discount_rate">historical_discount_rate<a class="headerlink" href="#historical_discount_rate" title="Permanent link">&para;</a></h2>
 <!-- REFERENCE: calculate_responsibility_adjustment_data() in src/fair_shares/library/utils/math/adjustments.py -->
 
-<p><strong>Effect:</strong> Weights earlier historical emissions less than recent ones when computing responsibility adjustments. Available on <code>per-capita-adjusted</code> functions only — not part of equal-per-capita accounting.</p>
+<p><strong>Effect:</strong> Weights earlier historical emissions less than recent ones when computing pre-allocation responsibility adjustments. Available on <code>per-capita-adjusted</code> functions only — not part of equal-per-capita accounting.</p>
 <p><strong>Direction:</strong></p>
 <ul>
 <li><code>rate=0.0</code> (default) → All historical emissions weighted equally (standard approach)</li>
@@ -2187,42 +2151,6 @@
 <p><strong>Key insight:</strong> This parameter is contested in the literature. The physical argument: natural carbon sinks remove CO2 over time, so older emissions contribute less to current concentrations [Dekker 2025; Van Den Berg 2020]. The moral counterargument: responsibility for harm does not decay with time, and discounting systematically benefits the countries most responsible for cumulative warming [Meyer 2013; Shue 2015; Caney 2009]. The choice of any rate above 0.0 is a normative decision, not a technical one.</p>
 <p><strong>Mathematical detail:</strong> See <a href="https://setupelz.github.io/fair-shares/science/allocations/#historical-emissions-discounting">Historical Emissions Discounting</a></p>
 <p><strong>Theoretical basis:</strong> See <a href="https://setupelz.github.io/fair-shares/science/allocations/">Allocation Approaches</a> · <a href="https://setupelz.github.io/fair-shares/science/allocations/#historical-responsibility">Historical Responsibility</a></p>
-<hr />
-<h2 id="combination_mode">combination_mode<a class="headerlink" href="#combination_mode" title="Permanent link">&para;</a></h2>
-<!-- REFERENCE: per_capita_adjusted_budget() in src/fair_shares/library/allocations/budgets/per_capita.py -->
-<!-- REFERENCE: per_capita_adjusted() in src/fair_shares/library/allocations/pathways/per_capita.py -->
-
-<p><strong>Effect:</strong> Controls how responsibility and capability adjustments combine with the equal-per-capita baseline. Two modes: <code>"multiplicative"</code> (default) and <code>"additive"</code> (Baer's RCI formula [Baer 2009]).</p>
-<p><strong>Direction:</strong></p>
-<ul>
-<li><code>"multiplicative"</code> → R and C interact as compounding exponents; extreme countries see amplified divergence</li>
-<li><code>"additive"</code> → R and C produce independent share vectors combined as a weighted sum; divergence is bounded</li>
-</ul>
-<p>In multiplicative mode, a country that scores high on both responsibility and capability receives a compounding reduction. In additive mode, the two adjustments operate independently — the combined effect is the sum, not the product. This produces smaller reductions for countries at both extremes and larger reductions for countries at one extreme only.</p>
-<p>Additive mode also retains a pure equal-per-capita component when <span class="arithmatex">\(w_R + w_C &lt; 1\)</span>: the residual <span class="arithmatex">\((1 - w_R - w_C)\)</span> weight goes to the EPC baseline. Multiplicative mode has no such residual.</p>
-<p><strong>Key insight:</strong> The two modes produce meaningfully different allocations only when both responsibility and capability weights are non-zero AND countries differ in their R vs C rankings. For single-dimension adjustments (only R or only C), the two modes converge to similar results because there is no interaction to compound or separate.</p>
-<p><strong>Mathematical detail:</strong> See <a href="https://setupelz.github.io/fair-shares/science/allocations/#combination-mode">Combination Mode</a></p>
-<p><strong>Theoretical basis:</strong> See <a href="https://setupelz.github.io/fair-shares/science/allocations/#weight-normalization">Weight Normalization</a></p>
-<hr />
-<h2 id="apply_threshold_to_responsibility">apply_threshold_to_responsibility<a class="headerlink" href="#apply_threshold_to_responsibility" title="Permanent link">&para;</a></h2>
-<!-- REFERENCE: calculate_gini_adjusted_responsibility() in src/fair_shares/library/utils/math/adjustments.py -->
-
-<p><strong>Effect:</strong> Extends the development threshold (income floor) to the responsibility side, excluding below-threshold individuals' emissions from a country's historical responsibility. Available in <code>*-gini-*</code> approaches only.</p>
-<p><strong>Direction:</strong></p>
-<ul>
-<li><code>False</code> (default) → Threshold applies only to capability; all emissions count toward responsibility</li>
-<li><code>True</code> → Below-threshold individuals' emissions excluded from responsibility (GDR-faithful [Baer 2009])</li>
-</ul>
-<p>Countries with large below-threshold populations see the largest change. When a substantial fraction of a country's population earns below the income floor, their associated emissions are excluded from historical responsibility. This reduces the country's measured responsibility.</p>
-<p>The effect is most pronounced for:</p>
-<ul>
-<li><strong>Large developing countries</strong> (India, Indonesia, Nigeria) — large below-threshold populations mean a significant emissions fraction is excluded</li>
-<li><strong>Middle-income countries</strong> (Brazil, South Africa) — the fraction depends on inequality (Gini coefficient) and where the income floor falls relative to the distribution</li>
-<li><strong>High-income countries</strong> — minimal effect; nearly all population is above-threshold, so almost no emissions are excluded</li>
-</ul>
-<p><strong>Key insight:</strong> Without this flag, the GDR framework is partially implemented — the development threshold protects capability but not responsibility. Setting it to True completes the GDR design where subsistence-level individuals are exempt from both dimensions of obligation.</p>
-<p><strong>Mathematical detail:</strong> See <a href="https://setupelz.github.io/fair-shares/science/allocations/#development-threshold-on-responsibility">Development Threshold on Responsibility</a></p>
-<p><strong>Theoretical basis:</strong> See <a href="https://setupelz.github.io/fair-shares/science/allocations/#gini-adjustment">Gini Adjustment</a></p>
 <hr />
 <h2 id="understanding-weights-vs-exponents">Understanding Weights vs Exponents<a class="headerlink" href="#understanding-weights-vs-exponents" title="Permanent link">&para;</a></h2>
 <p>Two distinct parameter types control adjustments. They are often confused:</p>
@@ -2275,14 +2203,14 @@
 </thead>
 <tbody>
 <tr>
-<td><strong>Direct subtraction</strong></td>
+<td><strong>Cumulative accounting</strong></td>
 <td>Early <code>allocation_year</code> (e.g. 1990, 1850)</td>
-<td>Subtracts actual emissions since that year from each country's budget</td>
+<td>Requires considering cumulative emissions since that year when determining the remaining budget; negative allocations are a mathematical consequence</td>
 </tr>
 <tr>
 <td><strong>Relative rescaling</strong></td>
 <td><code>pre_allocation_responsibility_weight</code> + <code>pre_allocation_responsibility_year</code></td>
-<td>Rescales per-capita shares based on cumulative per-capita emissions in [<code>pre_allocation_responsibility_year</code>, <code>allocation_year</code>)</td>
+<td>Multiplicative rescaling of per-capita shares over [<code>pre_allocation_responsibility_year</code>, <code>allocation_year</code>); always produces positive allocations if <code>allocation_year</code> is the present</td>
 </tr>
 </tbody>
 </table>
@@ -2300,7 +2228,7 @@
 <td><code>pre_allocation_responsibility_weight=0.0, capability_weight=0.0</code></td>
 </tr>
 <tr>
-<td>Historical responsibility via subtraction</td>
+<td>Historical responsibility via cumulative accounting</td>
 <td>Early <code>allocation_year</code> (e.g. 1990), no weight needed</td>
 </tr>
 <tr>
@@ -2342,8 +2270,8 @@
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="n">pre_allocation_responsibility_year</span><span class="o">=</span><span class="mi">1990</span><span class="p">,</span>  <span class="c1"># window: [1990, 2020)</span>
 </span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="p">)</span>
 </span></code></pre></div>
-<p>Rescales per-capita shares using 1990-2019 per-capita emissions (50%) and GDP (50%). No direct subtraction of past emissions (allocation starts at 2020).</p>
-<h3 id="both-responsibility-mechanisms-direct-subtraction-rescaling">Both Responsibility Mechanisms (Direct Subtraction + Rescaling)<a class="headerlink" href="#both-responsibility-mechanisms-direct-subtraction-rescaling" title="Permanent link">&para;</a></h3>
+<p>Rescales per-capita shares using 1990-2019 per-capita emissions (50%) and GDP (50%). No cumulative accounting of past emissions in the budget (allocation starts at 2020).</p>
+<h3 id="both-responsibility-mechanisms-cumulative-accounting-rescaling">Both Responsibility Mechanisms (Cumulative Accounting + Rescaling)<a class="headerlink" href="#both-responsibility-mechanisms-cumulative-accounting-rescaling" title="Permanent link">&para;</a></h3>
 <!-- REFERENCE: per_capita_adjusted_budget() in src/fair_shares/library/allocations/budgets/per_capita.py -->
 
 <div class="language-python highlight"><span class="filename">Python</span><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">per_capita_adjusted_budget</span><span class="p">(</span>
@@ -2353,7 +2281,7 @@
 </span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="n">pre_allocation_responsibility_year</span><span class="o">=</span><span class="mi">1850</span><span class="p">,</span>  <span class="c1"># window: [1850, 1990)</span>
 </span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="p">)</span>
 </span></code></pre></div>
-<p>Emissions from 1990 onward are subtracted directly from the budget (via <code>allocation_year=1990</code>). Per-capita emissions from 1850-1989 rescale the remaining allocation (via <code>pre_allocation_responsibility_weight=1.0</code>).</p>
+<p>Cumulative emissions from 1990 onward are accounted for when determining the remaining budget (via <code>allocation_year=1990</code>). Per-capita emissions from 1850-1989 rescale the remaining allocation (via <code>pre_allocation_responsibility_weight=1.0</code>).</p>
 <h3 id="capability-with-development-threshold">Capability with Development Threshold<a class="headerlink" href="#capability-with-development-threshold" title="Permanent link">&para;</a></h3>
 <!-- REFERENCE: per_capita_adjusted_gini_budget() in src/fair_shares/library/allocations/budgets/per_capita.py -->
 
@@ -2371,15 +2299,15 @@
 <h3 id="parameter-sensitivity-ranking">Parameter Sensitivity Ranking<a class="headerlink" href="#parameter-sensitivity-ranking" title="Permanent link">&para;</a></h3>
 <p>Based on the examples:</p>
 <ol>
-<li><strong><code>pre_allocation_responsibility_weight</code></strong> (largest effect) - Can change allocations by 3-4 percentage points</li>
+<li><strong><code>allocation_year</code></strong> (largest absolute effect) - Cumulative accounting swings allocations by hundreds of GtCO2 and can flip them negative (USA: +12.3 to -329.2 GtCO2)</li>
+<li><strong><code>pre_allocation_responsibility_weight</code></strong> (largest percentage-point effect on shares) - Can change allocations by 3-4 percentage points via multiplicative rescaling</li>
 <li><strong><code>capability_weight</code></strong> (typically 0.5-1 percentage point changes)</li>
 <li><strong><code>income_floor</code></strong> (smallest effect) - Typically &lt;0.5 percentage point changes</li>
-<li><strong><code>allocation_year</code></strong> (context-dependent) - Effect depends on historical population changes</li>
 </ol>
 <h3 id="multi-parameter-trade-offs">Multi-Parameter Trade-offs<a class="headerlink" href="#multi-parameter-trade-offs" title="Permanent link">&para;</a></h3>
 <p>When combining adjustments:</p>
 <ul>
-<li>High responsibility weight + high capability weight → Very low allocations for developed countries</li>
+<li>High pre-allocation responsibility weight + high capability weight → Very low allocations for developed countries</li>
 <li>Capability-dominant weighting (e.g., 0.2:0.8) → Allocations shift primarily by GDP per capita</li>
 <li>Responsibility alone → "Polluter pays" framing</li>
 <li>Capability alone → "Common but differentiated" without historical accountability</li>

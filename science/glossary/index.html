@@ -2016,7 +2016,7 @@
 <p>All approach names use <code>kebab-case</code> notation. For complete details, see the <a href="../../user-guide/approach-catalog/">Approach Catalog</a>.</p>
 <div class="admonition info">
 <p class="admonition-title">Key concept: allocation_year</p>
-<p>All approaches incorporate historical responsibility via <code>allocation_year</code> (budget) or <code>first_allocation_year</code> (pathway). When set in the past, emissions from that year to present are subtracted, leaving different <strong>remaining allocations</strong> for each country. The <code>*-adjusted</code> approaches add further weighting on top of this mechanism.</p>
+<p>All approaches incorporate historical responsibility via <code>allocation_year</code> (budget) or <code>first_allocation_year</code> (pathway). When set in the past, cumulative emissions since that year are considered when determining the remaining budget — leaving different <strong>remaining allocations</strong> for each country. The <code>*-adjusted</code> approaches add further weighting on top of this mechanism.</p>
 </div>
 <h3 id="budget-approaches">Budget Approaches<a class="headerlink" href="#budget-approaches" title="Permanent link">&para;</a></h3>
 <dl>
@@ -2052,7 +2052,7 @@
 <h3 id="core-parameters">Core Parameters<a class="headerlink" href="#core-parameters" title="Permanent link">&para;</a></h3>
 <dl>
 <dt><strong><code>allocation_year</code></strong> / <strong><code>first_allocation_year</code></strong> (type: <code>int</code>)</dt>
-<dd>Start year for cumulative accounting. Past emissions subtracted → different remaining allocations. No neutral default.</dd>
+<dd>Start year for cumulative accounting. Cumulative emissions since this year are considered when determining the remaining budget → different remaining allocations. No neutral default.</dd>
 <dd>Budget approaches use <code>allocation_year</code>; pathway approaches use <code>first_allocation_year</code>.</dd>
 <dt><strong><code>convergence_year</code></strong> (type: <code>int</code>)</dt>
 <dd>Target year for per capita convergence. Must be &gt; allocation year. Convergence approaches only.</dd>
@@ -2065,7 +2065,7 @@
 <p>Constraint: <code>pre_allocation_responsibility_weight + capability_weight ≤ 1.0</code></p>
 <dl>
 <dt><strong><code>pre_allocation_responsibility_weight</code></strong> (type: <code>float</code>, default: <code>0.0</code>)</dt>
-<dd>Weight for relative per-capita rescaling based on emissions in [<code>pre_allocation_responsibility_year</code>, <code>allocation_year</code>). Higher = more reduction for countries with high per-capita emissions in that window. Separate from the direct subtraction done by early <code>allocation_year</code>.</dd>
+<dd>Weight for relative per-capita rescaling based on emissions in [<code>pre_allocation_responsibility_year</code>, <code>allocation_year</code>). Higher = more reduction for countries with high per-capita emissions in that window. Separate from the cumulative accounting done by early <code>allocation_year</code>. Always produces positive allocations if <code>allocation_year</code> is the present.</dd>
 <dt><strong><code>capability_weight</code></strong> (type: <code>float</code>, default: <code>0.0</code>)</dt>
 <dd>Weight for GDP-based adjustment. Higher = more reduction for wealthy countries.</dd>
 </dl>
@@ -2177,13 +2177,13 @@
 <dd>Ethical tradition grounding equal per capita entitlement to atmospheric space.</dd>
 <dd>See: <a href="../allocations/">Allocation Approaches</a></dd>
 <dt><strong>Equal per capita</strong></dt>
-<dd>Each person has equal entitlement to atmospheric space. In fair-shares, historical accountability is usually incorporated via <code>allocation_year</code> (past emissions subtracted), not via weight adjustments.</dd>
+<dd>Each person has equal entitlement to atmospheric space. In fair-shares, historical accountability is usually incorporated via <code>allocation_year</code> (cumulative accounting includes past emissions), not via weight adjustments.</dd>
 <dd>See: <a href="../allocations/">Allocation Approaches</a></dd>
 <dt><strong>Grandfathering</strong></dt>
 <dd>Allocating future entitlements based on current emission shares. Critiqued as lacking ethical basis. <code>per-capita-convergence</code> includes grandfathering elements.</dd>
 <dd>See: <a href="../allocations/#approaches-debated-in-the-literature">Allocation Approaches</a></dd>
 <dt><strong>Historical responsibility</strong></dt>
-<dd>Past emissions reduce remaining fair share. Primary mechanism: <code>allocation_year</code> (earlier = more subtracted). Secondary: <code>pre_allocation_responsibility_weight</code> in <code>*-adjusted</code> approaches.</dd>
+<dd>Past emissions reduce remaining fair share. Two distinct mechanisms: (1) early <code>allocation_year</code> — cumulative accounting that includes past emissions when determining the remaining budget; (2) <code>pre_allocation_responsibility_weight</code> in <code>*-adjusted</code> approaches — multiplicative rescaling of shares.</dd>
 <dd>See: <a href="../allocations/#historical-responsibility">Allocation Approaches</a></dd>
 <dt><strong>Negative Allocation</strong></dt>
 <dd>When a party's remaining fair share under a carbon budget is negative — its past emissions have already exceeded its equal per capita entitlement. Signals the need for highest possible domestic ambition, negative emissions targets (CDR), and international support. Negative allocations are a feature, not a bug: they communicate the scale of overshoot and the urgency of minimizing its duration and magnitude. [Pelz 2025b]</dd>
@@ -2206,7 +2206,7 @@
 <dt><strong>Bunker fuels</strong></dt>
 <dd>CO₂ emissions from international aviation and shipping. Included in global emission totals but excluded from national inventories (no country claims responsibility). Must be subtracted when converting global RCBs to country-allocatable budgets [Weber 2026].</dd>
 <dt><strong>ECPC</strong></dt>
-<dd>Equal Cumulative Per Capita. An allocation approach that distributes a carbon budget equally on a cumulative per-capita basis, with past emissions subtracted from future entitlements.</dd>
+<dd>Equal Cumulative Per Capita. An allocation approach that distributes a carbon budget equally on a cumulative per-capita basis, requiring consideration of cumulative emissions since the allocation year when determining the remaining budget.</dd>
 <dt><strong>GDP</strong></dt>
 <dd>Gross Domestic Product. Economic output measure used for capability adjustments.</dd>
 <dt><strong>GHG</strong></dt>
