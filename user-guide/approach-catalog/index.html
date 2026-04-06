@@ -1784,7 +1784,7 @@
 </ul>
 <hr />
 <h2 id="the-allocation-year-parameter">The Allocation Year Parameter<a class="headerlink" href="#the-allocation-year-parameter" title="Permanent link">&para;</a></h2>
-<p>When <code>allocation_year</code> (budget) or <code>first_allocation_year</code> (pathway) is set in the past, past emissions are subtracted from the budget before allocation. Countries have different <strong>remaining allocations</strong> depending on historical emissions.</p>
+<p>When <code>allocation_year</code> (budget) or <code>first_allocation_year</code> (pathway) is set in the past, the allocation considers cumulative population (and emissions, if using adjusted approaches) from that year onward when computing each country's share. fair-shares does not subtract past emissions natively — it computes shares of the total budget from the allocation year. If you want <strong>remaining allocations</strong> from the present, subtract each country's actual emissions between the allocation year and now from their allocated share as a post-processing step.</p>
 <p>The choice of start date is normatively significant: 1850 captures the full industrial era, 1950 tracks post-war growth, and 1990 corresponds to the IPCC First Assessment Report — widely treated in the equity literature as the "excusable ignorance" threshold, beyond which responsibility for emissions harm is difficult to deny [Baer 2013; Pelz 2025b].</p>
 <p>See <a href="../../science/allocations/#historical-responsibility">Allocation Approaches</a> for configuration details.</p>
 <hr />
@@ -1804,7 +1804,7 @@
 </tr>
 <tr>
 <td><strong><code>per-capita-adjusted-budget</code></strong></td>
-<td>Additional weighting by emissions history (historical responsibility) and GDP (ability to pay)</td>
+<td>Additional weighting by pre-allocation responsibility (per-capita emissions rescaling) and capability (GDP)</td>
 </tr>
 <tr>
 <td><strong><code>per-capita-adjusted-gini-budget</code></strong></td>
@@ -1816,7 +1816,7 @@
 <h2 id="pathway-approaches">Pathway Approaches<a class="headerlink" href="#pathway-approaches" title="Permanent link">&para;</a></h2>
 <p>Allocate emissions over multiple years, producing annual shares.</p>
 <h3 id="equal-per-capita-family">Equal Per Capita Family<a class="headerlink" href="#equal-per-capita-family" title="Permanent link">&para;</a></h3>
-<p>These approaches implement Equal Cumulative Per Capita (ECPC) allocation when an <code>allocation_year</code> in the past is used, ensuring historical emissions count against each country's share.</p>
+<p>These approaches implement Equal Cumulative Per Capita (ECPC) allocation. When <code>allocation_year</code> is set in the past, cumulative population from that year determines each country's share of the total budget.</p>
 <table>
 <thead>
 <tr>
@@ -1831,7 +1831,7 @@
 </tr>
 <tr>
 <td><strong><code>per-capita-adjusted</code></strong></td>
-<td>Additional weighting by emissions history (historical responsibility) and GDP (ability to pay)</td>
+<td>Additional weighting by pre-allocation responsibility (per-capita emissions rescaling) and capability (GDP)</td>
 </tr>
 <tr>
 <td><strong><code>per-capita-adjusted-gini</code></strong></td>
@@ -1859,7 +1859,7 @@
 </tr>
 <tr>
 <td><strong><code>cumulative-per-capita-convergence-adjusted</code></strong></td>
-<td>Additional weighting by emissions history and GDP</td>
+<td>Additional weighting by pre-allocation responsibility (per-capita emissions rescaling) and capability (GDP)</td>
 </tr>
 <tr>
 <td><strong><code>cumulative-per-capita-convergence-gini-adjusted</code></strong></td>
@@ -1882,12 +1882,16 @@
 <td>Budget vs Pathway</td>
 </tr>
 <tr>
-<td>Account for history (historical responsibility)?</td>
-<td>Set early <code>allocation_year</code></td>
+<td>Account for history via cumulative accounting?</td>
+<td>Set early <code>allocation_year</code> — cumulative population from that year determines shares</td>
 </tr>
 <tr>
-<td>Account for capability (ability to pay)?</td>
-<td>Use <code>-adjusted</code> variants</td>
+<td>Account for history via pre-allocation rescaling?</td>
+<td>Use <code>-adjusted</code> variants with <code>pre_allocation_responsibility_weight</code> — multiplicative rescaling by per-capita emissions in a historical window</td>
+</tr>
+<tr>
+<td>Account for capability?</td>
+<td>Use <code>-adjusted</code> variants with <code>capability_weight</code></td>
 </tr>
 <tr>
 <td>Account for within-country inequality?</td>

@@ -1362,9 +1362,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#responsibility-parameters" class="md-nav__link">
+  <a href="#pre-allocation-responsibility-parameters" class="md-nav__link">
     <span class="md-ellipsis">
-      Responsibility Parameters
+      Pre-allocation Responsibility Parameters
     </span>
   </a>
   
@@ -1383,6 +1383,24 @@
   <a href="#inequality-parameters" class="md-nav__link">
     <span class="md-ellipsis">
       Inequality Parameters
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#discounting-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Discounting Parameters
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#convergence-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Convergence Parameters
     </span>
   </a>
   
@@ -1854,9 +1872,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#responsibility-parameters" class="md-nav__link">
+  <a href="#pre-allocation-responsibility-parameters" class="md-nav__link">
     <span class="md-ellipsis">
-      Responsibility Parameters
+      Pre-allocation Responsibility Parameters
     </span>
   </a>
   
@@ -1875,6 +1893,24 @@
   <a href="#inequality-parameters" class="md-nav__link">
     <span class="md-ellipsis">
       Inequality Parameters
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#discounting-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Discounting Parameters
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#convergence-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Convergence Parameters
     </span>
   </a>
   
@@ -2032,7 +2068,7 @@
 <dt><strong><code>equal-per-capita</code></strong></dt>
 <dd>Annual population-proportional shares. Historical accountability via <code>first_allocation_year</code>.</dd>
 <dt><strong><code>per-capita-adjusted</code></strong></dt>
-<dd>Annual shares with responsibility/capability adjustments. CBDR-RC.</dd>
+<dd>Annual shares with pre-allocation responsibility/capability adjustments. CBDR-RC.</dd>
 <dt><strong><code>per-capita-adjusted-gini</code></strong></dt>
 <dd>Annual shares with Gini adjustment. Subsistence protection.</dd>
 </dl>
@@ -2043,7 +2079,7 @@
 <dt><strong><code>cumulative-per-capita-convergence</code></strong></dt>
 <dd>Budget-preserving convergence. Distributes cumulative per capita shares over time. <strong>Fair share approach.</strong></dd>
 <dt><strong><code>cumulative-per-capita-convergence-adjusted</code></strong> / <strong><code>-gini-adjusted</code></strong></dt>
-<dd>Convergence with responsibility/capability/Gini adjustments.</dd>
+<dd>Convergence with pre-allocation responsibility/capability/Gini adjustments.</dd>
 </dl>
 <p>See: <a href="../../api/allocations/budgets/">API Reference</a> · <a href="../principle-to-code/">From Principle to Code</a></p>
 <hr />
@@ -2063,21 +2099,22 @@
 </dl>
 <h3 id="adjustment-weights">Adjustment Weights<a class="headerlink" href="#adjustment-weights" title="Permanent link">&para;</a></h3>
 <p>Constraint: <code>pre_allocation_responsibility_weight + capability_weight ≤ 1.0</code></p>
+<p>Only the <strong>ratio</strong> between the two weights matters -- they are normalized by their sum before use. <code>(0.3, 0.7)</code> and <code>(0.15, 0.35)</code> produce identical results. When one weight is 0, the other is the sole adjustment regardless of its specific value -- <code>(0.0, 0.3)</code> is identical to <code>(0.0, 1.0)</code>.</p>
 <dl>
 <dt><strong><code>pre_allocation_responsibility_weight</code></strong> (type: <code>float</code>, default: <code>0.0</code>)</dt>
-<dd>Weight for relative per-capita rescaling based on emissions in [<code>pre_allocation_responsibility_year</code>, <code>allocation_year</code>). Higher = more reduction for countries with high per-capita emissions in that window. Separate from the cumulative accounting done by early <code>allocation_year</code>. Always produces positive allocations if <code>allocation_year</code> is the present.</dd>
+<dd>Weight for relative per-capita rescaling based on emissions in [<code>pre_allocation_responsibility_year</code>, <code>allocation_year</code>). Higher relative to <code>capability_weight</code> = more reduction for countries with high per-capita emissions in that window. Separate from the cumulative accounting done by early <code>allocation_year</code>. Always produces positive allocations if <code>allocation_year</code> is the present.</dd>
 <dt><strong><code>capability_weight</code></strong> (type: <code>float</code>, default: <code>0.0</code>)</dt>
-<dd>Weight for GDP-based adjustment. Higher = more reduction for wealthy countries.</dd>
+<dd>Weight for GDP-based adjustment (applies from allocation year onwards). Higher relative to <code>pre_allocation_responsibility_weight</code> = more reduction for wealthy countries. Note the temporal asymmetry: pre-allocation responsibility looks backward from the allocation year, while capability looks forward from it.</dd>
 </dl>
-<h3 id="responsibility-parameters">Responsibility Parameters<a class="headerlink" href="#responsibility-parameters" title="Permanent link">&para;</a></h3>
+<h3 id="pre-allocation-responsibility-parameters">Pre-allocation Responsibility Parameters<a class="headerlink" href="#pre-allocation-responsibility-parameters" title="Permanent link">&para;</a></h3>
 <dl>
 <dt><strong><code>pre_allocation_responsibility_year</code></strong> (type: <code>int</code>, default: <code>1990</code>)</dt>
 <dd>Start year for cumulative emissions in the pre-allocation responsibility window. Must be strictly less than <code>allocation_year</code> for the adjustment to have effect — when equal, the window is empty.</dd>
-<dt><strong><code>responsibility_per_capita</code></strong> (type: <code>bool</code>, default: <code>True</code>)</dt>
-<dd>Per capita (True) or absolute (False) emissions for responsibility calculation.</dd>
-<dt><strong><code>responsibility_exponent</code></strong> (type: <code>float</code>, default: <code>1.0</code>)</dt>
-<dd>Exponent for responsibility adjustment. &gt;1.0 increases non-linearity.</dd>
-<dt><strong><code>responsibility_functional_form</code></strong> (type: <code>str</code>, default: <code>"asinh"</code>)</dt>
+<dt><strong><code>pre_allocation_responsibility_per_capita</code></strong> (type: <code>bool</code>, default: <code>True</code>)</dt>
+<dd>Per capita (True) or absolute (False) emissions for pre-allocation responsibility calculation.</dd>
+<dt><strong><code>pre_allocation_responsibility_exponent</code></strong> (type: <code>float</code>, default: <code>1.0</code>)</dt>
+<dd>Exponent for pre-allocation responsibility adjustment. &gt;1.0 increases non-linearity.</dd>
+<dt><strong><code>pre_allocation_responsibility_functional_form</code></strong> (type: <code>str</code>, default: <code>"asinh"</code>)</dt>
 <dd>Functional form: <code>"asinh"</code> or <code>"power"</code>.</dd>
 </dl>
 <h3 id="capability-parameters">Capability Parameters<a class="headerlink" href="#capability-parameters" title="Permanent link">&para;</a></h3>
@@ -2096,10 +2133,26 @@
 <dt><strong><code>max_gini_adjustment</code></strong> (type: <code>float</code>, default: <code>0.8</code>)</dt>
 <dd>Maximum Gini-based adjustment magnitude.</dd>
 </dl>
+<h3 id="discounting-parameters">Discounting Parameters<a class="headerlink" href="#discounting-parameters" title="Permanent link">&para;</a></h3>
+<dl>
+<dt><strong><code>historical_discount_rate</code></strong> (type: <code>float</code>, default: <code>0.0</code>)</dt>
+<dd>Weights earlier historical emissions less when computing pre-allocation responsibility adjustments. <code>0.0</code> treats all years equally. Available on <code>*-adjusted</code> functions only. See <a href="../parameter-effects/#historical_discount_rate">Parameter Effects</a>.</dd>
+</dl>
+<h3 id="convergence-parameters">Convergence Parameters<a class="headerlink" href="#convergence-parameters" title="Permanent link">&para;</a></h3>
+<dl>
+<dt><strong><code>convergence_method</code></strong> (type: <code>str</code>, default: <code>"minimum-speed"</code>)</dt>
+<dd>Solver for convergence pathway. <code>"minimum-speed"</code> finds the minimum exponential speed satisfying cumulative constraints. <code>"sine-deviation"</code> uses iterative sine-shaped deviation from a PCC baseline (requires <code>convergence_year</code>). Convergence approaches only.</dd>
+<dt><strong><code>max_convergence_speed</code></strong> (type: <code>float</code>, default: <code>0.9</code>)</dt>
+<dd>Upper bound on exponential convergence speed. Lower values force slower transitions but may cause infeasibility. Convergence approaches only.</dd>
+<dt><strong><code>historical_start_year</code></strong> (type: <code>int | None</code>, default: <code>None</code>)</dt>
+<dd>Extends cumulative population window backward for convergence target shares. When set, cumulative population is summed from this year instead of <code>first_allocation_year</code>. A population entitlement parameter -- does not affect responsibility adjustments or emissions accounting. Convergence approaches only. See <a href="../parameter-effects/#historical_start_year-convergence-only">Parameter Effects</a>.</dd>
+<dt><strong><code>strict</code></strong> (type: <code>bool</code>, default: <code>True</code>)</dt>
+<dd>Controls behavior on infeasible convergence targets. <code>True</code> raises an error; <code>False</code> clips infeasible long-run shares and reports per-country deviation ratios. Convergence approaches only. See <a href="../parameter-effects/#strict-convergence-only">Parameter Effects</a>.</dd>
+</dl>
 <h3 id="constraint-parameters">Constraint Parameters<a class="headerlink" href="#constraint-parameters" title="Permanent link">&para;</a></h3>
 <dl>
 <dt><strong><code>max_deviation_sigma</code></strong> (type: <code>float | None</code>, default: <code>2.0</code>)</dt>
-<dd>Outlier constraint (standard deviations from mean).</dd>
+<dd>Outlier constraint (standard deviations from mean). Limits how far any country's adjusted allocation can deviate from equal per capita. Only relevant when applying scaling adjustments.</dd>
 <dt><strong><code>preserve_allocation_year_shares</code></strong> / <strong><code>preserve_first_allocation_year_shares</code></strong> (type: <code>bool</code>, default: <code>False</code>)</dt>
 <dd>Fix population shares at allocation year rather than recalculating dynamically.</dd>
 </dl>

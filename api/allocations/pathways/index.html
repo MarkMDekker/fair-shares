@@ -2118,7 +2118,7 @@ equity analysis.</p>
 
 <details class="see-also" open>
   <summary>See Also</summary>
-  <p>per_capita_adjusted : With responsibility/capability adjustments
+  <p>per_capita_adjusted : With pre-allocation responsibility/capability adjustments
 per_capita_adjusted_gini : With Gini-adjusted GDP</p>
 </details>
 
@@ -2146,9 +2146,9 @@ per_capita_adjusted_gini : With Gini-adjusted GDP</p>
 </span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="n">pre_allocation_responsibility_weight</span><span class="p">:</span> <span class="n"><span title="float">float</span></span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
 </span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="n">capability_weight</span><span class="p">:</span> <span class="n"><span title="float">float</span></span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
 </span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="n">pre_allocation_responsibility_year</span><span class="p">:</span> <span class="n"><span title="int">int</span></span> <span class="o">=</span> <span class="mi">1990</span><span class="p">,</span>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    <span class="n">responsibility_per_capita</span><span class="p">:</span> <span class="n"><span title="bool">bool</span></span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    <span class="n">responsibility_exponent</span><span class="p">:</span> <span class="n"><span title="float">float</span></span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    <span class="n">responsibility_functional_form</span><span class="p">:</span> <span class="n"><span title="str">str</span></span> <span class="o">=</span> <span class="s2">&quot;asinh&quot;</span><span class="p">,</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    <span class="n">pre_allocation_responsibility_per_capita</span><span class="p">:</span> <span class="n"><span title="bool">bool</span></span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    <span class="n">pre_allocation_responsibility_exponent</span><span class="p">:</span> <span class="n"><span title="float">float</span></span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    <span class="n">pre_allocation_responsibility_functional_form</span><span class="p">:</span> <span class="n"><span title="str">str</span></span> <span class="o">=</span> <span class="s2">&quot;asinh&quot;</span><span class="p">,</span>
 </span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    <span class="n">capability_per_capita</span><span class="p">:</span> <span class="n"><span title="bool">bool</span></span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 </span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>    <span class="n">capability_exponent</span><span class="p">:</span> <span class="n"><span title="float">float</span></span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
 </span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>    <span class="n">capability_functional_form</span><span class="p">:</span> <span class="n"><span title="str">str</span></span> <span class="o">=</span> <span class="s2">&quot;asinh&quot;</span><span class="p">,</span>
@@ -2168,7 +2168,7 @@ per_capita_adjusted_gini : With Gini-adjusted GDP</p>
 
     <div class="doc doc-contents first">
 
-        <p>Per capita pathway allocation with responsibility and capability adjustments.</p>
+        <p>Per capita pathway allocation with pre-allocation responsibility and capability adjustments.</p>
 <p>Extends equal per capita by incorporating:</p>
 <ul>
 <li>Responsibility adjustment: Countries with higher historical emissions
@@ -2202,7 +2202,7 @@ P_{\text{adj}}(g, t) = P(g, t) \times R(g) \times C(g, t)
 <p><strong>Responsibility Adjustment</strong></p>
 <p>The responsibility metric is based on cumulative historical emissions
 from pre_allocation_responsibility_year to first_allocation_year.</p>
-<p>For per capita responsibility (:code:<code>responsibility_per_capita=True</code>, default):</p>
+<p>For per capita responsibility (:code:<code>pre_allocation_responsibility_per_capita=True</code>, default):</p>
 <div class="arithmatex">\[
 R(g) = \left(\frac{\sum_{t=t_h}^{t_a} E(g, t)}{\sum_{t=t_h}^{t_a} P(g, t)}\right)^{-w_r \times e_r}
 \]</div>
@@ -2215,7 +2215,7 @@ R(g) = \left(\frac{\sum_{t=t_h}^{t_a} E(g, t)}{\sum_{t=t_h}^{t_a} P(g, t)}\right
 <li><span class="arithmatex">\(w_r\)</span>: Normalized responsibility weight</li>
 <li><span class="arithmatex">\(e_r\)</span>: Responsibility exponent</li>
 </ul>
-<p>For absolute responsibility (:code:<code>responsibility_per_capita=False</code>):</p>
+<p>For absolute responsibility (:code:<code>pre_allocation_responsibility_per_capita=False</code>):</p>
 <div class="arithmatex">\[
 R(g) = \left(\sum_{t=t_h}^{t_a} E(g, t)\right)^{-w_r \times e_r}
 \]</div>
@@ -2396,7 +2396,7 @@ first_allocation_year]. Default: 1990</p>
           </tr>
           <tr class="doc-section-item">
             <td>
-                <code>responsibility_per_capita</code>
+                <code>pre_allocation_responsibility_per_capita</code>
             </td>
             <td>
                   <code><span title="bool">bool</span></code>
@@ -2412,7 +2412,7 @@ first_allocation_year]. Default: 1990</p>
           </tr>
           <tr class="doc-section-item">
             <td>
-                <code>responsibility_exponent</code>
+                <code>pre_allocation_responsibility_exponent</code>
             </td>
             <td>
                   <code><span title="float">float</span></code>
@@ -2428,7 +2428,7 @@ first_allocation_year]. Default: 1990</p>
           </tr>
           <tr class="doc-section-item">
             <td>
-                <code>responsibility_functional_form</code>
+                <code>pre_allocation_responsibility_functional_form</code>
             </td>
             <td>
                   <code><span title="str">str</span></code>
@@ -2695,9 +2695,9 @@ per_capita_adjusted_gini : With Gini-adjusted GDP</p>
 </span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="n">pre_allocation_responsibility_weight</span><span class="p">:</span> <span class="n"><span title="float">float</span></span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
 </span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="n">capability_weight</span><span class="p">:</span> <span class="n"><span title="float">float</span></span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
 </span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    <span class="n">pre_allocation_responsibility_year</span><span class="p">:</span> <span class="n"><span title="int">int</span></span> <span class="o">=</span> <span class="mi">1990</span><span class="p">,</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    <span class="n">responsibility_per_capita</span><span class="p">:</span> <span class="n"><span title="bool">bool</span></span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    <span class="n">responsibility_exponent</span><span class="p">:</span> <span class="n"><span title="float">float</span></span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    <span class="n">responsibility_functional_form</span><span class="p">:</span> <span class="n"><span title="str">str</span></span> <span class="o">=</span> <span class="s2">&quot;asinh&quot;</span><span class="p">,</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    <span class="n">pre_allocation_responsibility_per_capita</span><span class="p">:</span> <span class="n"><span title="bool">bool</span></span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    <span class="n">pre_allocation_responsibility_exponent</span><span class="p">:</span> <span class="n"><span title="float">float</span></span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    <span class="n">pre_allocation_responsibility_functional_form</span><span class="p">:</span> <span class="n"><span title="str">str</span></span> <span class="o">=</span> <span class="s2">&quot;asinh&quot;</span><span class="p">,</span>
 </span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>    <span class="n">capability_per_capita</span><span class="p">:</span> <span class="n"><span title="bool">bool</span></span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 </span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>    <span class="n">capability_exponent</span><span class="p">:</span> <span class="n"><span title="float">float</span></span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
 </span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>    <span class="n">capability_functional_form</span><span class="p">:</span> <span class="n"><span title="str">str</span></span> <span class="o">=</span> <span class="s2">&quot;asinh&quot;</span><span class="p">,</span>
@@ -2719,7 +2719,7 @@ per_capita_adjusted_gini : With Gini-adjusted GDP</p>
 
     <div class="doc doc-contents first">
 
-        <p>Per capita pathway allocation with responsibility, capability, and Gini adjustments.</p>
+        <p>Per capita pathway allocation with pre-allocation responsibility, capability, and Gini adjustments.</p>
 <p>The most comprehensive variant, incorporating:</p>
 <ul>
 <li>Responsibility adjustment: Countries with higher historical emissions
@@ -2735,11 +2735,14 @@ per_capita_adjusted_gini : With Gini-adjusted GDP</p>
   <p>Similar to :func:<code>per_capita_adjusted</code>, but capability uses Gini-adjusted GDP
 to account for income inequality within countries.</p>
 <p><strong>Gini Adjustment Process</strong></p>
-<p>GDP is adjusted using the Greenhouse Development Rights (GDR) framework:
-only income above a development threshold counts as capability. When
-combined with the income floor, higher inequality means more national
-income sits above the threshold — increasing measured capability.
-See :func:<code>~fair_shares.library.utils.math.allocation.calculate_gini_adjusted_gdp</code>
+<p>GDP is adjusted using an interpretation of the Greenhouse Development
+Rights (GDR) framework's capability metric (note: GDR was designed for
+burden-sharing; fair-shares adapts its capability calculation for
+entitlement allocation). Only income above a development threshold counts
+as capability. When combined with the income floor, higher inequality
+means more national income sits above the threshold — increasing measured
+capability. See
+:func:<code>~fair_shares.library.utils.math.allocation.calculate_gini_adjusted_gdp</code>
 for the full mathematical derivation.</p>
 <p><strong>Capability Adjustment with Gini-Adjusted GDP</strong></p>
 <p>For per capita capability (:code:<code>capability_per_capita=True</code>, default):</p>
@@ -2932,7 +2935,7 @@ pre_allocation_responsibility_weight + capability_weight &lt;= 1.0</p>
           </tr>
           <tr class="doc-section-item">
             <td>
-                <code>responsibility_per_capita</code>
+                <code>pre_allocation_responsibility_per_capita</code>
             </td>
             <td>
                   <code><span title="bool">bool</span></code>
@@ -2948,7 +2951,7 @@ pre_allocation_responsibility_weight + capability_weight &lt;= 1.0</p>
           </tr>
           <tr class="doc-section-item">
             <td>
-                <code>responsibility_exponent</code>
+                <code>pre_allocation_responsibility_exponent</code>
             </td>
             <td>
                   <code><span title="float">float</span></code>
@@ -2964,7 +2967,7 @@ pre_allocation_responsibility_weight + capability_weight &lt;= 1.0</p>
           </tr>
           <tr class="doc-section-item">
             <td>
-                <code>responsibility_functional_form</code>
+                <code>pre_allocation_responsibility_functional_form</code>
             </td>
             <td>
                   <code><span title="str">str</span></code>
@@ -3020,9 +3023,10 @@ pre_allocation_responsibility_weight + capability_weight &lt;= 1.0</p>
             <td>
               <div class="doc-md-description">
                 <p>Income floor for Gini adjustment (in USD PPP per capita). Income below
-this threshold is excluded from capability calculations, implementing the
-Greenhouse Development Rights development threshold: individuals below this
-income level are exempt from climate obligations [Baer 2013]. Default: 7500.0
+this threshold is excluded from capability calculations, adapted from the
+Greenhouse Development Rights (GDR) development threshold [Baer 2013]
+(GDR was designed for burden-sharing; fair-shares uses its capability
+metric in an entitlement allocation context). Default: 7500.0
 See docs/science/parameter-effects.md#income_floor for real allocation
 examples showing how this affects country shares</p>
               </div>
@@ -3185,7 +3189,8 @@ natural CO2 removal rationale (Dekker Eq. 5). Default: 0.0 (no discounting).</p>
 <details class="note" open>
   <summary>Notes</summary>
   <p>This approach extends capability-based allocation by incorporating intra-national
-inequality via the GDR development threshold framework. Only income above the
+inequality via the GDR development threshold (adapted for entitlement
+allocation from GDR's burden-sharing context). Only income above the
 development threshold counts toward capability. When combined with the income
 floor, higher inequality means more national income sits above the threshold.
 See :func:<code>~fair_shares.library.utils.math.allocation.calculate_gini_adjusted_gdp</code>
@@ -3543,7 +3548,7 @@ emission shares to equal per capita shares over a 30-year period.</p>
 
 <details class="see-also" open>
   <summary>See Also</summary>
-  <p>per_capita_adjusted : Equal per capita with responsibility/capability adjustments
+  <p>per_capita_adjusted : Equal per capita with pre-allocation responsibility/capability adjustments
 cumulative_per_capita_convergence : Convergence accounting for cumulative emissions</p>
 </details>
 
@@ -3936,7 +3941,7 @@ Default: None.</p>
 <details class="see-also" open>
   <summary>See Also</summary>
   <p>cumulative_per_capita_convergence_adjusted : With
-    responsibility/capability adjustments
+    pre-allocation responsibility/capability adjustments
 cumulative_per_capita_convergence_adjusted_gini : With Gini-adjusted GDP</p>
 </details>
 
@@ -4038,9 +4043,9 @@ controls whether an error is raised if exact targets cannot be achieved.</p>
 </span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="n">pre_allocation_responsibility_weight</span><span class="p">:</span> <span class="n"><span title="float">float</span></span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
 </span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="n">capability_weight</span><span class="p">:</span> <span class="n"><span title="float">float</span></span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
 </span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="n">pre_allocation_responsibility_year</span><span class="p">:</span> <span class="n"><span title="int">int</span></span> <span class="o">=</span> <span class="mi">1990</span><span class="p">,</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="n">responsibility_per_capita</span><span class="p">:</span> <span class="n"><span title="bool">bool</span></span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    <span class="n">responsibility_exponent</span><span class="p">:</span> <span class="n"><span title="float">float</span></span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    <span class="n">responsibility_functional_form</span><span class="p">:</span> <span class="n"><span title="str">str</span></span> <span class="o">=</span> <span class="s2">&quot;asinh&quot;</span><span class="p">,</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="n">pre_allocation_responsibility_per_capita</span><span class="p">:</span> <span class="n"><span title="bool">bool</span></span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    <span class="n">pre_allocation_responsibility_exponent</span><span class="p">:</span> <span class="n"><span title="float">float</span></span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    <span class="n">pre_allocation_responsibility_functional_form</span><span class="p">:</span> <span class="n"><span title="str">str</span></span> <span class="o">=</span> <span class="s2">&quot;asinh&quot;</span><span class="p">,</span>
 </span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    <span class="n">capability_per_capita</span><span class="p">:</span> <span class="n"><span title="bool">bool</span></span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 </span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    <span class="n">capability_exponent</span><span class="p">:</span> <span class="n"><span title="float">float</span></span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
 </span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>    <span class="n">capability_functional_form</span><span class="p">:</span> <span class="n"><span title="str">str</span></span> <span class="o">=</span> <span class="s2">&quot;asinh&quot;</span><span class="p">,</span>
@@ -4064,7 +4069,7 @@ controls whether an error is raised if exact targets cannot be achieved.</p>
 
     <div class="doc doc-contents first">
 
-        <p>Cumulative per capita convergence with responsibility and capability adjustments.</p>
+        <p>Cumulative per capita convergence with pre-allocation responsibility and capability adjustments.</p>
 <p>Extends cumulative per capita convergence by incorporating:</p>
 <ul>
 <li>Responsibility adjustment: Countries with higher historical emissions
@@ -4108,7 +4113,7 @@ P_{\text{adj}}(g) = P_{\text{cum}}(g) \times R(g) \times C(g)
 <p><strong>Responsibility Adjustment</strong></p>
 <p>The responsibility metric is based on cumulative historical emissions
 from pre_allocation_responsibility_year to first_allocation_year.</p>
-<p>For per capita responsibility (:code:<code>responsibility_per_capita=True</code>, default):</p>
+<p>For per capita responsibility (:code:<code>pre_allocation_responsibility_per_capita=True</code>, default):</p>
 <div class="arithmatex">\[
 R(g) = \left(\frac{\sum_{t=t_h}^{t_a} E(g, t)}{\sum_{t=t_h}^{t_a} P(g, t)}\right)^{-w_r \times e_r}
 \]</div>
@@ -4121,7 +4126,7 @@ R(g) = \left(\frac{\sum_{t=t_h}^{t_a} E(g, t)}{\sum_{t=t_h}^{t_a} P(g, t)}\right
 <li><span class="arithmatex">\(w_r\)</span>: Normalized responsibility weight</li>
 <li><span class="arithmatex">\(e_r\)</span>: Responsibility exponent</li>
 </ul>
-<p>For absolute responsibility (:code:<code>responsibility_per_capita=False</code>):</p>
+<p>For absolute responsibility (:code:<code>pre_allocation_responsibility_per_capita=False</code>):</p>
 <div class="arithmatex">\[
 R(g) = \left(\sum_{t=t_h}^{t_a} E(g, t)\right)^{-w_r \times e_r}
 \]</div>
@@ -4283,7 +4288,9 @@ capability_weight &lt;= 1.0</p>
             <td>
               <div class="doc-md-description">
                 <p>Weight for capability adjustment (0-1). Higher GDP -&gt; smaller allocation.
-Requires gdp_ts. Must satisfy: pre_allocation_responsibility_weight + capability_weight &lt;= 1.0</p>
+Applies from the first allocation year onwards (contrast with pre-allocation
+responsibility, which looks backward from it). Requires gdp_ts. Must satisfy:
+pre_allocation_responsibility_weight + capability_weight &lt;= 1.0</p>
               </div>
             </td>
             <td>
@@ -4310,7 +4317,7 @@ Default: 1990</p>
           </tr>
           <tr class="doc-section-item">
             <td>
-                <code>responsibility_per_capita</code>
+                <code>pre_allocation_responsibility_per_capita</code>
             </td>
             <td>
                   <code><span title="bool">bool</span></code>
@@ -4326,7 +4333,7 @@ Default: 1990</p>
           </tr>
           <tr class="doc-section-item">
             <td>
-                <code>responsibility_exponent</code>
+                <code>pre_allocation_responsibility_exponent</code>
             </td>
             <td>
                   <code><span title="float">float</span></code>
@@ -4342,7 +4349,7 @@ Default: 1990</p>
           </tr>
           <tr class="doc-section-item">
             <td>
-                <code>responsibility_functional_form</code>
+                <code>pre_allocation_responsibility_functional_form</code>
             </td>
             <td>
                   <code><span title="str">str</span></code>
@@ -4723,9 +4730,9 @@ Capabilities (CBDR-RC). Higher past emissions and higher GDP -&gt; smaller alloc
 </span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="n">pre_allocation_responsibility_weight</span><span class="p">:</span> <span class="n"><span title="float">float</span></span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
 </span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="n">capability_weight</span><span class="p">:</span> <span class="n"><span title="float">float</span></span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
 </span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="n">pre_allocation_responsibility_year</span><span class="p">:</span> <span class="n"><span title="int">int</span></span> <span class="o">=</span> <span class="mi">1990</span><span class="p">,</span>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    <span class="n">responsibility_per_capita</span><span class="p">:</span> <span class="n"><span title="bool">bool</span></span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    <span class="n">responsibility_exponent</span><span class="p">:</span> <span class="n"><span title="float">float</span></span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    <span class="n">responsibility_functional_form</span><span class="p">:</span> <span class="n"><span title="str">str</span></span> <span class="o">=</span> <span class="s2">&quot;asinh&quot;</span><span class="p">,</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    <span class="n">pre_allocation_responsibility_per_capita</span><span class="p">:</span> <span class="n"><span title="bool">bool</span></span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    <span class="n">pre_allocation_responsibility_exponent</span><span class="p">:</span> <span class="n"><span title="float">float</span></span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    <span class="n">pre_allocation_responsibility_functional_form</span><span class="p">:</span> <span class="n"><span title="str">str</span></span> <span class="o">=</span> <span class="s2">&quot;asinh&quot;</span><span class="p">,</span>
 </span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    <span class="n">capability_per_capita</span><span class="p">:</span> <span class="n"><span title="bool">bool</span></span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 </span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>    <span class="n">capability_exponent</span><span class="p">:</span> <span class="n"><span title="float">float</span></span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
 </span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>    <span class="n">capability_functional_form</span><span class="p">:</span> <span class="n"><span title="str">str</span></span> <span class="o">=</span> <span class="s2">&quot;asinh&quot;</span><span class="p">,</span>
@@ -4794,15 +4801,18 @@ P_{\text{adj}}(g) = P_{\text{cum}}(g) \times R(g) \times C_{\text{Gini}}(g)
 <li><span class="arithmatex">\(C_{\text{Gini}}(g)\)</span>: Gini-adjusted capability factor (equals 1.0 if not used)</li>
 </ul>
 <p><strong>Gini Adjustment Process</strong></p>
-<p>GDP is adjusted using the Greenhouse Development Rights (GDR) framework:
-only income above a development threshold counts as capability. When
-combined with the income floor, higher inequality means more national
-income sits above the threshold — increasing measured capability.
-See :func:<code>~fair_shares.library.utils.math.allocation.calculate_gini_adjusted_gdp</code>
+<p>GDP is adjusted using an interpretation of the Greenhouse Development
+Rights (GDR) framework's capability metric (note: GDR was designed for
+burden-sharing; fair-shares adapts its capability calculation for
+entitlement allocation). Only income above a development threshold counts
+as capability. When combined with the income floor, higher inequality
+means more national income sits above the threshold — increasing measured
+capability. See
+:func:<code>~fair_shares.library.utils.math.allocation.calculate_gini_adjusted_gdp</code>
 for the full mathematical derivation.</p>
 <p><strong>Responsibility Adjustment</strong></p>
 <p>Identical to adjusted convergence (see that function for details).</p>
-<p>For per capita responsibility (:code:<code>responsibility_per_capita=True</code>, default):</p>
+<p>For per capita responsibility (:code:<code>pre_allocation_responsibility_per_capita=True</code>, default):</p>
 <div class="arithmatex">\[
 R(g) = \left(\frac{\sum_{t=t_h}^{t_a} E(g, t)}{\sum_{t=t_h}^{t_a} P(g, t)}\right)^{-w_r \times e_r}
 \]</div>
@@ -4997,7 +5007,9 @@ capability_weight &lt;= 1.0</p>
             <td>
               <div class="doc-md-description">
                 <p>Weight for capability adjustment (0-1). Higher GDP -&gt; smaller allocation.
-Requires gdp_ts. Must satisfy: pre_allocation_responsibility_weight + capability_weight &lt;= 1.0</p>
+Applies from the first allocation year onwards (contrast with pre-allocation
+responsibility, which looks backward from it). Requires gdp_ts. Must satisfy:
+pre_allocation_responsibility_weight + capability_weight &lt;= 1.0</p>
               </div>
             </td>
             <td>
@@ -5024,7 +5036,7 @@ Default: 1990</p>
           </tr>
           <tr class="doc-section-item">
             <td>
-                <code>responsibility_per_capita</code>
+                <code>pre_allocation_responsibility_per_capita</code>
             </td>
             <td>
                   <code><span title="bool">bool</span></code>
@@ -5040,7 +5052,7 @@ Default: 1990</p>
           </tr>
           <tr class="doc-section-item">
             <td>
-                <code>responsibility_exponent</code>
+                <code>pre_allocation_responsibility_exponent</code>
             </td>
             <td>
                   <code><span title="float">float</span></code>
@@ -5056,7 +5068,7 @@ Default: 1990</p>
           </tr>
           <tr class="doc-section-item">
             <td>
-                <code>responsibility_functional_form</code>
+                <code>pre_allocation_responsibility_functional_form</code>
             </td>
             <td>
                   <code><span title="str">str</span></code>

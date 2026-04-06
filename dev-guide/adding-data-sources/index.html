@@ -1692,6 +1692,30 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Scenario Data and NGHGI Consistency">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#normalised-scenario-schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      Normalised scenario schema
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rcb-sources-and-all-ghg-pathway-dependency" class="md-nav__link">
+    <span class="md-ellipsis">
+      RCB Sources and All-GHG Pathway Dependency
+    </span>
+  </a>
+  
 </li>
       
         <li class="md-nav__item">
@@ -2003,6 +2027,30 @@
   <a href="#scenario-data-and-nghgi-consistency" class="md-nav__link">
     <span class="md-ellipsis">
       Scenario Data and NGHGI Consistency
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Scenario Data and NGHGI Consistency">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#normalised-scenario-schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      Normalised scenario schema
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rcb-sources-and-all-ghg-pathway-dependency" class="md-nav__link">
+    <span class="md-ellipsis">
+      RCB Sources and All-GHG Pathway Dependency
     </span>
   </a>
   
@@ -2352,6 +2400,34 @@ convention than PRIMAP/NGHGI, apply the necessary corrections in the
 preprocessing notebook (<code>104_data_preprocess_scenarios.py</code>) before
 the data enters the pipeline. Do not rely on downstream corrections — the
 allocation functions assume scenario data is already convention-consistent.</p>
+<h3 id="normalised-scenario-schema">Normalised scenario schema<a class="headerlink" href="#normalised-scenario-schema" title="Permanent link">&para;</a></h3>
+<p>The pipeline normalises all scenario data into a common schema with
+<code>climate-assessment</code> (temperature target) and <code>quantile</code> (probability
+percentile) fields. Each scenario source defines its own mapping into this
+schema. For example, AR6 maps C1 to <code>climate-assessment="1.5C"</code>,
+<code>quantile=0.5</code>. All downstream code works with these normalised fields
+regardless of the upstream source.</p>
+<p>Any new data processing notebook that introduces a scenario source <strong>must</strong>
+output data with <code>climate-assessment</code> and <code>quantile</code> columns conforming to
+this schema. See notebook 104 for the AR6 reference implementation.</p>
+<hr />
+<h2 id="rcb-sources-and-all-ghg-pathway-dependency">RCB Sources and All-GHG Pathway Dependency<a class="headerlink" href="#rcb-sources-and-all-ghg-pathway-dependency" title="Permanent link">&para;</a></h2>
+<p>When adding or updating remaining carbon budget (RCB) data, keep in mind
+that all-GHG allocations using RCBs require a <strong>decomposition</strong> into CO₂
+(allocated via the budget) and non-CO₂ (allocated via scenario pathways).
+This means:</p>
+<ul>
+<li>New RCBs must have <strong>matching scenario pathways</strong> available in the active
+  data source configuration. Without them the non-CO₂ leg has no data to
+  allocate from and <code>build_data_config()</code> will raise a <code>ConfigurationError</code>.</li>
+<li>The scenario pathways must cover the same climate assessments as the RCBs
+  (e.g., 1.5 °C / 2 °C categories).</li>
+<li>Auto-derivation of pathway approaches for non-CO₂ only works when pathway
+  data is present in the active source set.</li>
+</ul>
+<p>See <a href="../../science/other-operations/#all-ghg-decomposition">Other Operations: Decomposition</a>
+for the science and <a href="../architecture-walkthrough/#composite-category-decomposition">Architecture Walkthrough: Composite Category Decomposition</a>
+for the code path.</p>
 <hr />
 <h2 id="normative-implications">Normative Implications<a class="headerlink" href="#normative-implications" title="Permanent link">&para;</a></h2>
 <p>Some data source choices carry normative weight. Contributors should document the rationale for their data source choices. For example, some decision points include:</p>

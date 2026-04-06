@@ -1960,7 +1960,7 @@
 </span></code></pre></div>
 <p><strong>What this reflects:</strong></p>
 <ul>
-<li>No responsibility/capability weights → Historical emissions and wealth don't affect allocation</li>
+<li>No pre-allocation responsibility/capability weights → Historical emissions and wealth don't affect allocation</li>
 <li><code>allocation_year=2020</code> → Forward-looking; no cumulative accounting of past emissions in the budget</li>
 <li><code>preserve_allocation_year_shares=False</code> → Shares adjust with population changes</li>
 </ul>
@@ -2011,10 +2011,10 @@
 <p><strong>What this reflects:</strong></p>
 <ul>
 <li><code>allocation_year=2020</code> → Forward-looking; no cumulative accounting of past emissions in the budget</li>
-<li><code>capability_weight=1.0</code> → GDP fully scales per-capita shares</li>
+<li><code>capability_weight=1.0</code> → GDP fully scales per-capita shares (from allocation year onwards)</li>
 <li><code>pre_allocation_responsibility_weight=0.0</code> → Historical emissions do not affect allocation</li>
 </ul>
-<p><strong>Distributional outcome:</strong> High-GDP countries (US, Germany) receive smaller allocations than pure equal per capita would give them. Low-GDP countries receive larger allocations. The adjustment is based on current economic capacity, not historical emissions.</p>
+<p><strong>Distributional outcome:</strong> High-GDP countries (US, Germany) receive smaller allocations than pure equal per capita would give them. Low-GDP countries receive larger allocations. The adjustment is based on economic capacity from the allocation year onwards, not historical emissions.</p>
 <p><strong>Underlying reasoning:</strong> The ability-to-pay principle. Countries with greater economic resources should lead mitigation because they can afford to.</p>
 <hr />
 <h3 id="example-4-historical-responsibility-via-rescaling">Example 4: Historical Responsibility via Rescaling<a class="headerlink" href="#example-4-historical-responsibility-via-rescaling" title="Permanent link">&para;</a></h3>
@@ -2060,7 +2060,7 @@
 <p><strong>What this reflects:</strong></p>
 <ul>
 <li><code>first_allocation_year=2025</code> → Start pathway allocations from 2025</li>
-<li><code>capability_weight=0.5</code>, <code>pre_allocation_responsibility_weight=0.5</code> → Balanced CBDR-RC in each year</li>
+<li><code>capability_weight=0.5</code>, <code>pre_allocation_responsibility_weight=0.5</code> → Balanced CBDR-RC in each year. Capability adjustments apply from the first allocation year onwards; pre-allocation responsibility looks backward from it — this temporal asymmetry is inherent to CBDR-RC.</li>
 <li>No convergence → Countries immediately receive fair shares in 2025, adjusted each year</li>
 <li>Immediate allocation → No grandfathering, high emitters get reduced shares immediately</li>
 </ul>
@@ -2071,31 +2071,37 @@
 
 <hr />
 <h3 id="example-6-convergence-with-capability-adjustment">Example 6: Convergence with Capability Adjustment<a class="headerlink" href="#example-6-convergence-with-capability-adjustment" title="Permanent link">&para;</a></h3>
-<p><strong>Value judgment:</strong> Immediate transition to equal per capita is economically disruptive and politically infeasible. A gradual pathway that converges to fair shares over time is necessary for transition planning, but economic capability should determine how fast countries converge and how much they pay for international support.</p>
+<p><strong>Value judgment:</strong> Immediate transition to equal per capita is economically disruptive and politically infeasible. A gradual pathway that converges to fair shares over time is necessary for transition planning, but economic capability should determine how fast countries converge and how much they pay for international support. Furthermore, cumulative per-capita entitlements should reflect historical population patterns — countries that had large populations during the period of industrialisation had more people with a claim to equal atmospheric space.</p>
 <p><strong>Configuration:</strong></p>
 <div class="language-python highlight"><span class="filename">Python</span><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">allocations</span> <span class="o">=</span> <span class="p">{</span>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="s2">&quot;cumulative-per-capita-convergence-adjusted&quot;</span><span class="p">:</span> <span class="p">[</span>
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>        <span class="p">{</span>
 </span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>            <span class="s2">&quot;first_allocation_year&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2025</span><span class="p">],</span>
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>            <span class="s2">&quot;capability_weight&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.3</span><span class="p">],</span>
-</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>            <span class="s2">&quot;pre_allocation_responsibility_weight&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]</span>
-</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>        <span class="p">}</span>
-</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>    <span class="p">]</span>
-</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="p">}</span>
-</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="c1"># Run through allocation pipeline with AR6 scenario data configured in conf/</span>
-</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="c1"># Note: Use cumulative-per-capita-convergence-adjusted (not base convergence)</span>
-</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="c1"># for capability/responsibility weighting</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>            <span class="s2">&quot;capability_weight&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">],</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>            <span class="s2">&quot;pre_allocation_responsibility_weight&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">],</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>            <span class="s2">&quot;pre_allocation_responsibility_year&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1990</span><span class="p">],</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>            <span class="s2">&quot;historical_start_year&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1950</span><span class="p">],</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>            <span class="s2">&quot;strict&quot;</span><span class="p">:</span> <span class="p">[</span><span class="kc">False</span><span class="p">],</span>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>        <span class="p">}</span>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>    <span class="p">]</span>
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="p">}</span>
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="c1"># Run through allocation pipeline with AR6 scenario data configured in conf/</span>
+</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="c1"># Note: Use cumulative-per-capita-convergence-adjusted (not base convergence)</span>
+</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="c1"># for pre-allocation responsibility/capability weighting</span>
 </span></code></pre></div>
 <p><strong>What this reflects:</strong></p>
 <ul>
 <li><code>first_allocation_year=2025</code> → Begin convergence pathway from 2025</li>
-<li><code>capability_weight=0.3</code> → GDP reduces allocation based on per-capita income</li>
-<li><code>pre_allocation_responsibility_weight=0.0</code> → Historical emissions don't affect pathway</li>
+<li><code>capability_weight=0.5</code>, <code>pre_allocation_responsibility_weight=0.5</code> → Equal weighting of capability (GDP, from first allocation year onwards) and historical responsibility (per-capita emissions, looking backward from it). These weights are relative — only the ratio matters. <code>(0.5, 0.5)</code> is identical to <code>(0.3, 0.3)</code> or <code>(1.0, 1.0)</code>. If one weight is 0, the other becomes the sole adjustment regardless of its value.</li>
+<li><code>pre_allocation_responsibility_year=1990</code> → Responsibility rescaling window covers 1990–2025</li>
+<li><code>historical_start_year=1950</code> → Cumulative population for target shares is summed from 1950, not 2025. Countries with large mid-20<sup>th</sup>-century populations (China, India) receive larger entitlements than they would under the default (forward-looking only)</li>
+<li><code>strict=False</code> → Accept approximate solutions if some countries' targets are mathematically infeasible. The solver reports per-country deviation ratios as warnings rather than raising an error. Use <code>strict=True</code> (default) when you need exact results and want to know immediately if a configuration is infeasible.</li>
 <li>Cumulative constraint → Total pathway emissions respect global budget</li>
 </ul>
-<p><strong>Distributional outcome:</strong> Countries transition from current emissions toward cumulative per capita targets while preserving cumulative shares. High-emission countries have downward trajectories; low-emission countries have upward trajectories. Starting from current emissions means high emitters receive higher near-term allocations, but cumulative totals are budget-preserving (unlike <code>per-capita-convergence</code> which is NOT budget-preserving).</p>
-<p><strong>Underlying reasoning:</strong> Cumulative per capita shares are the fair target, but immediate redistribution is impractical. Transition pathways balance long-term equity with near-term feasibility while preserving cumulative budgets.</p>
+<p><strong>Distributional outcome:</strong> Countries transition from current emissions toward cumulative per capita targets while preserving cumulative shares. The balanced responsibility/capability weighting means both historical per-capita emissions (1990–2025) and GDP per capita reduce allocations for developed countries, while the <code>historical_start_year=1950</code> shifts target shares toward countries that were populous during industrialisation — India and China get larger targets, while countries whose populations grew recently (e.g., sub-Saharan Africa) receive relatively less than with the default. Starting from current emissions means high emitters receive higher near-term allocations, but cumulative totals are budget-preserving (unlike <code>per-capita-convergence</code> which is NOT budget-preserving).</p>
+<p><strong>Underlying reasoning:</strong> Cumulative per capita shares are the fair target, but immediate redistribution is impractical. Transition pathways balance long-term equity with near-term feasibility while preserving cumulative budgets. The balanced CBDR-RC weighting differentiates by both who emitted most and who can afford to act. Extending the population window to 1950 reflects the position that entitlements to the atmospheric commons should account for historical population patterns during the period when that commons was being filled [Dekker 2025; Van Den Berg 2020].</p>
 <p><strong>Contrast with immediate pathways:</strong> Cumulative per capita convergence creates gradual transitions from current emissions (preserving near-term inequality) while respecting cumulative budget constraints. Immediate pathways (Example 5) allocate fair shares from the start.</p>
+<p><strong>Note on <code>historical_start_year</code>:</strong> This parameter only affects the convergence target shares (cumulative population entitlement). It does not affect responsibility adjustments, capability weighting, or historical emissions discounting — those are independent mechanisms. Omitting <code>historical_start_year</code> (or setting it to None) uses <code>first_allocation_year</code> as the population window start, which is the default. See <a href="../allocations/#historical-start-year-convergence-only">Historical Start Year</a> for full details.</p>
 <hr />
 <h3 id="example-7-development-first-minimal-differentiation">Example 7: Development-First (Minimal Differentiation)<a class="headerlink" href="#example-7-development-first-minimal-differentiation" title="Permanent link">&para;</a></h3>
 <p><strong>Value judgment:</strong> Development rights are paramount. Countries should be allowed to reach development thresholds before facing mitigation burdens. Only income above subsistence counts toward capability, and historical emissions before widespread scientific consensus (1990) should not create obligations.</p>
@@ -2119,8 +2125,8 @@
 <ul>
 <li><code>allocation_year=1990</code> → Cumulative emissions since 1990 are considered when determining the remaining budget</li>
 <li><code>pre_allocation_responsibility_weight=0.2</code> + <code>pre_allocation_responsibility_year=1950</code> → Per-capita emissions from 1950-1989 rescale allocations (relative mechanism)</li>
-<li><code>capability_weight=0.8</code> → GDP-based capability dominates the adjustment</li>
-<li><code>income_floor=10000</code> → Higher than GDR threshold ($7,500/year 2010 PPP) — broader subsistence definition</li>
+<li><code>capability_weight=0.8</code> → GDP-based capability dominates the adjustment (applies from allocation year onwards)</li>
+<li><code>income_floor=10000</code> → Higher than GDR threshold ($7,500/year 2010 PPP) — broader subsistence definition (GDR was designed for burden-sharing; fair-shares adapts its capability metric for entitlement allocation)</li>
 <li>Gini data configured → Within-country inequality affects effective capability</li>
 </ul>
 <p><strong>Distributional outcome:</strong> Least developed countries retain most of their remaining allocation. High-income countries have reduced remaining allocations (from cumulative budget accounting since 1990), further reduced by capability_weight=0.8. The pre_allocation_responsibility_weight=0.2 additionally rescales shares based on 1950-1989 per-capita emissions (this rescaling always produces positive allocations if <code>allocation_year</code> is the present — it is a multiplicative adjustment, not cumulative accounting).</p>

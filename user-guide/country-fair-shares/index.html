@@ -2000,12 +2000,12 @@
 <tr>
 <td><code>all-ghg-ex-co2-lulucf</code></td>
 <td>All GHGs excluding CO₂ from land use</td>
-<td>Avoids LULUCF measurement uncertainty</td>
+<td>GWP100 AR6 values; avoids LULUCF measurement uncertainty</td>
 </tr>
 <tr>
 <td><code>all-ghg</code></td>
 <td>All greenhouse gases including LULUCF</td>
-<td>Uses GWP100 AR6 values</td>
+<td>GWP100 AR6 values</td>
 </tr>
 </tbody>
 </table>
@@ -2027,7 +2027,7 @@
 <tr>
 <td><code>pathway</code></td>
 <td>Pathway approaches</td>
-<td>IPCC AR6 scenarios -- allocate existing scenario pathways</td>
+<td>Scenario pathways (e.g. IPCC AR6) -- allocate existing scenario pathways</td>
 </tr>
 <tr>
 <td><code>rcb-pathways</code></td>
@@ -2047,7 +2047,7 @@
 <tbody>
 <tr>
 <td><code>emissions</code></td>
-<td>Historical emissions for responsibility calculations</td>
+<td>Historical emissions for pre-allocation responsibility calculations</td>
 </tr>
 <tr>
 <td><code>population</code></td>
@@ -2068,7 +2068,7 @@
 <div class="admonition note">
 <p class="admonition-title">Entry Points Framework</p>
 </div>
-<p>Before configuring approaches and parameters, it helps to work through the five entry points for fair share quantification [Pelz 2025b]: (1) foundational principles, (2) allocation quantity, (3) allocation approach, (4) indicators, (5) implications for all others. The steps below map directly onto these decision stages. See <a href="../../science/principle-to-code/">From Principle to Code</a> for details.</p>
+<p>Before configuring approaches and parameters, it helps to work through the five entry points for fair share quantification [Pelz 2025b]: (1) foundational principles, (2) allocation quantity, (3) allocation approach, (4) indicators, (5) implications for all others. See <a href="../../science/principle-to-code/">From Principle to Code</a> for details.</p>
 <h2 id="step-2-allocation-approaches">Step 2: Allocation Approaches<a class="headerlink" href="#step-2-allocation-approaches" title="Permanent link">&para;</a></h2>
 <!-- REFERENCE: Approach implementations in src/fair_shares/library/allocations/
      Budget approaches: budgets/per_capita.py
@@ -2077,7 +2077,6 @@
 -->
 
 <h3 id="budget-approaches-for-targetrcbs">Budget Approaches (for <code>target="rcbs"</code>)<a class="headerlink" href="#budget-approaches-for-targetrcbs" title="Permanent link">&para;</a></h3>
-<p>These implement Equal Cumulative Per Capita (ECPC) allocation when <code>allocation_year</code> is set to a historical start year (e.g., 1990). The choice of start year is normatively significant — 1990 corresponds to the IPCC First Assessment Report and the "excusable ignorance" threshold in the equity literature [Baer 2013; Pelz 2025b].</p>
 <table>
 <thead>
 <tr>
@@ -2092,7 +2091,7 @@
 </tr>
 <tr>
 <td><code>per-capita-adjusted-budget</code></td>
-<td>Adjusted for responsibility and capability</td>
+<td>Adjusted for pre-allocation responsibility and capability</td>
 </tr>
 <tr>
 <td><code>per-capita-adjusted-gini-budget</code></td>
@@ -2115,7 +2114,7 @@
 </tr>
 <tr>
 <td><code>per-capita-adjusted</code></td>
-<td>Adjusted for responsibility and capability</td>
+<td>Adjusted for pre-allocation responsibility and capability</td>
 </tr>
 <tr>
 <td><code>per-capita-adjusted-gini</code></td>
@@ -2131,7 +2130,7 @@
 </tr>
 <tr>
 <td><code>cumulative-per-capita-convergence-adjusted</code></td>
-<td>Cumulative convergence with responsibility and capability adjustments</td>
+<td>Cumulative convergence with pre-allocation responsibility and capability adjustments</td>
 </tr>
 <tr>
 <td><code>cumulative-per-capita-convergence-gini-adjusted</code></td>

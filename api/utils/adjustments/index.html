@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="API reference for responsibility, capability, Gini, and deviation constraint adjustments">
+        <meta name="description" content="API reference for pre-allocation responsibility, capability, Gini, and deviation constraint adjustments">
       
       
         <meta name="author" content="The fair-shares Contributors">
@@ -1825,7 +1825,7 @@
 
 
 <h1 id="adjustment-functions">Adjustment Functions<a class="headerlink" href="#adjustment-functions" title="Permanent link">&para;</a></h1>
-<p>Functions for calculating responsibility, capability, and Gini adjustments.</p>
+<p>Functions for calculating pre-allocation responsibility, capability, and Gini adjustments.</p>
 <h2 id="relative-adjustments">Relative Adjustments<a class="headerlink" href="#relative-adjustments" title="Permanent link">&para;</a></h2>
 <h3 id="calculate_relative_adjustment">calculate_relative_adjustment<a class="headerlink" href="#calculate_relative_adjustment" title="Permanent link">&para;</a></h3>
 
@@ -1992,9 +1992,12 @@ numerical issues and ensure valid results for all inputs.</p>
     <div class="doc doc-contents first">
 
         <p>Gini-adjusted GDP (capability) using the GDR development threshold.</p>
-<p>Implements the Greenhouse Development Rights (GDR) framework approach to
-national capability (Baer et al. 2009): only income <strong>above</strong> a development
-threshold counts as "ability to pay" for climate action.</p>
+<p>Implements an interpretation of the Greenhouse Development Rights (GDR)
+framework's capability metric for entitlement allocation (Baer et al. 2009).
+Note: GDR was originally designed for burden-sharing; fair-shares adapts its
+capability calculation for use in an entitlement context. Only income
+<strong>above</strong> a development threshold counts as "ability to pay" for climate
+action.</p>
 <p>For each individual, their first <code>income_floor</code> of annual income is exempt —
 it's needed for basic human development. Only the excess above the floor
 contributes to national capability.</p>

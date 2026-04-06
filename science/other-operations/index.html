@@ -1522,9 +1522,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ar6-single-pass-exception" class="md-nav__link">
+  <a href="#single-pass-exception-for-direct-scenario-pathways" class="md-nav__link">
     <span class="md-ellipsis">
-      AR6 single-pass exception
+      Single-pass exception for direct scenario pathways
     </span>
   </a>
   
@@ -2146,9 +2146,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ar6-single-pass-exception" class="md-nav__link">
+  <a href="#single-pass-exception-for-direct-scenario-pathways" class="md-nav__link">
     <span class="md-ellipsis">
-      AR6 single-pass exception
+      Single-pass exception for direct scenario pathways
     </span>
   </a>
   
@@ -2343,7 +2343,7 @@
 <li>The discrete annual sum equals the original carbon budget by construction</li>
 </ol>
 <p>Country allocations happen <strong>after</strong> this step, using pathway allocation approaches (e.g., <code>equal-per-capita</code>, <code>per-capita-adjusted</code>). The pathway shape does not prescribe country net-zero years — those emerge from the allocation step. When a country's allocated share approaches zero, that approximates their implied net-zero year.</p>
-<p>The default generator is <code>exponential-decay</code> (shifted exponential). The <code>generator</code> parameter supports extensibility — other functional forms can be added without changing the allocation pipeline.</p>
+<p>The default (and currently only) generator is <code>exponential-decay</code> (shifted exponential). The <code>generator</code> parameter is an extensibility point — alternative functional forms (e.g., linear, sigmoid) can be added without changing the allocation pipeline, provided they satisfy the same constraint: the discrete annual sum must exactly equal the input carbon budget by the end year (typically 2100). Note that even with a 2100 end year, individual regions may reach effective net-zero much earlier when their allocated share of the global pathway becomes negligibly small.</p>
 <p><strong><a href="https://setupelz.github.io/fair-shares/api/utils/math/#rcb-pathway-generation">API Reference →</a></strong></p>
 <hr />
 <h2 id="data-preprocessing">Data Preprocessing<a class="headerlink" href="#data-preprocessing" title="Permanent link">&para;</a></h2>
@@ -2375,8 +2375,7 @@
 near-linear relationship between cumulative CO₂ emissions and global warming
 [IPCC AR6 WG1]. Non-CO₂ greenhouse gases (CH₄, N₂O, F-gases) pathways are an
 assumption used in deriving the remaining carbon budget quantity.</p>
-<p>To produce all-GHG fair share allocations under RCBs, the system
-<strong>decomposes</strong> the problem into two components:</p>
+<p>When users request an all-GHG allocation (e.g. <code>all-ghg</code> or <code>all-ghg-ex-co2-lulucf</code>) but use RCBs as the target source, a problem arises: RCBs constrain CO₂ only and say nothing about non-CO₂ gases. To produce all-GHG results, the system <strong>decomposes</strong> the problem into two components — allocating CO₂ via the budget approach and non-CO₂ via scenario pathways:</p>
 <table>
 <thead>
 <tr>
@@ -2396,11 +2395,15 @@ assumption used in deriving the remaining carbon budget quantity.</p>
 <tr>
 <td>Non-CO₂</td>
 <td><code>non-co2</code></td>
-<td>Pathway approach (AR6 scenarios)</td>
-<td>AR6 median pathways</td>
+<td>Pathway approach (e.g. AR6 scenarios)</td>
+<td>e.g. AR6 median pathways</td>
 </tr>
 </tbody>
 </table>
+<div class="admonition note">
+<p class="admonition-title">New RCBs require matching scenario pathways</p>
+<p>When adding new remaining carbon budgets, complete scenario pathways that meet their climate assessments must also be available in the active data source configuration for pathways. Without them, the non-CO₂ decomposition has no pathway data to allocate from.</p>
+</div>
 <h3 id="decomposition-rules">Decomposition rules<a class="headerlink" href="#decomposition-rules" title="Permanent link">&para;</a></h3>
 <p>The CO₂ component depends on the requested emission category:</p>
 <ul>
@@ -2414,22 +2417,20 @@ assumption used in deriving the remaining carbon budget quantity.</p>
 <div class="arithmatex">\[
 \text{non-CO}_2 = \text{all-ghg-ex-co2-lulucf} - \text{co2-ffi}
 \]</div>
-<p>This subtraction is applied to both historical emissions (from PRIMAP) and
-future scenarios (from AR6), producing non-CO₂ timeseries that are used for
+<p>This subtraction is applied to both historical emissions (e.g. PRIMAP) and
+future scenarios (e.g. AR6), producing non-CO₂ timeseries that are used for
 pathway allocation.</p>
 <h3 id="scenario-labels">Scenario labels<a class="headerlink" href="#scenario-labels" title="Permanent link">&para;</a></h3>
-<p>AR6 categories are mapped to clean climate-assessment names and quantiles
-during preprocessing in notebook 104. The mapping splits the combined
-AR6 category label into separate fields matching the RCB convention:</p>
+<p>Scenario source categories are mapped to clean <code>climate-assessment</code> names and <code>quantile</code> fields during preprocessing (notebook 104). This normalisation ensures that all downstream code — including non-CO₂ pathways — works with a consistent format regardless of the upstream scenario source. For example, AR6 categories map as:</p>
 <ul>
 <li>C1 → <code>climate-assessment="1.5C"</code>, <code>quantile=0.5</code></li>
 <li>C3 → <code>climate-assessment="2C"</code>, <code>quantile=0.66</code></li>
 <li>C2 → <code>climate-assessment="2C"</code>, <code>quantile=0.83</code></li>
 </ul>
+<p>New scenario sources would define their own mapping into the same clean format. Any new data processing notebook that introduces a scenario source must output data in this normalised schema.</p>
 <p>Internally, notebook 104 uses combined labels (e.g., "1.5p50") during
 median calculation to keep C2 and C3 distinct, then remaps to the clean
-format at output. All downstream code — including non-CO₂ pathways —
-uses the clean format directly.</p>
+format at output.</p>
 <h3 id="auto-derivation-of-pathway-approaches">Auto-derivation of pathway approaches<a class="headerlink" href="#auto-derivation-of-pathway-approaches" title="Permanent link">&para;</a></h3>
 <p>Users only specify budget approaches (e.g., <code>equal-per-capita-budget</code>). The
 system automatically derives equivalent pathway approaches for non-CO₂:</p>
@@ -2441,11 +2442,12 @@ system automatically derives equivalent pathway approaches for non-CO₂:</p>
 <li><code>preserve_allocation_year_shares</code> → <code>preserve_first_allocation_year_shares</code></li>
 </ul>
 <p>This ensures methodological consistency: the same equity principle governs
-both gases, adapted to the different allocation modes.</p>
-<h3 id="ar6-single-pass-exception">AR6 single-pass exception<a class="headerlink" href="#ar6-single-pass-exception" title="Permanent link">&para;</a></h3>
-<p>When <code>target=pathway</code>, composite categories are <strong>not</strong> decomposed. AR6
-provides direct scenario data for <code>all-ghg</code> and <code>all-ghg-ex-co2-lulucf</code>,
-so the system runs a single pathway allocation pass.</p>
+both gases, adapted to the different allocation modes. This auto-derivation only works when scenario pathway data matching the requested climate assessments is available in the active source set — without it, the non-CO₂ leg has nothing to allocate.</p>
+<h3 id="single-pass-exception-for-direct-scenario-pathways">Single-pass exception for direct scenario pathways<a class="headerlink" href="#single-pass-exception-for-direct-scenario-pathways" title="Permanent link">&para;</a></h3>
+<p>When <code>target=pathway</code>, composite categories are <strong>not</strong> decomposed. If the
+scenario source provides direct data for <code>all-ghg</code> or <code>all-ghg-ex-co2-lulucf</code>
+(as AR6 does), the system runs a single pathway allocation pass instead of
+the CO₂ + non-CO₂ decomposition.</p>
 <hr />
 <h2 id="weber-rcb-corrections">Weber RCB Corrections<a class="headerlink" href="#weber-rcb-corrections" title="Permanent link">&para;</a></h2>
 <p>Remaining carbon budgets (RCBs) are published relative to a baseline year (e.g., 2020 for AR6 WGI, 2023 for Lamboll et al.) and use <strong>bookkeeping model (BM)</strong> estimates for land-use CO₂ fluxes. To produce country-level fair share allocations that are comparable with nationally reported emissions, the published RCB must be:</p>
@@ -2616,21 +2618,24 @@ L_{\text{BM}}^{\text{capped}} = \max\!\left(0,\; \underset{i}{\text{median}}\lef
 <p>Bookkeeping models (e.g., BLUE, OSCAR) estimate only <strong>direct human-caused</strong> land-use fluxes -- deforestation, afforestation, land management. NGHGIs additionally include <strong>indirect effects</strong> such as CO₂ fertilization of managed forests and climate-driven changes in soil carbon. The NGHGI total is therefore systematically different from the bookkeeping total, even for the same physical land area.</p>
 <p>The global difference is substantial: NGHGI-reported LULUCF is a larger net sink than BM estimates, creating a 5--7 GtCO₂/yr discrepancy primarily because CO₂ fertilization enhances carbon uptake on managed land [Weber 2026].</p>
 <h3 id="per-scenario-net-zero-years-as-integration-bounds">Per-scenario net-zero years as integration bounds<a class="headerlink" href="#per-scenario-net-zero-years-as-integration-bounds" title="Permanent link">&para;</a></h3>
-<p>Forward-looking quantities (LULUCF decomposition, convention gap, bunker deduction) are integrated from their start year to the <strong>scenario-specific net-zero year</strong> <span class="arithmatex">\(t_{\text{nz},i}\)</span> -- the first year when that scenario's total CO₂ emissions (<code>Emissions|CO2</code> = fossil + BM LULUCF) reach zero. This prevents post-net-zero negative emissions from inflating the corrections.</p>
+<p>Forward-looking quantities (LULUCF decomposition, convention gap, bunker deduction) are integrated from their start year to the <strong>scenario-specific net-zero year</strong> <span class="arithmatex">\(t_{\text{nz},i}\)</span> -- the first year when that scenario's total CO₂ emissions (<code>Emissions|CO2</code>) reach zero. This prevents post-net-zero negative emissions from inflating the corrections.</p>
+<p>Note that <code>Emissions|CO2</code> in IAM scenario databases is fossil + BM LULUCF by convention — this is a property of how scenarios report total CO₂, not a methodological choice by fair-shares.</p>
 <p>Per-scenario net-zero years are computed from the Gidden et al. AR6 reanalysis (OSCAR v3.2) data. Scenario-level summary statistics (median, quartiles) are stored in <code>data/rcbs/ar6_category_constants.yaml</code>, keyed by RCB scenario label (e.g., <code>1.5p50</code>). The scenario-level median NZ year is used for the bunker integration endpoint (which is observational, not scenario-dependent).</p>
 <p>Scenarios that never reach net-zero total CO₂ before 2100 are assigned 2100 as a conservative upper integration bound.</p>
 <h3 id="convention-gap-decomposition">Convention gap decomposition<a class="headerlink" href="#convention-gap-decomposition" title="Permanent link">&para;</a></h3>
 <p>The per-scenario convention gap <span class="arithmatex">\(\text{Gap}_i\)</span> decomposes into two temporal segments:</p>
-<p><strong>Historical</strong> (<span class="arithmatex">\(2020 \leq t \leq \mathrm{splice{\_}year}\)</span>): Melo NGHGI (reported values, same for all scenarios) minus Gidden Direct for scenario <span class="arithmatex">\(i\)</span> (a bookkeeping proxy from the AR6 reanalysis). The splice year is derived dynamically from the data (currently 2023 with Melo v3.1). The gap always covers the full 2020--NZ range because the BM LULUCF rebase years also need convention conversion:</p>
+<p><strong>Historical</strong> (<span class="arithmatex">\(2020 \leq t \leq \mathrm{splice{\_}year}\)</span>): NGHGI actual LULUCF (reported values, same for all scenarios) minus BM LULUCF for scenario <span class="arithmatex">\(i\)</span> (the bookkeeping proxy from scenario data). The splice year is derived dynamically from the data (currently 2023). The gap always covers the full 2020--NZ range because the BM LULUCF rebase years also need convention conversion:</p>
 <div class="arithmatex">\[
-\text{Gap}_{i,\text{hist}} = \sum_{t=2020}^{\min(\text{splice},\, t_{\text{nz},i})} \left[\text{Melo}(t) - \text{Gidden}_{\text{Direct},i}(t)\right]
+\text{Gap}_{i,\text{hist}} = \sum_{t=2020}^{\min(\text{splice},\, t_{\text{nz},i})} \left[\text{NGHGI}_{\text{actual}}(t) - \text{BM}_{\text{Direct},i}(t)\right]
 \]</div>
-<p><strong>Future</strong> (<span class="arithmatex">\(t &gt; \mathrm{splice{\_}year}\)</span>): Only the Gidden Indirect component for scenario <span class="arithmatex">\(i\)</span> (CO₂ fertilization and other passive fluxes), because the Direct components cancel in the gap:</p>
+<p>Currently, NGHGI actual LULUCF is sourced from Melo et al. and BM LULUCF from the Gidden et al. AR6 reanalysis (AFOLU|Direct). These are the current data sources for these roles — alternatives providing the same quantities could be substituted.</p>
+<p><strong>Future</strong> (<span class="arithmatex">\(t &gt; \mathrm{splice{\_}year}\)</span>): Only the NGHGI-consistent indirect component for scenario <span class="arithmatex">\(i\)</span> (CO₂ fertilization and other passive fluxes), because the direct components cancel in the gap:</p>
 <div class="arithmatex">\[
-\text{Gap}_{i,\text{future}} = \sum_{t=\text{splice}+1}^{t_{\text{nz},i}} \text{Gidden}_{\text{Indirect},i}(t)
+\text{Gap}_{i,\text{future}} = \sum_{t=\text{splice}+1}^{t_{\text{nz},i}} \text{Indirect}_{i}(t)
 \]</div>
-<p>The total per-scenario gap is <span class="arithmatex">\(\text{Gap}_i = \text{Gap}_{i,\text{hist}} + \text{Gap}_{i,\text{future}}\)</span>, and the median is taken across all scenarios <span class="arithmatex">\(i\)</span> in the corresponding AR6 category pool. Each scenario's integration ends at its own <span class="arithmatex">\(t_{\text{nz},i}\)</span>.</p>
-<p><strong>Why AR6 scenario data for the BM side?</strong> The convention gap is a per-scenario quantity — each scenario has its own AFOLU|Direct pathway, NZ year, and Indirect fluxes. The Gidden AR6 reanalysis provides this per-scenario decomposition. Global Carbon Budget multi-model averages cannot be substituted here because they would collapse the per-scenario variation into a single number, breaking the integrate-per-scenario-then-median methodology. For actual historical emissions (the RCB rebase from baseline to 2020), PRIMAP observational data is used — no scenario data is involved in that step.</p>
+<p>Currently sourced from the Gidden et al. AR6 reanalysis (AFOLU|Indirect).</p>
+<p>The total per-scenario gap is <span class="arithmatex">\(\text{Gap}_i = \text{Gap}_{i,\text{hist}} + \text{Gap}_{i,\text{future}}\)</span>, and the median is taken across all scenarios <span class="arithmatex">\(i\)</span> in the corresponding climate category pool. Each scenario's integration ends at its own <span class="arithmatex">\(t_{\text{nz},i}\)</span>.</p>
+<p><strong>Why per-scenario data for the BM side?</strong> The convention gap is a per-scenario quantity — each scenario has its own AFOLU|Direct pathway, NZ year, and Indirect fluxes. Global Carbon Budget multi-model averages cannot be substituted here because they would collapse the per-scenario variation into a single number, breaking the integrate-per-scenario-then-median methodology. For actual historical emissions (the RCB rebase from baseline to 2020), observational data is used — no scenario data is involved in that step.</p>
 <h3 id="world-co2-timeseries-for-backward-extension">World CO₂ timeseries for backward extension<a class="headerlink" href="#world-co2-timeseries-for-backward-extension" title="Permanent link">&para;</a></h3>
 <p>When the allocation year is before 2020, historical emissions must be added back to the RCB (see <a href="#rcb-pathway-generation">RCB Pathway Generation</a> above). For total CO₂, the per-year world emissions use the NGHGI convention:</p>
 <div class="arithmatex">\[

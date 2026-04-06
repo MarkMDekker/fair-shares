@@ -2029,7 +2029,7 @@
 </span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>    <span class="n">gdp_ts</span><span class="o">=</span><span class="n">gdp_ts</span><span class="p">,</span>
 </span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>    <span class="n">allocation_year</span><span class="o">=</span><span class="mi">2015</span><span class="p">,</span>
 </span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>    <span class="n">emission_category</span><span class="o">=</span><span class="s2">&quot;all-ghg-ex-co2-lulucf&quot;</span><span class="p">,</span>
-</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>    <span class="n">capability_weight</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>    <span class="n">capability_weight</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
 </span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>    <span class="n">pre_allocation_responsibility_weight</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
 </span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>    <span class="n">pre_allocation_responsibility_year</span><span class="o">=</span><span class="mi">1990</span><span class="p">,</span>
 </span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>    <span class="n">preserve_allocation_year_shares</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -2038,8 +2038,8 @@
 </span></code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Capability-only is a minimal example</p>
+<p>Setting <code>pre_allocation_responsibility_weight=0.0</code> produces a capability-only configuration for illustration. When one weight is 0, the other is the sole adjustment — its specific value does not matter (only the ratio between weights affects results), so <code>1.0</code> is used for clarity. The normatively recommended configuration typically includes both responsibility and capability components — see <a href="../../science/principle-to-code/">Principle to Code</a> for guidance.</p>
 </div>
-<p>Setting <code>pre_allocation_responsibility_weight=0.0</code> produces a capability-only configuration for illustration. The normatively recommended configuration typically includes both responsibility and capability components — see <a href="../../science/principle-to-code/">Principle to Code</a> for guidance.</p>
 <hr />
 <h2 id="preparing-remaining-budgets-for-iam-model-input">Preparing Remaining Budgets for IAM Model Input<a class="headerlink" href="#preparing-remaining-budgets-for-iam-model-input" title="Permanent link">&para;</a></h2>
 <p><strong>Use notebook 401</strong> for model input preparation. Notebooks 402/403 show allocation examples only.</p>
