@@ -1785,7 +1785,7 @@
 <hr />
 <h2 id="the-allocation-year-parameter">The Allocation Year Parameter<a class="headerlink" href="#the-allocation-year-parameter" title="Permanent link">&para;</a></h2>
 <p>When <code>allocation_year</code> (budget) or <code>first_allocation_year</code> (pathway) is set in the past, the allocation considers cumulative population (and emissions, if using adjusted approaches) from that year onward when computing each country's share. fair-shares does not subtract past emissions natively — it computes shares of the total budget from the allocation year. If you want <strong>remaining allocations</strong> from the present, subtract each country's actual emissions between the allocation year and now from their allocated share as a post-processing step.</p>
-<p>The choice of start date is normatively significant: 1850 captures the full industrial era, 1950 tracks post-war growth, and 1990 corresponds to the IPCC First Assessment Report — widely treated in the equity literature as the "excusable ignorance" threshold, beyond which responsibility for emissions harm is difficult to deny [Baer 2013; Pelz 2025b].</p>
+<p>The choice of start date is normatively significant: 1850 captures the full industrial era, 1950 tracks post-war growth, and 1990 corresponds to the IPCC First Assessment Report — widely treated in the equity literature as the "excusable ignorance" threshold, beyond which responsibility for emissions harm is difficult to deny <a href="https://doi.org/10.1002/wcc.201">Baer 2013</a>; <a href="https://doi.org/10.1088/1748-9326/ada45f">Pelz 2025b</a>. For the philosophical origin of the excusable-ignorance defence and its rebuttal, see <a href="https://doi.org/10.1515/mopp-2013-0009">Shue 2015</a> and <a href="https://doi.org/10.1080/13698230903326331">Caney 2010</a>.</p>
 <p>See <a href="../../science/allocations/#historical-responsibility">Allocation Approaches</a> for configuration details.</p>
 <hr />
 <h2 id="budget-approaches">Budget Approaches<a class="headerlink" href="#budget-approaches" title="Permanent link">&para;</a></h2>
@@ -1851,7 +1851,7 @@
 <tbody>
 <tr>
 <td><strong><code>per-capita-convergence</code></strong></td>
-<td>Comparison baseline (not a fair share approach) — convergence from current emission levels embeds implicit grandfathering during the transition period [Kartha 2018]</td>
+<td>Comparison baseline (not a fair share approach) — convergence from current emission levels embeds implicit grandfathering during the transition period <a href="https://doi.org/10.1038/s41558-018-0152-7">Kartha 2018</a></td>
 </tr>
 <tr>
 <td><strong><code>cumulative-per-capita-convergence</code></strong></td>
@@ -1903,7 +1903,7 @@
 <div class="admonition tip">
 <p class="admonition-title">Entry Points Framework</p>
 </div>
-<p>Approach selection is one of five structured decision stages in fair share quantification [Pelz 2025b]. Before choosing an approach, make explicit decisions about (1) foundational principles, (2) allocation quantity, and (3) which indicators will operationalize your approach — these upstream choices constrain which approaches are normatively coherent. See <a href="../../science/principle-to-code/">From Principle to Code</a> for the full framework.</p>
+<p>Approach selection is one of five structured decision stages in fair share quantification <a href="https://doi.org/10.1088/1748-9326/ada45f">Pelz 2025b</a>. Before choosing an approach, make explicit decisions about (1) foundational principles, (2) allocation quantity, and (3) which indicators will operationalize your approach — these upstream choices constrain which approaches are normatively coherent. See <a href="../../science/principle-to-code/">From Principle to Code</a> for the full framework.</p>
 <hr />
 <h2 id="registry-reference">Registry Reference<a class="headerlink" href="#registry-reference" title="Permanent link">&para;</a></h2>
 <p>All approaches are registered in <a href="https://github.com/setupelz/fair-shares/blob/main/src/fair_shares/library/allocations/manager.py"><code>src/fair_shares/library/allocations/manager.py</code></a>.</p>

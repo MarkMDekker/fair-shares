@@ -1846,7 +1846,7 @@
 <p>For allocation approach details and parameters, see <a href="../allocations/">Allocation Approaches</a>.</p>
 <hr />
 <h2 id="the-five-entry-points">The Five Entry Points<a class="headerlink" href="#the-five-entry-points" title="Permanent link">&para;</a></h2>
-<p>Based on the Pelz et al. 2025 framework. Each entry point is a decision you must make.</p>
+<p>Based on the entry points framework in <a href="https://doi.org/10.1088/1748-9326/ada45f">Pelz 2025b</a>. Each entry point is a decision the analyst must make.</p>
 <pre class="mermaid"><code>flowchart LR
     Start([Start]) --&gt; Step1[1. Identify&lt;br/&gt;Principles]
     Step1 --&gt; Step2[2. Define&lt;br/&gt;Quantity]
@@ -1897,6 +1897,10 @@
 </tbody>
 </table>
 <p><strong>Anti-pattern</strong>: Working backward from favorable allocations undermines scientific legitimacy.</p>
+<div class="admonition note">
+<p class="admonition-title">Scholarly context</p>
+<p>The entry-points framework sits within a wider conversation about how to interpret the Paris Agreement's equity provisions. For the legal interpretation of CBDR-RC in its normative environment, see <a href="https://doi.org/10.1093/clp/cuae011">Rajamani 2024</a>. For the ethical choices hidden inside fair-share quantifications, see <a href="https://doi.org/10.1038/s41558-021-01015-8">Dooley 2021</a>. On the duties of states under international climate law, see the <a href="https://www.icj-cij.org/case/187">ICJ 2025</a> advisory opinion.</p>
+</div>
 <hr />
 <h2 id="quick-reference">Quick Reference<a class="headerlink" href="#quick-reference" title="Permanent link">&para;</a></h2>
 <p>Each normative position maps to specific allocation approaches and parameters. See <a href="../allocations/">Allocation Approaches</a> for full detail.</p>
@@ -2099,7 +2103,7 @@
 <li>Cumulative constraint → Total pathway emissions respect global budget</li>
 </ul>
 <p><strong>Distributional outcome:</strong> Countries transition from current emissions toward cumulative per capita targets while preserving cumulative shares. The balanced responsibility/capability weighting means both historical per-capita emissions (1990–2025) and GDP per capita reduce allocations for developed countries, while the <code>historical_start_year=1950</code> shifts target shares toward countries that were populous during industrialisation — India and China get larger targets, while countries whose populations grew recently (e.g., sub-Saharan Africa) receive relatively less than with the default. Starting from current emissions means high emitters receive higher near-term allocations, but cumulative totals are budget-preserving (unlike <code>per-capita-convergence</code> which is NOT budget-preserving).</p>
-<p><strong>Underlying reasoning:</strong> Cumulative per capita shares are the fair target, but immediate redistribution is impractical. Transition pathways balance long-term equity with near-term feasibility while preserving cumulative budgets. The balanced CBDR-RC weighting differentiates by both who emitted most and who can afford to act. Extending the population window to 1950 reflects the position that entitlements to the atmospheric commons should account for historical population patterns during the period when that commons was being filled [Dekker 2025; Van Den Berg 2020].</p>
+<p><strong>Underlying reasoning:</strong> Cumulative per capita shares are the fair target, but immediate redistribution is impractical. Transition pathways balance long-term equity with near-term feasibility while preserving cumulative budgets. The balanced CBDR-RC weighting differentiates by both who emitted most and who can afford to act. Extending the population window to 1950 reflects the position that entitlements to the atmospheric commons should account for historical population patterns during the period when that commons was being filled <a href="https://doi.org/10.1038/s41558-025-02361-7">Dekker 2025</a>; <a href="https://doi.org/10.1007/s10584-019-02368-y">Van Den Berg 2020</a>.</p>
 <p><strong>Contrast with immediate pathways:</strong> Cumulative per capita convergence creates gradual transitions from current emissions (preserving near-term inequality) while respecting cumulative budget constraints. Immediate pathways (Example 5) allocate fair shares from the start.</p>
 <p><strong>Note on <code>historical_start_year</code>:</strong> This parameter only affects the convergence target shares (cumulative population entitlement). It does not affect responsibility adjustments, capability weighting, or historical emissions discounting — those are independent mechanisms. Omitting <code>historical_start_year</code> (or setting it to None) uses <code>first_allocation_year</code> as the population window start, which is the default. See <a href="../allocations/#historical-start-year-convergence-only">Historical Start Year</a> for full details.</p>
 <hr />
@@ -2142,19 +2146,19 @@
 <p>Fair-shares operationalizes principles -- it cannot tell you which principles to adopt. The following questions require normative judgment, and the literature contains diverse positions on each:</p>
 <ol>
 <li>
-<p><strong>Which principles are morally relevant?</strong> — Should historical responsibility matter? Should capability determine obligations? These are philosophical questions about justice.</p>
+<p><strong>Which principles are morally relevant?</strong> — Should historical responsibility matter? Should capability determine obligations? These are philosophical questions about justice. For a concise overview of the competing ethical traditions (utilitarian, egalitarian, capabilities, cosmopolitan, Rawlsian), see <a href="https://plato.stanford.edu/entries/justice-climate/">Caney 2021</a> in the Stanford Encyclopedia of Philosophy, and [Shue 2014] for the subsistence/luxury-emissions distinction that underpins most development-rights framings.</p>
 </li>
 <li>
-<p><strong>Where do thresholds come from?</strong> — Income floors, pre-allocation responsibility start dates, convergence years involve value judgments about development rights and transition feasibility.</p>
+<p><strong>Where do thresholds come from?</strong> — Income floors, pre-allocation responsibility start dates, convergence years involve value judgments about development rights and transition feasibility. The $7,500 PPP development threshold used in fair-shares originates in the Greenhouse Development Rights framework (<a href="https://doi.org/10.1002/wcc.201">Baer 2013</a>); other thresholds require their own defence.</p>
 </li>
 <li>
-<p><strong>What happens with negative remaining allocations?</strong> — When <code>allocation_year</code> is in the past, high historical emitters may have already exceeded their fair share — their remaining allocation is negative (carbon debt). Negative allocations communicate the scale of exceedance and create a signal for what is required. They imply the need for highest possible domestic ambition, negative emissions targets (carbon dioxide removal), and international support for others. The priority is to minimize the duration and magnitude of overshoot [Pelz 2025b; Pelz 2025a]. What specific obligations follow (accelerated domestic mitigation, financial transfers, CDR investments) requires political specification, but the tool transparently surfaces the normative implication.</p>
+<p><strong>What happens with negative remaining allocations?</strong> — When <code>allocation_year</code> is in the past, high historical emitters may have already exceeded their fair share — their remaining allocation is negative (carbon debt). Negative allocations communicate the scale of exceedance and create a signal for what is required. They imply the need for highest possible domestic ambition, negative emissions targets (carbon dioxide removal), and international support for others. The priority is to minimize the duration and magnitude of overshoot <a href="https://doi.org/10.1088/1748-9326/ada45f">Pelz 2025b</a>; <a href="https://doi.org/10.1073/pnas.2409316122">Pelz 2025a</a>; see also <a href="https://doi.org/10.1038/NCLIMATE2774">Matthews 2016</a> for the earlier carbon-debt formulation. What specific obligations follow (accelerated domestic mitigation, financial transfers, CDR investments) requires political specification, but the tool transparently surfaces the normative implication.</p>
 </li>
 <li>
-<p><strong>Is convergence ethically acceptable?</strong> — Convergence embeds grandfathering, rewarding past high emissions. The tool provides pure per-capita-convergence approaches for transparency, not endorsement. This is distinct from cumulative-per-capita-convergence, which starts with current per capita emissions but converges to cumulative per capita shares over time.</p>
+<p><strong>Is convergence ethically acceptable?</strong> — Convergence embeds grandfathering, rewarding past high emissions. <a href="https://doi.org/10.1038/s41558-018-0152-7">Kartha 2018</a> catalogues the resulting distributional bias; <a href="https://doi.org/10.1080/17449620903110300">Caney 2009</a> makes the ethical case against it. The tool provides pure per-capita-convergence approaches for transparency, not endorsement. This is distinct from cumulative-per-capita-convergence, which starts with current per capita emissions but converges to cumulative per capita shares over time.</p>
 </li>
 <li>
-<p><strong>Which temperature target?</strong> — Allocations depend on carbon budget, which depends on temperature target (1.5°C, 2°C) and probability threshold. These are risk tolerance decisions.</p>
+<p><strong>Which temperature target?</strong> — Allocations depend on carbon budget, which depends on temperature target (1.5°C, 2°C) and probability threshold <a href="https://doi.org/10.1038/s41558-023-01848-5">Lamboll 2023</a>. These are risk tolerance decisions.</p>
 </li>
 </ol>
 <p><strong>What the tool DOES provide:</strong></p>

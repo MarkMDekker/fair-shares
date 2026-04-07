@@ -1494,6 +1494,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#cascading-biases" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cascading Biases
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#bau-deviation-framing" class="md-nav__link">
     <span class="md-ellipsis">
       BAU Deviation Framing
@@ -2161,6 +2170,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#cascading-biases" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cascading Biases
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#bau-deviation-framing" class="md-nav__link">
     <span class="md-ellipsis">
       BAU Deviation Framing
@@ -2253,13 +2271,13 @@
 <p>All allocation approaches ensure shares sum to 1 in each year and ensure complete global coverage.</p>
 <div class="admonition warning">
 <p class="admonition-title">Value neutrality is impossible in equity analysis</p>
-<p>No allocation approach is normatively neutral. Every choice about base year, indicator, weighting, or approach inclusion reflects value judgments about fairness [Dooley 2021; Kartha 2018].</p>
+<p>No allocation approach is normatively neutral. Every choice about base year, indicator, weighting, or approach inclusion reflects value judgments about fairness <a href="https://doi.org/10.1038/s41558-021-01015-8">Dooley 2021</a>; <a href="https://doi.org/10.1038/s41558-018-0152-7">Kartha 2018</a>. Research on IAM methodology and effort-sharing has repeatedly documented how "neutral" defaults systematically favour wealthy nations <a href="https://doi.org/10.1098/rsta.2016.0461">Klinsky 2018</a>; <a href="https://doi.org/10.1080/14693062.2019.1680337">Winkler 2020</a>; <a href="https://doi.org/10.1038/s41558-023-01869-0">Zimm 2024</a>.</p>
 <p>Two specific pitfalls to avoid:</p>
 <ul>
 <li>Do not claim comprehensiveness through approach averaging. Averaging contradictory approaches (e.g., averaging grandfathering with equal per capita) does not produce a neutral result — it produces an incoherent one.</li>
 <li>Do not combine contradictory principles into composite indices.</li>
 </ul>
-<p>The appropriate role of analysis is to clarify the ethical underpinnings and consequences of normative choices — not to make those choices on behalf of users [Kartha 2018].</p>
+<p>The appropriate role of analysis is to clarify the ethical underpinnings and consequences of normative choices — not to make those choices on behalf of users <a href="https://doi.org/10.1038/s41558-018-0152-7">Kartha 2018</a>.</p>
 </div>
 <h3 id="budget-vs-pathway-choosing-based-on-your-needs">Budget vs Pathway: Choosing Based on Your Needs<a class="headerlink" href="#budget-vs-pathway-choosing-based-on-your-needs" title="Permanent link">&para;</a></h3>
 <p><strong>In brief:</strong> Both produce compatible cumulative allocations. Choose based on whether you need year-by-year breakdowns.</p>
@@ -2510,7 +2528,8 @@
 <p><strong>Mathematical specifications:</strong> <a href="https://setupelz.github.io/fair-shares/api/allocations/budgets/#equal_per_capita_budget">Budget</a> | <a href="https://setupelz.github.io/fair-shares/api/allocations/pathways/#equal_per_capita">Pathway</a></p>
 <hr />
 <h2 id="historical-responsibility">Historical Responsibility<a class="headerlink" href="#historical-responsibility" title="Permanent link">&para;</a></h2>
-<p>Two mechanisms:</p>
+<p>The case for historical responsibility rests on the claim that past emissions create present obligations — that cumulative contributions to the problem should shape the distribution of remaining space. The normative grounding spans harm prohibition <a href="https://doi.org/10.1515/mopp-2013-0009">Shue 2015</a>; <a href="https://chicagounbound.uchicago.edu/cjil/vol13/iss2/15/">Meyer 2013</a>, corrective justice <a href="https://doi.org/10.1080/13698230903326331">Caney 2010</a>, and the founding per-capita equity argument in <a href="https://cdn.cseindia.org/userfiles/GlobalWarming%20Book.pdf">Agarwal 1991</a>. Quantitative operationalisation is developed by <a href="https://doi.org/10.1038/NCLIMATE2774">Matthews 2016</a> (cumulative carbon debt against an equal per-capita benchmark) and extended by <a href="https://doi.org/10.1073/pnas.2409316122">Pelz 2025a</a> (net-zero carbon debt as a persistent post-peak obligation).</p>
+<p>fair-shares exposes two distinct mechanisms to operationalise this:</p>
 <ol>
 <li><strong>Early allocation year:</strong> Set <code>allocation_year</code> to 1850 or 1990 — cumulative population from that year determines each country's share (can produce negative allocations when shares are applied to a budget)</li>
 <li><strong>Responsibility weight:</strong> Use <code>pre_allocation_responsibility_weight</code> + <code>pre_allocation_responsibility_year</code> — multiplicative rescaling of shares based on relative per-capita historical emissions (always positive if <code>allocation_year</code> is the present)</li>
@@ -2525,14 +2544,14 @@
 <p class="admonition-title">This is a per-capita-adjusted parameter, not an equal-per-capita parameter</p>
 <p>Discounting historical emissions is not a neutral technical choice. It systematically reduces measured responsibility for early-industrialising countries and is <strong>not</strong> part of equal-per-capita accounting. Equal per capita treats every tonne of CO2 equivalently regardless of when it was emitted. Discounting departs from this by introducing a temporal weighting that favours early emitters.</p>
 <p>The parameter is available on the <code>per-capita-adjusted</code> family of functions (where <code>pre_allocation_responsibility_weight &gt; 0</code>), not on <code>equal-per-capita</code> functions. It is also available on <code>cumulative-per-capita-convergence-adjusted</code> and <code>cumulative-per-capita-convergence-gini-adjusted</code>, which route through the same pre-allocation responsibility adjustment pipeline.</p>
-<p>For critiques of discounting historical responsibility, see [Meyer 2013] (why historical emissions should count at face value), [Shue 2014; Shue 2015] (harm prohibition does not decay with time), and [Caney 2009] (discounting conflates atmospheric residence with moral responsibility). For the countervailing physical argument, see [Dekker 2025] and [Van Den Berg 2020].</p>
+<p>For critiques of discounting historical responsibility, see <a href="https://chicagounbound.uchicago.edu/cjil/vol13/iss2/15/">Meyer 2013</a> (why historical emissions should count at face value), [Shue 2014]; <a href="https://doi.org/10.1515/mopp-2013-0009">Shue 2015</a> (harm prohibition does not decay with time), and <a href="https://doi.org/10.1080/17449620903110300">Caney 2009</a> (discounting conflates atmospheric residence with moral responsibility). For the countervailing physical argument, see <a href="https://doi.org/10.1038/s41558-025-02361-7">Dekker 2025</a> and <a href="https://doi.org/10.1007/s10584-019-02368-y">Van Den Berg 2020</a>.</p>
 </div>
 <p>Weights earlier historical emissions less than recent ones when computing pre-allocation responsibility scaling. The discount weight for emissions in year <span class="arithmatex">\(t\)</span> relative to a reference year <span class="arithmatex">\(t_{ref}\)</span> is:</p>
 <div class="arithmatex">\[
 w(t) = (1 - r_d)^{t_{ref} - t}
 \]</div>
 <p>where <span class="arithmatex">\(r_d\)</span> is the discount rate (0.0 to &lt;1.0) and <span class="arithmatex">\(t_{ref}\)</span> is the year before the allocation year. When <code>historical_discount_rate=0.0</code> (default), all historical emissions are weighted equally — this is the standard approach. When per-capita pre-allocation responsibility is used, the same discount weights are applied to population for consistency.</p>
-<p>The argument for discounting is physical: a fraction of emitted CO2 is removed from the atmosphere each year by ocean and terrestrial sinks, so older emissions contribute less to current concentrations [Dekker 2025; Van Den Berg 2020]. The argument against is moral: responsibility for harm does not diminish with time, and discounting produces outcomes that systematically benefit the countries most responsible for cumulative warming [Meyer 2013; Shue 2015].</p>
+<p>The argument for discounting is physical: a fraction of emitted CO2 is removed from the atmosphere each year by ocean and terrestrial sinks, so older emissions contribute less to current concentrations <a href="https://doi.org/10.1038/s41558-025-02361-7">Dekker 2025</a>; <a href="https://doi.org/10.1007/s10584-019-02368-y">Van Den Berg 2020</a>. The argument against is moral: responsibility for harm does not diminish with time, and discounting produces outcomes that systematically benefit the countries most responsible for cumulative warming <a href="https://chicagounbound.uchicago.edu/cjil/vol13/iss2/15/">Meyer 2013</a>; <a href="https://doi.org/10.1515/mopp-2013-0009">Shue 2015</a>.</p>
 <table>
 <thead>
 <tr>
@@ -2582,7 +2601,7 @@ w(t) = (1 - r_d)^{t_{ref} - t}
 <p><strong><code>minimum-speed</code></strong> finds the slowest possible exponential convergence that still satisfies the cumulative constraint. This produces the most gradual transition, giving high-emitting countries the most time to adjust. Use this as the default — it is fully automatic and produces conservative (least-disruptive) transition paths.</p>
 </li>
 <li>
-<p><strong><code>sine-deviation</code></strong> front-loads the adjustment, requiring larger near-term emission reductions and allowing more headroom later. This reflects an urgency argument: if cumulative emissions drive warming, earlier reductions have more value. Use this when you want to explore front-loaded pathways or when replicating [Dekker 2025].</p>
+<p><strong><code>sine-deviation</code></strong> front-loads the adjustment, requiring larger near-term emission reductions and allowing more headroom later. This reflects an urgency argument: if cumulative emissions drive warming, earlier reductions have more value. Use this when you want to explore front-loaded pathways or when replicating <a href="https://doi.org/10.1038/s41558-025-02361-7">Dekker 2025</a>.</p>
 </li>
 </ul>
 <table>
@@ -2601,7 +2620,7 @@ w(t) = (1 - r_d)^{t_{ref} - t}
 </tr>
 <tr>
 <td><code>sine-deviation</code></td>
-<td>Iterative sine-shaped deviation from a PCC baseline [Dekker 2025]. Front-loads the adjustment toward cumulative budget targets.</td>
+<td>Iterative sine-shaped deviation from a PCC baseline <a href="https://doi.org/10.1038/s41558-025-02361-7">Dekker 2025</a>. Front-loads the adjustment toward cumulative budget targets.</td>
 <td><code>convergence_year</code></td>
 </tr>
 </tbody>
@@ -2727,18 +2746,20 @@ E_{alloc}(t, g) = \frac{D(t,g)}{t_{conv} - t} \cdot \sin\!\left(\frac{t}{t_{conv
 <h2 id="per-capita-convergence-pcc">Per Capita Convergence (PCC)<a class="headerlink" href="#per-capita-convergence-pcc" title="Permanent link">&para;</a></h2>
 <!-- REFERENCE: per_capita_convergence() in src/fair_shares/library/allocations/pathways/per_capita_convergence.py -->
 
-<p>The <code>per-capita-convergence</code> approach linearly blends grandfathering (current emissions) with equal per capita over time. It includes grandfathering elements, which are critiqued in the literature; see <a href="#approaches-debated-in-the-literature">Approaches Debated in the Literature</a> for context.</p>
+<p>The <code>per-capita-convergence</code> approach linearly blends grandfathering (current emissions) with equal per capita over time. It includes grandfathering elements, critiqued as having "no support among moral and political philosophers" <a href="https://doi.org/10.1038/s41558-021-01015-8">Dooley 2021</a>; see <a href="#approaches-debated-in-the-literature">Approaches Debated in the Literature</a> for context and <a href="https://doi.org/10.1038/s41558-018-0152-7">Kartha 2018</a> on how convergence framings embed grandfathering during the transition period.</p>
 <p><strong><a href="https://setupelz.github.io/fair-shares/api/allocations/pathways/">Formulation →</a></strong></p>
 <hr />
 <h2 id="approaches-debated-in-the-literature">Approaches Debated in the Literature<a class="headerlink" href="#approaches-debated-in-the-literature" title="Permanent link">&para;</a></h2>
 <p>Several approaches appear in climate policy discussions and have been subject to scholarly critique.</p>
 <h3 id="grandfathering">Grandfathering<a class="headerlink" href="#grandfathering" title="Permanent link">&para;</a></h3>
-<p>Allocating future emission entitlements based on current emission shares. Caney [2009] calls grandfathering "morally perverse," and Dooley [2021] documents that it has "virtually no support among moral and political philosophers." Despite this, it dominates many studies that claim to be value-neutral. Moreover grandfathering is often embedded implicitly in "blended" approaches that combine it with equity principles [Kartha 2018] which must be treated with caution.</p>
+<p>Allocating future emission entitlements based on current emission shares. <a href="https://doi.org/10.1080/17449620903110300">Caney 2009</a> calls grandfathering "morally perverse," and <a href="https://doi.org/10.1038/s41558-021-01015-8">Dooley 2021</a> documents that it has "virtually no support among moral and political philosophers." Despite this, it dominates many studies that claim to be value-neutral. Moreover grandfathering is often embedded implicitly in "blended" approaches that combine it with equity principles <a href="https://doi.org/10.1038/s41558-018-0152-7">Kartha 2018</a> which must be treated with caution.</p>
 <p>The <code>per-capita-convergence</code> approach includes grandfathering elements and is available in fair-shares for comparison; see <a href="#per-capita-convergence-pcc">PCC</a>.</p>
+<h3 id="cascading-biases">Cascading Biases<a class="headerlink" href="#cascading-biases" title="Permanent link">&para;</a></h3>
+<p><a href="https://doi.org/10.1038/s41558-018-0152-7">Kartha 2018</a> identifies three methodological biases that compound across effort-sharing analyses and systematically favour wealthier countries: <strong>scope bias</strong> (including cost-effectiveness alongside equity approaches, so that "efficiency" framings dilute equity findings), <strong>framing bias</strong> (late base years that embed grandfathering by construction), and <strong>aggregation bias</strong> (averaging ethically unequal approaches as if they were interchangeable). Each bias is small in isolation; cascaded together they produce results that look neutral but are not. <a href="https://doi.org/10.1038/s41558-025-02361-7">Dekker 2025</a> documents how these patterns persist in recent fair-target modelling. The practical implication for fair-shares users: choose approaches based on principled argument, not menu-inclusion, and report each configuration separately rather than aggregating across principles.</p>
 <h3 id="bau-deviation-framing">BAU Deviation Framing<a class="headerlink" href="#bau-deviation-framing" title="Permanent link">&para;</a></h3>
-<p>Treating deviation from business-as-usual emissions as a cost or sacrifice. Pelz 2025b argues this framing is inconsistent with CBDR-RC because it treats current emission levels as a baseline entitlement.</p>
+<p>Treating deviation from business-as-usual emissions as a cost or sacrifice. <a href="https://doi.org/10.1088/1748-9326/ada45f">Pelz 2025b</a> argues this framing is inconsistent with CBDR-RC because it treats current emission levels as a baseline entitlement — a concealed form of grandfathering.</p>
 <h3 id="small-share-justification">Small Share Justification<a class="headerlink" href="#small-share-justification" title="Permanent link">&para;</a></h3>
-<p>Arguments of the form "We only emit X% of global emissions." Winkler 2020 notes this cannot be universalized and conflates total with per capita emissions.</p>
+<p>Arguments of the form "We only emit X% of global emissions." <a href="https://doi.org/10.1080/14693062.2019.1680337">Winkler 2020</a> notes this cannot be universalised (every country's share is small under a sufficiently fine partition) and conflates total with per capita emissions. <a href="https://doi.org/10.1038/s41558-021-01015-8">Dooley 2021</a> catalogues it as one of several "illegitimate" fairness indicators that routinely appear in NDC justifications.</p>
 <hr />
 <h2 id="see-also">See Also<a class="headerlink" href="#see-also" title="Permanent link">&para;</a></h2>
 <ul>

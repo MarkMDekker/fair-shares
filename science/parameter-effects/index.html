@@ -2234,7 +2234,7 @@
 <p><strong>Theoretical basis:</strong> See <a href="https://setupelz.github.io/fair-shares/science/allocations/#historical-responsibility">Historical Responsibility</a> · <a href="https://setupelz.github.io/fair-shares/science/allocations/#weight-normalization">Weight Normalization</a></p>
 <hr />
 <h2 id="income_floor">income_floor<a class="headerlink" href="#income_floor" title="Permanent link">&para;</a></h2>
-<p><strong>Effect:</strong> Sets a development threshold for capability calculations, adapted from the Greenhouse Development Rights framework (Baer et al. 2009). Note that GDR was designed for burden-sharing; fair-shares uses its capability metric in an entitlement allocation context. For every person, only their income <strong>above</strong> this threshold counts towards "capability" or "ability to pay". Income up to the threshold is considered necessary for basic human development.</p>
+<p><strong>Effect:</strong> Sets a development threshold for capability calculations, adapted from the Greenhouse Development Rights framework (<a href="https://doi.org/10.1080/13668790903195495">Baer 2009</a>; <a href="https://doi.org/10.1002/wcc.201">Baer 2013</a>). Note that GDR was designed for burden-sharing; fair-shares uses its capability metric in an entitlement allocation context. For every person, only their income <strong>above</strong> this threshold counts towards "capability" or "ability to pay". Income up to the threshold is considered necessary for basic human development.</p>
 <p><strong>Direction:</strong></p>
 <ul>
 <li><code>floor=0</code> → All income counts toward capability (no development protection)</li>
@@ -2291,7 +2291,7 @@
 <li><code>rate=0.01</code> → Stronger discounting; 1850 emissions at ~18% weight</li>
 </ul>
 <p>Higher rates reduce the influence of early-industrialisation emissions. Countries that industrialised early (UK, Germany, USA) benefit most from discounting. Countries whose emissions grew recently (China, India) see relatively smaller changes because their emission mass is concentrated in recent decades where discount weights are near 1.0.</p>
-<p><strong>Key insight:</strong> This parameter is contested in the literature. The physical argument: natural carbon sinks remove CO2 over time, so older emissions contribute less to current concentrations [Dekker 2025; Van Den Berg 2020]. The moral counterargument: responsibility for harm does not decay with time, and discounting systematically benefits the countries most responsible for cumulative warming [Meyer 2013; Shue 2015; Caney 2009]. The choice of any rate above 0.0 is a normative decision, not a technical one.</p>
+<p><strong>Key insight:</strong> This parameter is contested in the literature. The physical argument: natural carbon sinks remove CO2 over time, so older emissions contribute less to current concentrations <a href="https://doi.org/10.1038/s41558-025-02361-7">Dekker 2025</a>; <a href="https://doi.org/10.1007/s10584-019-02368-y">Van Den Berg 2020</a>. The moral counterargument: responsibility for harm does not decay with time, and discounting systematically benefits the countries most responsible for cumulative warming <a href="https://chicagounbound.uchicago.edu/cjil/vol13/iss2/15/">Meyer 2013</a>; <a href="https://doi.org/10.1515/mopp-2013-0009">Shue 2015</a>; <a href="https://doi.org/10.1080/17449620903110300">Caney 2009</a>. The choice of any rate above 0.0 is a normative decision, not a technical one.</p>
 <p><strong>Mathematical detail:</strong> See <a href="https://setupelz.github.io/fair-shares/science/allocations/#historical-emissions-discounting">Historical Emissions Discounting</a></p>
 <p><strong>Theoretical basis:</strong> See <a href="https://setupelz.github.io/fair-shares/science/allocations/">Allocation Approaches</a> · <a href="https://setupelz.github.io/fair-shares/science/allocations/#historical-responsibility">Historical Responsibility</a></p>
 <hr />
@@ -2343,7 +2343,7 @@
 <p><em>Directional effects shown. India and China gain cumulative entitlement because they held a larger share of global population in 1850–1950 than they do from 2020 onward. USA and Germany lose entitlement because their population share was smaller historically.</em></p>
 <p><strong>Key insight:</strong> This parameter addresses a specific question: over what period should cumulative population count toward per-capita atmospheric entitlements? The default (forward-looking only) implicitly treats past use of the atmospheric commons as irrelevant to future entitlement. Setting <code>historical_start_year</code> to 1850 takes the position that entitlements should reflect the entire period of industrialisation. The choice is normative — there is no technically neutral default.</p>
 <p><strong>Mathematical detail:</strong> See <a href="https://setupelz.github.io/fair-shares/science/allocations/#historical-start-year-convergence-only">Historical Start Year</a></p>
-<p><strong>Theoretical basis:</strong> See [Dekker 2025; Van Den Berg 2020] in <a href="https://setupelz.github.io/fair-shares/science/references/">References</a></p>
+<p><strong>Theoretical basis:</strong> <a href="https://doi.org/10.1038/s41558-025-02361-7">Dekker 2025</a>; <a href="https://doi.org/10.1007/s10584-019-02368-y">Van Den Berg 2020</a></p>
 <hr />
 <h2 id="strict-convergence-only">strict (Convergence Only)<a class="headerlink" href="#strict-convergence-only" title="Permanent link">&para;</a></h2>
 <!-- REFERENCE: find_minimum_convergence_speed() in src/fair_shares/library/utils/math/convergence.py -->
@@ -2424,7 +2424,7 @@
 <p><strong>Direction:</strong></p>
 <ul>
 <li><code>"minimum-speed"</code> (default) → Finds the minimum exponential convergence speed that satisfies cumulative constraints. Produces the smoothest feasible transition.</li>
-<li><code>"sine-deviation"</code> → Iterative sine-shaped deviation from a per-capita-convergence baseline [Dekker 2025]. Front-loads the adjustment toward cumulative budget targets. Requires <code>convergence_year</code>.</li>
+<li><code>"sine-deviation"</code> → Iterative sine-shaped deviation from a per-capita-convergence baseline <a href="https://doi.org/10.1038/s41558-025-02361-7">Dekker 2025</a>. Front-loads the adjustment toward cumulative budget targets. Requires <code>convergence_year</code>.</li>
 </ul>
 <p><strong>Key insight:</strong> <code>minimum-speed</code> is the workhorse — it requires no additional parameters and finds the least disruptive transition path. <code>sine-deviation</code> is more aggressive near-term: it front-loads adjustments using a sine-shaped correction, producing steeper initial changes but converging by <code>convergence_year</code>. Use <code>sine-deviation</code> when the policy question is specifically about accelerated near-term transitions.</p>
 <p><strong>Mathematical detail:</strong> See <a href="https://setupelz.github.io/fair-shares/science/allocations/#convergence-method">Convergence Method</a></p>

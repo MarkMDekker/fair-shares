@@ -2373,7 +2373,9 @@
 <h2 id="all-ghg-allocations-with-rcbs">All-GHG Allocations with RCBs<a class="headerlink" href="#all-ghg-allocations-with-rcbs" title="Permanent link">&para;</a></h2>
 <p>Remaining carbon budgets constrain <strong>CO₂ only</strong> — they are derived from the
 near-linear relationship between cumulative CO₂ emissions and global warming
-[IPCC AR6 WG1]. Non-CO₂ greenhouse gases (CH₄, N₂O, F-gases) pathways are an
+(<a href="https://doi.org/10.1017/9781009157896">IPCC 2021</a>, AR6 WG1; see also
+<a href="https://doi.org/10.1038/s41558-023-01848-5">Lamboll 2023</a> on budget size and
+uncertainty). Non-CO₂ greenhouse gases (CH₄, N₂O, F-gases) pathways are an
 assumption used in deriving the remaining carbon budget quantity.</p>
 <p>When users request an all-GHG allocation (e.g. <code>all-ghg</code> or <code>all-ghg-ex-co2-lulucf</code>) but use RCBs as the target source, a problem arises: RCBs constrain CO₂ only and say nothing about non-CO₂ gases. To produce all-GHG results, the system <strong>decomposes</strong> the problem into two components — allocating CO₂ via the budget approach and non-CO₂ via scenario pathways:</p>
 <table>
@@ -2616,7 +2618,7 @@ L_{\text{BM}}^{\text{capped}} = \max\!\left(0,\; \underset{i}{\text{median}}\lef
 <p>This means that adding a new RCB source (e.g., Lamboll et al. with baseline 2023) only requires actual emissions data through 2022 for the rebase. The LULUCF decomposition integrates from <span class="arithmatex">\(\text{base}\)</span> (co2-ffi), while the convention gap and bunker deduction always cover the full 2020--NZ period.</p>
 <h3 id="why-two-lulucf-conventions-matter">Why two LULUCF conventions matter<a class="headerlink" href="#why-two-lulucf-conventions-matter" title="Permanent link">&para;</a></h3>
 <p>Bookkeeping models (e.g., BLUE, OSCAR) estimate only <strong>direct human-caused</strong> land-use fluxes -- deforestation, afforestation, land management. NGHGIs additionally include <strong>indirect effects</strong> such as CO₂ fertilization of managed forests and climate-driven changes in soil carbon. The NGHGI total is therefore systematically different from the bookkeeping total, even for the same physical land area.</p>
-<p>The global difference is substantial: NGHGI-reported LULUCF is a larger net sink than BM estimates, creating a 5--7 GtCO₂/yr discrepancy primarily because CO₂ fertilization enhances carbon uptake on managed land [Weber 2026].</p>
+<p>The global difference is substantial: NGHGI-reported LULUCF is a larger net sink than BM estimates, creating a 5--7 GtCO₂/yr discrepancy primarily because CO₂ fertilization enhances carbon uptake on managed land <a href="https://doi.org/10.1038/s41467-026-69078-9">Weber 2026</a>.</p>
 <h3 id="per-scenario-net-zero-years-as-integration-bounds">Per-scenario net-zero years as integration bounds<a class="headerlink" href="#per-scenario-net-zero-years-as-integration-bounds" title="Permanent link">&para;</a></h3>
 <p>Forward-looking quantities (LULUCF decomposition, convention gap, bunker deduction) are integrated from their start year to the <strong>scenario-specific net-zero year</strong> <span class="arithmatex">\(t_{\text{nz},i}\)</span> -- the first year when that scenario's total CO₂ emissions (<code>Emissions|CO2</code>) reach zero. This prevents post-net-zero negative emissions from inflating the corrections.</p>
 <p>Note that <code>Emissions|CO2</code> in IAM scenario databases is fossil + BM LULUCF by convention — this is a property of how scenarios report total CO₂, not a methodological choice by fair-shares.</p>
