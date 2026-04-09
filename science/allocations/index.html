@@ -1391,15 +1391,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#historical-start-year-convergence-only" class="md-nav__link">
-    <span class="md-ellipsis">
-      Historical Start Year (Convergence Only)
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -2067,15 +2058,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#historical-start-year-convergence-only" class="md-nav__link">
-    <span class="md-ellipsis">
-      Historical Start Year (Convergence Only)
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -2437,9 +2419,9 @@
 </tr>
 <tr>
 <td>Historical population entitlement</td>
-<td>Extends cumulative population window backward for target shares</td>
+<td>Use <code>equal-per-capita-budget(allocation_year=1850)</code> then post-process by subtracting actual emissions</td>
 <td>N/A</td>
-<td><code>historical_start_year</code> (convergence approaches only)</td>
+<td>Composition of budget allocation + post-processing</td>
 </tr>
 <tr>
 <td>Convergence mechanism</td>
@@ -2456,6 +2438,11 @@
 <p><strong>Pre-allocation responsibility scaling</strong> (e.g. <code>allocation_year=2025</code>, <code>pre_allocation_responsibility_year=1990</code>): keeps the allocation year at 2025 (so no cumulative accounting of past emissions in the budget) but multiplicatively rescales each country's share based on relative per-capita emissions during 1990–2025. Always produces positive allocations if <code>allocation_year</code> is the present, because it adjusts <em>proportions</em>, not <em>levels</em> — but it is not a 1:1 accounting of those emissions.</p>
 </div>
 <p><strong>Temporal note:</strong> Capability adjustments apply from the allocation year onwards. Pre-allocation responsibility scaling covers <code>pre_allocation_responsibility_year</code> to the allocation year — a separate, earlier window.</p>
+<p><strong>GDP window beyond the last observed year:</strong> When the allocation cumulative window extends past the last year of the input GDP time series (the default <code>wdi-2025</code> ends at 2023), the per-capita budget and pathway primitives forward-fill GDP per capita from the last observed year to cover every subsequent year of the window. The cross-country capability ratios of the last observed year are then held constant for the rest of the window. The cumulative-per-capita-convergence primitives behave differently: their per-country capability scalar is computed only over the intersection of GDP and population years, with no forward-fill at all. In both cases, users who want different post-observation capability dynamics (SSP2 GDP projections, custom growth assumptions, or a future-extended WDI release) should extend the input <code>gdp_ts</code> time series before calling the allocation function. The forward-fill is the minimum-disruption default when no projected GDP data is supplied; the library does not prescribe a projection.</p>
+<p><strong>Capability snapshot mode (<code>capability_reference_year: int | None = None</code>):</strong> By default, <code>per_capita_adjusted_budget</code> computes capability year-by-year — <code>pf(GDP_per_cap(g, t))</code> is evaluated for each country and year in the allocation window, then multiplied into that year's population and summed cumulatively. Setting <code>capability_reference_year</code> to an integer changes this: capability becomes a scalar per country, computed as <code>pf(GDP_per_cap(g, t_ref))</code> from that single reference year's data, then broadcast across all population years in the window. The reference year can be before, at, or after <code>allocation_year</code> — all three cases are handled. The two modes are algebraically equivalent only when capability is constant over the window; in practice they diverge substantially for long windows spanning periods of economic change. Emits a <code>UserWarning</code> if <code>capability_reference_year</code> exceeds the last observed GDP year.</p>
+<p>The canonical example of <code>ref_year &lt; allocation_year</code> is the PRR2023 lag-1 convention: PRR2023 defines capability as GDP per capita in the year immediately preceding the allocation decision, so <code>allocation_year=2015</code> paired with <code>capability_reference_year=2014</code> is the reproduction-faithful configuration. The nb601 notebook (PRR2023 reproduction) uses exactly this. More broadly: use <code>capability_reference_year=1990</code> with <code>allocation_year=1990</code> for ESABCC 2023 <code>CPCadjCAP</code> results.</p>
+<p><strong>Gini caveat when <code>ref_year &lt; allocation_year</code>:</strong> The Gini adjustment (<code>gini_s</code> kwarg) is NOT applied to the snapshot in this case. The snapshot is sourced from the unfiltered <code>gdp_ts</code> and <code>population_ts</code> inputs, before the Gini adjustment step runs. Users who need Gini at the reference year should either (a) use a reference year inside the allocation window, or (b) pre-apply Gini to <code>gdp_ts</code> externally before calling <code>per_capita_adjusted_budget</code>.</p>
+<p>Year-by-year integration is the more defensible forward-looking semantic — it reflects lifetime capability over the allocation window rather than a point-in-time snapshot — but snapshot is the reproduction-faithful choice for papers that defined capability as a fixed indicator at a reference instant. For full design rationale and edge-case behaviour, see the proposal spec at <code>specs/active/2026-04-08-capability-snapshot-mode-proposal.md</code>.</p>
 <p>These can be combined. For example, CBDR-RC can be interpreted and operationalised through:</p>
 <ul>
 <li>Early allocation year (e.g. 1850) + capability weight: simplest, but capability data may be unavailable for early years</li>
@@ -2478,10 +2465,10 @@
 <!-- REFERENCE: per_capita_adjusted_budget() in src/fair_shares/library/allocations/budgets/per_capita.py -->
 <!-- REFERENCE: per_capita_adjusted() in src/fair_shares/library/allocations/pathways/per_capita.py -->
 
-<p>Parameter: <code>max_deviation_sigma</code> (default: 2.0, set to <code>None</code> to disable)</p>
-<p><strong>Why this exists:</strong> Pre-allocation responsibility and capability adjustments are multiplicative rescaling factors applied to population. In theory, these factors are unbounded — a country with extremely high per-capita emissions and high GDP could have its allocation rescaled to near zero, while a country at the other extreme could receive a disproportionately large share. Without a constraint, a single outlier country can distort the entire distribution, making results sensitive to data quality in the tails rather than the underlying equity logic.</p>
-<p><code>max_deviation_sigma</code> caps this by limiting how far any country's adjusted allocation can deviate from the equal-per-capita baseline, measured in standard deviations of the adjustment distribution. The default of 2.0 standard deviations permits substantial differentiation while preventing extreme outliers from dominating results.</p>
-<p>Set to <code>None</code> to remove the constraint entirely — use this when you want the raw, unconstrained adjustment to see the full range of differentiation. Values below 1.0 compress the distribution aggressively and are rarely appropriate.</p>
+<p>Parameter: <code>max_deviation_sigma</code> (default: <code>None</code> — no constraint; set to a positive float such as <code>2.0</code> to enable a ±N-σ cap)</p>
+<p><strong>Why this exists:</strong> Pre-allocation responsibility and capability adjustments are multiplicative rescaling factors applied to population. In theory, these factors are unbounded — a country with extremely high per-capita emissions and high GDP could have its allocation rescaled to near zero, while a country at the other extreme could receive a disproportionately large share. A single outlier country can therefore distort the entire distribution, making results sensitive to data quality in the tails. <code>max_deviation_sigma</code> provides an optional opt-in cap on this behaviour for users who want to dampen tail sensitivity.</p>
+<p><code>max_deviation_sigma</code> caps this by limiting how far any country's adjusted allocation can deviate from the equal-per-capita baseline, measured in standard deviations of the adjustment distribution. <strong>The default is <code>None</code> (no cap)</strong> — fair-shares does not silently clip extreme values, because most published effort-sharing frameworks (Pelz 2025, PRR2023, GDR/Baer 2009, Dekker 2025) explicitly permit and even expect extreme tails. Setting <code>max_deviation_sigma=2.0</code> reproduces the older fair-shares default behaviour, which clipped to within 2 standard deviations.</p>
+<p>Use a numeric value (e.g. <code>2.0</code>) when you explicitly want to compress the distribution; leave it at <code>None</code> to reproduce the raw, unconstrained adjustment behaviour described in the source papers.</p>
 <p>Only relevant when applying scaling adjustments (pre-allocation responsibility, capability, or combinations). Has no effect on pure equal-per-capita approaches.</p>
 <p><strong>Implementation details:</strong> <a href="https://setupelz.github.io/fair-shares/api/allocations/budgets/#per_capita_adjusted_budget">Budget</a> | <a href="https://setupelz.github.io/fair-shares/api/allocations/pathways/#per_capita_adjusted">Pathway</a></p>
 <hr />
@@ -2544,7 +2531,7 @@
 <p class="admonition-title">This is a per-capita-adjusted parameter, not an equal-per-capita parameter</p>
 <p>Discounting historical emissions is not a neutral technical choice. It systematically reduces measured responsibility for early-industrialising countries and is <strong>not</strong> part of equal-per-capita accounting. Equal per capita treats every tonne of CO2 equivalently regardless of when it was emitted. Discounting departs from this by introducing a temporal weighting that favours early emitters.</p>
 <p>The parameter is available on the <code>per-capita-adjusted</code> family of functions (where <code>pre_allocation_responsibility_weight &gt; 0</code>), not on <code>equal-per-capita</code> functions. It is also available on <code>cumulative-per-capita-convergence-adjusted</code> and <code>cumulative-per-capita-convergence-gini-adjusted</code>, which route through the same pre-allocation responsibility adjustment pipeline.</p>
-<p>For critiques of discounting historical responsibility, see <a href="https://chicagounbound.uchicago.edu/cjil/vol13/iss2/15/">Meyer 2013</a> (why historical emissions should count at face value), [Shue 2014]; <a href="https://doi.org/10.1515/mopp-2013-0009">Shue 2015</a> (harm prohibition does not decay with time), and <a href="https://doi.org/10.1080/17449620903110300">Caney 2009</a> (discounting conflates atmospheric residence with moral responsibility). For the countervailing physical argument, see <a href="https://doi.org/10.1038/s41558-025-02361-7">Dekker 2025</a> and <a href="https://doi.org/10.1007/s10584-019-02368-y">Van Den Berg 2020</a>.</p>
+<p>For critiques of discounting historical responsibility, see <a href="https://chicagounbound.uchicago.edu/cjil/vol13/iss2/15/">Meyer 2013</a> (why historical emissions should count at face value), <a href="../references/#shue-2014">Shue 2014</a>; <a href="https://doi.org/10.1515/mopp-2013-0009">Shue 2015</a> (harm prohibition does not decay with time), and <a href="https://doi.org/10.1080/17449620903110300">Caney 2009</a> (discounting conflates atmospheric residence with moral responsibility). For the countervailing physical argument, see <a href="https://doi.org/10.1038/s41558-025-02361-7">Dekker 2025</a> and <a href="https://doi.org/10.1007/s10584-019-02368-y">Van Den Berg 2020</a>.</p>
 </div>
 <p>Weights earlier historical emissions less than recent ones when computing pre-allocation responsibility scaling. The discount weight for emissions in year <span class="arithmatex">\(t\)</span> relative to a reference year <span class="arithmatex">\(t_{ref}\)</span> is:</p>
 <div class="arithmatex">\[
@@ -2643,50 +2630,6 @@ E_{alloc}(t, g) = \frac{D(t,g)}{t_{conv} - t} \cdot \sin\!\left(\frac{t}{t_{conv
 <p><strong>Why this exists:</strong> The convergence solver finds the exponential speed at which each country's emission share moves toward its target. Without an upper bound, the solver could produce speeds where a country's allocation swings wildly from one year to the next — technically satisfying the cumulative constraint but producing a pathway no country could actually follow.</p>
 <p><code>max_convergence_speed</code> caps the speed parameter at a value between 0 and 1. At 0.9 (default), a country's allocation can move up to 90% of the remaining distance to its long-run target in a single year — fast enough for aggressive transitions but smooth enough to be physically plausible. Lower values force gentler transitions but increase the chance of infeasibility (the solver may not find a path that satisfies the cumulative constraint at low speeds). Higher values allow more abrupt year-to-year changes.</p>
 <p>If <code>strict=True</code> raises an infeasibility error and <code>max_convergence_speed</code> is below 0.9, try increasing it before relaxing other parameters.</p>
-<h3 id="historical-start-year-convergence-only">Historical Start Year (Convergence Only)<a class="headerlink" href="#historical-start-year-convergence-only" title="Permanent link">&para;</a></h3>
-<!-- REFERENCE: cumulative_per_capita_convergence() in src/fair_shares/library/allocations/pathways/cumulative_per_capita_convergence.py -->
-
-<p>Parameter: <code>historical_start_year</code> (default: None)</p>
-<p><strong>Why this exists:</strong> Cumulative per capita convergence computes target shares based on cumulative population — the total person-years a country contributes over the allocation horizon. By default, this sum starts at <code>first_allocation_year</code>. But that ignores a key fact: the atmospheric commons was being used long before the allocation starts. Countries that had large populations during the period of industrialisation (China, India) had more people with a claim to equal per-capita atmospheric space during those decades. If cumulative per-capita entitlements are the fairness principle, then the population window should arguably cover the entire period over which the commons was used — not just the future [Dekker 2025; Van Den Berg 2020].</p>
-<p><code>historical_start_year</code> operationalises this choice. When set, cumulative population for computing target shares is summed from <code>historical_start_year</code> instead of <code>first_allocation_year</code>. Must be <span class="arithmatex">\(\leq\)</span> <code>first_allocation_year</code>.</p>
-<p>The effect is directional and predictable: extending the population window backward increases the cumulative entitlement of countries that had large populations historically, and decreases the entitlement of countries whose populations grew recently. The magnitude depends on how far back the window extends and how much relative population shares shifted over that period.</p>
-<div class="admonition note">
-<p class="admonition-title">This is a population entitlement parameter, not a pre-allocation responsibility parameter</p>
-<p><code>historical_start_year</code> affects the <strong>target share</strong> calculation (who is entitled to how much atmospheric space based on cumulative population). It does not affect pre-allocation responsibility adjustments or historical emissions accounting. For historical responsibility, see <a href="#building-blocks"><code>pre_allocation_responsibility_weight</code></a> and <a href="#historical-emissions-discounting"><code>historical_discount_rate</code></a>.</p>
-</div>
-<table>
-<thead>
-<tr>
-<th>Configuration</th>
-<th>Cumulative population window</th>
-<th>Effect</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Default (no <code>historical_start_year</code>)</td>
-<td><code>first_allocation_year</code> to end</td>
-<td>Target shares based on forward-looking population only</td>
-</tr>
-<tr>
-<td><code>historical_start_year=1990</code></td>
-<td>1990 to end</td>
-<td>Modest shift — population shares were similar to today</td>
-</tr>
-<tr>
-<td><code>historical_start_year=1950</code></td>
-<td>1950 to end</td>
-<td>Moderate shift toward China, India</td>
-</tr>
-<tr>
-<td><code>historical_start_year=1850</code></td>
-<td>1850 to end</td>
-<td>Strongest shift — captures the full industrialisation period</td>
-</tr>
-</tbody>
-</table>
-<p>Available on all three convergence variants: <code>cumulative-per-capita-convergence</code>, <code>cumulative-per-capita-convergence-adjusted</code>, and <code>cumulative-per-capita-convergence-gini-adjusted</code>.</p>
-<hr />
 <h2 id="strict-parameter-convergence-only">Strict Parameter (Convergence Only)<a class="headerlink" href="#strict-parameter-convergence-only" title="Permanent link">&para;</a></h2>
 <!-- REFERENCE: cumulative_per_capita_convergence() in src/fair_shares/library/allocations/pathways/cumulative_per_capita_convergence.py -->
 <!-- REFERENCE: cumulative_per_capita_convergence_adjusted() in src/fair_shares/library/allocations/pathways/cumulative_per_capita_convergence.py -->
@@ -2727,9 +2670,10 @@ E_{alloc}(t, g) = \frac{D(t,g)}{t_{conv} - t} \cdot \sin\!\left(\frac{t}{t_{conv
 <h2 id="adjustment-shape-parameters">Adjustment Shape Parameters<a class="headerlink" href="#adjustment-shape-parameters" title="Permanent link">&para;</a></h2>
 <p>The <code>*-adjusted</code> and <code>*-adjusted-gini</code> approaches expose several parameters that control the functional shape of pre-allocation responsibility and capability adjustments. Pre-allocation responsibility looks backward from the allocation year; capability adjustments apply from the allocation year onwards. These are advanced tuning parameters — the defaults are appropriate for most analyses. They are documented here for completeness; see the <a href="https://setupelz.github.io/fair-shares/api/allocations/budgets/#per_capita_adjusted_budget">API Reference</a> for full mathematical details.</p>
 <h3 id="per-capita-vs-absolute-mode">Per Capita vs Absolute Mode<a class="headerlink" href="#per-capita-vs-absolute-mode" title="Permanent link">&para;</a></h3>
-<p>Parameters: <code>pre_allocation_responsibility_per_capita</code> (default: True), <code>capability_per_capita</code> (default: True)</p>
-<p><strong>Why these exist:</strong> Pre-allocation responsibility can be measured on a per-capita or absolute basis, and the choice reflects different fairness intuitions. Per-capita mode (the default) divides cumulative emissions by cumulative population before comparing countries — a high-population country with high total emissions may have low per-capita emissions, reducing its responsibility adjustment. Absolute mode uses total emissions regardless of population, which penalises large emitters even if their per-capita emissions are low. The same logic applies to capability: per-capita GDP measures individual prosperity, while absolute GDP measures aggregate economic capacity.</p>
-<p>Per-capita mode is the standard choice in the equity literature and is consistent with the equal-per-capita framing of fair-shares. Absolute mode may be appropriate when the research question focuses on aggregate national capacity or total emission volume.</p>
+<p>Parameters: <code>pre_allocation_responsibility_per_capita</code> (default: <code>False</code>), <code>capability_per_capita</code> (default: <code>True</code>)</p>
+<p><strong>Why these exist:</strong> Pre-allocation responsibility can be measured on a per-capita or absolute basis, and the choice reflects different fairness intuitions. <strong>Absolute mode (the responsibility default)</strong> uses total cumulative emissions regardless of population, which penalises large historical emitters in line with the polluter-pays framing of GDR (Baer 2009), Matthews (2016), and most of the historical-responsibility literature. Per-capita mode divides cumulative emissions by cumulative population before comparing countries — a high-population country with high total emissions may have low per-capita emissions, reducing its responsibility adjustment.</p>
+<p>Capability is the inverse: per-capita mode (the default) measures individual prosperity using GDP/capita, which is the standard in the capability literature. Absolute mode uses total GDP and may be appropriate when the research question focuses on aggregate national capacity.</p>
+<p>The historical default for responsibility was <code>True</code> (per-capita); it was flipped to <code>False</code> so that responsibility-based reproductions match the polluter-pays absolute framing the source literature actually uses. Set explicitly to <code>True</code> if your research framing genuinely calls for per-capita responsibility.</p>
 <h3 id="exponents">Exponents<a class="headerlink" href="#exponents" title="Permanent link">&para;</a></h3>
 <p>Parameters: <code>pre_allocation_responsibility_exponent</code> (default: 1.0), <code>capability_exponent</code> (default: 1.0)</p>
 <p><strong>Why these exist:</strong> The exponent controls the shape of the adjustment function — how steeply allocations decline as emissions or GDP increase. At 1.0 (default), the adjustment is proportional: doubling per-capita emissions roughly doubles the adjustment. At values above 1.0, the adjustment is convex: high emitters or wealthy countries are penalised disproportionately more. This operationalises the argument that the first tonne of emissions or dollar of GDP matters less than the hundredth — a form of diminishing marginal value.</p>

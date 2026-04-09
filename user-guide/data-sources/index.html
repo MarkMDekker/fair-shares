@@ -2241,11 +2241,15 @@
 <p><strong>Source:</strong> World Bank World Development Indicators (2025).</p>
 <p><strong>License:</strong> <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY-4.0</a></p>
 <p><strong>Location:</strong> <code>data/gdp/wdi-2025/</code></p>
-<p><strong>What it provides:</strong> GDP per capita (PPP, constant 2021 USD).</p>
+<p><strong>What it provides:</strong> GDP per capita (PPP, constant 2021 USD). Observed series; ends at 2023.</p>
 <div class="admonition note">
 <p class="admonition-title">PPP vs MER: a normative choice</p>
 </div>
 <p>The choice between PPP and MER GDP measures is not purely technical — it is a normative decision that can significantly affect allocation results <a href="https://doi.org/10.1088/1748-9326/ada45f">Pelz 2025b</a>. See <a href="../../science/principle-to-code/">From Principle to Code</a> for further discussion.</p>
+<div class="admonition note">
+<p class="admonition-title">Post-observation GDP window</p>
+</div>
+<p><code>wdi-2025</code> is observed data only and ends at 2023, while population data extends to ~2100. When an allocation cumulative window runs past 2023, the per-capita budget and pathway primitives forward-fill GDP per capita from 2023 to cover the rest of the window — holding the cross-country capability ratios of 2023 constant. The cumulative-per-capita-convergence primitives instead compute their per-country capability scalar only over the observed-GDP years (no forward-fill). To use projected GDP for the post-observation window (SSP2, a custom growth assumption, or a future-extended WDI release), extend the input <code>gdp_ts</code> time series before calling the allocation function. See <a href="../../science/allocations/#building-blocks">Building Blocks</a> in the science docs for the full description.</p>
 <h3 id="imf-world-economic-outlook">IMF World Economic Outlook<a class="headerlink" href="#imf-world-economic-outlook" title="Permanent link">&para;</a></h3>
 <p><strong>Source:</strong> International Monetary Fund World Economic Outlook (2025).</p>
 <p><strong>License:</strong> <a href="https://www.imf.org/external/terms.htm">IMF Terms of Use</a> (permits academic use with citation)</p>

@@ -1329,15 +1329,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#historical_start_year-convergence-only" class="md-nav__link">
-    <span class="md-ellipsis">
-      historical_start_year (Convergence Only)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#strict-convergence-only" class="md-nav__link">
     <span class="md-ellipsis">
       strict (Convergence Only)
@@ -1871,15 +1862,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#historical_start_year-convergence-only" class="md-nav__link">
-    <span class="md-ellipsis">
-      historical_start_year (Convergence Only)
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#strict-convergence-only" class="md-nav__link">
     <span class="md-ellipsis">
       strict (Convergence Only)
@@ -2121,7 +2103,7 @@
 <h2 id="pre_allocation_responsibility_weight-and-capability_weight">pre_allocation_responsibility_weight and capability_weight<a class="headerlink" href="#pre_allocation_responsibility_weight-and-capability_weight" title="Permanent link">&para;</a></h2>
 <p><strong>Effect:</strong> These two weights jointly control CBDR-RC adjustments. They are <strong>relative</strong> — only their ratio matters, not their individual values. <code>(0.5, 0.5)</code> is identical to <code>(1.0, 1.0)</code> or <code>(0.3, 0.3)</code>. When one weight is 0, the other becomes the sole adjustment regardless of its value — <code>(0.0, 0.3)</code> is identical to <code>(0.0, 1.0)</code>. When both are 0, no adjustment is applied (pure equal per capita). See <a href="https://setupelz.github.io/fair-shares/science/allocations/#weight-normalization">Weight Normalization</a>.</p>
 <p><code>pre_allocation_responsibility_weight</code> activates per-capita rescaling based on cumulative per-capita emissions in [<code>pre_allocation_responsibility_year</code>, <code>allocation_year</code>). This is a <strong>separate mechanism</strong> from setting an early <code>allocation_year</code> — rescaling is multiplicative and always produces positive allocations if <code>allocation_year</code> is the present, whereas cumulative accounting can produce negative allocations (see <a href="#if-you-want-x-set-y-guide">comparison table</a> below).</p>
-<p><code>capability_weight</code> activates capability (ability to pay) adjustments based on GDP per capita from the allocation year onwards. Capability data before the allocation year is not used.</p>
+<p><code>capability_weight</code> activates capability (ability to pay) adjustments based on GDP per capita from the allocation year onwards. Capability data before the allocation year is not used. When the allocation window extends past the last observed GDP year (default <code>wdi-2025</code> ends at 2023), the per-capita budget and pathway primitives forward-fill GDP per capita from the last observed year to cover the rest of the window — holding the cross-country capability ratios of that last year constant for every subsequent year. To use different post-observation capability dynamics (SSP2 projections, custom growth assumptions, or a future-extended WDI release), extend the input <code>gdp_ts</code> time series before calling the allocation function.</p>
 <p><strong>Direction:</strong></p>
 <ul>
 <li>Both weights <code>0.0</code> → No adjustment (equal per capita)</li>
@@ -2295,56 +2277,6 @@
 <p><strong>Mathematical detail:</strong> See <a href="https://setupelz.github.io/fair-shares/science/allocations/#historical-emissions-discounting">Historical Emissions Discounting</a></p>
 <p><strong>Theoretical basis:</strong> See <a href="https://setupelz.github.io/fair-shares/science/allocations/">Allocation Approaches</a> · <a href="https://setupelz.github.io/fair-shares/science/allocations/#historical-responsibility">Historical Responsibility</a></p>
 <hr />
-<h2 id="historical_start_year-convergence-only">historical_start_year (Convergence Only)<a class="headerlink" href="#historical_start_year-convergence-only" title="Permanent link">&para;</a></h2>
-<!-- REFERENCE: cumulative_per_capita_convergence() in src/fair_shares/library/allocations/pathways/cumulative_per_capita_convergence.py -->
-
-<p><strong>Effect:</strong> Extends the cumulative population window backward when computing convergence target shares. Countries with large historical populations receive larger cumulative entitlements; countries whose populations grew recently receive relatively less. This is a population entitlement parameter — it does not affect pre-allocation responsibility adjustments or historical emissions accounting.</p>
-<p><strong>Direction:</strong></p>
-<ul>
-<li>Default (None) → Cumulative population starts at <code>first_allocation_year</code></li>
-<li>Earlier <code>historical_start_year</code> → More weight to historically populous countries (China, India)</li>
-<li><code>historical_start_year</code> = <code>first_allocation_year</code> → No-op (identical to default)</li>
-</ul>
-<p><strong>Example:</strong> <code>cumulative-per-capita-convergence</code> with <code>first_allocation_year=2020</code>, varying <code>historical_start_year</code></p>
-<table>
-<thead>
-<tr>
-<th>Country</th>
-<th>Default (no hist)</th>
-<th>hist=1990</th>
-<th>hist=1950</th>
-<th>hist=1850</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>USA</td>
-<td>↔ baseline</td>
-<td>↓ slight</td>
-<td>↓ moderate</td>
-<td>↓ large</td>
-</tr>
-<tr>
-<td>India</td>
-<td>↔ baseline</td>
-<td>↑ slight</td>
-<td>↑ moderate</td>
-<td>↑ large</td>
-</tr>
-<tr>
-<td>Germany</td>
-<td>↔ baseline</td>
-<td>↓ slight</td>
-<td>↓ moderate</td>
-<td>↓ large</td>
-</tr>
-</tbody>
-</table>
-<p><em>Directional effects shown. India and China gain cumulative entitlement because they held a larger share of global population in 1850–1950 than they do from 2020 onward. USA and Germany lose entitlement because their population share was smaller historically.</em></p>
-<p><strong>Key insight:</strong> This parameter addresses a specific question: over what period should cumulative population count toward per-capita atmospheric entitlements? The default (forward-looking only) implicitly treats past use of the atmospheric commons as irrelevant to future entitlement. Setting <code>historical_start_year</code> to 1850 takes the position that entitlements should reflect the entire period of industrialisation. The choice is normative — there is no technically neutral default.</p>
-<p><strong>Mathematical detail:</strong> See <a href="https://setupelz.github.io/fair-shares/science/allocations/#historical-start-year-convergence-only">Historical Start Year</a></p>
-<p><strong>Theoretical basis:</strong> <a href="https://doi.org/10.1038/s41558-025-02361-7">Dekker 2025</a>; <a href="https://doi.org/10.1007/s10584-019-02368-y">Van Den Berg 2020</a></p>
-<hr />
 <h2 id="strict-convergence-only">strict (Convergence Only)<a class="headerlink" href="#strict-convergence-only" title="Permanent link">&para;</a></h2>
 <!-- REFERENCE: find_minimum_convergence_speed() in src/fair_shares/library/utils/math/convergence.py -->
 
@@ -2397,11 +2329,11 @@
 <p><strong>Effect:</strong> Limits how far any country's adjusted allocation can deviate from equal per capita, measured in standard deviations. Only relevant when applying scaling adjustments (pre-allocation responsibility, capability, or combinations). Without this constraint, extreme adjustment values can produce outlier allocations.</p>
 <p><strong>Direction:</strong></p>
 <ul>
-<li><code>None</code> → No constraint (adjustments applied without limit)</li>
-<li><code>2.0</code> (default) → Allocations clipped to within ±2 standard deviations of equal per capita</li>
+<li><code>None</code> (default) → No constraint; adjustments applied without limit</li>
+<li><code>2.0</code> → Allocations clipped to within ±2 standard deviations of equal per capita</li>
 <li>Lower values → Tighter constraint, allocations closer to equal per capita</li>
 </ul>
-<p><strong>Key insight:</strong> This is a safety rail, not a tuning parameter. The default of 2.0 prevents extreme outliers while preserving meaningful differentiation. Set to <code>None</code> only when you want the raw adjustment values without any clipping — useful for sensitivity analysis but risky for production results. If you find yourself lowering this significantly, the adjustments themselves may be too aggressive.</p>
+<p><strong>Key insight:</strong> This is an opt-in tail-compression lever. Setting <code>max_deviation_sigma=2.0</code> compresses tails — disclose the choice.</p>
 <p><strong>Mathematical detail:</strong> See <a href="https://setupelz.github.io/fair-shares/science/allocations/#maximum-deviation-constraint">Maximum Deviation Constraint</a></p>
 <hr />
 <h2 id="preserve_allocation_year_shares-preserve_first_allocation_year_shares">preserve_allocation_year_shares / preserve_first_allocation_year_shares<a class="headerlink" href="#preserve_allocation_year_shares-preserve_first_allocation_year_shares" title="Permanent link">&para;</a></h2>
@@ -2545,10 +2477,6 @@
 <tr>
 <td>Stronger-than-linear rescaling</td>
 <td><code>pre_allocation_responsibility_weight=1.0, pre_allocation_responsibility_exponent=2.0</code></td>
-</tr>
-<tr>
-<td>Historical population entitlements (convergence)</td>
-<td><code>historical_start_year=1950</code> (or 1850) on <code>cumulative-per-capita-convergence*</code></td>
 </tr>
 </tbody>
 </table>

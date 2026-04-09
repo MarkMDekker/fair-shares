@@ -2792,6 +2792,20 @@ metric in an entitlement allocation context). Default: 0.0</p>
     </table>
 
 
+<details class="note" open>
+  <summary>Notes</summary>
+  <p><strong>GDP window:</strong> The cumulative sums of GDP and population are computed
+only over the intersection of years where both data are available. There
+is no forward-fill into post-observation years. With <code>gdp_ts</code> typically
+ending at the last observed year (e.g. 2023 for <code>wdi-2025</code>) and
+population running to ~2100, only the observed-GDP years contribute to
+the capability metric. Users who want post-observation GDP dynamics to
+enter the capability calculation should extend the input <code>gdp_ts</code> time
+series with projected data (SSP2 GDP projections, custom growth
+assumptions, or a future-extended WDI release) before calling this
+function.</p>
+</details>
+
 <details class="see-also" open>
   <summary>See Also</summary>
   <p>calculate_responsibility_adjustment_data_convergence : For pre-allocation responsibility adjustments

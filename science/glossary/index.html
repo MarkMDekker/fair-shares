@@ -2110,8 +2110,8 @@
 <dl>
 <dt><strong><code>pre_allocation_responsibility_year</code></strong> (type: <code>int</code>, default: <code>1990</code>)</dt>
 <dd>Start year for cumulative emissions in the pre-allocation responsibility window. Must be strictly less than <code>allocation_year</code> for the adjustment to have effect — when equal, the window is empty.</dd>
-<dt><strong><code>pre_allocation_responsibility_per_capita</code></strong> (type: <code>bool</code>, default: <code>True</code>)</dt>
-<dd>Per capita (True) or absolute (False) emissions for pre-allocation responsibility calculation.</dd>
+<dt><strong><code>pre_allocation_responsibility_per_capita</code></strong> (type: <code>bool</code>, default: <code>False</code>)</dt>
+<dd>Per capita (True) or absolute (False) emissions for pre-allocation responsibility calculation. Default is <code>False</code> (absolute) to match the polluter-pays framing of GDR (Baer 2009), Matthews (2016), and most historical-responsibility literature. Set to <code>True</code> if your research framing calls for per-capita responsibility.</dd>
 <dt><strong><code>pre_allocation_responsibility_exponent</code></strong> (type: <code>float</code>, default: <code>1.0</code>)</dt>
 <dd>Exponent for pre-allocation responsibility adjustment. &gt;1.0 increases non-linearity.</dd>
 <dt><strong><code>pre_allocation_responsibility_functional_form</code></strong> (type: <code>str</code>, default: <code>"asinh"</code>)</dt>
@@ -2144,15 +2144,13 @@
 <dd>Solver for convergence pathway. <code>"minimum-speed"</code> finds the minimum exponential speed satisfying cumulative constraints. <code>"sine-deviation"</code> uses iterative sine-shaped deviation from a PCC baseline (requires <code>convergence_year</code>). Convergence approaches only.</dd>
 <dt><strong><code>max_convergence_speed</code></strong> (type: <code>float</code>, default: <code>0.9</code>)</dt>
 <dd>Upper bound on exponential convergence speed. Lower values force slower transitions but may cause infeasibility. Convergence approaches only.</dd>
-<dt><strong><code>historical_start_year</code></strong> (type: <code>int | None</code>, default: <code>None</code>)</dt>
-<dd>Extends cumulative population window backward for convergence target shares. When set, cumulative population is summed from this year instead of <code>first_allocation_year</code>. A population entitlement parameter -- does not affect pre-allocation responsibility adjustments or emissions accounting. Convergence approaches only. See <a href="../parameter-effects/#historical_start_year-convergence-only">Parameter Effects</a>.</dd>
 <dt><strong><code>strict</code></strong> (type: <code>bool</code>, default: <code>True</code>)</dt>
 <dd>Controls behavior on infeasible convergence targets. <code>True</code> raises an error; <code>False</code> clips infeasible long-run shares and reports per-country deviation ratios. Convergence approaches only. See <a href="../parameter-effects/#strict-convergence-only">Parameter Effects</a>.</dd>
 </dl>
 <h3 id="constraint-parameters">Constraint Parameters<a class="headerlink" href="#constraint-parameters" title="Permanent link">&para;</a></h3>
 <dl>
-<dt><strong><code>max_deviation_sigma</code></strong> (type: <code>float | None</code>, default: <code>2.0</code>)</dt>
-<dd>Outlier constraint (standard deviations from mean). Prevents extreme adjustment values from dominating allocations -- without it, a single country with very high per-capita emissions or GDP can distort the entire distribution. Set to <code>None</code> to disable. Only relevant when applying scaling adjustments. See <a href="../parameter-effects/#max_deviation_sigma">Parameter Effects</a>.</dd>
+<dt><strong><code>max_deviation_sigma</code></strong> (type: <code>float | None</code>, default: <code>None</code>)</dt>
+<dd>Optional outlier constraint (standard deviations from mean). Default <code>None</code> means no constraint — the raw, unconstrained adjustment is returned. Set to a positive float (e.g. <code>2.0</code>) to opt into a ±N-σ cap that compresses extreme values. Only relevant when applying scaling adjustments. See <a href="../parameter-effects/#max_deviation_sigma">Parameter Effects</a>.</dd>
 <dt><strong><code>preserve_allocation_year_shares</code></strong> / <strong><code>preserve_first_allocation_year_shares</code></strong> (type: <code>bool</code>, default: <code>False</code>)</dt>
 <dd>When <code>True</code>, freezes population (and adjustment) shares at the allocation year instead of recalculating as demographics evolve. The choice reflects whether future population growth should increase a country's atmospheric entitlement. See <a href="../parameter-effects/#preserve_allocation_year_shares-preserve_first_allocation_year_shares">Parameter Effects</a>.</dd>
 </dl>
@@ -2253,7 +2251,7 @@
 <dt><strong>AR6</strong></dt>
 <dd>IPCC Sixth Assessment Report (2021-2023). Source of global emissions scenarios used in fair-shares.</dd>
 <dt><strong>BAU</strong></dt>
-<dd>Business As Usual. Baseline emissions scenario without climate policy. Note: framing deviation from BAU as a "cost" or "sacrifice" has been critiqued in the literature as inconsistent with CBDR-RC (see Kartha 2018).</dd>
+<dd>Business As Usual. Baseline emissions scenario without climate policy. Note: framing deviation from BAU as a "cost" or "sacrifice" has been critiqued in the literature as inconsistent with CBDR-RC (see <a href="https://doi.org/10.1038/s41558-018-0152-7">Kartha 2018</a>).</dd>
 <dt><strong>Bookkeeping (BM)</strong></dt>
 <dd>LULUCF accounting method that estimates only direct human-caused land-use fluxes (deforestation, afforestation, land management). Used by IPCC for RCBs. Contrast with NGHGI, which additionally includes indirect effects. See: <a href="../other-operations/#why-two-lulucf-conventions-matter">NGHGI-Consistent RCB Corrections</a></dd>
 <dt><strong>Bunker fuels</strong></dt>
