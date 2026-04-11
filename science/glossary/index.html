@@ -1487,18 +1487,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#equity-principles" class="md-nav__link">
+  <a href="#key-concepts" class="md-nav__link">
     <span class="md-ellipsis">
-      Equity Principles
+      Key Concepts
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#abbreviations" class="md-nav__link">
+  <a href="#abbreviations-and-terms" class="md-nav__link">
     <span class="md-ellipsis">
-      Abbreviations
+      Abbreviations and Terms
     </span>
   </a>
   
@@ -1997,18 +1997,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#equity-principles" class="md-nav__link">
+  <a href="#key-concepts" class="md-nav__link">
     <span class="md-ellipsis">
-      Equity Principles
+      Key Concepts
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#abbreviations" class="md-nav__link">
+  <a href="#abbreviations-and-terms" class="md-nav__link">
     <span class="md-ellipsis">
-      Abbreviations
+      Abbreviations and Terms
     </span>
   </a>
   
@@ -2052,7 +2052,7 @@
 <p>All approach names use <code>kebab-case</code> notation. For complete details, see the <a href="../../user-guide/approach-catalog/">Approach Catalog</a>.</p>
 <div class="admonition info">
 <p class="admonition-title">Key concept: allocation_year</p>
-<p>All approaches incorporate historical differentiation via <code>allocation_year</code> (budget) or <code>first_allocation_year</code> (pathway). When set in the past, cumulative population from that year determines each country's share of the total budget — leaving different <strong>remaining allocations</strong> for each country. The <code>*-adjusted</code> approaches add pre-allocation responsibility rescaling on top of this mechanism.</p>
+<p>All approaches incorporate historical differentiation via <code>allocation_year</code> (budget) or <code>first_allocation_year</code> (pathway). When set in the past, cumulative population from that year determines each country's share of the total budget — leaving different <strong>remaining allocations</strong> for each country. The <code>*-adjusted</code> approaches additionally apply pre-allocation responsibility and capability rescaling on top of this mechanism.</p>
 </div>
 <h3 id="budget-approaches">Budget Approaches<a class="headerlink" href="#budget-approaches" title="Permanent link">&para;</a></h3>
 <dl>
@@ -2111,7 +2111,7 @@
 <dt><strong><code>pre_allocation_responsibility_year</code></strong> (type: <code>int</code>, default: <code>1990</code>)</dt>
 <dd>Start year for cumulative emissions in the pre-allocation responsibility window. Must be strictly less than <code>allocation_year</code> for the adjustment to have effect — when equal, the window is empty.</dd>
 <dt><strong><code>pre_allocation_responsibility_per_capita</code></strong> (type: <code>bool</code>, default: <code>False</code>)</dt>
-<dd>Per capita (True) or absolute (False) emissions for pre-allocation responsibility calculation. Default is <code>False</code> (absolute) to match the polluter-pays framing of GDR (Baer 2009), Matthews (2016), and most historical-responsibility literature. Set to <code>True</code> if your research framing calls for per-capita responsibility.</dd>
+<dd>Per capita (True) or absolute (False) emissions for pre-allocation responsibility calculation. Default is <code>False</code> (absolute) to match the polluter-pays framing used in most of the historical-responsibility literature, which treats responsibility as a country's total cumulative contribution to atmospheric CO2 — see <a href="https://doi.org/10.1038/NCLIMATE2774">Matthews 2016</a> (absolute cumulative emissions as the debt metric) and the <a href="https://doi.org/10.1080/13668790903195495">Greenhouse Development Rights framework (Baer 2009)</a>, which starts from country-level absolute cumulative emissions and applies a within-country subsistence filter (not a per-capita normalisation). Set to <code>True</code> if your research framing genuinely calls for per-capita historical responsibility.</dd>
 <dt><strong><code>pre_allocation_responsibility_exponent</code></strong> (type: <code>float</code>, default: <code>1.0</code>)</dt>
 <dd>Exponent for pre-allocation responsibility adjustment. &gt;1.0 increases non-linearity.</dd>
 <dt><strong><code>pre_allocation_responsibility_functional_form</code></strong> (type: <code>str</code>, default: <code>"asinh"</code>)</dt>
@@ -2212,20 +2212,20 @@
 <p>Operations like <code>.loc[]</code>, <code>.xs()</code>, and <code>.groupby()</code> can select/aggregate along specific index levels.</p>
 <p>See: <a href="https://pandas.pydata.org/docs/user_guide/advanced.html">pandas MultiIndex documentation</a></p>
 <hr />
-<h2 id="equity-principles">Equity Principles<a class="headerlink" href="#equity-principles" title="Permanent link">&para;</a></h2>
+<h2 id="key-concepts">Key Concepts<a class="headerlink" href="#key-concepts" title="Permanent link">&para;</a></h2>
 <p>Brief definitions. For detailed explanations and operationalization, see <a href="../allocations/">Allocation Approaches</a> and <a href="../principle-to-code/">From Principle to Code</a>.</p>
 <dl>
 <dt><strong>Carbon Debt</strong></dt>
 <dd>Obligation owed by high-emitting nations that have exceeded their fair share of atmospheric space. Can be quantified in tonnes CO2 or monetary terms. <a href="https://doi.org/10.1038/NCLIMATE2774">Matthews 2016</a> calculates debts against an equal per capita benchmark; <a href="https://doi.org/10.1073/pnas.2409316122">Pelz 2025a</a> introduces a net-zero framing that makes post-peak obligations explicit. Moral grounding: <a href="https://doi.org/10.1080/13698230.2012.727311">Pickering 2012</a>.</dd>
 <dd>See: <a href="../references/">References</a></dd>
 <dt><strong>Cascading Biases</strong></dt>
-<dd>Systematic methodological choices in effort-sharing frameworks that compound to favor wealthy nations. <a href="https://doi.org/10.1038/s41558-018-0152-7">Kartha 2018</a> identifies three types: scope bias (including cost-effectiveness alongside equity approaches), framing bias (late base years that embed grandfathering), and aggregation bias (equal weighting of ethically unequal approaches). <a href="https://doi.org/10.1038/s41558-018-0152-7">Kartha 2018</a></dd>
+<dd>Systematic methodological choices in effort-sharing frameworks that compound to favor wealthy nations. <a href="https://doi.org/10.1038/s41558-018-0152-7">Kartha 2018</a> identifies three types: scope bias (including cost-effectiveness alongside equity approaches), framing bias (late base years that embed grandfathering), and aggregation bias (equal weighting of ethically unequal approaches).</dd>
 <dd>See: <a href="../allocations/#approaches-debated-in-the-literature">Allocation Approaches</a></dd>
 <dt><strong>CBDR-RC</strong></dt>
 <dd>Common But Differentiated Responsibilities and Respective Capabilities. UNFCCC foundational principle: all countries share responsibility, but obligations differ based on historical emissions and economic capacity. For the legal interpretation in its normative environment, see <a href="https://doi.org/10.1093/clp/cuae011">Rajamani 2024</a>; for operational interpretations under the Paris Agreement, see <a href="https://doi.org/10.1080/14693062.2021.1970504">Rajamani 2021</a>.</dd>
 <dd>See: <a href="../allocations/">Allocation Approaches</a></dd>
 <dt><strong>Egalitarianism</strong></dt>
-<dd>Ethical tradition grounding equal per capita entitlement to atmospheric space.</dd>
+<dd>Ethical tradition grounding equal per capita entitlement to atmospheric space. <a href="https://cdn.cseindia.org/userfiles/GlobalWarming%20Book.pdf">Agarwal 1991</a> makes the foundational per-capita argument from an anti-colonial standpoint; <a href="https://doi.org/10.1080/17449620903110300">Caney 2009</a> develops the philosophical case for egalitarian allocation of greenhouse gas emission rights.</dd>
 <dd>See: <a href="../allocations/">Allocation Approaches</a></dd>
 <dt><strong>Equal per capita</strong></dt>
 <dd>Each person has equal entitlement to atmospheric space. In fair-shares, historical accountability is usually incorporated via <code>allocation_year</code> (cumulative accounting includes past emissions), not via weight adjustments.</dd>
@@ -2240,18 +2240,18 @@
 <dd>When a party's remaining fair share under a carbon budget is negative — its past emissions have already exceeded its equal per capita entitlement. Signals the need for highest possible domestic ambition, negative emissions targets (CDR), and international support. Negative allocations are a feature, not a bug: they communicate the scale of overshoot and the urgency of minimizing its duration and magnitude. <a href="https://doi.org/10.1088/1748-9326/ada45f">Pelz 2025b</a></dd>
 <dd>See: <a href="../allocations/">Allocation Approaches</a> · <a href="../principle-to-code/">From Principle to Code</a></dd>
 <dt><strong>Subsistence protection</strong></dt>
-<dd>Basic needs emissions protected from mitigation burdens. Operationalized via <code>income_floor</code> and Gini adjustments.</dd>
+<dd>Basic needs emissions protected from mitigation burdens. Grounded in <a href="../references/#shue-2014">Shue 2014</a>'s distinction between subsistence and luxury emissions; operationalised in the <a href="https://doi.org/10.1080/13668790903195495">Greenhouse Development Rights framework (Baer 2009)</a> via a development threshold that excludes both income and emissions of low-income individuals from a country's responsibility and capacity calculations. In fair-shares, implemented via <code>income_floor</code> and Gini adjustments.</dd>
 <dd>See: <a href="../allocations/#gini-adjustment">Allocation Approaches</a></dd>
 </dl>
 <hr />
-<h2 id="abbreviations">Abbreviations<a class="headerlink" href="#abbreviations" title="Permanent link">&para;</a></h2>
+<h2 id="abbreviations-and-terms">Abbreviations and Terms<a class="headerlink" href="#abbreviations-and-terms" title="Permanent link">&para;</a></h2>
 <dl>
 <dt><strong>API</strong></dt>
 <dd>Application Programming Interface. In this documentation, refers to the function-level reference for allocation approaches.</dd>
 <dt><strong>AR6</strong></dt>
 <dd>IPCC Sixth Assessment Report (2021-2023). Source of global emissions scenarios used in fair-shares.</dd>
 <dt><strong>BAU</strong></dt>
-<dd>Business As Usual. Baseline emissions scenario without climate policy. Note: framing deviation from BAU as a "cost" or "sacrifice" has been critiqued in the literature as inconsistent with CBDR-RC (see <a href="https://doi.org/10.1038/s41558-018-0152-7">Kartha 2018</a>).</dd>
+<dd>Business As Usual. Baseline emissions scenario without climate policy. Note: framing deviation from BAU as a "cost" or "sacrifice" has been critiqued as inconsistent with CBDR-RC — fair shares must be assessed relative to other parties, not against a country's own BAU (<a href="https://doi.org/10.1007/s10784-017-9381-x">Winkler 2018</a>; <a href="https://doi.org/10.1080/14693062.2021.1970504">Rajamani 2021</a>; <a href="https://doi.org/10.1088/1748-9326/ada45f">Pelz 2025b</a>).</dd>
 <dt><strong>Bookkeeping (BM)</strong></dt>
 <dd>LULUCF accounting method that estimates only direct human-caused land-use fluxes (deforestation, afforestation, land management). Used by IPCC for RCBs. Contrast with NGHGI, which additionally includes indirect effects. See: <a href="../other-operations/#why-two-lulucf-conventions-matter">NGHGI-Consistent RCB Corrections</a></dd>
 <dt><strong>Bunker fuels</strong></dt>
