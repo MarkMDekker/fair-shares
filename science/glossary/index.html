@@ -2059,7 +2059,7 @@
 <dt><strong><code>equal-per-capita-budget</code></strong></dt>
 <dd>Population-proportional allocation. Historical accountability via <code>allocation_year</code> only.</dd>
 <dt><strong><code>per-capita-adjusted-budget</code></strong></dt>
-<dd>Adds <code>pre_allocation_responsibility_weight</code> (backward-looking from allocation year) and <code>capability_weight</code> (forward-looking from allocation year onwards) adjustments. CBDR-RC.</dd>
+<dd>Adds <code>pre_allocation_responsibility_weight</code> (covers the window prior to allocation year) and <code>capability_weight</code> (from allocation year onwards) adjustments. CBDR-RC.</dd>
 <dt><strong><code>per-capita-adjusted-gini-budget</code></strong></dt>
 <dd>Adds Gini adjustment for within-country inequality. Subsistence protection.</dd>
 </dl>
@@ -2104,7 +2104,7 @@
 <dt><strong><code>pre_allocation_responsibility_weight</code></strong> (type: <code>float</code>, default: <code>0.0</code>)</dt>
 <dd>Weight for relative per-capita rescaling based on emissions in [<code>pre_allocation_responsibility_year</code>, <code>allocation_year</code>). Higher relative to <code>capability_weight</code> = more reduction for countries with high per-capita emissions in that window. Separate from the cumulative accounting done by early <code>allocation_year</code>. Always produces positive allocations if <code>allocation_year</code> is the present.</dd>
 <dt><strong><code>capability_weight</code></strong> (type: <code>float</code>, default: <code>0.0</code>)</dt>
-<dd>Weight for GDP-based adjustment (applies from allocation year onwards). Higher relative to <code>pre_allocation_responsibility_weight</code> = more reduction for wealthy countries. Note the temporal asymmetry: pre-allocation responsibility looks backward from the allocation year, while capability looks forward from it.</dd>
+<dd>Weight for GDP-based adjustment (applies from allocation year onwards). Higher relative to <code>pre_allocation_responsibility_weight</code> = more reduction for wealthy countries. Note the temporal asymmetry: pre-allocation responsibility covers the window prior to the allocation year, while capability applies from it onwards.</dd>
 </dl>
 <h3 id="pre-allocation-responsibility-parameters">Pre-allocation Responsibility Parameters<a class="headerlink" href="#pre-allocation-responsibility-parameters" title="Permanent link">&para;</a></h3>
 <dl>

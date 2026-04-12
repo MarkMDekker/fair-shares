@@ -1972,7 +1972,7 @@
 <p><strong>Underlying reasoning:</strong> The atmosphere is treated as a global commons to be shared equally among all living persons, without regard to past emissions.</p>
 <hr />
 <h3 id="example-2-both-responsibility-mechanisms-cumulative-accounting-rescaling">Example 2: Both Responsibility Mechanisms (Cumulative Accounting + Rescaling)<a class="headerlink" href="#example-2-both-responsibility-mechanisms-cumulative-accounting-rescaling" title="Permanent link">&para;</a></h3>
-<p><strong>Value judgment:</strong> Historical responsibility is the primary basis for differentiation. Countries that caused the climate problem through cumulative emissions should bear proportionally greater mitigation burdens. Equal per capita provides the baseline, but historical excess emissions strongly reduce allocation.</p>
+<p><strong>Value judgment:</strong> Historical responsibility is the primary basis for differentiation. Countries that caused the climate problem through cumulative emissions should bear proportionally greater mitigation burdens. A past allocation year already accounts for responsibility (consumed budget); pre-allocation responsibility rescaling further reduces allocations for high-emitting countries.</p>
 <p><strong>Configuration:</strong></p>
 <div class="language-python highlight"><span class="filename">Python</span><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">allocations</span> <span class="o">=</span> <span class="p">{</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="s2">&quot;per-capita-adjusted-budget&quot;</span><span class="p">:</span> <span class="p">[</span>
@@ -2065,7 +2065,7 @@
 <p><strong>What this reflects:</strong></p>
 <ul>
 <li><code>first_allocation_year=2025</code> → Start pathway allocations from 2025</li>
-<li><code>capability_weight=0.5</code>, <code>pre_allocation_responsibility_weight=0.5</code> → Balanced CBDR-RC in each year. Capability adjustments apply from the first allocation year onwards; pre-allocation responsibility looks backward from it — this temporal asymmetry is inherent to CBDR-RC.</li>
+<li><code>capability_weight=0.5</code>, <code>pre_allocation_responsibility_weight=0.5</code> → Balanced CBDR-RC in each year. Capability adjustments apply from the first allocation year onwards; pre-allocation responsibility covers the window prior to it — this temporal asymmetry is inherent to CBDR-RC.</li>
 <li>No convergence → Countries immediately receive fair shares in 2025, adjusted each year</li>
 <li>Immediate allocation → No grandfathering, high emitters get reduced shares immediately</li>
 </ul>
@@ -2096,7 +2096,7 @@
 <p><strong>What this reflects:</strong></p>
 <ul>
 <li><code>first_allocation_year=2025</code> → Begin convergence pathway from 2025</li>
-<li><code>capability_weight=0.5</code>, <code>pre_allocation_responsibility_weight=0.5</code> → Equal weighting of capability (GDP, from first allocation year onwards) and historical responsibility (per-capita emissions, looking backward from it). These weights are relative — only the ratio matters. <code>(0.5, 0.5)</code> is identical to <code>(0.3, 0.3)</code> or <code>(1.0, 1.0)</code>. If one weight is 0, the other becomes the sole adjustment regardless of its value.</li>
+<li><code>capability_weight=0.5</code>, <code>pre_allocation_responsibility_weight=0.5</code> → Equal weighting of capability (GDP, from first allocation year onwards) and historical responsibility (per-capita emissions in the window prior to it). These weights are relative — only the ratio matters. <code>(0.5, 0.5)</code> is identical to <code>(0.3, 0.3)</code> or <code>(1.0, 1.0)</code>. If one weight is 0, the other becomes the sole adjustment regardless of its value.</li>
 <li><code>pre_allocation_responsibility_year=1990</code> → Responsibility rescaling window covers 1990–2025</li>
 <li><code>strict=False</code> → Accept approximate solutions if some countries' targets are mathematically infeasible. The solver reports per-country deviation ratios as warnings rather than raising an error. Use <code>strict=True</code> (default) when you need exact results and want to know immediately if a configuration is infeasible.</li>
 <li>Cumulative constraint → Total pathway emissions respect global budget</li>

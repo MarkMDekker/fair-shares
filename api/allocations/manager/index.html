@@ -2160,14 +2160,16 @@ single year's cumulative budget. Pathway approaches allocate emissions
 over multiple years. Budget approaches use <code>allocation_year</code>, pathway
 approaches use <code>first_allocation_year</code>.</p>
 <p><strong>Equity considerations:</strong> Each approach implements different equity
-principles. The equal per capita approaches treat population as the sole
-basis for claims. Adjusted approaches incorporate capability
-(ability to pay based on GDP, from the allocation year onwards) and/or
-pre-allocation responsibility (multiplicative rescaling based on
-per-capita emissions backward-looking from the allocation year),
-implementing aspects of CBDR-RC. Parameters like
-<code>pre_allocation_responsibility_weight</code> and <code>capability_weight</code> represent
-explicit normative choices about how to balance these considerations.</p>
+principles. All equal per capita approaches account for historical
+responsibility when the allocation year is set in the past (past
+emissions consume budget). Adjusted approaches additionally offer
+pre-allocation responsibility rescaling (multiplicative rescaling based
+on cumulative per-capita emissions in the window prior to the allocation
+year) and/or
+capability adjustments (ability to pay based on GDP, from the allocation
+year onwards). Parameters like <code>pre_allocation_responsibility_weight</code>
+and <code>capability_weight</code> represent explicit normative choices about how
+to balance these considerations.</p>
 <p><strong>Transparency:</strong> All parameter choices are recorded in the result
 metadata to enable replication and critical assessment.</p>
 </details>

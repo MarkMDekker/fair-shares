@@ -1958,7 +1958,7 @@ A(g, t) = \frac{P(g, t_a)}{\sum_{g'} P(g', t_a)} \quad \forall t \geq t_a
               <div class="doc-md-description">
                 <p>First year that should be used for calculating the allocation.
 This must be a column in population_ts.
-See docs/science/parameter-effects.md#allocation_year for how this affects
+See the <code>allocation_year</code> section in docs/science/parameter-effects.md for how this affects
 country shares</p>
               </div>
             </td>
@@ -2082,39 +2082,14 @@ first_allocation_year are preserved across all periods.</p>
 
 <details class="note" open>
   <summary>Notes</summary>
-  <p>The equal per capita principle treats the atmosphere as a finite shared resource
-with equal claims per person. It serves as a widely used baseline in climate
-equity analysis.</p>
-<p><strong>When to Use</strong></p>
-<ul>
-<li>As a baseline to compare against adjusted approaches</li>
-<li>When transparency and simplicity are priorities</li>
-<li>As a reference point before applying pre-allocation responsibility or capability adjustments</li>
-</ul>
+  <p><strong>Theoretical grounding:</strong></p>
+<p>The equal per capita principle treats the atmosphere as a finite shared resource
+with equal claims per person. With a past first_allocation_year, it also
+accounts for historical responsibility: emissions since that year consume
+part of each country's pathway allocation, giving less to higher-emitting
+countries.</p>
 <p>See docs/science/allocations.md for theoretical grounding and limitations.</p>
 </details>
-
-<p><span class="doc-section-title">Examples:</span></p>
-    <div class="language-pycon highlight"><span class="filename">Python Console Session</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">fair_shares.library.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_example_data</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">create_example_data</span><span class="p">()</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">equal_per_capita</span><span class="p">(</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="gp">... </span>    <span class="n">population_ts</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;population&quot;</span><span class="p">],</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="gp">... </span>    <span class="n">first_allocation_year</span><span class="o">=</span><span class="mi">2020</span><span class="p">,</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="gp">... </span>    <span class="n">emission_category</span><span class="o">=</span><span class="s2">&quot;co2-ffi&quot;</span><span class="p">,</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="gp">... </span><span class="p">)</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="go">Converting units...</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Check that shares sum to 1.0 at each year</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">shares</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">relative_shares_pathway_emissions</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">shares_2020</span> <span class="o">=</span> <span class="n">shares</span><span class="p">[</span><span class="s2">&quot;2020&quot;</span><span class="p">]</span>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">shares_2020</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-10</span><span class="p">)</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="go">True</span>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="gp">&gt;&gt;&gt; </span><span class="c1"># China and India have similar populations, so similar shares</span>
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">shares_2020</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;CHN&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0.3</span><span class="p">)</span>  <span class="c1"># China has large population</span>
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="go">True</span>
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">shares_2020</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;IND&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0.3</span><span class="p">)</span>  <span class="c1"># India has large population too</span>
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="go">True</span>
-</span></code></pre></div>
-
 
 <details class="see-also" open>
   <summary>See Also</summary>
@@ -2279,9 +2254,10 @@ within :math:<code>\sigma</code> standard deviations of the equal per capita bas
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Starting year for the allocation.
-See docs/science/parameter-effects.md#allocation_year for how this affects
-country shares</p>
+                <p>Starting year for the allocation pathway. Shares are computed
+from this year onwards. See
+<code>docs/science/parameter-effects.md</code> §allocation_year for how
+the choice of year affects country shares.</p>
               </div>
             </td>
             <td>
@@ -2297,7 +2273,7 @@ country shares</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>The emission category (e.g., 'co2-ffi', 'all-ghg').</p>
+                <p>Emission category (e.g., <code>'co2-ffi'</code>, <code>'all-ghg'</code>).</p>
               </div>
             </td>
             <td>
@@ -2313,8 +2289,10 @@ country shares</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Country emissions for pre-allocation responsibility calculation. Required if
-pre_allocation_responsibility_weight &gt; 0.</p>
+                <p><strong>Pre-allocation responsibility.</strong> Country emissions used to
+compute cumulative emissions in the window
+<code>[pre_allocation_responsibility_year, first_allocation_year)</code>.
+Required when <code>pre_allocation_responsibility_weight &gt; 0</code>.</p>
               </div>
             </td>
             <td>
@@ -2330,8 +2308,8 @@ pre_allocation_responsibility_weight &gt; 0.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>GDP time series for capability adjustment (used from first allocation year
-onwards). Required if capability_weight &gt; 0.</p>
+                <p><strong>Capability.</strong> GDP time series used from <code>first_allocation_year</code>
+onwards. Required when <code>capability_weight &gt; 0</code>.</p>
               </div>
             </td>
             <td>
@@ -2347,11 +2325,11 @@ onwards). Required if capability_weight &gt; 0.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Weight for pre-allocation responsibility adjustment (0-1). Higher historical
-emissions -&gt; smaller allocation. Must satisfy:
-pre_allocation_responsibility_weight + capability_weight &lt;= 1.0
-See docs/science/parameter-effects.md#pre_allocation_responsibility_weight for real
-allocation examples showing how this affects country shares</p>
+                <p><strong>Pre-allocation responsibility.</strong> Relative weight (0–1). Only the
+ratio to <code>capability_weight</code> matters — <code>(0.5, 0.5)</code> is
+identical to <code>(1.0, 1.0)</code>. When 0, pre-allocation
+responsibility is disabled.
+See <code>docs/science/parameter-effects.md</code> §weights.</p>
               </div>
             </td>
             <td>
@@ -2367,12 +2345,11 @@ allocation examples showing how this affects country shares</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Weight for capability adjustment (0-1), applied from the first allocation
-year onwards (contrast with pre-allocation responsibility, which looks
-backward from it). Higher cumulative GDP per capita -&gt; smaller allocation.
-Must satisfy: pre_allocation_responsibility_weight + capability_weight &lt;= 1.0
-See docs/science/parameter-effects.md#capability_weight for real
-allocation examples showing how this affects country shares</p>
+                <p><strong>Capability.</strong> Relative weight (0–1). Applies from
+<code>first_allocation_year</code> onwards (contrast with pre-allocation
+responsibility, which covers the window before it). When 0,
+capability is disabled.
+See <code>docs/science/parameter-effects.md</code> §weights.</p>
               </div>
             </td>
             <td>
@@ -2388,8 +2365,9 @@ allocation examples showing how this affects country shares</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>First year of pre-allocation responsibility window [pre_allocation_responsibility_year,
-first_allocation_year]. Default: 1990</p>
+                <p><strong>Pre-allocation responsibility.</strong> Start year of the historical
+window <code>[pre_allocation_responsibility_year,
+first_allocation_year)</code>. Default: 1990.</p>
               </div>
             </td>
             <td>
@@ -2405,7 +2383,10 @@ first_allocation_year]. Default: 1990</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>If True, use per capita emissions for pre-allocation responsibility. Default: True</p>
+                <p><strong>Pre-allocation responsibility.</strong> If <code>True</code>, cumulative
+emissions are divided by cumulative population before computing
+the adjustment factor. If <code>False</code> (default), absolute
+cumulative emissions are used.</p>
               </div>
             </td>
             <td>
@@ -2421,7 +2402,9 @@ first_allocation_year]. Default: 1990</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Exponent for pre-allocation responsibility adjustment calculation. Default: 1.0</p>
+                <p><strong>Pre-allocation responsibility.</strong> Exponent applied to the
+emissions metric. Higher values amplify differences between
+countries. Default: 1.0.</p>
               </div>
             </td>
             <td>
@@ -2437,12 +2420,31 @@ first_allocation_year]. Default: 1990</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Functional form for pre-allocation responsibility adjustment ('asinh', 'power', 'linear').
-Default: 'asinh'</p>
+                <p><strong>Pre-allocation responsibility.</strong> Transformation applied to the
+raw metric: <code>'asinh'</code> (default), <code>'power'</code>, or <code>'linear'</code>.
+<code>'asinh'</code> compresses extreme values.</p>
               </div>
             </td>
             <td>
                   <code>&#39;asinh&#39;</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>capability_per_capita</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p><strong>Capability.</strong> If <code>True</code> (default), GDP is divided by
+population before computing the capability factor. If <code>False</code>,
+absolute GDP is used.</p>
+              </div>
+            </td>
+            <td>
+                  <code>True</code>
             </td>
           </tr>
           <tr class="doc-section-item">
@@ -2454,7 +2456,8 @@ Default: 'asinh'</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Exponent for capability adjustment calculation. Default: 1.0</p>
+                <p><strong>Capability.</strong> Exponent applied to the GDP metric. Higher values
+amplify differences between countries. Default: 1.0.</p>
               </div>
             </td>
             <td>
@@ -2470,8 +2473,8 @@ Default: 'asinh'</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Functional form for capability adjustment ('asinh', 'power', 'linear').
-Default: 'asinh'</p>
+                <p><strong>Capability.</strong> Transformation applied to the raw GDP metric:
+<code>'asinh'</code> (default), <code>'power'</code>, or <code>'linear'</code>.</p>
               </div>
             </td>
             <td>
@@ -2487,10 +2490,9 @@ Default: 'asinh'</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Maximum allowed deviation from equal per capita baseline. Constrains
-allocations to remain within a statistically reasonable range of the equal
-per capita baseline, preventing extreme adjustments. If None, no constraint
-is applied.</p>
+                <p><strong>Constraint.</strong> Maximum allowed deviation from equal per capita
+baseline, in population-weighted standard deviations. Prevents
+extreme adjustments. <code>None</code> (default) means no constraint.</p>
               </div>
             </td>
             <td>
@@ -2506,8 +2508,9 @@ is applied.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>If False (default), shares are calculated at each year. If True, shares
-calculated at first_allocation_year are preserved across all periods.</p>
+                <p><strong>Mode.</strong> If <code>False</code> (default), shares are recalculated at each
+year. If <code>True</code>, shares from <code>first_allocation_year</code> are held
+constant for all subsequent years.</p>
               </div>
             </td>
             <td>
@@ -2523,9 +2526,11 @@ calculated at first_allocation_year are preserved across all periods.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Discount rate for historical emissions (0.0 to &lt;1.0). When &gt; 0, earlier
-emissions are weighted less via (1 - rate)^(reference_year - t). Implements
-natural CO2 removal rationale (Dekker Eq. 5). Default: 0.0 (no discounting).</p>
+                <p><strong>Pre-allocation responsibility.</strong> Discount rate for historical
+emissions (0.0 to &lt;1.0). Weights earlier emissions less via
+<code>(1 - rate)^(reference_year - t)</code> (Dekker Eq. 5). Default: 0.0
+(no discounting). Only affects the pre-allocation responsibility
+calculation.</p>
               </div>
             </td>
             <td>
@@ -2541,7 +2546,7 @@ natural CO2 removal rationale (Dekker Eq. 5). Default: 0.0 (no discounting).</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Index level name for grouping (typically 'iso3c'). Default: 'iso3c'</p>
+                <p>Index level name for grouping. Default: <code>'iso3c'</code>.</p>
               </div>
             </td>
             <td>
@@ -2557,7 +2562,7 @@ natural CO2 removal rationale (Dekker Eq. 5). Default: 0.0 (no discounting).</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Index level name for units. Default: 'unit'</p>
+                <p>Index level name for units. Default: <code>'unit'</code>.</p>
               </div>
             </td>
             <td>
@@ -2614,16 +2619,20 @@ natural CO2 removal rationale (Dekker Eq. 5). Default: 0.0 (no discounting).</p>
 
 <details class="note" open>
   <summary>Notes</summary>
-  <p>This approach operationalizes Common But Differentiated Responsibilities and
-Respective Capabilities (CBDR-RC) by combining:</p>
+  <p><strong>Theoretical grounding:</strong></p>
+<p>This approach provides explicit mechanisms for differentiating allocations:</p>
 <ul>
-<li><strong>Pre-allocation Responsibility (Polluter Pays Principle)</strong>: Multiplicative
-  rescaling of shares based on cumulative per-capita emissions in a historical
-  window — countries that contributed more to the problem bear greater obligations</li>
-<li><strong>Capability (Ability to Pay Principle)</strong>: Adjusts based on economic resources
-  from the first allocation year onwards — countries with greater capacity bear
-  greater obligations</li>
+<li><strong>Pre-allocation Responsibility Rescaling</strong>: Multiplicative rescaling of
+  shares based on cumulative per-capita emissions in a historical window —
+  an alternative to the responsibility accounting that comes from setting
+  first_allocation_year in the past (where past emissions consume allocation)</li>
+<li><strong>Capability (Ability to Pay)</strong>: Adjusts based on economic resources
+  from the first allocation year onwards — countries with greater capacity
+  bear greater obligations</li>
 </ul>
+<p>CBDR-RC can be operationalized either through a past first_allocation_year
+(responsibility via consumed budget) combined with capability adjustments,
+or through pre-allocation responsibility rescaling, or both.</p>
 <p>Parameter choices involve normative judgments that should be made transparently:</p>
 <ul>
 <li>Choice of start year for pre-allocation responsibility</li>
@@ -2643,39 +2652,6 @@ release) should extend the input <code>gdp_ts</code> time series before calling
 this function. The forward-fill is the minimum-disruption default when
 no projected GDP data is supplied.</p>
 </details>
-
-<p><span class="doc-section-title">Examples:</span></p>
-    <div class="language-pycon highlight"><span class="filename">Python Console Session</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">fair_shares.library.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_example_data</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">create_example_data</span><span class="p">()</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Equal weights for pre-allocation responsibility and capability (50/50 split)</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">per_capita_adjusted</span><span class="p">(</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="gp">... </span>    <span class="n">population_ts</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;population&quot;</span><span class="p">],</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="gp">... </span>    <span class="n">country_actual_emissions_ts</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;emissions&quot;</span><span class="p">],</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="gp">... </span>    <span class="n">gdp_ts</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;gdp&quot;</span><span class="p">],</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="gp">... </span>    <span class="n">first_allocation_year</span><span class="o">=</span><span class="mi">2020</span><span class="p">,</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="gp">... </span>    <span class="n">emission_category</span><span class="o">=</span><span class="s2">&quot;co2-ffi&quot;</span><span class="p">,</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="gp">... </span>    <span class="n">pre_allocation_responsibility_weight</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="gp">... </span>    <span class="n">capability_weight</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="gp">... </span><span class="p">)</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="go">Converting units...</span>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Check that shares sum to 1.0</span>
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">shares</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">relative_shares_pathway_emissions</span>
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">shares_2020</span> <span class="o">=</span> <span class="n">shares</span><span class="p">[</span><span class="s2">&quot;2020&quot;</span><span class="p">]</span>
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">shares_2020</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-10</span><span class="p">)</span>
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="go">True</span>
-</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="gp">&gt;&gt;&gt; </span><span class="c1"># High emitters like USA should have smaller shares than equal per capita</span>
-</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">equal_pc_result</span> <span class="o">=</span> <span class="n">equal_per_capita</span><span class="p">(</span>
-</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="gp">... </span>    <span class="n">population_ts</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;population&quot;</span><span class="p">],</span>
-</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="gp">... </span>    <span class="n">first_allocation_year</span><span class="o">=</span><span class="mi">2020</span><span class="p">,</span>
-</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="gp">... </span>    <span class="n">emission_category</span><span class="o">=</span><span class="s2">&quot;co2-ffi&quot;</span><span class="p">,</span>
-</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="gp">... </span><span class="p">)</span>
-</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="go">Converting units...</span>
-</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">equal_pc_shares</span> <span class="o">=</span> <span class="n">equal_pc_result</span><span class="o">.</span><span class="n">relative_shares_pathway_emissions</span><span class="p">[</span><span class="s2">&quot;2020&quot;</span><span class="p">]</span>
-</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="gp">&gt;&gt;&gt; </span><span class="c1"># USA has lower share with adjustments due to high historical emissions + GDP</span>
-</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="n">shares_2020</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;USA&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">equal_pc_shares</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;USA&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
-</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="go">True</span>
-</span></code></pre></div>
-
 
 <details class="see-also" open>
   <summary>See Also</summary>
@@ -2820,9 +2796,8 @@ for worked examples.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Starting year for the allocation.
-See docs/science/parameter-effects.md#allocation_year for how this affects
-country shares</p>
+                <p>Year from which to begin the allocation pathway. See
+<code>docs/science/parameter-effects.md</code> §allocation_year.</p>
               </div>
             </td>
             <td>
@@ -2838,7 +2813,7 @@ country shares</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>The emission category (e.g., 'co2-ffi', 'all-ghg').</p>
+                <p>Emission category (e.g., <code>'co2-ffi'</code>, <code>'all-ghg'</code>).</p>
               </div>
             </td>
             <td>
@@ -2854,8 +2829,10 @@ country shares</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Country emissions for pre-allocation responsibility calculation. Required if
-pre_allocation_responsibility_weight &gt; 0.</p>
+                <p><strong>Pre-allocation responsibility.</strong> Country emissions used to
+compute cumulative emissions in the window
+<code>[pre_allocation_responsibility_year, first_allocation_year)</code>.
+Required when <code>pre_allocation_responsibility_weight &gt; 0</code>.</p>
               </div>
             </td>
             <td>
@@ -2871,8 +2848,9 @@ pre_allocation_responsibility_weight &gt; 0.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>GDP time series for capability adjustment. Required if capability_weight &gt; 0
-or gini_s provided.</p>
+                <p><strong>Capability.</strong> GDP time series used from <code>first_allocation_year</code>
+onwards. Required when <code>capability_weight &gt; 0</code> or <code>gini_s</code>
+is provided.</p>
               </div>
             </td>
             <td>
@@ -2888,8 +2866,8 @@ or gini_s provided.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Gini coefficients for GDP inequality adjustment. When provided, GDP is
-adjusted to reflect income distribution within countries.</p>
+                <p><strong>Gini.</strong> Gini coefficients for within-country income inequality.
+Used to adjust GDP before computing the capability factor.</p>
               </div>
             </td>
             <td>
@@ -2905,8 +2883,9 @@ adjusted to reflect income distribution within countries.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Weight for pre-allocation responsibility adjustment (0-1). Must satisfy:
-pre_allocation_responsibility_weight + capability_weight &lt;= 1.0</p>
+                <p><strong>Pre-allocation responsibility.</strong> Relative weight (0–1). Only the
+ratio to <code>capability_weight</code> matters. When 0, pre-allocation
+responsibility is disabled.</p>
               </div>
             </td>
             <td>
@@ -2922,8 +2901,8 @@ pre_allocation_responsibility_weight + capability_weight &lt;= 1.0</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Weight for capability adjustment (0-1). Must satisfy:
-pre_allocation_responsibility_weight + capability_weight &lt;= 1.0</p>
+                <p><strong>Capability.</strong> Relative weight (0–1). Applies from
+<code>first_allocation_year</code> onwards. When 0, capability is disabled.</p>
               </div>
             </td>
             <td>
@@ -2939,7 +2918,9 @@ pre_allocation_responsibility_weight + capability_weight &lt;= 1.0</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>First year of pre-allocation responsibility window. Default: 1990</p>
+                <p><strong>Pre-allocation responsibility.</strong> Start year of the historical
+window <code>[pre_allocation_responsibility_year,
+first_allocation_year)</code>. Default: 1990.</p>
               </div>
             </td>
             <td>
@@ -2955,7 +2936,9 @@ pre_allocation_responsibility_weight + capability_weight &lt;= 1.0</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>If True, use per capita emissions for pre-allocation responsibility. Default: True</p>
+                <p><strong>Pre-allocation responsibility.</strong> If <code>True</code>, uses per-capita
+cumulative emissions. If <code>False</code> (default), uses absolute
+cumulative emissions.</p>
               </div>
             </td>
             <td>
@@ -2971,7 +2954,8 @@ pre_allocation_responsibility_weight + capability_weight &lt;= 1.0</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Exponent for pre-allocation responsibility adjustment calculation. Default: 1.0</p>
+                <p><strong>Pre-allocation responsibility.</strong> Exponent applied to the
+emissions metric. Default: 1.0.</p>
               </div>
             </td>
             <td>
@@ -2987,11 +2971,30 @@ pre_allocation_responsibility_weight + capability_weight &lt;= 1.0</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Functional form for pre-allocation responsibility adjustment. Default: 'asinh'</p>
+                <p><strong>Pre-allocation responsibility.</strong> Transformation: <code>'asinh'</code>
+(default), <code>'power'</code>, or <code>'linear'</code>.</p>
               </div>
             </td>
             <td>
                   <code>&#39;asinh&#39;</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>capability_per_capita</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p><strong>Capability.</strong> If <code>True</code> (default), Gini-adjusted GDP is
+divided by population. If <code>False</code>, absolute Gini-adjusted GDP
+is used.</p>
+              </div>
+            </td>
+            <td>
+                  <code>True</code>
             </td>
           </tr>
           <tr class="doc-section-item">
@@ -3003,7 +3006,8 @@ pre_allocation_responsibility_weight + capability_weight &lt;= 1.0</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Exponent for capability adjustment calculation. Default: 1.0</p>
+                <p><strong>Capability.</strong> Exponent applied to the Gini-adjusted GDP metric.
+Default: 1.0.</p>
               </div>
             </td>
             <td>
@@ -3019,7 +3023,8 @@ pre_allocation_responsibility_weight + capability_weight &lt;= 1.0</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Functional form for capability adjustment. Default: 'asinh'</p>
+                <p><strong>Capability.</strong> Transformation: <code>'asinh'</code> (default), <code>'power'</code>,
+or <code>'linear'</code>.</p>
               </div>
             </td>
             <td>
@@ -3035,13 +3040,10 @@ pre_allocation_responsibility_weight + capability_weight &lt;= 1.0</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Income floor for Gini adjustment (in USD PPP per capita). Income below
-this threshold is excluded from capability calculations, adapted from the
-Greenhouse Development Rights (GDR) development threshold [Baer 2013]
-(GDR was designed for burden-sharing; fair-shares uses its capability
-metric in an entitlement allocation context). Default: 7500.0
-See docs/science/parameter-effects.md#income_floor for real allocation
-examples showing how this affects country shares</p>
+                <p><strong>Gini.</strong> Development threshold in USD PPP per capita. Income
+below this is excluded from capability calculations, adapted from
+GDR (Baer 2013). Default: 7500.0. See
+<code>docs/science/parameter-effects.md</code> §income_floor.</p>
               </div>
             </td>
             <td>
@@ -3057,8 +3059,9 @@ examples showing how this affects country shares</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Maximum reduction factor from GDR threshold adjustment (0-1). Limits how
-much the development threshold deduction can reduce effective GDP. Default: 0.8</p>
+                <p><strong>Gini.</strong> Maximum reduction factor from threshold deduction (0–1).
+Limits how much the deduction can reduce effective GDP.
+Default: 0.8.</p>
               </div>
             </td>
             <td>
@@ -3074,10 +3077,9 @@ much the development threshold deduction can reduce effective GDP. Default: 0.8<
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Maximum allowed deviation from equal per capita baseline. Constrains
-allocations to remain within a statistically reasonable range of the equal
-per capita baseline, preventing extreme adjustments. If None, no constraint
-is applied.</p>
+                <p><strong>Constraint.</strong> Maximum allowed deviation from equal per capita
+baseline, in population-weighted standard deviations. <code>None</code>
+(default) means no constraint.</p>
               </div>
             </td>
             <td>
@@ -3093,8 +3095,9 @@ is applied.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>If False (default), shares are calculated at each year. If True, shares
-calculated at first_allocation_year are preserved across all periods.</p>
+                <p><strong>Mode.</strong> If <code>False</code> (default), shares are recalculated at each
+year. If <code>True</code>, shares from <code>first_allocation_year</code> are held
+constant.</p>
               </div>
             </td>
             <td>
@@ -3110,9 +3113,10 @@ calculated at first_allocation_year are preserved across all periods.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Discount rate for historical emissions (0.0 to &lt;1.0). When &gt; 0, earlier
-emissions are weighted less via (1 - rate)^(reference_year - t). Implements
-natural CO2 removal rationale (Dekker Eq. 5). Default: 0.0 (no discounting).</p>
+                <p><strong>Pre-allocation responsibility.</strong> Discount rate for historical
+emissions (0.0 to &lt;1.0), via <code>(1 - rate)^(reference_year - t)</code>
+(Dekker Eq. 5). Default: 0.0. Only affects the pre-allocation
+responsibility calculation.</p>
               </div>
             </td>
             <td>
@@ -3128,7 +3132,7 @@ natural CO2 removal rationale (Dekker Eq. 5). Default: 0.0 (no discounting).</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Index level name for grouping (typically 'iso3c'). Default: 'iso3c'</p>
+                <p>Index level name for grouping. Default: <code>'iso3c'</code>.</p>
               </div>
             </td>
             <td>
@@ -3144,7 +3148,7 @@ natural CO2 removal rationale (Dekker Eq. 5). Default: 0.0 (no discounting).</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Index level name for units. Default: 'unit'</p>
+                <p>Index level name for units. Default: <code>'unit'</code>.</p>
               </div>
             </td>
             <td>
@@ -3201,20 +3205,14 @@ natural CO2 removal rationale (Dekker Eq. 5). Default: 0.0 (no discounting).</p>
 
 <details class="note" open>
   <summary>Notes</summary>
-  <p>This approach extends capability-based allocation by incorporating intra-national
+  <p><strong>Theoretical grounding:</strong></p>
+<p>This approach extends capability-based allocation by incorporating intra-national
 inequality via the GDR development threshold (adapted for entitlement
 allocation from GDR's burden-sharing context). Only income above the
 development threshold counts toward capability. When combined with the income
 floor, higher inequality means more national income sits above the threshold.
 See :func:<code>~fair_shares.library.utils.math.allocation.calculate_gini_adjusted_gdp</code>
 for the mathematical formulation.</p>
-<p><strong>When to Use</strong></p>
-<ul>
-<li>When capability assessment should account for income distribution within countries</li>
-<li>When the development threshold (income floor) should affect capability measurement</li>
-<li>For comprehensive allocation incorporating population, historical
-  responsibility, and inequality-adjusted capability</li>
-</ul>
 <p>See docs/science/allocations.md for theoretical grounding.</p>
 <p><strong>GDP window:</strong> When the allocation pathway extends past the last year of
 the input <code>gdp_ts</code>, the cumulative (Gini-adjusted) GDP per capita values
@@ -3228,50 +3226,6 @@ series before calling this function. Gini coefficients are looked up
 per-country and are not part of this forward-fill — only the GDP series
 is extended in time.</p>
 </details>
-
-<p><span class="doc-section-title">Examples:</span></p>
-    <div class="language-pycon highlight"><span class="filename">Python Console Session</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">fair_shares.library.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_example_data</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">create_example_data</span><span class="p">()</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Equal weights with Gini adjustment</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">per_capita_adjusted_gini</span><span class="p">(</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="gp">... </span>    <span class="n">population_ts</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;population&quot;</span><span class="p">],</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="gp">... </span>    <span class="n">country_actual_emissions_ts</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;emissions&quot;</span><span class="p">],</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="gp">... </span>    <span class="n">gdp_ts</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;gdp&quot;</span><span class="p">],</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="gp">... </span>    <span class="n">gini_s</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;gini&quot;</span><span class="p">],</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="gp">... </span>    <span class="n">first_allocation_year</span><span class="o">=</span><span class="mi">2020</span><span class="p">,</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="gp">... </span>    <span class="n">emission_category</span><span class="o">=</span><span class="s2">&quot;co2-ffi&quot;</span><span class="p">,</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="gp">... </span>    <span class="n">pre_allocation_responsibility_weight</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="gp">... </span>    <span class="n">capability_weight</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="gp">... </span><span class="p">)</span>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="go">Converting units...</span>
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Check that shares sum to 1.0</span>
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">shares</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">relative_shares_pathway_emissions</span>
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">shares_2020</span> <span class="o">=</span> <span class="n">shares</span><span class="p">[</span><span class="s2">&quot;2020&quot;</span><span class="p">]</span>
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">shares_2020</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-10</span><span class="p">)</span>
-</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="go">True</span>
-</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Verify approach is correctly identified</span>
-</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="o">.</span><span class="n">approach</span>
-</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="go">&#39;per-capita-adjusted-gini&#39;</span>
-</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Verify all countries have valid shares (between 0 and 1)</span>
-</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">((</span><span class="n">shares_2020</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span> <span class="ow">and</span> <span class="p">(</span><span class="n">shares_2020</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">())</span>
-</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="go">True</span>
-</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Compare to non-Gini version - shares will differ due to inequality adjustment</span>
-</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">result_no_gini</span> <span class="o">=</span> <span class="n">per_capita_adjusted</span><span class="p">(</span>
-</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="gp">... </span>    <span class="n">population_ts</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;population&quot;</span><span class="p">],</span>
-</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="gp">... </span>    <span class="n">country_actual_emissions_ts</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;emissions&quot;</span><span class="p">],</span>
-</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a><span class="gp">... </span>    <span class="n">gdp_ts</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;gdp&quot;</span><span class="p">],</span>
-</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="gp">... </span>    <span class="n">first_allocation_year</span><span class="o">=</span><span class="mi">2020</span><span class="p">,</span>
-</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a><span class="gp">... </span>    <span class="n">emission_category</span><span class="o">=</span><span class="s2">&quot;co2-ffi&quot;</span><span class="p">,</span>
-</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a><span class="gp">... </span>    <span class="n">pre_allocation_responsibility_weight</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
-</span><span id="__span-0-34"><a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a><span class="gp">... </span>    <span class="n">capability_weight</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
-</span><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a><span class="gp">... </span><span class="p">)</span>
-</span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a><span class="go">Converting units...</span>
-</span><span id="__span-0-37"><a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">shares_no_gini</span> <span class="o">=</span> <span class="n">result_no_gini</span><span class="o">.</span><span class="n">relative_shares_pathway_emissions</span><span class="p">[</span><span class="s2">&quot;2020&quot;</span><span class="p">]</span>
-</span><span id="__span-0-38"><a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Gini adjustment changes the allocation pattern</span>
-</span><span id="__span-0-39"><a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a><span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="ow">not</span> <span class="n">shares_2020</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="n">shares_no_gini</span><span class="p">))</span>
-</span><span id="__span-0-40"><a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a><span class="go">True</span>
-</span></code></pre></div>
-
 
 <details class="see-also" open>
   <summary>See Also</summary>
@@ -3526,49 +3480,8 @@ with shares that sum to 1 across groups for the specified emission category.</p>
 
 <details class="note" open>
   <summary>Notes</summary>
-  <p><strong>When to Use</strong></p>
-<ul>
-<li>Academic comparison with Contraction and Convergence scenarios</li>
-<li>Exploring sensitivity of allocations to transition period length</li>
-<li>When a gradual transition from status quo is explicitly desired</li>
-</ul>
-<p><strong>Limitations</strong></p>
-<ul>
-<li>Does not incorporate pre-allocation responsibility rescaling for past emissions</li>
-<li>Does not incorporate capability/ability to pay</li>
-<li>The grandfathering starting point lacks ethical basis (see referenced docs)</li>
-</ul>
-<p>For allocations grounded in CBDR-RC principles, consider using
-per_capita_adjusted or cumulative_per_capita_convergence approaches.</p>
+  
 </details>
-
-<p><span class="doc-section-title">Examples:</span></p>
-    <p>Calculate per capita convergence allocation transitioning from current
-emission shares to equal per capita shares over a 30-year period.</p>
-    <div class="language-pycon highlight"><span class="filename">Python Console Session</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">fair_shares.library.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_example_data</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">create_example_data</span><span class="p">(</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="gp">... </span>    <span class="n">countries</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;USA&quot;</span><span class="p">,</span> <span class="s2">&quot;CHN&quot;</span><span class="p">,</span> <span class="s2">&quot;IND&quot;</span><span class="p">],</span> <span class="n">years</span><span class="o">=</span><span class="p">[</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">2030</span><span class="p">,</span> <span class="mi">2050</span><span class="p">]</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="gp">... </span><span class="p">)</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">per_capita_convergence</span><span class="p">(</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="gp">... </span>    <span class="n">population_ts</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;population&quot;</span><span class="p">],</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="gp">... </span>    <span class="n">country_actual_emissions_ts</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;emissions&quot;</span><span class="p">],</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="gp">... </span>    <span class="n">first_allocation_year</span><span class="o">=</span><span class="mi">2020</span><span class="p">,</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="gp">... </span>    <span class="n">convergence_year</span><span class="o">=</span><span class="mi">2050</span><span class="p">,</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="gp">... </span>    <span class="n">emission_category</span><span class="o">=</span><span class="s2">&quot;co2-ffi&quot;</span><span class="p">,</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="gp">... </span><span class="p">)</span>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="o">.</span><span class="n">approach</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="go">&#39;per-capita-convergence&#39;</span>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;convergence_year&quot;</span><span class="p">]</span>
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="go">2050</span>
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Result contains relative shares that blend from current emissions</span>
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="gp">&gt;&gt;&gt; </span><span class="c1"># (grandfathering) at 2020 to equal per capita at 2050</span>
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="o">.</span><span class="n">relative_shares_pathway_emissions</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="go">2020    1.000</span>
-</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="go">2030    1.000</span>
-</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="go">2050    1.000</span>
-</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="go">dtype: float64</span>
-</span></code></pre></div>
-
 
 <details class="see-also" open>
   <summary>See Also</summary>
@@ -3941,23 +3854,21 @@ Default: None.</p>
     </table>
 
 
-<details class="see-also" open>
-  <summary>See Also</summary>
-  <p>cumulative_per_capita_convergence_adjusted : With
-    pre-allocation responsibility/capability adjustments
-cumulative_per_capita_convergence_adjusted_gini : With Gini-adjusted GDP</p>
-</details>
-
 <details class="note" open>
   <summary>Notes</summary>
   <p><strong>Theoretical grounding:</strong></p>
-<p>For theoretical foundations, use cases, and limitations, see:
-    docs/science/allocations.md#convergence-mechanism-theoretical-foundations</p>
-<p>For translating the egalitarian tradition (which grounds the equal per capita
-principle) into pathway allocations, see:
-    docs/science/principle-to-code.md#convergence-pathway-approaches</p>
-<p>For CBDR-RC principles (responsibility and capability), use
-cumulative_per_capita_convergence_adjusted or
+<p>For convergence mechanism foundations, use cases, and limitations, see:
+    docs/science/allocations.md#convergence-mechanism-pathways-only</p>
+<p>The base convergence approach drives toward equal cumulative per capita
+targets. The first_allocation_year choice affects normative positioning:
+a past year means historical emissions since then consume part of each
+country's cumulative target, directly incorporating responsibility.
+Combined with capability adjustments (available in the <code>_adjusted</code>
+variants), this already operationalizes CBDR-RC without needing explicit
+pre-allocation responsibility rescaling.
+See docs/science/principle-to-code.md for implementation examples.</p>
+<p>For capability adjustments or explicit pre-allocation responsibility
+rescaling, use cumulative_per_capita_convergence_adjusted or
 cumulative_per_capita_convergence_adjusted_gini.</p>
 <p><strong>Convergence Speed</strong></p>
 <p>The convergence speed is automatically determined to be the minimum speed
@@ -3966,62 +3877,12 @@ transition path while still achieving equity goals. The <code>strict</code> para
 controls whether an error is raised if exact targets cannot be achieved.</p>
 </details>
 
-<p><span class="doc-section-title">Examples:</span></p>
-    <p>Basic usage with default parameters:</p>
-    <div class="language-pycon highlight"><span class="filename">Python Console Session</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">fair_shares.library.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_example_data</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">fair_shares.library.allocations.pathways</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="gp">... </span>    <span class="n">cumulative_per_capita_convergence</span><span class="p">,</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="gp">... </span><span class="p">)</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Create example data</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">create_example_data</span><span class="p">(</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="gp">... </span>    <span class="n">countries</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;USA&quot;</span><span class="p">,</span> <span class="s2">&quot;CHN&quot;</span><span class="p">,</span> <span class="s2">&quot;IND&quot;</span><span class="p">],</span> <span class="n">years</span><span class="o">=</span><span class="p">[</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">2030</span><span class="p">,</span> <span class="mi">2050</span><span class="p">]</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="gp">... </span><span class="p">)</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Run allocation with strict=False for limited time horizon</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">cumulative_per_capita_convergence</span><span class="p">(</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="gp">... </span>    <span class="n">population_ts</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;population&quot;</span><span class="p">],</span>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="gp">... </span>    <span class="n">country_actual_emissions_ts</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;emissions&quot;</span><span class="p">],</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="gp">... </span>    <span class="n">world_scenario_emissions_ts</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;world_emissions&quot;</span><span class="p">],</span>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="gp">... </span>    <span class="n">first_allocation_year</span><span class="o">=</span><span class="mi">2020</span><span class="p">,</span>
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="gp">... </span>    <span class="n">emission_category</span><span class="o">=</span><span class="s2">&quot;co2-ffi&quot;</span><span class="p">,</span>
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="gp">... </span>    <span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># Accept approximate targets with limited data</span>
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="gp">... </span><span class="p">)</span>
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="go">Converting units...</span>
-</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Check approach is correct</span>
-</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="o">.</span><span class="n">approach</span>
-</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="go">&#39;cumulative-per-capita-convergence&#39;</span>
-</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Shares sum to 1.0 at each year</span>
-</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">shares</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">relative_shares_pathway_emissions</span>
-</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">shares</span><span class="p">[</span><span class="s2">&quot;2020&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-10</span><span class="p">)</span>
-</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="go">True</span>
-</span></code></pre></div>
-    <p>Adjust convergence behavior with strict=False for approximate targets:</p>
-    <div class="language-pycon highlight"><span class="filename">Python Console Session</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">result_approx</span> <span class="o">=</span> <span class="n">cumulative_per_capita_convergence</span><span class="p">(</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="gp">... </span>    <span class="n">population_ts</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;population&quot;</span><span class="p">],</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="gp">... </span>    <span class="n">country_actual_emissions_ts</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;emissions&quot;</span><span class="p">],</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="gp">... </span>    <span class="n">world_scenario_emissions_ts</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;world_emissions&quot;</span><span class="p">],</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="gp">... </span>    <span class="n">first_allocation_year</span><span class="o">=</span><span class="mi">2020</span><span class="p">,</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="gp">... </span>    <span class="n">emission_category</span><span class="o">=</span><span class="s2">&quot;co2-ffi&quot;</span><span class="p">,</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="gp">... </span>    <span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># Accept approximate targets</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="gp">... </span>    <span class="n">max_convergence_speed</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>  <span class="c1"># Slower, smoother convergence</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="gp">... </span><span class="p">)</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="go">Converting units...</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Check for warnings about deviations</span>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">result_approx</span><span class="o">.</span><span class="n">country_warnings</span><span class="p">:</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Some targets approximate:&quot;</span><span class="p">,</span> <span class="n">result_approx</span><span class="o">.</span><span class="n">country_warnings</span><span class="p">)</span>
-</span></code></pre></div>
-    <p>Remove deviation constraints for unconstrained targets:</p>
-    <div class="language-pycon highlight"><span class="filename">Python Console Session</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">result_unconstrained</span> <span class="o">=</span> <span class="n">cumulative_per_capita_convergence</span><span class="p">(</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="gp">... </span>    <span class="n">population_ts</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;population&quot;</span><span class="p">],</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="gp">... </span>    <span class="n">country_actual_emissions_ts</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;emissions&quot;</span><span class="p">],</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="gp">... </span>    <span class="n">world_scenario_emissions_ts</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;world_emissions&quot;</span><span class="p">],</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="gp">... </span>    <span class="n">first_allocation_year</span><span class="o">=</span><span class="mi">2020</span><span class="p">,</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="gp">... </span>    <span class="n">emission_category</span><span class="o">=</span><span class="s2">&quot;co2-ffi&quot;</span><span class="p">,</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="gp">... </span>    <span class="n">max_deviation_sigma</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="c1"># No constraints on target shares</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="gp">... </span>    <span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># Needed for limited data</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="gp">... </span><span class="p">)</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="go">Converting units...</span>
-</span></code></pre></div>
-
+<details class="see-also" open>
+  <summary>See Also</summary>
+  <p>cumulative_per_capita_convergence_adjusted : With
+    pre-allocation responsibility/capability adjustments
+cumulative_per_capita_convergence_adjusted_gini : With Gini-adjusted GDP</p>
+</details>
 
     </div>
 
@@ -4174,8 +4035,7 @@ are constrained to prevent extreme deviations from equal cumulative per capita.<
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Population time series for per capita calculations and pre-allocation
-responsibility adjustment.</p>
+                <p>Population time series for per capita calculations.</p>
               </div>
             </td>
             <td>
@@ -4191,7 +4051,8 @@ responsibility adjustment.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Country emissions for initial shares and pre-allocation responsibility calculation.</p>
+                <p>Country emissions for initial shares at <code>first_allocation_year</code>
+and for the pre-allocation responsibility calculation.</p>
               </div>
             </td>
             <td>
@@ -4207,7 +4068,8 @@ responsibility adjustment.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>World emissions pathway defining time horizon and year weights.</p>
+                <p><strong>Convergence.</strong> World emissions pathway defining time horizon
+and year weights for convergence dynamics.</p>
               </div>
             </td>
             <td>
@@ -4223,7 +4085,8 @@ responsibility adjustment.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Starting year for the allocation.</p>
+                <p>Starting year for the allocation. Shares are computed from this
+year onwards.</p>
               </div>
             </td>
             <td>
@@ -4239,7 +4102,7 @@ responsibility adjustment.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>The emission category (e.g., 'co2-ffi', 'all-ghg').</p>
+                <p>Emission category (e.g., <code>'co2-ffi'</code>, <code>'all-ghg'</code>).</p>
               </div>
             </td>
             <td>
@@ -4255,7 +4118,8 @@ responsibility adjustment.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>GDP time series for capability adjustment. Required if capability_weight &gt; 0.</p>
+                <p><strong>Capability.</strong> GDP time series used from <code>first_allocation_year</code>
+onwards. Required when <code>capability_weight &gt; 0</code>.</p>
               </div>
             </td>
             <td>
@@ -4271,9 +4135,9 @@ responsibility adjustment.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Weight for pre-allocation responsibility adjustment (0-1). Higher historical
-emissions -&gt; smaller allocation. Must satisfy:
-pre_allocation_responsibility_weight + capability_weight &lt;= 1.0</p>
+                <p><strong>Pre-allocation responsibility.</strong> Relative weight (0–1). Only the
+ratio to <code>capability_weight</code> matters. When 0, pre-allocation
+responsibility is disabled.</p>
               </div>
             </td>
             <td>
@@ -4289,10 +4153,10 @@ pre_allocation_responsibility_weight + capability_weight &lt;= 1.0</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Weight for capability adjustment (0-1). Higher GDP -&gt; smaller allocation.
-Applies from the first allocation year onwards (contrast with pre-allocation
-responsibility, which looks backward from it). Requires gdp_ts. Must satisfy:
-pre_allocation_responsibility_weight + capability_weight &lt;= 1.0</p>
+                <p><strong>Capability.</strong> Relative weight (0–1). Applies from
+<code>first_allocation_year</code> onwards (contrast with pre-allocation
+responsibility, which covers the window before it). When 0,
+capability is disabled.</p>
               </div>
             </td>
             <td>
@@ -4308,9 +4172,9 @@ pre_allocation_responsibility_weight + capability_weight &lt;= 1.0</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>First year of pre-allocation responsibility window
-[pre_allocation_responsibility_year, first_allocation_year].
-Default: 1990</p>
+                <p><strong>Pre-allocation responsibility.</strong> Start year of the historical
+window <code>[pre_allocation_responsibility_year,
+first_allocation_year)</code>. Default: 1990.</p>
               </div>
             </td>
             <td>
@@ -4326,7 +4190,9 @@ Default: 1990</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>If True, use per capita emissions for pre-allocation responsibility. Default: True</p>
+                <p><strong>Pre-allocation responsibility.</strong> If <code>True</code>, uses per-capita
+cumulative emissions. If <code>False</code> (default), uses absolute
+cumulative emissions.</p>
               </div>
             </td>
             <td>
@@ -4342,7 +4208,8 @@ Default: 1990</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Exponent for pre-allocation responsibility adjustment calculation. Default: 1.0</p>
+                <p><strong>Pre-allocation responsibility.</strong> Exponent applied to the
+emissions metric. Default: 1.0.</p>
               </div>
             </td>
             <td>
@@ -4358,8 +4225,8 @@ Default: 1990</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Functional form for pre-allocation responsibility adjustment ('asinh', 'power',
-'linear'). Default: 'asinh'</p>
+                <p><strong>Pre-allocation responsibility.</strong> Transformation: <code>'asinh'</code>
+(default), <code>'power'</code>, or <code>'linear'</code>.</p>
               </div>
             </td>
             <td>
@@ -4375,7 +4242,8 @@ Default: 1990</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>If True, use per capita GDP for capability. Default: True</p>
+                <p><strong>Capability.</strong> If <code>True</code> (default), GDP is divided by
+population. If <code>False</code>, absolute GDP is used.</p>
               </div>
             </td>
             <td>
@@ -4391,7 +4259,7 @@ Default: 1990</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Exponent for capability adjustment calculation. Default: 1.0</p>
+                <p><strong>Capability.</strong> Exponent applied to the GDP metric. Default: 1.0.</p>
               </div>
             </td>
             <td>
@@ -4407,8 +4275,8 @@ Default: 1990</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Functional form for capability adjustment ('asinh', 'power',
-'linear'). Default: 'asinh'</p>
+                <p><strong>Capability.</strong> Transformation: <code>'asinh'</code> (default), <code>'power'</code>,
+or <code>'linear'</code>.</p>
               </div>
             </td>
             <td>
@@ -4424,8 +4292,9 @@ Default: 1990</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Maximum allowed deviation from equal per capita baseline in terms of
-population-weighted standard deviations. If None, no constraint is applied.</p>
+                <p><strong>Constraint.</strong> Maximum allowed deviation from equal per capita
+baseline, in population-weighted standard deviations. <code>None</code>
+(default) means no constraint.</p>
               </div>
             </td>
             <td>
@@ -4441,8 +4310,9 @@ population-weighted standard deviations. If None, no constraint is applied.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Maximum allowed convergence speed (0 to 1.0). Lower values create smoother
-pathways but may become infeasible. Default: 0.9</p>
+                <p><strong>Convergence.</strong> Maximum allowed convergence speed (0–1.0). Lower
+values create smoother pathways but may become infeasible.
+Default: 0.9.</p>
               </div>
             </td>
             <td>
@@ -4458,8 +4328,9 @@ pathways but may become infeasible. Default: 0.9</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>If True (default), raise error for infeasible convergence.
-If False, use nearest feasible solution with warnings.</p>
+                <p><strong>Convergence.</strong> If <code>True</code> (default), raise error for infeasible
+convergence. If <code>False</code>, use nearest feasible solution with
+warnings.</p>
               </div>
             </td>
             <td>
@@ -4475,9 +4346,10 @@ If False, use nearest feasible solution with warnings.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Discount rate for historical emissions (0.0 to &lt;1.0). When &gt; 0, earlier
-emissions are weighted less via (1 - rate)^(reference_year - t). Implements
-natural CO2 removal rationale (Dekker Eq. 5). Default: 0.0 (no discounting).</p>
+                <p><strong>Pre-allocation responsibility.</strong> Discount rate for historical
+emissions (0.0 to &lt;1.0), via <code>(1 - rate)^(reference_year - t)</code>
+(Dekker Eq. 5). Default: 0.0. Only affects the pre-allocation
+responsibility calculation.</p>
               </div>
             </td>
             <td>
@@ -4493,10 +4365,11 @@ natural CO2 removal rationale (Dekker Eq. 5). Default: 0.0 (no discounting).</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Convergence algorithm to use. "minimum-speed" (default): exponential
-convergence with binary-search for minimum feasible speed.
-"sine-deviation" (Dekker Eqs. 7-8): iterative sine-shaped correction
-from a PCC baseline; requires convergence_year.</p>
+                <p><strong>Convergence.</strong> Algorithm to use. <code>'minimum-speed'</code> (default):
+exponential convergence with binary-search for minimum feasible
+speed. <code>'sine-deviation'</code> (Dekker Eqs. 7-8): iterative
+sine-shaped correction from a PCC baseline; requires
+<code>convergence_year</code>.</p>
               </div>
             </td>
             <td>
@@ -4512,9 +4385,9 @@ from a PCC baseline; requires convergence_year.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Year by which allocations converge to equal per capita. Required when
-convergence_method='sine-deviation'. Must be &gt; first_allocation_year.
-Default: None.</p>
+                <p><strong>Convergence.</strong> Year by which allocations converge to equal per
+capita. Required when <code>convergence_method='sine-deviation'</code>.
+Must be &gt; <code>first_allocation_year</code>. Default: <code>None</code>.</p>
               </div>
             </td>
             <td>
@@ -4530,7 +4403,7 @@ Default: None.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Index level name for grouping (typically 'iso3c'). Default: 'iso3c'</p>
+                <p>Index level name for grouping. Default: <code>'iso3c'</code>.</p>
               </div>
             </td>
             <td>
@@ -4546,7 +4419,7 @@ Default: None.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Index level name for units. Default: 'unit'</p>
+                <p>Index level name for units. Default: <code>'unit'</code>.</p>
               </div>
             </td>
             <td>
@@ -4601,24 +4474,19 @@ Default: None.</p>
     </table>
 
 
-<details class="see-also" open>
-  <summary>See Also</summary>
-  <p>cumulative_per_capita_convergence : Without adjustments
-cumulative_per_capita_convergence_adjusted_gini : With Gini-adjusted GDP</p>
-</details>
-
 <details class="note" open>
   <summary>Notes</summary>
   <p><strong>Theoretical grounding:</strong></p>
-<p>For theoretical foundations and CBDR-RC principles, see:
-    docs/science/allocations.md#convergence-mechanism-theoretical-foundations
-    docs/science/allocations<a class="magiclink magiclink-github magiclink-issue" href="https://github.com/setupelz/.md/issues/4" title="GitHub Issue: setupelz/.md #4">.md#4</a>-common-but-differentiated-responsibilities-cbdr-rc</p>
-<p>For translating equity principles into pathway allocations, see:
-    docs/science/principle-to-code.md#convergence-pathway-approaches
-    docs/science/principle-to-code.md#cbdr-rc</p>
-<p>This approach incorporates pre-allocation responsibility and capability adjustments
-to operationalize Common But Differentiated Responsibilities and Respective
-Capabilities (CBDR-RC). Higher past emissions and higher GDP -&gt; smaller allocation.</p>
+<p>For convergence mechanism foundations, see:
+    docs/science/allocations.md#convergence-mechanism-pathways-only</p>
+<p>For how historical responsibility and capability enter allocations, see:
+    docs/science/allocations.md#historical-responsibility</p>
+<p>For implementation examples, see docs/science/principle-to-code.md.</p>
+<p>This approach provides explicit pre-allocation responsibility rescaling
+and capability adjustments. These are one way to operationalize CBDR-RC;
+another is setting first_allocation_year in the past (responsibility
+via consumed budget) combined with capability adjustments.
+Higher past emissions and/or higher GDP -&gt; smaller allocation.</p>
 <p><strong>GDP window:</strong> The capability metric for this approach is a per-country
 scalar computed by summing GDP and population only over the intersection
 of years where both data are available -- there is no forward-fill into
@@ -4629,75 +4497,18 @@ series extends. Users who want post-observation GDP dynamics to enter
 the capability calculation should extend the input <code>gdp_ts</code> time series
 with projected data (SSP2 GDP projections, custom growth assumptions, or
 a future-extended WDI release) before calling this function.</p>
+<p><strong>Convergence Speed</strong></p>
+<p>The convergence speed is automatically determined to be the minimum speed
+that ensures cumulative targets are met, creating the smoothest possible
+transition path while still achieving equity goals. The <code>strict</code> parameter
+controls whether an error is raised if exact targets cannot be achieved.</p>
 </details>
 
-<p><span class="doc-section-title">Examples:</span></p>
-    <p>Basic usage with equal pre-allocation responsibility and capability weights:</p>
-    <div class="language-pycon highlight"><span class="filename">Python Console Session</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">fair_shares.library.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_example_data</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">fair_shares.library.allocations.pathways</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="gp">... </span>    <span class="n">cumulative_per_capita_convergence_adjusted</span><span class="p">,</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="gp">... </span><span class="p">)</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Create example data</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">create_example_data</span><span class="p">(</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="gp">... </span>    <span class="n">countries</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;USA&quot;</span><span class="p">,</span> <span class="s2">&quot;CHN&quot;</span><span class="p">,</span> <span class="s2">&quot;IND&quot;</span><span class="p">],</span> <span class="n">years</span><span class="o">=</span><span class="p">[</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">2030</span><span class="p">,</span> <span class="mi">2050</span><span class="p">]</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="gp">... </span><span class="p">)</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Run allocation with adjustments and strict=False for limited data</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">cumulative_per_capita_convergence_adjusted</span><span class="p">(</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="gp">... </span>    <span class="n">population_ts</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;population&quot;</span><span class="p">],</span>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="gp">... </span>    <span class="n">country_actual_emissions_ts</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;emissions&quot;</span><span class="p">],</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="gp">... </span>    <span class="n">world_scenario_emissions_ts</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;world_emissions&quot;</span><span class="p">],</span>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="gp">... </span>    <span class="n">gdp_ts</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;gdp&quot;</span><span class="p">],</span>
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="gp">... </span>    <span class="n">first_allocation_year</span><span class="o">=</span><span class="mi">2020</span><span class="p">,</span>
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="gp">... </span>    <span class="n">emission_category</span><span class="o">=</span><span class="s2">&quot;co2-ffi&quot;</span><span class="p">,</span>
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="gp">... </span>    <span class="n">pre_allocation_responsibility_weight</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>  <span class="c1"># 50% adjustment for historical emissions</span>
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="gp">... </span>    <span class="n">capability_weight</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>  <span class="c1"># 50% adjustment for GDP</span>
-</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="gp">... </span>    <span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># Accept approximate targets with limited data</span>
-</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="gp">... </span><span class="p">)</span>
-</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="go">Converting units...</span>
-</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Check results - high emitters get less than pure per-capita</span>
-</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="o">.</span><span class="n">approach</span>
-</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="go">&#39;cumulative-per-capita-convergence-adjusted&#39;</span>
-</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Shares sum to 1.0 at each year</span>
-</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">shares</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">relative_shares_pathway_emissions</span>
-</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="gp">&gt;&gt;&gt; </span><span class="nb">bool</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">shares</span><span class="p">[</span><span class="s2">&quot;2020&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-10</span><span class="p">)</span>
-</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="go">True</span>
-</span></code></pre></div>
-    <p>Adjust convergence speed for smoother pathways:</p>
-    <div class="language-pycon highlight"><span class="filename">Python Console Session</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">result_smooth</span> <span class="o">=</span> <span class="n">cumulative_per_capita_convergence_adjusted</span><span class="p">(</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="gp">... </span>    <span class="n">population_ts</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;population&quot;</span><span class="p">],</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="gp">... </span>    <span class="n">country_actual_emissions_ts</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;emissions&quot;</span><span class="p">],</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="gp">... </span>    <span class="n">world_scenario_emissions_ts</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;world_emissions&quot;</span><span class="p">],</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="gp">... </span>    <span class="n">gdp_ts</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;gdp&quot;</span><span class="p">],</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="gp">... </span>    <span class="n">first_allocation_year</span><span class="o">=</span><span class="mi">2020</span><span class="p">,</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="gp">... </span>    <span class="n">emission_category</span><span class="o">=</span><span class="s2">&quot;co2-ffi&quot;</span><span class="p">,</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="gp">... </span>    <span class="n">pre_allocation_responsibility_weight</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="gp">... </span>    <span class="n">capability_weight</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="gp">... </span>    <span class="n">max_convergence_speed</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="gp">... </span>    <span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="gp">... </span><span class="p">)</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="go">Converting units...</span>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Check for warnings if targets couldn&#39;t be met exactly</span>
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">result_smooth</span><span class="o">.</span><span class="n">country_warnings</span><span class="p">:</span>
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Approximate targets:&quot;</span><span class="p">,</span> <span class="n">result_smooth</span><span class="o">.</span><span class="n">country_warnings</span><span class="p">)</span>
-</span></code></pre></div>
-    <p>Emphasize pre-allocation responsibility over capability:</p>
-    <div class="language-pycon highlight"><span class="filename">Python Console Session</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">result_responsibility</span> <span class="o">=</span> <span class="n">cumulative_per_capita_convergence_adjusted</span><span class="p">(</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="gp">... </span>    <span class="n">population_ts</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;population&quot;</span><span class="p">],</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="gp">... </span>    <span class="n">country_actual_emissions_ts</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;emissions&quot;</span><span class="p">],</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="gp">... </span>    <span class="n">world_scenario_emissions_ts</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;world_emissions&quot;</span><span class="p">],</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="gp">... </span>    <span class="n">gdp_ts</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;gdp&quot;</span><span class="p">],</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="gp">... </span>    <span class="n">first_allocation_year</span><span class="o">=</span><span class="mi">2020</span><span class="p">,</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="gp">... </span>    <span class="n">emission_category</span><span class="o">=</span><span class="s2">&quot;co2-ffi&quot;</span><span class="p">,</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="gp">... </span>    <span class="n">pre_allocation_responsibility_weight</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="gp">... </span>    <span class="n">capability_weight</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="gp">... </span>    <span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="gp">... </span><span class="p">)</span>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="go">Converting units...</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Historical emitters penalized more than in equal-weight case</span>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">result_responsibility</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;pre_allocation_responsibility_weight&quot;</span><span class="p">]</span>
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="go">0.7</span>
-</span></code></pre></div>
-
+<details class="see-also" open>
+  <summary>See Also</summary>
+  <p>cumulative_per_capita_convergence : Without adjustments
+cumulative_per_capita_convergence_adjusted_gini : With Gini-adjusted GDP</p>
+</details>
 
     </div>
 
@@ -4865,8 +4676,7 @@ are constrained to prevent extreme deviations from equal cumulative per capita.<
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Population time series for per capita calculations and pre-allocation
-responsibility adjustment.</p>
+                <p>Population time series for per capita calculations.</p>
               </div>
             </td>
             <td>
@@ -4882,7 +4692,8 @@ responsibility adjustment.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Country emissions for initial shares and pre-allocation responsibility calculation.</p>
+                <p>Country emissions for initial shares at <code>first_allocation_year</code>
+and for the pre-allocation responsibility calculation.</p>
               </div>
             </td>
             <td>
@@ -4898,7 +4709,8 @@ responsibility adjustment.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>World emissions pathway defining time horizon and year weights.</p>
+                <p><strong>Convergence.</strong> World emissions pathway defining time horizon
+and year weights for convergence dynamics.</p>
               </div>
             </td>
             <td>
@@ -4914,7 +4726,8 @@ responsibility adjustment.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Starting year for the allocation.</p>
+                <p>Starting year for the allocation. Shares are computed from this
+year onwards.</p>
               </div>
             </td>
             <td>
@@ -4930,7 +4743,7 @@ responsibility adjustment.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>The emission category (e.g., 'co2-ffi', 'all-ghg').</p>
+                <p>Emission category (e.g., <code>'co2-ffi'</code>, <code>'all-ghg'</code>).</p>
               </div>
             </td>
             <td>
@@ -4946,8 +4759,9 @@ responsibility adjustment.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>GDP time series for capability adjustment. Required if
-capability_weight &gt; 0 or gini_s provided.</p>
+                <p><strong>Capability.</strong> GDP time series used from <code>first_allocation_year</code>
+onwards. Required when <code>capability_weight &gt; 0</code> or <code>gini_s</code>
+is provided.</p>
               </div>
             </td>
             <td>
@@ -4963,8 +4777,8 @@ capability_weight &gt; 0 or gini_s provided.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Gini coefficients for GDP inequality adjustment. When provided, GDP is adjusted
-to reflect income distribution within countries.</p>
+                <p><strong>Gini.</strong> Gini coefficients for within-country income inequality.
+Used to adjust GDP before computing the capability factor.</p>
               </div>
             </td>
             <td>
@@ -4980,9 +4794,9 @@ to reflect income distribution within countries.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Weight for pre-allocation responsibility adjustment (0-1). Higher historical
-emissions -&gt; smaller allocation. Must satisfy:
-pre_allocation_responsibility_weight + capability_weight &lt;= 1.0</p>
+                <p><strong>Pre-allocation responsibility.</strong> Relative weight (0–1). Only the
+ratio to <code>capability_weight</code> matters. When 0, pre-allocation
+responsibility is disabled.</p>
               </div>
             </td>
             <td>
@@ -4998,10 +4812,8 @@ pre_allocation_responsibility_weight + capability_weight &lt;= 1.0</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Weight for capability adjustment (0-1). Higher GDP -&gt; smaller allocation.
-Applies from the first allocation year onwards (contrast with pre-allocation
-responsibility, which looks backward from it). Requires gdp_ts. Must satisfy:
-pre_allocation_responsibility_weight + capability_weight &lt;= 1.0</p>
+                <p><strong>Capability.</strong> Relative weight (0–1). Applies from
+<code>first_allocation_year</code> onwards. When 0, capability is disabled.</p>
               </div>
             </td>
             <td>
@@ -5017,9 +4829,9 @@ pre_allocation_responsibility_weight + capability_weight &lt;= 1.0</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>First year of pre-allocation responsibility window
-[pre_allocation_responsibility_year, first_allocation_year].
-Default: 1990</p>
+                <p><strong>Pre-allocation responsibility.</strong> Start year of the historical
+window <code>[pre_allocation_responsibility_year,
+first_allocation_year)</code>. Default: 1990.</p>
               </div>
             </td>
             <td>
@@ -5035,7 +4847,9 @@ Default: 1990</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>If True, use per capita emissions for pre-allocation responsibility. Default: True</p>
+                <p><strong>Pre-allocation responsibility.</strong> If <code>True</code>, uses per-capita
+cumulative emissions. If <code>False</code> (default), uses absolute
+cumulative emissions.</p>
               </div>
             </td>
             <td>
@@ -5051,7 +4865,8 @@ Default: 1990</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Exponent for pre-allocation responsibility adjustment calculation. Default: 1.0</p>
+                <p><strong>Pre-allocation responsibility.</strong> Exponent applied to the
+emissions metric. Default: 1.0.</p>
               </div>
             </td>
             <td>
@@ -5067,8 +4882,8 @@ Default: 1990</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Functional form for pre-allocation responsibility adjustment ('asinh', 'power',
-'linear'). Default: 'asinh'</p>
+                <p><strong>Pre-allocation responsibility.</strong> Transformation: <code>'asinh'</code>
+(default), <code>'power'</code>, or <code>'linear'</code>.</p>
               </div>
             </td>
             <td>
@@ -5084,7 +4899,9 @@ Default: 1990</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>If True, use per capita GDP for capability. Default: True</p>
+                <p><strong>Capability.</strong> If <code>True</code> (default), Gini-adjusted GDP is
+divided by population. If <code>False</code>, absolute Gini-adjusted GDP
+is used.</p>
               </div>
             </td>
             <td>
@@ -5100,7 +4917,8 @@ Default: 1990</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Exponent for capability adjustment calculation. Default: 1.0</p>
+                <p><strong>Capability.</strong> Exponent applied to the Gini-adjusted GDP metric.
+Default: 1.0.</p>
               </div>
             </td>
             <td>
@@ -5116,8 +4934,8 @@ Default: 1990</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Functional form for capability adjustment ('asinh', 'power',
-'linear'). Default: 'asinh'</p>
+                <p><strong>Capability.</strong> Transformation: <code>'asinh'</code> (default), <code>'power'</code>,
+or <code>'linear'</code>.</p>
               </div>
             </td>
             <td>
@@ -5133,9 +4951,9 @@ Default: 1990</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Income floor for Gini adjustment (in USD). Income below this threshold
-is excluded
-from capability calculations. Default: 7500.0</p>
+                <p><strong>Gini.</strong> Development threshold in USD PPP per capita. Income
+below this is excluded from capability calculations. Default:
+7500.0.</p>
               </div>
             </td>
             <td>
@@ -5151,8 +4969,8 @@ from capability calculations. Default: 7500.0</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Maximum reduction factor from GDR threshold adjustment (0-1). Limits how much
-the development threshold deduction can reduce effective GDP. Default: 0.8</p>
+                <p><strong>Gini.</strong> Maximum reduction factor from threshold deduction (0–1).
+Default: 0.8.</p>
               </div>
             </td>
             <td>
@@ -5168,8 +4986,9 @@ the development threshold deduction can reduce effective GDP. Default: 0.8</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Maximum allowed deviation from equal per capita baseline in terms of
-population-weighted standard deviations. If None, no constraint is applied.</p>
+                <p><strong>Constraint.</strong> Maximum allowed deviation from equal per capita
+baseline, in population-weighted standard deviations. <code>None</code>
+(default) means no constraint.</p>
               </div>
             </td>
             <td>
@@ -5185,8 +5004,8 @@ population-weighted standard deviations. If None, no constraint is applied.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Maximum allowed convergence speed (0 to 1.0). Lower values create smoother
-pathways but may become infeasible. Default: 0.9</p>
+                <p><strong>Convergence.</strong> Maximum allowed convergence speed (0–1.0).
+Default: 0.9.</p>
               </div>
             </td>
             <td>
@@ -5202,8 +5021,8 @@ pathways but may become infeasible. Default: 0.9</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>If True (default), raise error for infeasible convergence.
-If False, use nearest feasible solution with warnings.</p>
+                <p><strong>Convergence.</strong> If <code>True</code> (default), raise error for infeasible
+convergence. If <code>False</code>, use nearest feasible solution.</p>
               </div>
             </td>
             <td>
@@ -5219,9 +5038,10 @@ If False, use nearest feasible solution with warnings.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Discount rate for historical emissions (0.0 to &lt;1.0). When &gt; 0, earlier
-emissions are weighted less via (1 - rate)^(reference_year - t). Implements
-natural CO2 removal rationale (Dekker Eq. 5). Default: 0.0 (no discounting).</p>
+                <p><strong>Pre-allocation responsibility.</strong> Discount rate for historical
+emissions (0.0 to &lt;1.0), via <code>(1 - rate)^(reference_year - t)</code>
+(Dekker Eq. 5). Default: 0.0. Only affects the pre-allocation
+responsibility calculation.</p>
               </div>
             </td>
             <td>
@@ -5237,10 +5057,9 @@ natural CO2 removal rationale (Dekker Eq. 5). Default: 0.0 (no discounting).</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Convergence algorithm to use. "minimum-speed" (default): exponential
-convergence with binary-search for minimum feasible speed.
-"sine-deviation" (Dekker Eqs. 7-8): iterative sine-shaped correction
-from a PCC baseline; requires convergence_year.</p>
+                <p><strong>Convergence.</strong> Algorithm: <code>'minimum-speed'</code> (default) or
+<code>'sine-deviation'</code> (Dekker Eqs. 7-8, requires
+<code>convergence_year</code>).</p>
               </div>
             </td>
             <td>
@@ -5256,9 +5075,9 @@ from a PCC baseline; requires convergence_year.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Year by which allocations converge to equal per capita. Required when
-convergence_method='sine-deviation'. Must be &gt; first_allocation_year.
-Default: None.</p>
+                <p><strong>Convergence.</strong> Year by which allocations converge to equal per
+capita. Required when <code>convergence_method='sine-deviation'</code>.
+Default: <code>None</code>.</p>
               </div>
             </td>
             <td>
@@ -5274,7 +5093,7 @@ Default: None.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Index level name for grouping (typically 'iso3c'). Default: 'iso3c'</p>
+                <p>Index level name for grouping. Default: <code>'iso3c'</code>.</p>
               </div>
             </td>
             <td>
@@ -5290,7 +5109,7 @@ Default: None.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Index level name for units. Default: 'unit'</p>
+                <p>Index level name for units. Default: <code>'unit'</code>.</p>
               </div>
             </td>
             <td>
@@ -5345,21 +5164,14 @@ Default: None.</p>
     </table>
 
 
-<details class="see-also" open>
-  <summary>See Also</summary>
-  <p>cumulative_per_capita_convergence : Without adjustments
-cumulative_per_capita_convergence_adjusted : Without Gini adjustment</p>
-</details>
-
 <details class="note" open>
   <summary>Notes</summary>
   <p><strong>Theoretical grounding:</strong></p>
-<p>For theoretical foundations, intra-national equity, and Gini adjustment rationale, see:
-    docs/science/allocations.md#convergence-mechanism-theoretical-foundations
-    docs/science/allocations.md#gini-adjustment-for-within-country-inequality</p>
-<p>For translating equity principles into pathway allocations, see:
-    docs/science/principle-to-code.md#convergence-pathway-approaches
-    docs/science/principle-to-code.md#subsistence-protection</p>
+<p>For convergence mechanism foundations and Gini adjustment rationale, see:
+    docs/science/allocations.md#convergence-mechanism-pathways-only
+    docs/science/allocations.md#gini-adjustment</p>
+<p>For implementation examples combining convergence with subsistence
+protection, see docs/science/principle-to-code.md.</p>
 <p>This approach extends the adjusted convergence method by incorporating
 Gini-adjusted GDP to account for income inequality within countries. The
 <code>income_floor</code> parameter implements the subsistence vs. luxury emissions
@@ -5377,60 +5189,18 @@ projections, custom growth assumptions, or a future-extended WDI release)
 before calling this function. Gini coefficients are looked up per-country
 and are not part of this windowing -- only the GDP series is constrained
 to the observation window.</p>
+<p><strong>Convergence Speed</strong></p>
+<p>The convergence speed is automatically determined to be the minimum speed
+that ensures cumulative targets are met, creating the smoothest possible
+transition path while still achieving equity goals. The <code>strict</code> parameter
+controls whether an error is raised if exact targets cannot be achieved.</p>
 </details>
 
-<p><span class="doc-section-title">Examples:</span></p>
-    <p>Basic usage with Gini-adjusted GDP:</p>
-    <div class="language-pycon highlight"><span class="filename">Python Console Session</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">fair_shares.library.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_example_data</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">fair_shares.library.allocations.pathways</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="gp">... </span>    <span class="n">cumulative_per_capita_convergence_adjusted_gini</span><span class="p">,</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="gp">... </span><span class="p">)</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Create example data</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">create_example_data</span><span class="p">(</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="gp">... </span>    <span class="n">countries</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;USA&quot;</span><span class="p">,</span> <span class="s2">&quot;CHN&quot;</span><span class="p">,</span> <span class="s2">&quot;BRA&quot;</span><span class="p">],</span> <span class="n">years</span><span class="o">=</span><span class="p">[</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">2030</span><span class="p">,</span> <span class="mi">2050</span><span class="p">]</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="gp">... </span><span class="p">)</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Run allocation with Gini adjustment</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">cumulative_per_capita_convergence_adjusted_gini</span><span class="p">(</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="gp">... </span>    <span class="n">population_ts</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;population&quot;</span><span class="p">],</span>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="gp">... </span>    <span class="n">country_actual_emissions_ts</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;emissions&quot;</span><span class="p">],</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="gp">... </span>    <span class="n">world_scenario_emissions_ts</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;world_emissions&quot;</span><span class="p">],</span>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="gp">... </span>    <span class="n">gdp_ts</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;gdp&quot;</span><span class="p">],</span>
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="gp">... </span>    <span class="n">gini_s</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;gini&quot;</span><span class="p">],</span>
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="gp">... </span>    <span class="n">first_allocation_year</span><span class="o">=</span><span class="mi">2020</span><span class="p">,</span>
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="gp">... </span>    <span class="n">emission_category</span><span class="o">=</span><span class="s2">&quot;co2-ffi&quot;</span><span class="p">,</span>
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="gp">... </span>    <span class="n">pre_allocation_responsibility_weight</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>  <span class="c1"># 50% adjustment for historical emissions</span>
-</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="gp">... </span>    <span class="n">capability_weight</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>  <span class="c1"># 50% adjustment for Gini-adjusted GDP</span>
-</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="gp">... </span><span class="p">)</span>
-</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="go">Converting units...</span>
-</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Check results - Gini adjustment included</span>
-</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span><span class="o">.</span><span class="n">approach</span>
-</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="go">&#39;cumulative-per-capita-convergence-gini-adjusted&#39;</span>
-</span></code></pre></div>
-    <p>Adjust Gini parameters to control inequality weighting:</p>
-    <div class="language-pycon highlight"><span class="filename">Python Console Session</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Custom Gini parameters</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">result_custom_gini</span> <span class="o">=</span> <span class="p">(</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="gp">... </span>    <span class="n">cumulative_per_capita_convergence_adjusted_gini</span><span class="p">(</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="gp">... </span>        <span class="n">population_ts</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;population&quot;</span><span class="p">],</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="gp">... </span>        <span class="n">country_actual_emissions_ts</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;emissions&quot;</span><span class="p">],</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="gp">... </span>        <span class="n">world_scenario_emissions_ts</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;world_emissions&quot;</span><span class="p">],</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="gp">... </span>        <span class="n">gdp_ts</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;gdp&quot;</span><span class="p">],</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="gp">... </span>        <span class="n">gini_s</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;gini&quot;</span><span class="p">],</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="gp">... </span>        <span class="n">first_allocation_year</span><span class="o">=</span><span class="mi">2020</span><span class="p">,</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="gp">... </span>        <span class="n">emission_category</span><span class="o">=</span><span class="s2">&quot;co2-ffi&quot;</span><span class="p">,</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="gp">... </span>        <span class="n">pre_allocation_responsibility_weight</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="gp">... </span>        <span class="n">capability_weight</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="gp">... </span>        <span class="n">income_floor</span><span class="o">=</span><span class="mf">5000.0</span><span class="p">,</span>  <span class="c1"># Lower income floor</span>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="gp">... </span>        <span class="n">max_gini_adjustment</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span>  <span class="c1"># Allow stronger inequality adjustment</span>
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="gp">... </span>        <span class="n">max_convergence_speed</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>  <span class="c1"># Slower convergence</span>
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="gp">... </span>        <span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># Accept approximate targets if exact infeasible</span>
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="gp">... </span>    <span class="p">)</span>
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="gp">... </span><span class="p">)</span>
-</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="go">Converting units...</span>
-</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="gp">&gt;&gt;&gt; </span><span class="c1"># With income floor, high inequality means more income above threshold</span>
-</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="gp">&gt;&gt;&gt; </span><span class="n">result_custom_gini</span><span class="o">.</span><span class="n">approach</span>
-</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="go">&#39;cumulative-per-capita-convergence-gini-adjusted&#39;</span>
-</span></code></pre></div>
-
+<details class="see-also" open>
+  <summary>See Also</summary>
+  <p>cumulative_per_capita_convergence : Without adjustments
+cumulative_per_capita_convergence_adjusted : Without Gini adjustment</p>
+</details>
 
     </div>
 
