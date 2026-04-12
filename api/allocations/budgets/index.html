@@ -2109,17 +2109,11 @@ R(g) = \left(\sum_{t=t_h}^{t_a-1} E(g, t)\right)^{-w_r \times e_r}
 capability over the full allocation window. When <code>capability_reference_year</code>
 is set to an integer <span class="arithmatex">\(t_{\text{ref}}\)</span>, the capability is frozen at that
 year: <span class="arithmatex">\(C(g, t) \equiv C(g, t_{\text{ref}})\)</span> for all <span class="arithmatex">\(t\)</span> in the cumulative
-window. This matches the PRR2023 (ESABCC 2023) <code>allocationCPC</code>
-construction, where <code>pf(gdp_pc(t_ref)) * cumulative_pop</code> yields a
-scalar-per-region weight. Use this when reproducing PRR2023 results
-(e.g. <code>allocation_year=1990, capability_reference_year=1990</code> or
-<code>allocation_year=2015, capability_reference_year=2014</code>).
-When <code>capability_reference_year</code> is before <code>allocation_year</code> (e.g.
-PRR2023 lag-1), the snapshot is sourced from the full unfiltered
-<code>gdp_ts</code>. When <code>capability_reference_year</code> exceeds the last observed
-GDP year, the last observed column is used as the snapshot (forward-fill
-fallback, consistent with year-by-year default mode), and a
-<code>UserWarning</code> is emitted.</p>
+window. When <code>capability_reference_year</code> is before <code>allocation_year</code>,
+the snapshot is sourced from the full unfiltered <code>gdp_ts</code>. When
+<code>capability_reference_year</code> exceeds the last observed GDP year, the last
+observed column is used as the snapshot (forward-fill fallback, consistent
+with year-by-year default mode), and a <code>UserWarning</code> is emitted.</p>
 <p>For per capita capability (:code:<code>capability_per_capita=True</code>, default):</p>
 <div class="arithmatex">\[
 C(g, t) = \left(\frac{\text{GDP}(g, t)}{P(g, t)}\right)^{-w_c \times e_c}
@@ -2409,8 +2403,8 @@ population. If <code>False</code>, absolute GDP is used.</p>
               <div class="doc-md-description">
                 <p><strong>Capability.</strong> When <code>None</code> (default), capability is computed
 year-by-year. When set to an integer, GDP from that single year
-is broadcast across the allocation window (matching PRR2023
-<code>allocationCPC</code>). May be before or after <code>allocation_year</code>.
+is broadcast across the allocation window. May be before or
+after <code>allocation_year</code>.
 When before, Gini adjustment is NOT applied to the snapshot.
 Ignored when <code>capability_weight == 0</code>.</p>
               </div>
@@ -2465,7 +2459,7 @@ population at <code>allocation_year</code> only.</p>
               <div class="doc-md-description">
                 <p><strong>Pre-allocation responsibility.</strong> Discount rate for historical
 emissions (0.0 to &lt;1.0), via <code>(1 - rate)^(reference_year - t)</code>
-(Dekker Eq. 5). Default: 0.0. Only affects the pre-allocation
+Default: 0.0. Only affects the pre-allocation
 responsibility calculation.</p>
               </div>
             </td>
@@ -3008,8 +3002,8 @@ Default: 1.0.</p>
               <div class="doc-md-description">
                 <p><strong>Capability.</strong> When <code>None</code> (default), capability is computed
 year-by-year. When set to an integer, GDP from that single year
-is broadcast across the allocation window (matching PRR2023
-<code>allocationCPC</code>). When before <code>allocation_year</code>, Gini
+is broadcast across the allocation window. When before
+<code>allocation_year</code>, Gini
 adjustment is NOT applied to the snapshot.
 Ignored when <code>capability_weight == 0</code>.</p>
               </div>
@@ -3029,7 +3023,7 @@ Ignored when <code>capability_weight == 0</code>.</p>
               <div class="doc-md-description">
                 <p><strong>Gini.</strong> Development threshold in USD PPP per capita. Income
 below this is excluded from capability calculations, adapted from
-GDR (Baer 2013). Default: 0.0. See
+GDR. Default: 0.0. See
 <code>docs/science/parameter-effects.md</code> §income_floor.</p>
               </div>
             </td>
@@ -3100,7 +3094,7 @@ population at <code>allocation_year</code> only.</p>
               <div class="doc-md-description">
                 <p><strong>Pre-allocation responsibility.</strong> Discount rate for historical
 emissions (0.0 to &lt;1.0), via <code>(1 - rate)^(reference_year - t)</code>
-(Dekker Eq. 5). Default: 0.0. Only affects the pre-allocation
+Default: 0.0. Only affects the pre-allocation
 responsibility calculation.</p>
               </div>
             </td>

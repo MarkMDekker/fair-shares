@@ -2528,7 +2528,7 @@ constant for all subsequent years.</p>
               <div class="doc-md-description">
                 <p><strong>Pre-allocation responsibility.</strong> Discount rate for historical
 emissions (0.0 to &lt;1.0). Weights earlier emissions less via
-<code>(1 - rate)^(reference_year - t)</code> (Dekker Eq. 5). Default: 0.0
+<code>(1 - rate)^(reference_year - t)</code>. Default: 0.0
 (no discounting). Only affects the pre-allocation responsibility
 calculation.</p>
               </div>
@@ -3042,7 +3042,7 @@ or <code>'linear'</code>.</p>
               <div class="doc-md-description">
                 <p><strong>Gini.</strong> Development threshold in USD PPP per capita. Income
 below this is excluded from capability calculations, adapted from
-GDR (Baer 2013). Default: 7500.0. See
+GDR. Default: 7500.0. See
 <code>docs/science/parameter-effects.md</code> §income_floor.</p>
               </div>
             </td>
@@ -3115,7 +3115,7 @@ constant.</p>
               <div class="doc-md-description">
                 <p><strong>Pre-allocation responsibility.</strong> Discount rate for historical
 emissions (0.0 to &lt;1.0), via <code>(1 - rate)^(reference_year - t)</code>
-(Dekker Eq. 5). Default: 0.0. Only affects the pre-allocation
+Default: 0.0. Only affects the pre-allocation
 responsibility calculation.</p>
               </div>
             </td>
@@ -3269,8 +3269,8 @@ per_capita_adjusted : Without Gini adjustment</p>
         <p>Per capita convergence pathway blending grandfathering and equal per capita.</p>
 <p>This approach transitions from grandfathering (GF) to equal per capita (EPC)
 from allocation time, <span class="arithmatex">\(t_{a}\)</span>, to convergence time, <span class="arithmatex">\(t_{conv}\)</span>, using a
-linear weight <span class="arithmatex">\(M(t)\)</span>. It implements a variant of Contraction and Convergence
-[GCI 2003], where global emissions contract while per capita emissions
+linear weight <span class="arithmatex">\(M(t)\)</span>. It implements a variant of Contraction and Convergence,
+where global emissions contract while per capita emissions
 converge to equality by a target date.</p>
 
 
@@ -3748,7 +3748,7 @@ If False, use nearest feasible solution with warnings.</p>
               <div class="doc-md-description">
                 <p>Convergence algorithm to use. "minimum-speed" (default): exponential
 convergence with binary-search for minimum feasible speed.
-"sine-deviation" (Dekker Eqs. 7-8): iterative sine-shaped correction
+"sine-deviation": iterative sine-shaped correction
 from a PCC baseline; requires convergence_year.</p>
               </div>
             </td>
@@ -4348,7 +4348,7 @@ warnings.</p>
               <div class="doc-md-description">
                 <p><strong>Pre-allocation responsibility.</strong> Discount rate for historical
 emissions (0.0 to &lt;1.0), via <code>(1 - rate)^(reference_year - t)</code>
-(Dekker Eq. 5). Default: 0.0. Only affects the pre-allocation
+Default: 0.0. Only affects the pre-allocation
 responsibility calculation.</p>
               </div>
             </td>
@@ -4367,7 +4367,7 @@ responsibility calculation.</p>
               <div class="doc-md-description">
                 <p><strong>Convergence.</strong> Algorithm to use. <code>'minimum-speed'</code> (default):
 exponential convergence with binary-search for minimum feasible
-speed. <code>'sine-deviation'</code> (Dekker Eqs. 7-8): iterative
+speed. <code>'sine-deviation'</code>: iterative
 sine-shaped correction from a PCC baseline; requires
 <code>convergence_year</code>.</p>
               </div>
@@ -5040,7 +5040,7 @@ convergence. If <code>False</code>, use nearest feasible solution.</p>
               <div class="doc-md-description">
                 <p><strong>Pre-allocation responsibility.</strong> Discount rate for historical
 emissions (0.0 to &lt;1.0), via <code>(1 - rate)^(reference_year - t)</code>
-(Dekker Eq. 5). Default: 0.0. Only affects the pre-allocation
+Default: 0.0. Only affects the pre-allocation
 responsibility calculation.</p>
               </div>
             </td>
@@ -5058,7 +5058,7 @@ responsibility calculation.</p>
             <td>
               <div class="doc-md-description">
                 <p><strong>Convergence.</strong> Algorithm: <code>'minimum-speed'</code> (default) or
-<code>'sine-deviation'</code> (Dekker Eqs. 7-8, requires
+<code>'sine-deviation'</code> (requires
 <code>convergence_year</code>).</p>
               </div>
             </td>
