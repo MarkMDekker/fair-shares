@@ -7,7 +7,7 @@
 #       extension: .py
 #       format_name: percent
 #       format_version: '1.3'
-#       jupytext_version: 1.16.6
+#       jupytext_version: 1.19.3
 #   kernelspec:
 #     display_name: Python 3 (ipykernel)
 #     language: python
@@ -489,9 +489,7 @@ coverage_summary.to_csv(
     index=False,
 )
 print(
-    f"\nData coverage summary saved to: {
-        root_intermediate_dir / 'processed' / 'country_data_coverage_summary.csv'
-    }"
+    f"\nData coverage summary saved to: {root_intermediate_dir / 'processed' / 'country_data_coverage_summary.csv'}"
 )
 
 # %% [markdown]

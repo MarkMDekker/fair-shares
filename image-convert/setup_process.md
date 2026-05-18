@@ -1,0 +1,8 @@
+- clone the fair-shares repo TO YOUR C:/ DRIVE, NOT THE X:/ DRIVE
+- follow quick-start guide (https://setupelz.github.io/fair-shares/quickstart/)
+  - skip the first 'uv sync' command in 'Installation'
+  - DO follow the Anaconda / Conda section
+    - with the conda env activated, before you `jupyter lab`, run `pip install uv`
+  - you can also 'uv sync', but I don't remember if this is necessary or if I just did it anyways
+    - the uv install is necessary for the function of the notebook though
+  - open the 303_... and run it
