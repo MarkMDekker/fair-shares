@@ -69,8 +69,9 @@ project_root = here()
 # CONFIGURATION — edit this cell, then Run All below
 # =============================================================================
 
+target = "pathway" # "rcbs" or "pathway" or "rcb-pathways"
 # Output folder name
-allocation_folder = "reference_pathway_allocations_rcb_pathways"
+allocation_folder = f"reference_pathway_allocations_{'_'.join(target.split('-'))}"
 
 # Emission category: "co2-ffi" | "co2" | "all-ghg-ex-co2-lulucf" | "all-ghg"
 emission_category = "all-ghg"
@@ -78,7 +79,7 @@ emission_category = "all-ghg"
 # Data sources
 active_sources = {
     # Target: What climate goal to allocate
-    "target": "rcb-pathways",
+    "target": target,
     # Historical emissions from PRIMAP database (March 2025 version)
     "emissions": "primap-202503",
     # GDP data from World Bank World Development Indicators (2025)
@@ -89,8 +90,8 @@ active_sources = {
     "gini": "unu-wider-2025",
     # LULUCF data for NGHGI-consistent corrections
     "lulucf": "melo-2026",
-    # Pathway generator for rcb-pathways (optional, defaults to "exponential-decay")
-    "rcb_generator": "exponential-decay",
+    # # Pathway generator for rcb-pathways (optional, defaults to "exponential-decay")
+    # "rcb_generator": "exponential-decay",
 }
 
 # For pathway allocations only — harmonisation year to historical data
